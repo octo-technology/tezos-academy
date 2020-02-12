@@ -1,13 +1,42 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Electrolize", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.rc-slider {
+  margin: 10px 0 23px 5px;
+}
+
+.rc-slider-handle {
+  background-color: #0a456d !important;
+}
+
+.rc-slider-rail {
+  background-color: #0a456d !important;
+}
+
+.rc-slider-track {
+  background-color: #42edf8 !important;
+  box-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6);
+}
+
+.rc-slider-dot {
+  background-color: #0a456d !important;
+  border: 2px solid #0a456d !important;
+}
+
+.rc-slider-dot-active {
+  background-color: #42edf8 !important;
+  border-color: #42edf8 !important;
+  drop-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6);
+}
+
+.rc-slider-mark-text {
+  display: none !important;
 }
