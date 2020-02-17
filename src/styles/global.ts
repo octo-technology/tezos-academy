@@ -1,9 +1,15 @@
+import { createGlobalStyle } from "styled-components/macro";
+
+import { slideRightEnter, slideRightExit, slideLeftEnter, slideLeftExit } from "./animations";
+
+export const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background-color: #000;
   font-family: "Electrolize", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,6 +17,10 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+  text-decoration: none;
 }
 
 .rc-slider {
@@ -44,3 +54,24 @@ code {
 .rc-slider-mark-text {
   display: none !important;
 }
+
+.slide-right-enter-active {
+  animation: ${slideRightEnter} 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.slide-right-exit-active {
+  animation: ${slideRightExit} 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.slide-left-enter-active {
+  animation: ${slideLeftEnter} 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.slide-left-exit-active {
+  animation: ${slideLeftExit} 1000ms;
+  animation-fill-mode: forwards;
+}
+`;

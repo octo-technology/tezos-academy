@@ -1,14 +1,13 @@
 import styled from "styled-components/macro";
 
-export const ChapterGettingStartedStyled = styled.div`
+export const ChapterContractStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-  height: calc(100vh - 150px);
-  margin: 0 20px;
+  height: calc(100vh - 40px);
 `;
 
-export const ChapterGettingStartedGrid = styled.div`
+export const ChapterContractGrid = styled.div`
   display: grid;
   grid-template-rows: 440px auto;
   grid-gap: 20px;
