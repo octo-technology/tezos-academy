@@ -45,3 +45,18 @@ export const HeaderMenuSelector = styled.div`
   background: #42edf8;
   box-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6);
 `;
+
+export const HeaderSubMenuItem = styled(Link)`
+  font-size: 12px;
+  line-height: 30px;
+  color: #08658b;
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: top;
+  will-change: color;
+  transition: color 0.2s ease-in-out;
+
+  &.selected {
+    color: #fff;
+  }
+`;

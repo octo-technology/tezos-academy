@@ -140,3 +140,7 @@ export const ShipLaser = styled.img`
   left: 0;
   animation: ${jet} 0.02s ease alternate infinite, ${pew} 10s linear alternate infinite;
 `;
+
+export const ShipPreloadedImages = styled.div`
+  display: none;
+`;

@@ -19,8 +19,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-a {
+a, a:visited {
   text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+  will-change: opacity;
+}
+
+a:hover {
+  opacity: 0.9;
 }
 
 .rc-slider {

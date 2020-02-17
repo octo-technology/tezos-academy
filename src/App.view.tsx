@@ -24,7 +24,7 @@ const App = () => {
             previousLocation = location.pathname;
             return (
               <AppWrapper>
-                <AppTransitions pageKey={location.key} reverse={previousPage < nextPage}>
+                <AppTransitions pageKey={location.key} reverse={previousPage > nextPage}>
                   <Switch location={location}>
                     <Route exact path="/" component={ChapterGettingStarted} />
                     <Route exact path="/1" component={ChapterGettingStarted} />

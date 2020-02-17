@@ -14,7 +14,7 @@ export const AppTransitions = ({ pageKey, children, reverse }: { pageKey: any; c
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const animation = reverse ? "slide-left" : "slide-right";
+  const animation = reverse ? "slide-right" : "slide-left";
 
   return (
     <TransitionGroup

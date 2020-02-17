@@ -1,7 +1,8 @@
-import * as React from "react";
 import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { ShipStyled, ShipCabin, ShipGun, ShipWings, ShipEngine, ShipFlame, ShipLaser } from "./Ship.style";
+// prettier-ignore
+import { ShipCabin, ShipEngine, ShipFlame, ShipGun, ShipLaser, ShipPreloadedImages, ShipStyled, ShipWings } from "./Ship.style";
 
 type ShipViewProps = {
   shipCode: string;
@@ -138,16 +139,81 @@ export const ShipView = ({ shipCode }: ShipViewProps) => {
   const laserStyle = laserStyles[classCode][gunsCode];
 
   return (
-    <ShipStyled>
-      <ShipWings alt="wings" src={`/ships/${classColor}w${wingsCode}.svg`} />
-      <ShipGun alt="gun" src={`/ships/${classColor}g${gunsCode}.svg`} />
-      <ShipEngine alt="engine" src={`/ships/${classColor}e${engineCode}.svg`} />
-      <ShipCabin alt="cabin" src={`/ships/${classColor}c${cabinCode}.svg`} />
-      <ShipFlame alt="flame0" src={`/ships/flame${flameCode}.svg`} style={flameStyle[0]} />
-      <ShipFlame alt="flame1" src={`/ships/flame${flameCode}.svg`} style={flameStyle[1]} />
-      <ShipLaser alt="laser0" src="/ships/laser1.svg" style={laserStyle[0]} />
-      <ShipLaser alt="laser1" src="/ships/laser1.svg" style={laserStyle[1]} />
-    </ShipStyled>
+    <>
+      <ShipStyled>
+        <ShipWings alt="wings" src={`/ships/${classColor}w${wingsCode}.svg`} />
+        <ShipGun alt="gun" src={`/ships/${classColor}g${gunsCode}.svg`} />
+        <ShipEngine alt="engine" src={`/ships/${classColor}e${engineCode}.svg`} />
+        <ShipCabin alt="cabin" src={`/ships/${classColor}c${cabinCode}.svg`} />
+        <ShipFlame alt="flame0" src={`/ships/flame${flameCode}.svg`} style={flameStyle[0]} />
+        <ShipFlame alt="flame1" src={`/ships/flame${flameCode}.svg`} style={flameStyle[1]} />
+        <ShipLaser alt="laser0" src="/ships/laser1.svg" style={laserStyle[0]} />
+        <ShipLaser alt="laser1" src="/ships/laser1.svg" style={laserStyle[1]} />
+      </ShipStyled>
+
+      <ShipPreloadedImages>
+        <img alt="preload" src="/ships/yg3.svg" />
+        <img alt="preload" src="/ships/bc0.svg" />
+        <img alt="preload" src="/ships/bc1.svg" />
+        <img alt="preload" src="/ships/bc2.svg" />
+        <img alt="preload" src="/ships/be0.svg" />
+        <img alt="preload" src="/ships/be1.svg" />
+        <img alt="preload" src="/ships/be2.svg" />
+        <img alt="preload" src="/ships/be3.svg" />
+        <img alt="preload" src="/ships/be4.svg" />
+        <img alt="preload" src="/ships/bg0.svg" />
+        <img alt="preload" src="/ships/bg1.svg" />
+        <img alt="preload" src="/ships/bg2.svg" />
+        <img alt="preload" src="/ships/bg3.svg" />
+        <img alt="preload" src="/ships/bg4.svg" />
+        <img alt="preload" src="/ships/bw0.svg" />
+        <img alt="preload" src="/ships/bw1.svg" />
+        <img alt="preload" src="/ships/bw2.svg" />
+        <img alt="preload" src="/ships/bw3.svg" />
+        <img alt="preload" src="/ships/bw4.svg" />
+        <img alt="preload" src="/ships/flame0.svg" />
+        <img alt="preload" src="/ships/flame1.svg" />
+        <img alt="preload" src="/ships/flame2.svg" />
+        <img alt="preload" src="/ships/flame3.svg" />
+        <img alt="preload" src="/ships/flame4.svg" />
+        <img alt="preload" src="/ships/laser1.svg" />
+        <img alt="preload" src="/ships/rc0.svg" />
+        <img alt="preload" src="/ships/rc1.svg" />
+        <img alt="preload" src="/ships/rc2.svg" />
+        <img alt="preload" src="/ships/re0.svg" />
+        <img alt="preload" src="/ships/re1.svg" />
+        <img alt="preload" src="/ships/re2.svg" />
+        <img alt="preload" src="/ships/re3.svg" />
+        <img alt="preload" src="/ships/re4.svg" />
+        <img alt="preload" src="/ships/rg0.svg" />
+        <img alt="preload" src="/ships/rg1.svg" />
+        <img alt="preload" src="/ships/rg2.svg" />
+        <img alt="preload" src="/ships/rg3.svg" />
+        <img alt="preload" src="/ships/rg4.svg" />
+        <img alt="preload" src="/ships/rw0.svg" />
+        <img alt="preload" src="/ships/rw1.svg" />
+        <img alt="preload" src="/ships/rw2.svg" />
+        <img alt="preload" src="/ships/rw3.svg" />
+        <img alt="preload" src="/ships/rw4.svg" />
+        <img alt="preload" src="/ships/yc0.svg" />
+        <img alt="preload" src="/ships/yc1.svg" />
+        <img alt="preload" src="/ships/yc2.svg" />
+        <img alt="preload" src="/ships/ye0.svg" />
+        <img alt="preload" src="/ships/ye1.svg" />
+        <img alt="preload" src="/ships/ye2.svg" />
+        <img alt="preload" src="/ships/ye3.svg" />
+        <img alt="preload" src="/ships/ye4.svg" />
+        <img alt="preload" src="/ships/yg0.svg" />
+        <img alt="preload" src="/ships/yg1.svg" />
+        <img alt="preload" src="/ships/yg2.svg" />
+        <img alt="preload" src="/ships/yg4.svg" />
+        <img alt="preload" src="/ships/yw0.svg" />
+        <img alt="preload" src="/ships/yw1.svg" />
+        <img alt="preload" src="/ships/yw2.svg" />
+        <img alt="preload" src="/ships/yw3.svg" />
+        <img alt="preload" src="/ships/yw4.svg" />
+      </ShipPreloadedImages>
+    </>
   );
 };
 
