@@ -23,7 +23,7 @@ export const HeaderView = () => {
       </HeaderMenu>
       <HeaderSubMenu>
         <HeaderSubMenuItem to="/1" className={pathname === "/1" || pathname === "/" ? "selected" : ""}>
-          1 - GETTING STARTED
+          1 - ABOUT
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/2" className={pathname === "/2" ? "selected" : ""}>
           2 - FUNCTIONS

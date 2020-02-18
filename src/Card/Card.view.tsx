@@ -12,7 +12,7 @@ export const CardView = ({ shipCode }: CardProps) => (
   <CardStyled>
     <CardTopCorners />
     <CardBottomCorners />
-    <CardTitle>{shipCode}</CardTitle>
+    <CardTitle id="ship-id">{shipCode}</CardTitle>
     <svg
       className="rocket-svg"
       data-name="Layer 2"

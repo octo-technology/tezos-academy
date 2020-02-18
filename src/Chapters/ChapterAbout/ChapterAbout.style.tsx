@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 
-export const ChapterGettingStartedStyled = styled.div`
+export const ChapterStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
@@ -8,9 +8,9 @@ export const ChapterGettingStartedStyled = styled.div`
   margin: 0 20px;
 `;
 
-export const ChapterGettingStartedGrid = styled.div`
+export const ChapterGrid = styled.div`
   display: grid;
-  grid-template-rows: 440px auto;
+  grid-template-rows: 440px 1fr;
   grid-gap: 20px;
 `;
 
@@ -18,6 +18,9 @@ export const ChapterCourse = styled.div`
   background: rgba(0, 44, 69, 0.6);
   border: 1px solid #0a5688;
   padding: 20px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow: scroll;
 `;
 
 export const ChapterH1 = styled.div`
@@ -28,16 +31,16 @@ export const ChapterH1 = styled.div`
 export const ChapterH2 = styled.div`
   font-size: 24px;
   line-height: 28px;
-`;
-
-export const ChapterContent = styled.div`
-  font-size: 14px;
-  white-space: pre-wrap;
+  margin-top: 20px;
 `;
 
 export const ChapterValidator = styled.div`
   border: 1px solid #0a5688;
   position: relative;
+
+  &.ok {
+    border-color: #12650a;
+  }
 `;
 
 export const ChapterValidatorInside = styled.div`
@@ -50,6 +53,11 @@ export const ChapterValidatorInside = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  &.ok {
+    border: 1px solid #124e19;
+    background: url("/elements/card-bg-green.png") repeat;
+  }
 `;
 
 export const ChapterValidatorTitle = styled.div`
@@ -95,4 +103,8 @@ export const ButtonText = styled.div`
   height: 100%;
   line-height: 40px;
   z-index: 1;
+`;
+
+export const ChapterMonaco = styled.div`
+  border: 1px solid #0a5688;
 `;

@@ -199,6 +199,10 @@ export const CardTopCorners = styled.div`
     height: 8px;
     border-color: #00edff;
     border-style: solid;
+
+    &.ok {
+      border-color: #0ab30b;
+    }
   }
 
   &:empty::before {

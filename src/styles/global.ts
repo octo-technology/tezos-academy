@@ -24,10 +24,35 @@ a, a:visited {
   opacity: 1;
   transition: opacity 0.15s ease-in-out;
   will-change: opacity;
+  color: #08658b;
 }
 
 a:hover {
   opacity: 0.9;
+}
+
+p {
+    display: block;
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
+  background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #08658b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #08658b;
 }
 
 .rc-slider {

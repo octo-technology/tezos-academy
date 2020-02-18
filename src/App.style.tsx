@@ -12,5 +12,6 @@ export const AppStyled = styled.div`
 export const AppWrapper = styled.div`
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 100px);
+  overflow-x: hidden;
 `;
