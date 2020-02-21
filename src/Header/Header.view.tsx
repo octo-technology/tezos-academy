@@ -26,7 +26,7 @@ export const HeaderView = () => {
           1 - ABOUT
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/2" className={pathname === "/2" ? "selected" : ""}>
-          2 - FUNCTIONS
+          2 - TYPES
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/3" className={pathname === "/3" ? "selected" : ""}>
           3 - COMMING SOON...

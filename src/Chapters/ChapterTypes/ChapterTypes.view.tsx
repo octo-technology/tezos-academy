@@ -62,7 +62,8 @@ export const ChapterTypesView = ({ validatorState, validateCallback }: ChapterTy
         <ChapterMonaco>
           <Editor
             height="440px"
-            value="type storage is int"
+            value={`// Type your solution below
+`}
             language="pascal"
             theme="myCustomTheme"
             options={{
@@ -85,7 +86,7 @@ export const ChapterTypesView = ({ validatorState, validateCallback }: ChapterTy
             {validatorState === PENDING && (
               <ChapterValidatorContentWrapper>
                 <ChapterValidatorTitle>AWAITING VALIDATION</ChapterValidatorTitle>
-                <ChapterValidatorContent>Choose the ship 020433 to continue</ChapterValidatorContent>
+                <ChapterValidatorContent>Type your solution above and validate your answer</ChapterValidatorContent>
                 <Button>
                   <ButtonBorder />
                   <ButtonText onClick={() => validateCallback()}>VALIDATE MISSION</ButtonText>
@@ -100,12 +101,10 @@ export const ChapterTypesView = ({ validatorState, validateCallback }: ChapterTy
             )}
             {validatorState === WRONG && (
               <ChapterValidatorContentWrapper>
-                <ChapterValidatorTitle>MISSION FAILED</ChapterValidatorTitle>
-                <ChapterValidatorContent>Choose the ship 020433 and try again</ChapterValidatorContent>
-                <Button>
-                  <ButtonBorder />
-                  <ButtonText onClick={() => validateCallback()}>TRY AGAIN</ButtonText>
-                </Button>
+                <ChapterValidatorTitle>THANKS FOR TRYING THIS CHAPTER</ChapterValidatorTitle>
+                <ChapterValidatorContent>
+                  The diff editor is not available but will come soon :)
+                </ChapterValidatorContent>
               </ChapterValidatorContentWrapper>
             )}
           </ChapterValidatorInside>
