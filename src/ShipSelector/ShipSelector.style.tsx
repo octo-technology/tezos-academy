@@ -8,6 +8,10 @@ export const ShipSelectorStyled = styled.div`
   grid-template-columns: 270px auto;
   grid-gap: 30px;
   text-align: left;
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+  }
 `;
 
 export const ShipSelectorAttributes = styled.div``;

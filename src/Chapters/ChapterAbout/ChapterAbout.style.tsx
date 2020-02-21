@@ -6,12 +6,22 @@ export const ChapterStyled = styled.div`
   grid-gap: 20px;
   height: calc(100vh - 150px);
   margin: 0 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+    height: initial;
+  }
 `;
 
 export const ChapterGrid = styled.div`
   display: grid;
-  grid-template-rows: 440px 1fr;
+  grid-template-rows: auto auto;
   grid-gap: 20px;
+  overflow: scroll;
+
+  @media (max-width: 900px) {
+    overflow: initial;
+  }
 `;
 
 export const ChapterCourse = styled.div`

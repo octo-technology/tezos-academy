@@ -12,6 +12,10 @@ export const FooterStyled = styled.div`
     bottom: 0;
     right: 0;
   }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export const FooterCredits = styled.div`

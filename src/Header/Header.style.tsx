@@ -10,12 +10,20 @@ export const HeaderMenu = styled.div`
   height: 50px;
   background: rgba(0, 44, 69, 0.6);
   border-bottom: 1px solid #0a456d;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export const HeaderSubMenu = styled.div`
   height: 30px;
   background: rgba(10, 24, 34, 0.8);
   border-bottom: 1px solid #0a456d;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export const HeaderLogo = styled.img`

@@ -8,6 +8,7 @@ export const CardStyled = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 0px 30px rgba(139, 243, 255, 0.2);
   position: relative;
+  margin: auto;
 
   #comets line {
     fill: none;

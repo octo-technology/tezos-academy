@@ -7,6 +7,10 @@ export const AppStyled = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
+
+  @media (max-width: 900px) {
+    height: 100%;
+  }
 `;
 
 export const AppWrapper = styled.div`
@@ -14,4 +18,8 @@ export const AppWrapper = styled.div`
   width: 100vw;
   height: calc(100vh - 100px);
   overflow-x: hidden;
+
+  @media (max-width: 900px) {
+    height: 100%;
+  }
 `;
