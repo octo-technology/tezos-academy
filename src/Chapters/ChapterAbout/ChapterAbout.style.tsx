@@ -15,7 +15,7 @@ export const ChapterStyled = styled.div`
 
 export const ChapterGrid = styled.div`
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: 440px auto;
   grid-gap: 20px;
   overflow: scroll;
 
