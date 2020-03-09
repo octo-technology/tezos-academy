@@ -3,25 +3,25 @@ import Markdown from "markdown-to-jsx";
 import * as PropTypes from "prop-types";
 import * as React from "react";
 
-import { CardBottomCorners, CardTopCorners } from "../../Card/Card.style";
+import { CardBottomCorners, CardTopCorners } from "../Card/Card.style";
+import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
-import { PENDING, RIGHT, WRONG } from "./ChapterTypes.constants";
-import { data } from "./ChapterTypes.data";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/ChapterAbout/ChapterAbout.style";
 
-const MonacoReadOnly = ({ height, value }: any) => {
+const MonacoReadOnly = ({ children }: any) => {
+  const height = children.split("\n").length * 22;
   return (
     <div style={{ marginTop: "10px" }}>
       <Editor
         height={height}
-        value={value}
-        language="pascal"
+        value={children}
+        language="pascaligo"
         theme="myCustomTheme"
         options={{
           lineNumbers: false,
           scrollBeyondLastLine: false,
           minimap: { enabled: false },
-          scrollbar: { vertical: "hidden", verticalScrollbarSize: 0 },
+          scrollbar: { vertical: "hidden", verticalScrollbarSize: 0, alwaysConsumeMouseWheel: false },
           folding: false,
           readOnly: true,
           fontSize: 14,
@@ -117,10 +117,11 @@ const Validator = ({ validatorState, validateCallback }: any) => (
   </ChapterValidator>
 );
 
-const Content = () => (
+const Content = ({ course }: any) => (
   <Markdown
-    children={data}
+    children={course}
     options={{
+      // disableParsingRawHTML: true,
       overrides: {
         h1: {
           component: ChapterH1
@@ -136,27 +137,29 @@ const Content = () => (
   />
 );
 
-type ChapterTypesViewProps = {
+type ChapterViewProps = {
   validatorState: string;
   validateCallback: () => void;
   solution: string;
   proposedSolution: string;
   proposedSolutionCallback: (e: string) => void;
   showDiff: boolean;
+  course?: string;
 };
 
-export const ChapterTypesView = ({
+export const ChapterView = ({
   validatorState,
   validateCallback,
   solution,
   proposedSolution,
   proposedSolutionCallback,
-  showDiff
-}: ChapterTypesViewProps) => {
+  showDiff,
+  course
+}: ChapterViewProps) => {
   return (
     <ChapterStyled>
       <ChapterCourse>
-        <Content />
+        <Content course={course || ""} />
       </ChapterCourse>
       <ChapterGrid>
         <ChapterMonaco>
@@ -172,16 +175,17 @@ export const ChapterTypesView = ({
   );
 };
 
-ChapterTypesView.propTypes = {
+ChapterView.propTypes = {
   validatorState: PropTypes.string,
   validateCallback: PropTypes.func.isRequired,
   solution: PropTypes.string,
   proposedSolution: PropTypes.string,
   showDiff: PropTypes.bool.isRequired,
-  proposedSolutionCallback: PropTypes.func.isRequired
+  proposedSolutionCallback: PropTypes.func.isRequired,
+  course: PropTypes.string
 };
 
-ChapterTypesView.defaultProps = {
+ChapterView.defaultProps = {
   validatorState: PENDING,
   solution: "",
   proposedSolution: ""

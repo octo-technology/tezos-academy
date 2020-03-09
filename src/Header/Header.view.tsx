@@ -29,7 +29,10 @@ export const HeaderView = () => {
           2 - TYPES
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/3" className={pathname === "/3" ? "selected" : ""}>
-          3 - COMMING SOON...
+          3 - VARIABLES
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/4" className={pathname === "/4" ? "selected" : ""}>
+          4 - COMMING SOON...
         </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>

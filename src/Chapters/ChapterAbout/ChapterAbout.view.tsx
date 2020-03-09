@@ -14,13 +14,9 @@ monaco
   .init()
   .then(monacoInstance => {
     monacoInstance.editor.defineTheme("myCustomTheme", {
-      base: "vs-dark", // can also be vs-dark or hc-black
-      inherit: true, // can also be false to completely replace the builtin rules
-      rules: [
-        { token: "comment", foreground: "ffa500", fontStyle: "italic underline" },
-        { token: "comment.js", foreground: "008800", fontStyle: "bold" },
-        { token: "comment.css", foreground: "0000ff" } // will inherit fontStyle from `comment` above
-      ],
+      base: "vs-dark",
+      inherit: true,
+      rules: [{ token: "comment", foreground: "ffa500", fontStyle: "italic underline" }],
       colors: {
         "editor.foreground": "#F8F8F8",
         "editor.background": "#00000050",
