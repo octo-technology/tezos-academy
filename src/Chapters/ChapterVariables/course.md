@@ -13,17 +13,15 @@ const age: int = 25;
 Variables, unlike constants, are mutable. They cannot be declared in a global scope, but they can be declared and used within functions, or as function parameters.
 
 ```js
-function add (const a : int; const b : int) : int is
-  block {
-    var c : int := a + 2*b;
-    c := c - b
-  } with c
+var c: int := 2 + 3;
+c := c - 3
 ```
 
-⚠️ Notice the assignment operator := for var, instead of = for constants.
+⚠️ Notice the assignment operator _:=_ for var, instead of _=_ for constants.
 
 ## Your mission
 
-1- In the top right editor, modify the code from the previous chapter to make my_ship a variable.
+<!-- prettier-ignore -->
+1- In the top right editor, modify the code from the previous chapter to make *my\_ship* a variable.
 
-2- On the next line, modify its value to "222031"
+2- On the next line, modify its value to _"222031"_

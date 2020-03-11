@@ -9,6 +9,9 @@ import { ChapterView } from "./Chapter.view";
 
 import { dataTypes } from "../Chapters/ChapterTypes";
 import { dataVariables } from "../Chapters/ChapterVariables";
+import { dataMath } from "../Chapters/ChapterMath";
+import { dataStrings } from "../Chapters/ChapterStrings";
+import { dataFunctions } from "../Chapters/ChapterFunctions";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -21,6 +24,12 @@ export const Chapter = () => {
       setData({ course: dataTypes.course, exercise: dataTypes.exercise, solution: dataTypes.solution });
     if (pathname === "/3")
       setData({ course: dataVariables.course, exercise: dataVariables.exercise, solution: dataVariables.solution });
+    if (pathname === "/4")
+      setData({ course: dataMath.course, exercise: dataMath.exercise, solution: dataMath.solution });
+    if (pathname === "/5")
+      setData({ course: dataStrings.course, exercise: dataStrings.exercise, solution: dataStrings.solution });
+    if (pathname === "/6")
+      setData({ course: dataFunctions.course, exercise: dataFunctions.exercise, solution: dataFunctions.solution });
   }, [pathname]);
 
   const validateCallback = () => {
@@ -35,7 +44,9 @@ export const Chapter = () => {
   };
 
   const proposedSolutionCallback = (e: string) => {
-    setData({ exercise: e, ...data });
+    console.log({ course: data.course, exercise: e, solution: data.solution });
+    // @ts-ignore
+    setData({ ...data, exercise: e });
   };
 
   return (

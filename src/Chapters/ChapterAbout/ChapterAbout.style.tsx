@@ -118,3 +118,10 @@ export const ButtonText = styled.div`
 export const ChapterMonaco = styled.div`
   border: 1px solid #0a5688;
 `;
+
+export const ChapterItalic = styled.em`
+  color: #42edf8 !important;
+  text-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6);
+  text-transform: none;
+  font-style: normal;
+`;

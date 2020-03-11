@@ -16,7 +16,12 @@ monaco
     monacoInstance.editor.defineTheme("myCustomTheme", {
       base: "vs-dark",
       inherit: true,
-      rules: [{ token: "comment", foreground: "ffa500", fontStyle: "italic underline" }],
+      rules: [
+        { token: "comment", foreground: "666666", fontStyle: "italic" },
+        { token: "keyword", foreground: "FF5A00" },
+        { token: "number", foreground: "00FF47" },
+        { token: "string", foreground: "FA00FF" }
+      ],
       colors: {
         "editor.foreground": "#F8F8F8",
         "editor.background": "#00000050",
@@ -35,7 +40,7 @@ const MonacoReadOnly = ({ height, value }: any) => {
       <Editor
         height={height}
         value={value}
-        language="pascal"
+        language="pascaligo"
         theme="myCustomTheme"
         options={{
           lineNumbers: false,

@@ -6,7 +6,7 @@ import * as React from "react";
 import { CardBottomCorners, CardTopCorners } from "../Card/Card.style";
 import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/ChapterAbout/ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle, ChapterItalic } from "../Chapters/ChapterAbout/ChapterAbout.style";
 
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split("\n").length * 22;
@@ -38,7 +38,7 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback }: any) => {
       <ControlledEditor
         height="440px"
         value={proposedSolution}
-        language="pascal"
+        language="pascaligo"
         theme="myCustomTheme"
         onChange={(_, val) => proposedSolutionCallback(val)}
         options={{
@@ -63,7 +63,7 @@ const MonacoDiff = ({ solution, proposedSolution }: any) => {
         height="440px"
         original={solution}
         modified={proposedSolution}
-        language="pascal"
+        language="pascaligo"
         // @ts-ignore
         theme="myCustomTheme"
         options={{
@@ -131,6 +131,9 @@ const Content = ({ course }: any) => (
         },
         code: {
           component: MonacoReadOnly
+        },
+        em: {
+          component: ChapterItalic
         }
       }
     }}

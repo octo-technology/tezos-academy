@@ -18,7 +18,7 @@ export const HeaderView = () => {
           I - SHIP FACTORY
         </HeaderMenuItem>
         <HeaderMenuItem to="/11">II - INTO BATTLE</HeaderMenuItem>
-        <HeaderMenuItem to="/21">III - COMMING SOON</HeaderMenuItem>
+        <HeaderMenuItem to="/21">III - MORE SOON...</HeaderMenuItem>
         <HeaderMenuSelector />
       </HeaderMenu>
       <HeaderSubMenu>
@@ -32,7 +32,16 @@ export const HeaderView = () => {
           3 - VARIABLES
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/4" className={pathname === "/4" ? "selected" : ""}>
-          4 - COMMING SOON...
+          4 - MATH
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/5" className={pathname === "/5" ? "selected" : ""}>
+          5 - STRINGS
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/6" className={pathname === "/6" ? "selected" : ""}>
+          6 - FUNCTIONS
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="7" className={pathname === "/7" ? "selected" : ""}>
+          7 - COMMING SOON...
         </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>
