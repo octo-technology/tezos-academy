@@ -1,3 +1,5 @@
-// Type your solution below
 type ship_code is string
-const my_ship : ship_code = "020433"
+var my_ship : ship_code := "020433"
+my_ship := "222031"
+const my_ship_price : tez = 3tez * 1.20
+// Type your solution below

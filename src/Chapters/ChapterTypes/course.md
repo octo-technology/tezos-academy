@@ -1,10 +1,10 @@
 #Chapter 2 : Types
 
-LIGO is strongly and statically typed. This means that the compiler checks how your contract processes data. If it passes the test, your contract will not fail at run-time due to inconsistent assumptions on your data. This is called type checking.
+LIGO is strongly and statically typed language. This means that the compiler checks how your contract processes data. If it passes the test, your contract will not fail at run-time due to inconsistent assumptions on your data. This is called type checking.
 
 ## Built-in types
 
-LIGO comes with all basic types built-in like <i>string</i>, <i>uint</i> or <i>tez</i> for account balance or monetary transactions. You can find all built-in types on <a href="https://gitlab.com/ligolang/ligo/blob/dev/src/passes/operators/operators.ml#L35" target="_blank">the LIGO gitlab</a>.
+LIGO comes with all basic types built-in like _string_, _int_ or _tez_ for account balance or monetary transactions. You can find all built-in types on <a href="https://gitlab.com/ligolang/ligo/blob/dev/src/passes/operators/operators.ml#L35" target="_blank">the LIGO gitlab</a>.
 
 ## Type aliases
 
@@ -17,7 +17,7 @@ const dog_breed : breed = "Saluki"
 
 ## Simple types
 
-The type account_balances denotes maps from addresses to tez
+The type account_balances denotes a map from addresses to tez
 
 ```js
 type account_balances is map (address, tez)
@@ -27,41 +27,33 @@ map [("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address) -> 10mutez]
 
 ```
 
+ℹ️We will look more deeply into the _map_ construct in the following chapters.
+
 ## Structured types
 
 Often contracts require complex data structures, which in turn require well-typed storage or functions to work with. LIGO offers a simple way to compose simple types into structured types.
-The first of those structured types is the record, which aggregates types as fields and index them with a field name. In the example below you can see the definition of data types for a ledger that keeps the balance and number of previous transactions for a given account.
+The first of those structured types is the record, which aggregates types as fields and index them with a field name. In the example below we define an account type whick keeps the balance and number of previous transactions for a given account.
 
 ```js
-// Type aliasing
-
-type account is address
-type number_of_transactions is nat
-
-// The type account_data is a record with two fields.
-
-type account_data is record [
+type account is record [
   balance : tez;
-  transactions : number_of_transactions
+  transactions : nat
 ]
 
-// A ledger is a map from accounts to account_data
-
-type ledger is map (account, account_data)
-
-const my_ledger : ledger = map [
-  ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address) ->
-  record [
+const my_account : account = record [
     balance = 10mutez;
     transactions = 5n
   ]
-]
 ```
+
+ℹ️We will look more deeply into the _record_ construct in the following chapters.
 
 ## Your mission
 
-1- There is an online editor in the top right corner of this page. In the editor, define <i>ship_code</i> as a string type.
+<!-- prettier-ignore -->
+1- There is an online editor in the top right corner of this page. In the editor, define *ship\_code* as a string type.
 
-2- Then define the constant <i>my_ship</i> as a <i>ship_code</i> of value <i>'020433'</i>.
+<!-- prettier-ignore -->
+2- Then define the constant *my\_ship* as a *ship\_code* of value _'020433'_.
 
 3- Then go ahead and validate your mission for a comparative view with the solution.
