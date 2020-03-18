@@ -1,4 +1,4 @@
-#Chapter 2 : Types
+# Chapter 2 : Types
 
 LIGO is strongly and statically typed language. This means that the compiler checks how your contract processes data. If it passes the test, your contract will not fail at run-time due to inconsistent assumptions on your data. This is called type checking.
 

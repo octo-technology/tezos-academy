@@ -1,17 +1,19 @@
 import * as React from "react";
 import { useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useState } from "react";
-
 import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
-import { ChapterView } from "./Chapter.view";
-
+import { dataConditionals } from "../Chapters/ChapterConditionals";
+import { dataFunctions } from "../Chapters/ChapterFunctions";
+import { dataLists } from "../Chapters/ChapterLists";
+import { dataLoops } from "../Chapters/ChapterLoops";
+import { dataMath } from "../Chapters/ChapterMath";
+import { dataRecords } from "../Chapters/ChapterRecords";
+import { dataStrings } from "../Chapters/ChapterStrings";
 import { dataTypes } from "../Chapters/ChapterTypes";
 import { dataVariables } from "../Chapters/ChapterVariables";
-import { dataMath } from "../Chapters/ChapterMath";
-import { dataStrings } from "../Chapters/ChapterStrings";
-import { dataFunctions } from "../Chapters/ChapterFunctions";
+import { ChapterView } from "./Chapter.view";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -30,6 +32,18 @@ export const Chapter = () => {
       setData({ course: dataStrings.course, exercise: dataStrings.exercise, solution: dataStrings.solution });
     if (pathname === "/6")
       setData({ course: dataFunctions.course, exercise: dataFunctions.exercise, solution: dataFunctions.solution });
+    if (pathname === "/7")
+      setData({
+        course: dataConditionals.course,
+        exercise: dataConditionals.exercise,
+        solution: dataConditionals.solution
+      });
+    if (pathname === "/8")
+      setData({ course: dataLoops.course, exercise: dataLoops.exercise, solution: dataLoops.solution });
+    if (pathname === "/9")
+      setData({ course: dataRecords.course, exercise: dataRecords.exercise, solution: dataRecords.solution });
+    if (pathname === "/10")
+      setData({ course: dataLists.course, exercise: dataLists.exercise, solution: dataLists.solution });
   }, [pathname]);
 
   const validateCallback = () => {

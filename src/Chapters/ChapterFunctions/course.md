@@ -1,4 +1,4 @@
-#Chapter 6 : Functions
+# Chapter 6 : Functions
 
 LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a functions and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
 

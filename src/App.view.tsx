@@ -3,9 +3,8 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import { AppStyled, AppWrapper } from "./App.style";
 import { AppTransitions } from "./App.transitions";
-import { ChapterAbout } from "./Chapters/ChapterAbout/ChapterAbout.controller";
 import { Chapter } from "./Chapter/Chapter.controller";
-// import { ChapterVariables } from "./Chapters/ChapterVariables/ChapterVariables.controller";
+import { ChapterAbout } from "./Chapters/ChapterAbout/ChapterAbout.controller";
 import { Footer } from "./Footer/Footer.controller";
 import { Header } from "./Header/Header.controller";
 import { NotFound } from "./NotFound/NotFound.view";
@@ -34,6 +33,10 @@ const App = () => {
                     <Route exact path="/4" component={Chapter} />
                     <Route exact path="/5" component={Chapter} />
                     <Route exact path="/6" component={Chapter} />
+                    <Route exact path="/7" component={Chapter} />
+                    <Route exact path="/8" component={Chapter} />
+                    <Route exact path="/9" component={Chapter} />
+                    <Route exact path="/10" component={Chapter} />
                     <Route component={NotFound} />
                   </Switch>
                 </AppTransitions>

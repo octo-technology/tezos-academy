@@ -1,4 +1,4 @@
-#Chapter 4 : Math
+# Chapter 4 : Math
 
 LIGO offers three built-in numerical types:
 
