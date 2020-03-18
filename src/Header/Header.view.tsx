@@ -41,7 +41,7 @@ export const HeaderView = () => {
           6 - FUNCTIONS
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="7" className={pathname === "/7" ? "selected" : ""}>
-          7 - COMMING SOON...
+          7 - COMING SOON...
         </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>

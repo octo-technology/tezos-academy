@@ -75,7 +75,7 @@ LIGO functions are not recursive by default, the user need to indicate that the 
 
 At the moment, recursive function are limited to one (possibly tupled) parameter and recursion is limited to tail recursion (i.e the recursive call should be the last expression of the function)
 
-In PascaLigo recursive functions are defined using the _recursive_ keyword
+In PascaLIGO recursive functions are defined using the _recursive_ keyword
 
 ```js
 recursive function sum (const n : int; const acc: int) : int is
