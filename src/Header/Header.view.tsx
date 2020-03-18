@@ -40,16 +40,16 @@ export const HeaderView = () => {
         <HeaderSubMenuItem to="/6" className={pathname === "/6" ? "selected" : ""}>
           6 - FUNCTIONS
         </HeaderSubMenuItem>
-        <HeaderSubMenuItem to="7" className={pathname === "/7" ? "selected" : ""}>
+        <HeaderSubMenuItem to="/7" className={pathname === "/7" ? "selected" : ""}>
           7 - CONDITIONALS
         </HeaderSubMenuItem>
-        <HeaderSubMenuItem to="7" className={pathname === "/8" ? "selected" : ""}>
+        <HeaderSubMenuItem to="/8" className={pathname === "/8" ? "selected" : ""}>
           8 - LOOPS
         </HeaderSubMenuItem>
-        <HeaderSubMenuItem to="7" className={pathname === "/9" ? "selected" : ""}>
+        <HeaderSubMenuItem to="/9" className={pathname === "/9" ? "selected" : ""}>
           9 - RECORDS
         </HeaderSubMenuItem>
-        <HeaderSubMenuItem to="7" className={pathname === "/10" ? "selected" : ""}>
+        <HeaderSubMenuItem to="/10" className={pathname === "/10" ? "selected" : ""}>
           10 - LISTS
         </HeaderSubMenuItem>
       </HeaderSubMenu>
