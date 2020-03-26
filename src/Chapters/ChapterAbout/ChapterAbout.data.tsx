@@ -2,7 +2,7 @@ export const data = `#Chapter 1 : About Tezos Academy
 
 Tezos Academy is a fun interactive tutorial develloped by <a href="https://octo.com/" target="_blank">OCTO Technology</a> on how to code smart contracts for <a href="https://tezos.com/" target="_blank">Tezos</a>. You are about to create a spaceship battle smart contract!
 
-By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michaelson</a>, but it is an hard to learn low level formal language. That is why we decide for this tutorial to use <a href="https://ligolang.org/" target="_blank">Pascaligo</a> instead. The syntax is high level, close to Pascal and tranpiles to Michaelson.
+By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michelson</a>, but it is an hard to learn low level formal language. That is why we decide for this tutorial to use <a href="https://ligolang.org/" target="_blank">PascaLIGO</a> instead. The syntax is high level, close to Pascal and tranpiles to Michelson.
 
 ## Part I : The ship factory
 
@@ -16,7 +16,7 @@ We will add more and more functionalities as you progress through this tutorial,
 
 ## How Ship ID works
 
-Ship's appearance is based on its unique ID, a 8 digits integer such as
+Ship's appearance is based on its unique ID, a 6 digits integer such as
 <code height="20px" value="101301">
 
 Ship ID is similar to how DNA works. Parts of it correspond to parts of its appearance. The first digit corresponds to the class of the ship, the second to the cabin design, third to the engine design, etc...

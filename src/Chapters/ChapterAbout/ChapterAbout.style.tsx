@@ -121,7 +121,7 @@ export const ChapterMonaco = styled.div`
 
 export const ChapterItalic = styled.em`
   color: #42edf8 !important;
-  text-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6);
+  /* text-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6); */
   text-transform: none;
   font-style: normal;
 `;

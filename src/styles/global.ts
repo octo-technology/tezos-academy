@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components/macro";
 
-import { slideRightEnter, slideRightExit, slideLeftEnter, slideLeftExit } from "./animations";
+import { slideLeftEnter, slideLeftExit, slideRightEnter, slideRightExit } from "./animations";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -32,6 +32,7 @@ a:hover {
 }
 
 p {
+    font-family: "Roboto", sans-serif;
     display: block;
     margin-block-start: 10px;
     margin-block-end: 10px;

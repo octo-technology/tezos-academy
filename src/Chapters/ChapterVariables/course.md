@@ -4,7 +4,7 @@
 
 Constants are immutable by design, which means their values cannot be reassigned. Put in another way, they can be assigned once, at their declaration. When defining a constant you need to provide a name, type and a value:
 
-```js
+```
 const age: int = 25;
 ```
 
@@ -12,8 +12,8 @@ const age: int = 25;
 
 Variables, unlike constants, are mutable. They cannot be declared in a global scope, but they can be declared and used within functions, or as function parameters.
 
-```js
-var c: int := 2 + 3;
+```
+var c: int := 2 + 3
 c := c - 3
 ```
 

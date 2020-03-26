@@ -2,7 +2,7 @@
 
 Strings are defined using the built-in string type as follows:
 
-```js
+```
 const a: string = "Hello Captain Rogers";
 ```
 
@@ -10,19 +10,19 @@ const a: string = "Hello Captain Rogers";
 
 Strings can be concatenated using the _^_ operator.
 
-```js
-const name: string = "Captain Rogers";
-const greeting: string = "Hello";
-const full_greeting: string = greeting ^ " " ^ name;
+```
+const name: string = "Captain Rogers"
+const greeting: string = "Hello"
+const full_greeting: string = greeting ^ " " ^ name
 ```
 
 ## Slicing Strings
 
 Strings can be sliced using a built-in function _String.slice_ as follows:
 
-```js
-const name: string = "Captain Rogers";
-const slice: string = String.slice(0n, 1n, name);
+```
+const name: string = "Captain Rogers"
+const slice: string = String.slice(0n, 1n, name)
 ```
 
 ⚠️ Notice that the offset and length of the slice are natural numbers.
@@ -31,9 +31,9 @@ const slice: string = String.slice(0n, 1n, name);
 
 The length of a string can be found using a built-in function _String.length_ as follows:
 
-```js
-const name: string = "Captain Rogers";
-const length: nat = String.length(name); // length = 14
+```
+const name: string = "Captain Rogers"
+const length: nat = String.length(name) // length = 14
 ```
 
 ## Your mission

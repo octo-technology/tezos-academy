@@ -1,6 +1,6 @@
 # Chapter 6 : Functions
 
-LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a functions and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
+LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a function and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
 
 When calling a function, LIGO makes a copy of the arguments but also the environment variables. Therefore any modification to these will not be reflected outside the scope of the function and will be lost if not explicitly returned by the function.
 
@@ -10,25 +10,25 @@ There are 2 types of functions in PascaLIGO, Block Functions and Blockless Funct
 
 In PascaLIGO, blocks allows for the sequential composition of instructions into an isolated scope. Each block needs to include at least one instruction.
 
-```js
+```
 block { a := a + 1 }
 ```
 
 If we need a placeholder, we use the instruction _skip_ which leaves the state unchanged. The rationale for skip instead of a truly empty block is that it prevents you from writing an empty block by mistake.
 
-```js
+```
 block { skip }
 ```
 
 Blocks can also include declarations of values :
 
-```js
+```
 block { const a : int = 1 }
 ```
 
 Functions in PascaLIGO are defined using the following syntax :
 
-```js
+```
 function <name> (<parameters>) : <return_type> is
 block {
     <operations and instructions>
@@ -37,7 +37,7 @@ block {
 
 For instance :
 
-```js
+```
 function add (const a : int; const b : int) : int is
   block {
     const sum : int = a + b
@@ -48,7 +48,7 @@ function add (const a : int; const b : int) : int is
 
 Functions that can contain all of their logic into a single expression can be defined without the need of a block. The add function above can be re-written as a blockless function:
 
-```js
+```
 function add (const a: int; const b : int) : int is a + b
 ```
 
@@ -56,7 +56,7 @@ function add (const a: int; const b : int) : int is a + b
 
 It is possible to define functions without assigning them a name. They are useful when you want to pass them as arguments, or assign them to a key in a record or a map.
 
-```js
+```
 function increment (const b : int) : int is
    (function (const a : int) : int is a + 1) (b)
 const a : int = increment (1); // a = 2
@@ -64,7 +64,7 @@ const a : int = increment (1); // a = 2
 
 If the example above seems contrived, here is a more common design pattern for lambdas: to be used as parameters to functions. Consider the use case of having a list of integers and mapping the increment function to all its elements.
 
-```js
+```
 function incr_map (const l : list (int)) : list (int) is
   List.map (function (const i : int) : int is i + 1, l)
 ```
@@ -77,7 +77,7 @@ At the moment, recursive function are limited to one (possibly tupled) parameter
 
 In PascaLigo recursive functions are defined using the _recursive_ keyword
 
-```js
+```
 recursive function sum (const n : int; const acc: int) : int is
   if n<1 then acc else sum(n-1,acc+n)
 ```

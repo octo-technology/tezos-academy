@@ -3,4 +3,4 @@ var my_ship : ship_code := "020433"
 my_ship := "222031"
 const my_ship_price : tez = 3tez * 1.20
 // Type your solution below
-my_ship := String.slice(0n, 2n, my_ship) ^ "1" ^  String.slice(4n, 3n, my_ship)
+my_ship := String.slice(0n, 2n, my_ship) ^ "1" ^  String.slice(3n, 3n, my_ship)

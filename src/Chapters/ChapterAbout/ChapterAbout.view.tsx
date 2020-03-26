@@ -8,7 +8,7 @@ import { ShipSelector } from "../../ShipSelector/ShipSelector.controller";
 import { PENDING, RIGHT, WRONG } from "./ChapterAbout.constants";
 import { data } from "./ChapterAbout.data";
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterStyled, ChapterH1, ChapterH2, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
 
 monaco
   .init()
@@ -50,7 +50,7 @@ const MonacoReadOnly = ({ height, value }: any) => {
           folding: false,
           readOnly: true,
           fontSize: 14,
-          fontFamily: "Electrolize"
+          fontFamily: "Roboto"
         }}
       />
     </div>

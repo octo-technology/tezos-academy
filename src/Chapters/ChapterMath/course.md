@@ -17,7 +17,7 @@ LIGO offers three built-in numerical types:
 
 Addition in LIGO is accomplished by means of the + infix operator. Some type constraints apply, for example you cannot add a value of type tez to a value of type nat.
 
-```js
+```
 const a : int = 5 + 10
 const b : int = 5n + 10
 const c : tez = 5mutez + 0.000_010tez
@@ -29,7 +29,7 @@ const c : tez = 5mutez + 0.000_010tez
 
 Substractions follow the same principles.
 
-```js
+```
 const a : int = 5 - 10
 const b : int = 5n - 2n
 const d : tez = 5mutez - 1mutez
@@ -39,7 +39,7 @@ const d : tez = 5mutez - 1mutez
 
 Multiplications follow the same principles.
 
-```js
+```
 const a : int = 5 * 5
 const b : nat = 5n * 5n
 const c : tez = 5n * 5mutez
@@ -49,7 +49,7 @@ const c : tez = 5n * 5mutez
 
 Divisions follow the same principles.
 
-```js
+```
 const a : int = 10 / 3
 const b : nat = 10n / 3n
 const c : nat = 10mutez / 3mutez
@@ -59,7 +59,7 @@ const c : nat = 10mutez / 3mutez
 
 Modulos follow the same principles.
 
-```js
+```
 const a : int = 120
 const b : int = 9
 const rem1 : nat = a mod b  // 3
@@ -69,9 +69,9 @@ const rem1 : nat = a mod b  // 3
 
 You can cast an int to a nat and vice versa. Here is how:
 
-```js
-const a: int = int(1n);
-const b: nat = abs(1);
+```
+const a: int = int(1n)
+const b: nat = abs(1)
 ```
 
 ## Checking a nat
@@ -79,7 +79,7 @@ const b: nat = abs(1);
 <!-- prettier-ignore -->
 *is\_nat* returns a _nat_ or _None_
 
-```js
+```
 const is_a_nat : option (nat) = is_nat (1)
 ```
 

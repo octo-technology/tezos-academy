@@ -52,8 +52,16 @@ export const Chapter = () => {
       setValidatorState(PENDING);
     } else {
       setShowDiff(true);
-      if (data.exercise === data.solution) setValidatorState(RIGHT);
-      else setValidatorState(WRONG);
+      if (data.exercise && data.solution) {
+        if (
+          // @ts-ignore
+          data.exercise.replace(/\s+|\/\/ Type your solution below/g, "") ===
+          // @ts-ignore
+          data.solution.replace(/\s+|\/\/ Type your solution below/g, "")
+        )
+          setValidatorState(RIGHT);
+        else setValidatorState(WRONG);
+      } else setValidatorState(WRONG);
     }
   };
 
