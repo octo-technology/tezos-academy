@@ -15,10 +15,10 @@ export const HeaderView = () => {
           <HeaderLogo alt="logo" src="/elements/logo.svg" />
         </Link>
         <HeaderMenuItem to="/1" className="selected">
-          I - SHIP FACTORY
+          I - MY SHIP
         </HeaderMenuItem>
-        <HeaderMenuItem to="/11">II - INTO BATTLE</HeaderMenuItem>
-        <HeaderMenuItem to="/21">III - MORE SOON...</HeaderMenuItem>
+        <HeaderMenuItem to="/11">II - THE SHIP FACTORY</HeaderMenuItem>
+        <HeaderMenuItem to="/21">III - INTO BATTLE</HeaderMenuItem>
         <HeaderMenuSelector />
       </HeaderMenu>
       <HeaderSubMenu>
@@ -50,7 +50,7 @@ export const HeaderView = () => {
           9 - RECORDS
         </HeaderSubMenuItem>
         <HeaderSubMenuItem to="/10" className={pathname === "/10" ? "selected" : ""}>
-          10 - LISTS
+          10 - MAPS
         </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>

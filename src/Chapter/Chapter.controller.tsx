@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
 import { dataConditionals } from "../Chapters/ChapterConditionals";
 import { dataFunctions } from "../Chapters/ChapterFunctions";
-import { dataLists } from "../Chapters/ChapterLists";
+import { dataMaps } from "../Chapters/ChapterMaps";
 import { dataLoops } from "../Chapters/ChapterLoops";
 import { dataMath } from "../Chapters/ChapterMath";
 import { dataRecords } from "../Chapters/ChapterRecords";
@@ -43,7 +43,7 @@ export const Chapter = () => {
     if (pathname === "/9")
       setData({ course: dataRecords.course, exercise: dataRecords.exercise, solution: dataRecords.solution });
     if (pathname === "/10")
-      setData({ course: dataLists.course, exercise: dataLists.exercise, solution: dataLists.solution });
+      setData({ course: dataMaps.course, exercise: dataMaps.exercise, solution: dataMaps.solution });
   }, [pathname]);
 
   const validateCallback = () => {
