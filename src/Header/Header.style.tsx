@@ -46,7 +46,7 @@ export const HeaderMenuItem = styled(Link)`
 
 export const HeaderMenuSelector = styled.div`
   position: absolute;
-  width: 132px;
+  width: 85px;
   height: 3px;
   left: 314px;
   top: 47px;
