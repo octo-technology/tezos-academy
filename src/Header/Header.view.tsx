@@ -52,6 +52,9 @@ export const HeaderView = () => {
         <HeaderSubMenuItem to="/10" className={pathname === "/10" ? "selected" : ""}>
           10 - MAPS
         </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/11" className={pathname === "/11" ? "selected" : ""}>
+          11 - TIMESTAMPS
+        </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>
   );

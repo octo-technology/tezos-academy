@@ -18,14 +18,14 @@ const full_greeting: string = greeting ^ " " ^ name
 
 ## Slicing Strings
 
-Strings can be sliced using a built-in function _String.slice_ as follows:
+Strings can be sliced using a built-in function _String.sub_ as follows:
 
 ```
 const name: string = "Captain Rogers"
-const slice: string = String.slice(0n, 1n, name)
+const slice: string = String.sub(0n, 1n, name)
 ```
 
-⚠️ Notice that the offset and length of the slice are natural numbers.
+⚠️ Notice that the offset and length of the sub function are natural numbers.
 
 ## Length of Strings
 

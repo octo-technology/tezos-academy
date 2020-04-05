@@ -37,6 +37,7 @@ const App = () => {
                     <Route exact path="/8" component={Chapter} />
                     <Route exact path="/9" component={Chapter} />
                     <Route exact path="/10" component={Chapter} />
+                    <Route exact path="/11" component={Chapter} />
                     <Route component={NotFound} />
                   </Switch>
                 </AppTransitions>

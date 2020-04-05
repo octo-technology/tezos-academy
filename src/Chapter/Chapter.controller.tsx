@@ -14,6 +14,7 @@ import { dataStrings } from "../Chapters/ChapterStrings";
 import { dataTypes } from "../Chapters/ChapterTypes";
 import { dataVariables } from "../Chapters/ChapterVariables";
 import { ChapterView } from "./Chapter.view";
+import { dataTimestamps } from "../Chapters/ChapterTimestamps";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -44,6 +45,8 @@ export const Chapter = () => {
       setData({ course: dataRecords.course, exercise: dataRecords.exercise, solution: dataRecords.solution });
     if (pathname === "/10")
       setData({ course: dataMaps.course, exercise: dataMaps.exercise, solution: dataMaps.solution });
+    if (pathname === "/11")
+      setData({ course: dataTimestamps.course, exercise: dataTimestamps.exercise, solution: dataTimestamps.solution });
   }, [pathname]);
 
   const validateCallback = () => {
