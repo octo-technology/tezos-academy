@@ -40,22 +40,22 @@ p {
     margin-inline-end: 0px;
 }
 
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
   background: transparent;
 }
 
-::-webkit-scrollbar-track, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
+*::-webkit-scrollbar-track, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
   background: #00000000;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #08658b;
 }
 
-::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #08658b;
 }
 

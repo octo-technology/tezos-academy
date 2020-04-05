@@ -17,7 +17,7 @@ export const ChapterGrid = styled.div`
   display: grid;
   grid-template-rows: 440px auto;
   grid-gap: 20px;
-  overflow: scroll;
+  overflow: auto;
 
   @media (max-width: 900px) {
     overflow: initial;
@@ -30,7 +30,7 @@ export const ChapterCourse = styled.div`
   padding: 20px;
   font-size: 14px;
   white-space: pre-wrap;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const ChapterH1 = styled.div`
