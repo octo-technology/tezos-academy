@@ -17,10 +17,10 @@ export const ChapterGrid = styled.div`
   display: grid;
   grid-template-rows: 440px auto;
   grid-gap: 20px;
-  overflow: auto;
+  overflow-y: scroll;
 
   @media (max-width: 900px) {
-    overflow: initial;
+    overflow-y: scroll;
   }
 `;
 

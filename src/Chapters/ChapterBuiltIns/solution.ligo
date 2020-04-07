@@ -15,9 +15,8 @@ const my_ship : user =
         created_at : Tezos.Now
     ]
 
-// Type your solution below
-type owner is map (string, string)
+type owner is map (string, address)
 const owner_of : owner =
     map [
-        ("Galactica" : "Adama")
+        ("Galactica" : "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx")
     ]

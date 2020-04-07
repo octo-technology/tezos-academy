@@ -56,7 +56,7 @@ Maps load their entries into the environement, which is fine for small maps, but
 
 ## Your mission
 
-1- Create the mapping type _owner_ which associates a ship name to their owner address.
+1- Create the mapping type _owner_ which associates a ship name to their owner name.
 
 <!-- prettier-ignore -->
-2-Create the mapping *owner\_of* of type _owner_ for the ship "Battlestar" owned by "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx"
+2-Create the mapping *owner\_of* of type _owner_ for the ship "Battlestar" owned by "Adama"

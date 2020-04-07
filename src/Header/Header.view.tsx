@@ -55,6 +55,18 @@ export const HeaderView = () => {
         <HeaderSubMenuItem to="/11" className={pathname === "/11" ? "selected" : ""}>
           11 - TIMESTAMPS
         </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/12" className={pathname === "/12" ? "selected" : ""}>
+          12 - ADDRESSES
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/13" className={pathname === "/13" ? "selected" : ""}>
+          13 - ENTRYPOINTS
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/14" className={pathname === "/14" ? "selected" : ""}>
+          14 - BUILT-INS
+        </HeaderSubMenuItem>
+        <HeaderSubMenuItem to="/15" className={pathname === "/15" ? "selected" : ""}>
+          15 - INCLUSIONS
+        </HeaderSubMenuItem>
       </HeaderSubMenu>
     </HeaderStyled>
   );

@@ -1,4 +1,3 @@
-// Type your solution below
 type ship is
     record [
         name : string;
@@ -13,8 +12,9 @@ const my_ship : user =
         price : 1tez
     ]
 
-type owner is map (string, address)
+// Type your solution below
+type owner is map (string, string)
 const owner_of : owner =
     map [
-        ("Galactica" : "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx")
+        ("Galactica" : "Adama")
     ]

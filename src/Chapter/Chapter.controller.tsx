@@ -6,15 +6,19 @@ import { useLocation } from "react-router-dom";
 import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
 import { dataConditionals } from "../Chapters/ChapterConditionals";
 import { dataFunctions } from "../Chapters/ChapterFunctions";
-import { dataMaps } from "../Chapters/ChapterMaps";
 import { dataLoops } from "../Chapters/ChapterLoops";
+import { dataMaps } from "../Chapters/ChapterMaps";
 import { dataMath } from "../Chapters/ChapterMath";
 import { dataRecords } from "../Chapters/ChapterRecords";
 import { dataStrings } from "../Chapters/ChapterStrings";
+import { dataTimestamps } from "../Chapters/ChapterTimestamps";
 import { dataTypes } from "../Chapters/ChapterTypes";
 import { dataVariables } from "../Chapters/ChapterVariables";
+import { dataAddresses } from "../Chapters/ChapterAddresses";
+import { dataBuiltIns } from "../Chapters/ChapterBuiltIns";
+import { dataInclusions } from "../Chapters/ChapterInclusions";
+import { dataEntrypoints } from "../Chapters/ChapterEntrypoints";
 import { ChapterView } from "./Chapter.view";
-import { dataTimestamps } from "../Chapters/ChapterTimestamps";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -37,7 +41,7 @@ export const Chapter = () => {
       setData({
         course: dataConditionals.course,
         exercise: dataConditionals.exercise,
-        solution: dataConditionals.solution
+        solution: dataConditionals.solution,
       });
     if (pathname === "/8")
       setData({ course: dataLoops.course, exercise: dataLoops.exercise, solution: dataLoops.solution });
@@ -47,6 +51,18 @@ export const Chapter = () => {
       setData({ course: dataMaps.course, exercise: dataMaps.exercise, solution: dataMaps.solution });
     if (pathname === "/11")
       setData({ course: dataTimestamps.course, exercise: dataTimestamps.exercise, solution: dataTimestamps.solution });
+    if (pathname === "/12")
+      setData({ course: dataAddresses.course, exercise: dataAddresses.exercise, solution: dataAddresses.solution });
+    if (pathname === "/13")
+      setData({
+        course: dataEntrypoints.course,
+        exercise: dataEntrypoints.exercise,
+        solution: dataEntrypoints.solution,
+      });
+    if (pathname === "/14")
+      setData({ course: dataBuiltIns.course, exercise: dataBuiltIns.exercise, solution: dataBuiltIns.solution });
+    if (pathname === "/15")
+      setData({ course: dataInclusions.course, exercise: dataInclusions.exercise, solution: dataInclusions.solution });
   }, [pathname]);
 
   const validateCallback = () => {
