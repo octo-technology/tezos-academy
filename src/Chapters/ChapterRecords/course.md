@@ -56,7 +56,7 @@ function change_name (const u : user) : user is
 
 ## Your mission
 
-1- Your mission to create the _ship_ type as a record for the _name_ of your ship, its _code_, and its _price_ in tez.
+1- Your mission (in section 1), is to create the _ship_ type as a record for the _name_ of your ship, its _code_, and its _price_ in tez.
 
 <!-- prettier-ignore -->
-2- Create *my\_ship* as a _ship_ with the name "Galactica", code "222031" and a price of 1 tez
+2- In section 2, create *my\_ship* as a _ship_ with the name "Galactica", code "222031" and a price of 1 tez
