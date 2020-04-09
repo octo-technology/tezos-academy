@@ -33,4 +33,4 @@ const my_key : key = ("edpkuBknW28nW72KG6RoHtYW7p12T6GKc7nAbwYX5m8Wd9sDVC9yav" :
 
 2- Make the Galactica belong to address "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx"
 
-3- Make the Galactica belong to address "tz1YfuHeaaPyKFGAjrCskb8kzEEkmaMhiDhd"
+3- Make the Enterprise belong to address "tz1YfuHeaaPyKFGAjrCskb8kzEEkmaMhiDhd"
