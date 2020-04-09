@@ -6,7 +6,7 @@ type ship is
         price : tez
     ]
 
-const my_ship : user =
+const my_ship : ship =
     record [
         name : "Galactica";
         code : "222031";
