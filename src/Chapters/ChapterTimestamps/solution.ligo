@@ -12,7 +12,7 @@ const my_ship : ship =
         name : "Galactica";
         code : "222031";
         price : 1tez;
-        created_at : Tezos.Now
+        created_at : Tezos.now
     ]
 
 // Type your solution below

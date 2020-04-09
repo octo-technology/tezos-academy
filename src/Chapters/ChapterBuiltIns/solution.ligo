@@ -7,12 +7,12 @@ type ship is
         created_at : timestamp
     ]
 
-const my_ship : user =
+const my_ship : ship =
     record [
         name : "Galactica";
         code : "222031";
         price : 1tez;
-        created_at : Tezos.Now
+        created_at : Tezos.now
     ]
 
 type owner is map (string, address)
