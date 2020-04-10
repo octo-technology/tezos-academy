@@ -56,6 +56,9 @@ Maps load their entries into the environement, which is fine for small maps, but
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Gov: "Your registration request (for your ship) will be processed as fast as possible. You will recieve a message when it is done (probably in 4 to 6 weeks)."
+... I'm wondering why registration takes so long ...  I heard you are a blockchainer ! go help them ... pleeeease
+
 1- Create the mapping type _owner_ which associates a ship name to their owner name.
 
 <!-- prettier-ignore -->

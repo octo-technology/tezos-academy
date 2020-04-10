@@ -21,6 +21,8 @@ c := c - 3
 
 ## Your mission
 
+Interstellar Academy advise: Every space pilot must learn the basics before flying on your own winglets. 
+
 <!-- prettier-ignore -->
 1- In the top right editor, modify the code from the previous chapter to make *my\_ship* a variable.
 

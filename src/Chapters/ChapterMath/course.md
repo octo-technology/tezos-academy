@@ -85,5 +85,8 @@ const is_a_nat : option (nat) = is_nat (1)
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Academy: "You did not pay your admission fee in time. You received a 20% penalties for the delay in payment."
+Life is hard !
+
 <!-- prettier-ignore -->
 1- In the editor, define *my\_ship\_price* for 3tez plus a 20% tax.

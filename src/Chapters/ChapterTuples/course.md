@@ -33,6 +33,9 @@ alice.2 := "newAlice";
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Gov: We have received your registration form but the name Galactica is already assigned ! You must fill a  new form for changing the name of the ship. 
+It is time to fill the "name modification" form for your ship called "Enterprise because Galactica was already taken".
+
 1- Your mission is to create the _ship_ type as a tuple with the _name_ of your ship as string, its _code_ as string, and its _price_ in tez.
 
 <!-- prettier-ignore -->
