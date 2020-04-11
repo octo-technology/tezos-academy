@@ -38,5 +38,8 @@ const length: nat = String.length(name) // length = 14
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Academy: "Today's lesson: reading and splitting barcode." 
+Who knows maybe it can be a usefull skill, in case of professional retraining (if you fail the exam) you can be a supermarket cashier. 
+
 <!-- prettier-ignore -->
 1- Modify the third attribute of *my\_ship* from 2 to 1

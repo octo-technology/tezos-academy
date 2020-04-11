@@ -85,6 +85,8 @@ const is_a_nat : option (nat) = is_nat (1)
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Academy: "Today's lesson: space combat simulation - Know your opponent ! How strong is he ?". 
+
 <!-- prettier-ignore -->
 An armoured battleship _ship1_ is attacking a weaker battleship _ship2_. A third ship (_ship3_) is coming to rescue _ship2_ in order to have an even fight ! 
 1- In the editor, compute _ship3_ armor (which is the difference of armor between _ship1_ and _ship2_) in a constant variable *diff\_armor*

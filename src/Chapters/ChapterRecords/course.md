@@ -56,6 +56,8 @@ function change_name (const u : user) : user is
 
 ## Your mission
 
+Interstellar Academy annoucement: Congratulation young space pilot you have been granted a new space ship. It is time to fill the registration form for your new ship called Galactica.
+
 1- Your mission (in section 1), is to create the _ship_ type as a record for the _name_ of your ship, its _code_, and its _price_ in tez.
 
 <!-- prettier-ignore -->

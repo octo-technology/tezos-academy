@@ -50,6 +50,8 @@ const my_account : account = record [
 
 ## Your mission
 
+Congratulation young space pilot you have been accepted to the Interstellar Academy ! It seems you like spaceships, very well. Let's test you a bit before granting you a ship !
+
 <!-- prettier-ignore -->
 1- There is an online editor in the top right corner of this page. In the editor, define *ship\_code* as a string type.
 

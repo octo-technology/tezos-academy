@@ -73,6 +73,7 @@ In LIGO, a constant constructor is equivalent to the same constructor taking an 
 
 # Your mission
 
+You received a laserbeam message from Interstellar Academy: "Today's lesson: space combat simulation - Attack / Defense"
 Two ships are meeting around AlphaCentory, a space battle is about to begin ! It is time to choose your strategy: you can either fire on a ship or activate your electromagnetic shield.
 
 <!-- prettier-ignore -->

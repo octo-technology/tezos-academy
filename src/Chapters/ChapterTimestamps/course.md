@@ -31,5 +31,7 @@ const not_tommorow : bool = (Tezos.now = in_24_hrs)
 
 ## Your mission
 
+You received a laserbeam message from Interstellar Academy: "Time is almost up for your training. Real first test will be soon".
+
 <!-- prettier-ignore -->
 In the _ship_ record, add a *created\_at* key and implement it using the Now Timestamp.
