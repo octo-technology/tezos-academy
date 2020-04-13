@@ -4,6 +4,7 @@ import * as PropTypes from "prop-types";
 import * as React from "react";
 
 import { CardBottomCorners, CardTopCorners } from "../../Card/Card.style";
+import { Dialog } from "../../Dialog/Dialog.controller";
 import { ShipSelector } from "../../ShipSelector/ShipSelector.controller";
 import { PENDING, RIGHT, WRONG } from "./ChapterAbout.constants";
 import { data } from "./ChapterAbout.data";
@@ -12,7 +13,7 @@ import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1
 
 monaco
   .init()
-  .then(monacoInstance => {
+  .then((monacoInstance) => {
     monacoInstance.editor.defineTheme("myCustomTheme", {
       base: "vs-dark",
       inherit: true,
@@ -20,7 +21,7 @@ monaco
         { token: "comment", foreground: "666666", fontStyle: "italic" },
         { token: "keyword", foreground: "FF5A00" },
         { token: "number", foreground: "00FF47" },
-        { token: "string", foreground: "FA00FF" }
+        { token: "string", foreground: "FA00FF" },
       ],
       colors: {
         "editor.foreground": "#F8F8F8",
@@ -28,11 +29,11 @@ monaco
         "editor.selectionBackground": "#DDF0FF33",
         "editor.lineHighlightBackground": "#FFFFFF08",
         "editorCursor.foreground": "#A7A7A7",
-        "editorWhitespace.foreground": "#FFFFFF40"
-      }
+        "editorWhitespace.foreground": "#FFFFFF40",
+      },
     });
   })
-  .catch(error => console.error("An error occurred during initialization of Monaco: ", error));
+  .catch((error) => console.error("An error occurred during initialization of Monaco: ", error));
 
 const MonacoReadOnly = ({ height, value }: any) => {
   return (
@@ -50,7 +51,7 @@ const MonacoReadOnly = ({ height, value }: any) => {
           folding: false,
           readOnly: true,
           fontSize: 14,
-          fontFamily: "Roboto"
+          fontFamily: "Roboto",
         }}
       />
     </div>
@@ -71,15 +72,18 @@ export const ChapterAboutView = ({ validatorState, validateCallback }: ChapterAb
           options={{
             overrides: {
               h1: {
-                component: ChapterH1
+                component: ChapterH1,
               },
               h2: {
-                component: ChapterH2
+                component: ChapterH2,
               },
               code: {
-                component: MonacoReadOnly
-              }
-            }
+                component: MonacoReadOnly,
+              },
+              dialog: {
+                component: Dialog,
+              },
+            },
           }}
         />
       </ChapterCourse>
@@ -124,9 +128,9 @@ export const ChapterAboutView = ({ validatorState, validateCallback }: ChapterAb
 
 ChapterAboutView.propTypes = {
   validatorState: PropTypes.string,
-  validateCallback: PropTypes.func.isRequired
+  validateCallback: PropTypes.func.isRequired,
 };
 
 ChapterAboutView.defaultProps = {
-  validatorState: PENDING
+  validatorState: PENDING,
 };

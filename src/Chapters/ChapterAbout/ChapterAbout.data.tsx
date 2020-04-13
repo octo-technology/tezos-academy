@@ -1,10 +1,14 @@
-export const data = `#Chapter 1 : About Tezos Academy
+export const data = `#Chapter 1 : Tezos Academy
 
-Tezos Academy is a fun interactive tutorial develloped by <a href="https://octo.com/" target="_blank">OCTO Technology</a> on how to code smart contracts for <a href="https://tezos.com/" target="_blank">Tezos</a>. You are about to create a spaceship battle smart contract!
+<dialog>Hello rookie! I hope you are ready for a fight. The Xenomorphs have been attacking our colonies for days now. We are throwing everything we’ve got at them, that means even you rookie, so you better learn and fast! You have been assigned to ship 020433, go ahead and board your ship.</dialog>
 
-By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michelson</a>, but it is an hard to learn low level formal language. That is why we decide for this tutorial to use <a href="https://ligolang.org/" target="_blank">PascaLIGO</a> instead. The syntax is high level, close to Pascal and tranpiles to Michelson.
+Tezos Academy is a fun interactive tutorial develloped by <a href="https://octo.com/" target="_blank">OCTO Technology</a> on how to code smart contracts for <a href="https://tezos.com/" target="_blank">Tezos</a>. You are about to create spaceship battles smart contracts!
 
-## Part I : The ship factory
+By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michelson</a>, but it is an hard to learn low level formal language. For this tutorial, we will use <a href="https://ligolang.org/" target="_blank">PascaLIGO</a> instead. The syntax is high level, close to Pascal and tranpiles to Michelson.
+
+## Objectives
+
+In this tutorial, we will 
 
 In part I of this tutorial, you are going to build a "Ship Factory" to build an army of spaceships.
 

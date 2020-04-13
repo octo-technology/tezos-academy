@@ -1,22 +1,17 @@
-import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
 
+import { Chapter } from "../Chapter/Chapter.controller";
+import { ChapterAbout } from "../Chapters/ChapterAbout/ChapterAbout.controller";
+import { NotFound } from "../NotFound/NotFound.view";
 import { AppStyled, AppWrapper } from "./App.style";
 import { AppTransitions } from "./App.transitions";
-import { Chapter } from "./Chapter/Chapter.controller";
-import { ChapterAbout } from "./Chapters/ChapterAbout/ChapterAbout.controller";
-import { Footer } from "./Footer/Footer.controller";
-import { Header } from "./Header/Header.controller";
-import { NotFound } from "./NotFound/NotFound.view";
-import { GlobalStyle } from "./styles";
 
-const App = () => {
+export const AppView = () => {
   let previousLocation = window.location.pathname;
   return (
     <AppStyled>
-      <GlobalStyle />
-      <Router>
-        <Header />
+      <Suspense fallback={<div>Loading...</div>}>
         <Route
           render={({ location }: any) => {
             const nextPage = parseInt(location.pathname.replace("/", ""));
@@ -49,10 +44,7 @@ const App = () => {
             );
           }}
         />
-        <Footer />
-      </Router>
+      </Suspense>
     </AppStyled>
   );
 };
-
-export default App;
