@@ -5,12 +5,17 @@ export const DialogStyled = styled.div`
   display: grid;
   grid-template-columns: 164px auto;
   grid-gap: 10px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+  }
 `;
 
 export const DialogCharacter = styled.div`
   position: relative;
   height: 164px;
   width: 164px;
+  margin: auto;
 
   .character-bg {
     position: absolute;
@@ -287,24 +292,20 @@ export const DialogCharacter = styled.div`
   }
 `;
 
-export const DialogText = styled.div`
-  position: relative;
-
-  .dialog-bg {
-    position: absolute;
-    left: 0;
-    margin: 7px 0;
-    top: 0;
-    width: 100%;
-    height: 150px;
-  }
-`;
+export const DialogText = styled.div``;
 
 export const DialogTextInside = styled.div`
-  position: absolute;
-  left: 10px;
-  top: 14px;
-  width: calc(100% - 19px);
-  height: auto;
-  z-index: 1;
+  position: relative;
+  background-image: url("/elements/dialog.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 10px 10px 30px 10px;
+  margin-top: 7px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+    background-image: url("/elements/dialog-mobile.png");
+    padding: 30px 10px 10px 10px;
+    margin-top: -10px;
+  }
 `;

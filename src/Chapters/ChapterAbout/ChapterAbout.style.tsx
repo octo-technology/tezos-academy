@@ -10,6 +10,7 @@ export const ChapterStyled = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: auto;
     height: initial;
+    margin: 0 10px;
   }
 `;
 
@@ -20,7 +21,9 @@ export const ChapterGrid = styled.div`
   overflow-y: scroll;
 
   @media (max-width: 900px) {
-    overflow-y: scroll;
+    overflow-y: initial;
+    grid-template-rows: auto auto;
+    margin-bottom: 20px;
   }
 `;
 
@@ -36,12 +39,23 @@ export const ChapterCourse = styled.div`
 export const ChapterH1 = styled.div`
   font-size: 32px;
   line-height: 38px;
+
+  @media (max-width: 900px) {
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
 `;
 
 export const ChapterH2 = styled.div`
   font-size: 24px;
   line-height: 28px;
   margin-top: 20px;
+
+  @media (max-width: 900px) {
+    font-size: 20px;
+    line-height: 24px;
+  }
 `;
 
 export const ChapterValidator = styled.div`

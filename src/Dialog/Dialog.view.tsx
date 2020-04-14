@@ -20,7 +20,6 @@ export const DialogView = ({ text }: DialogProps) => (
       </div>
     </DialogCharacter>
     <DialogText>
-      <img alt="dialog-bg" className="dialog-bg" src="/elements/dialog.png" />
       <DialogTextInside>{text}</DialogTextInside>
     </DialogText>
   </DialogStyled>

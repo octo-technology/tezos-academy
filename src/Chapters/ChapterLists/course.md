@@ -1,3 +1,0 @@
-# Chapter 10 : Lists
-
-Coming soon ...

@@ -1,14 +1,11 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 import { Hamburger } from "../Hamburger/Hamburger.controller";
 // prettier-ignore
 import { HeaderBg, HeaderLogo, HeaderStyled } from "./Header.style";
 
 export const HeaderView = () => {
-  const { pathname } = useLocation();
-
   return (
     <HeaderStyled>
       <HeaderBg>
@@ -23,7 +20,7 @@ export const HeaderView = () => {
       <Link to="/">
         <HeaderLogo alt="logo" src="/elements/logo.svg" />
       </Link>
-      <Link to="/50" className="user">
+      <Link to="/sign-up" className="user">
         <img src="/elements/user.svg" alt="user" />
       </Link>
     </HeaderStyled>

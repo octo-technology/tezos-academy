@@ -92,7 +92,7 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/13" ? "current-path" : "other-path"}>
         <Link to="/13" onClick={() => hideCallback()}>
-          13 - Entrypoints
+          13 - Main function
         </Link>
       </DrawerItem>
 
@@ -104,37 +104,37 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/15" ? "current-path" : "other-path"}>
         <Link to="/15" onClick={() => hideCallback()}>
-          15 - Inclusions
+          15 - Cast
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/16" ? "current-path" : "other-path"}>
         <Link to="/16" onClick={() => hideCallback()}>
-          16 - ...
+          16 - Tuples
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/17" ? "current-path" : "other-path"}>
         <Link to="/17" onClick={() => hideCallback()}>
-          17 - ...
+          17 - Fail with
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/18" ? "current-path" : "other-path"}>
         <Link to="/18" onClick={() => hideCallback()}>
-          18 - ...
+          18 - Variant
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/19" ? "current-path" : "other-path"}>
         <Link to="/19" onClick={() => hideCallback()}>
-          19 - ...
+          19 - Pattern Matching
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/20" ? "current-path" : "other-path"}>
         <Link to="/20" onClick={() => hideCallback()}>
-          20 - ...
+          20 - Transactions
         </Link>
       </DrawerItem>
     </DrawerStyled>

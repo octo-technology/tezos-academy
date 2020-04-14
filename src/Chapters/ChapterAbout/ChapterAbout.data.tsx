@@ -8,15 +8,14 @@ By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.i
 
 ## Objectives
 
-In this tutorial, we will 
+In this tutorial, we will go over each fundamental principles of LIGO while coding the following features :
 
-In part I of this tutorial, you are going to build a "Ship Factory" to build an army of spaceships.
+* Our own ship
+* A ship factory
+* Our army of ships
+* Battle simulation
 
-* Our factory will maintain a database of all ships in our army
-* Our factory will have a function for creating new ships
-* Each ship will have a random and unique appearance
-
-We will add more and more functionalities as you progress through this tutorial, such as going into space battles! But first, let's start with the basics and create new ships.
+The ship factory will maintain a database of all ships in our army and have a function for creating new ships. Each ship will have a random and unique appearance. For this, we will use _Non-Fungible Tokens_ (i.e. tokens that are unique) with a dedicated ship ID.
 
 ## How Ship ID works
 
@@ -29,7 +28,7 @@ For our tutorial, we only designed a few parts for each attribute, 3 different c
 
 ## Your mission
 
-On the top-right panel, go ahead and move the slider of each attribute. Notice the Ship ID above the ship image and how the different numerical values correspond to the different ship appearance. Your mission is to select the ship with ID 020433 and validate it.
+On the top-right panel, go ahead and move the slider of each attribute. Notice the Ship ID above the ship image and how the different numerical values correspond to the different ship appearance. Your mission is to select the ship with ID 020433 and click _Validate Mission_ below.
 
-Next, we will start coding some PascaLIGO!
+Next, we will start coding some LIGO!
 `;

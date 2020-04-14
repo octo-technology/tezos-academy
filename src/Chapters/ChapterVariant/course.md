@@ -1,4 +1,4 @@
-# Chapter 7.2 : Variants
+# Chapter 18 : Variants
 
 ## Description
 
@@ -19,15 +19,16 @@ const head : coin = Head
 const tail : coin = Tail
 ```
 
-Notice that all possibles values for a variant are capitalized (*Head*, *Tail*)
+Notice that all possibles values for a variant are capitalized (_Head_, _Tail_)
 
-In this particular, possibles values (*Head*, *Tail*) carry no information beyond their names, so they are called constant constructors, but variants can carry some information.
+In this particular, possibles values (_Head_, _Tail_) carry no information beyond their names, so they are called constant constructors, but variants can carry some information.
 
 ## Syntax
 
 The variant definition follows the syntax :
+
 ```
-type <typename> is 
+type <typename> is
 | <Label1> of <typeDefinition1>
 | <Label2> of <typeDefinition2>
 ```
@@ -39,6 +40,7 @@ Types definitions (<typeDefinition>) refers to primitive type (nat, int,..) or p
 The unit type in Michelson or LIGO is a predefined type that contains only one value that carries no information. It is used when no relevant information is required or produced. Here is how it used.
 
 In PascaLIGO, the unique value of the unit type is Unit.
+
 ```
 const n : unit = Unit
 ```
@@ -48,14 +50,15 @@ const n : unit = Unit
 ## Assignement
 
 A variable can be define for a variant type <typename>, it follows the syntax:
-```
-const <variableName> : <typename> = <Label>(<Parameter>) | <Label>(<Parameter>) 
-```
 
+```
+const <variableName> : <typename> = <Label>(<Parameter>) | <Label>(<Parameter>)
+```
 
 ## Exemple
 
 Here is a snippet of code that defines different type of users
+
 ```
 type id is nat
 
@@ -69,7 +72,6 @@ const g : user = Guest
 ```
 
 In LIGO, a constant constructor is equivalent to the same constructor taking an argument of type unit, so, for example, Guest is the same value as Guest (unit).
-
 
 # Your mission
 

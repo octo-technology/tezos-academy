@@ -37,6 +37,12 @@ export const AppView = () => {
                     <Route exact path="/13" component={Chapter} />
                     <Route exact path="/14" component={Chapter} />
                     <Route exact path="/15" component={Chapter} />
+                    <Route exact path="/16" component={Chapter} />
+                    <Route exact path="/17" component={Chapter} />
+                    <Route exact path="/18" component={Chapter} />
+                    <Route exact path="/19" component={Chapter} />
+                    <Route exact path="/20" component={Chapter} />
+                    <Route exact path="/sign-up" component={NotFound} />
                     <Route component={NotFound} />
                   </Switch>
                 </AppTransitions>

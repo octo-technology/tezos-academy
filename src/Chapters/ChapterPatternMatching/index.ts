@@ -8,4 +8,4 @@ import exercise from "!raw-loader!./exercise.ligo";
 // @ts-ignore
 import solution from "!raw-loader!./solution.ligo";
 
-export const dataLists = { course, exercise, solution };
+export const dataPatternMatching = { course, exercise, solution };

@@ -6,7 +6,6 @@ import { DrawerForward } from "./Drawer.styles/DrawerForward";
 
 export const DrawerMask = styled.div`
   position: fixed;
-  overflow: scroll;
   z-index: 9;
   top: 0;
   left: 0;
@@ -37,6 +36,7 @@ export const DrawerStyled = styled.div`
   transform: translate3d(-300px, 0, 0);
   transition: 0.2s ease-in-out;
   will-change: transform;
+  overflow: scroll;
 
   h1 {
     color: #FFF
