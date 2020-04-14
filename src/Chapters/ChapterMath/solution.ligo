@@ -1,5 +1,4 @@
-type ship_code is string
-var my_ship : ship_code := "020433"
-my_ship := "222031"
 // Type your solution below
-const my_ship_price : tez = 3tez * 1.20
+const required_energy : int = 1210;
+const energy_per_battery_pack : int = 500;
+const required_battery_packs : int = required_energy / energy_per_battery_pack + 1

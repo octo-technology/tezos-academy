@@ -7,6 +7,7 @@ import { CardBottomCorners, CardTopCorners } from "../Card/Card.style";
 import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
 //prettier-ignore
 import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/ChapterAbout/ChapterAbout.style";
+import { Dialog } from "../Dialog/Dialog.controller";
 
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split("\n").length * 22;
@@ -25,7 +26,7 @@ const MonacoReadOnly = ({ children }: any) => {
           folding: false,
           readOnly: true,
           fontSize: 14,
-          fontFamily: "Roboto"
+          fontFamily: "Roboto",
         }}
       />
     </div>
@@ -49,7 +50,7 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback }: any) => {
           folding: true,
           readOnly: false,
           fontSize: 14,
-          fontFamily: "Roboto"
+          fontFamily: "Roboto",
         }}
       />
     </div>
@@ -75,7 +76,7 @@ const MonacoDiff = ({ solution, proposedSolution }: any) => {
           readOnly: false,
           fontSize: 14,
           fontFamily: "Roboto",
-          renderSideBySide: false
+          renderSideBySide: false,
         }}
       />
     </div>
@@ -124,18 +125,21 @@ const Content = ({ course }: any) => (
       // disableParsingRawHTML: true,
       overrides: {
         h1: {
-          component: ChapterH1
+          component: ChapterH1,
         },
         h2: {
-          component: ChapterH2
+          component: ChapterH2,
         },
         code: {
-          component: MonacoReadOnly
+          component: MonacoReadOnly,
         },
         em: {
-          component: ChapterItalic
-        }
-      }
+          component: ChapterItalic,
+        },
+        dialog: {
+          component: Dialog,
+        },
+      },
     }}
   />
 );
@@ -157,7 +161,7 @@ export const ChapterView = ({
   proposedSolution,
   proposedSolutionCallback,
   showDiff,
-  course
+  course,
 }: ChapterViewProps) => {
   return (
     <ChapterStyled>
@@ -185,11 +189,11 @@ ChapterView.propTypes = {
   proposedSolution: PropTypes.string,
   showDiff: PropTypes.bool.isRequired,
   proposedSolutionCallback: PropTypes.func.isRequired,
-  course: PropTypes.string
+  course: PropTypes.string,
 };
 
 ChapterView.defaultProps = {
   validatorState: PENDING,
   solution: "",
-  proposedSolution: ""
+  proposedSolution: "",
 };

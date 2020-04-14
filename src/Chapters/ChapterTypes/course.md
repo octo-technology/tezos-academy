@@ -1,5 +1,7 @@
 # Chapter 2 : Types
 
+<dialog character="mechanics">Welcome onboard, I'm the ship's mechanics. The first thing to do before departing is to define your ship's paramaters. Go ahead!</dialog>
+
 LIGO is strongly and statically typed language. This means that the compiler checks how your contract processes data. If it passes the test, your contract will not fail at run-time due to inconsistent assumptions on your data. This is called type checking.
 
 ## Built-in types
@@ -49,8 +51,6 @@ const my_account : account = record [
 ℹ️We will look more deeply into the _record_ construct in the following chapters.
 
 ## Your mission
-
-Congratulation young space pilot you have been accepted to the Interstellar Academy ! It seems you like spaceships, very well. Let's test you a bit before granting you a ship !
 
 <!-- prettier-ignore -->
 1- There is an online editor in the top right corner of this page. In the editor, define *ship\_code* as a string type.

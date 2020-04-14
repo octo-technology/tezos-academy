@@ -1,5 +1,7 @@
 # Chapter 3 : Variables
 
+<dialog character="mechanics">You're not very good, are you? Seems like you have locked the parameters. You should unlock them so we can later change the ship configuration if need be.</dialog>
+
 ## Constants
 
 Constants are immutable by design, which means their values cannot be reassigned. Put in another way, they can be assigned once, at their declaration. When defining a constant you need to provide a name, type and a value:
@@ -20,8 +22,6 @@ c := c - 3
 ⚠️ Notice the assignment operator _:=_ for var, instead of _=_ for constants.
 
 ## Your mission
-
-Interstellar Academy advise: Every space pilot must learn the basics before flying on your own winglets. 
 
 <!-- prettier-ignore -->
 1- In the top right editor, modify the code from the previous chapter to make *my\_ship* a variable.

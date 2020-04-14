@@ -1,6 +1,6 @@
 export const data = `#Chapter 1 : Tezos Academy
 
-<dialog>Hello rookie! I hope you are ready for a fight. The Xenomorphs have been attacking our colonies for days now. We are throwing everything we’ve got at them, that means even you rookie, so you better learn and fast! You have been assigned to ship 020433, go ahead and board your ship.</dialog>
+<dialog character="admiral">Hello rookie! I'm admiral Adama. I hope you are ready for a fight. The Xenomorphs have been attacking our colonies for days now. We are throwing everything we’ve got at them, that means even you rookie, so you better learn and fast! You have been assigned to ship 020433, go ahead and board your ship.</dialog>
 
 Tezos Academy is a fun interactive tutorial develloped by <a href="https://octo.com/" target="_blank">OCTO Technology</a> on how to code smart contracts for <a href="https://tezos.com/" target="_blank">Tezos</a>. You are about to create spaceship battles smart contracts!
 

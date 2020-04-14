@@ -34,14 +34,15 @@ export const DialogCharacter = styled.div`
     align-items: center;
     overflow: hidden;
   }
+
   .glitch .glitch__item {
-    background: url("/elements/soldier.png") no-repeat 50% 50% / cover;
     height: 148px;
     width: 148px;
     top: 8px;
     left: 8px;
     position: absolute;
   }
+
   .glitch .glitch__item:nth-child(n + 2) {
     opacity: 0;
     animation-duration: var(--time-anim);

@@ -1,5 +1,7 @@
 # Chapter 4 : Math
 
+<dialog character="scientist">Hello rookie, I'm Dr Zod, I hope you didn't sleep during your Math class in the academy because you're gonna need it! Your ship needs at least 1.21 gigawatts to function properly. Battery packs are 0.16 gigawatts per unit. How many battery packs do you need? Seems easy, right? Well, no, because the system doesn't run floating point numbers, so... good luck with that!</dialog>
+ 
 LIGO offers three built-in numerical types:
 
 - _int_ are integers, such as 10, -6 and 0.
@@ -55,6 +57,8 @@ const b : nat = 10n / 3n
 const c : nat = 10mutez / 3mutez
 ```
 
+⚠️ Remember that there are no floating point numbers in LIGO so dividing 9 by 2 will output 4 and not 4.5
+
 ## Modulo
 
 Modulos follow the same principles.
@@ -67,7 +71,7 @@ const rem1 : nat = a mod b  // 3
 
 ## From int to nat and back
 
-You can cast an int to a nat and vice versa. Here is how:
+You can cast an int to a nat and vice versa using the _int_ or _abs_ functions. Here is how:
 
 ```
 const a: int = int(1n)
@@ -85,8 +89,11 @@ const is_a_nat : option (nat) = is_nat (1)
 
 ## Your mission
 
-You received a laserbeam message from Interstellar Academy: "You did not pay your admission fee in time. You received a 20% penalties for the delay in payment."
-Life is hard !
+<!-- prettier-ignore -->
+1- In the editor, define *required\_energy* for 1.21 gigawatts. Since Tezos doesn't support floating point numbers, let's work in megawatts instead so that you can write the amount of energy as an _int_.
 
 <!-- prettier-ignore -->
-1- In the editor, define *my\_ship\_price* for 3tez plus a 20% tax.
+2- Define *energy\_per\_battery\_pack* for 0.16 gigawatts.
+
+<!-- prettier-ignore -->
+3- Define and compute *required\_battery\_packs* as the number of battery packs required to power your ship.

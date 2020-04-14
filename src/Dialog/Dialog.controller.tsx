@@ -4,16 +4,20 @@ import * as React from "react";
 import { DialogView } from "./Dialog.view";
 
 type DialogProps = {
-  children: string;
+  children: string[];
+  character: string;
 };
 
-export const Dialog = ({ children }: DialogProps) => {
+export const Dialog = ({ children, character }: DialogProps) => {
   console.log(children);
-  return <DialogView text={children[0]} />;
+  return <DialogView text={children[0]} character={character} />;
 };
 
 Dialog.propTypes = {
   children: PropTypes.arrayOf(PropTypes.string).isRequired,
+  character: PropTypes.string,
 };
 
-Dialog.defaultProps = {};
+Dialog.defaultProps = {
+  character: "admiral",
+};

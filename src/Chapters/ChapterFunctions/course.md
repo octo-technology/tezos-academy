@@ -1,5 +1,7 @@
 # Chapter 6 : Functions
 
+<dialog character="mechanics">Hey, why are you trying to change the part yourself? Just encapsulate your instructions and send the commands to the droids.</dialog>
+
 LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a function and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
 
 When calling a function, LIGO makes a copy of the arguments but also the environment variables. Therefore any modification to these will not be reflected outside the scope of the function and will be lost if not explicitly returned by the function.
