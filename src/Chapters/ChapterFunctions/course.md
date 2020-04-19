@@ -1,6 +1,6 @@
 # Chapter 6 : Functions
 
-<dialog character="mechanics">Hey, why are you trying to change the part yourself? Just encapsulate your instructions and send the commands to the droids.</dialog>
+<dialog character="mechanics">Hey, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
 
 LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a function and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
 
@@ -86,11 +86,8 @@ recursive function sum (const n : int; const acc: int) : int is
 
 ## Your mission
 
-<!-- prettier-ignore -->
-1- Write an block function *modify\_ship* taking as argument *my\_ship*.
+<!-- prettier-ignore -->1- Write an block function *modify\_ship* taking as argument *my\_ship* of type *ship\_code* and returning a varible of type *ship\_code* as well.
 
-<!-- prettier-ignore -->
-2- In the block, copy/cut the code from the previous chapter that modified the third attribute from 2 to 1 and assign the result to a constant *modified\_ship*
+<!-- prettier-ignore -->2- In the block, copy/cut the code from the previous chapter that modified the third attribute from 2 to 1 and assign the result to a constant *modified\_ship*
 
-<!-- prettier-ignore -->
-3- Return *modified\_ship*
+<!-- prettier-ignore -->3- Return *modified\_ship*

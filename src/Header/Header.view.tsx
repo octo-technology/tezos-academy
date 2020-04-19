@@ -20,7 +20,7 @@ export const HeaderView = () => {
       <Link to="/">
         <HeaderLogo alt="logo" src="/elements/logo.svg" />
       </Link>
-      <Link to="/sign-up" className="user">
+      <Link to="/coming-next" className="user">
         <img src="/elements/user.svg" alt="user" />
       </Link>
     </HeaderStyled>

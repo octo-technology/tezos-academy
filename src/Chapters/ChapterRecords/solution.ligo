@@ -1,19 +1,16 @@
-// Type your solution below (section 1)
-type ship is
+// Modify the code below
+type coordinates is
     record [
-        name : string;
-        code : string;
-        price : tez
+        x : nat;
+        y : nat;
+        z : nat
     ]
 
-function main (const p : unit; const store : unit) : (list(operation) * unit) is
-  block {
-    // Type your solution below (section 2)
-    const my_ship : ship =
-        record [
-            name = "Galactica";
-            code = "222031";
-            price = 1tez
-        ]
+var earth_coordinates : coordinates :=
+    record [
+        x = 2;
+        y = 7;
+        z = 1
+    ]
 
-  } with ((nil: list(operation)), unit)
+earth_coordinates : coordinates = earth_coordinates with record [earth_coordinates.z = 5]

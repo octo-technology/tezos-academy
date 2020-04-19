@@ -1,6 +1,8 @@
-# Chapter 13 : Main function
+# Chapter 8 : Main function
 
-A LIGO contract is made of a series of constant and function declarations. Only functions having a special type can be called when the contract is activated: we call them main functions. A main function takes two parameters, the _contract parameter_ and the _on-chain storage_, and returns _a pair made of a list of operations and a (new) storage_.
+<dialog character="admiral">God damn it rookie! What are you still doing at the space port? Take off already and go shoot some alien!!</dialog>
+
+A LIGO contract is made of a series of constants and function declarations. Only functions having a special type can be called when the contract is activated: we call them _main_ functions. A main function takes two parameters, the _contract parameter_ and the _on-chain storage_, and returns a pair made of a _list of operations_ and a _(new) storage_.
 
 When the contract is originated, the initial value of the storage is provided. When a main function is later called, only the parameter is provided, but the type of a main function contains both.
 

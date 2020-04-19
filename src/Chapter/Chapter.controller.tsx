@@ -24,6 +24,7 @@ import { dataVariant } from "../Chapters/ChapterVariant";
 import { dataPatternMatching } from "../Chapters/ChapterPatternMatching";
 import { dataCast } from "../Chapters/ChapterCast";
 import { dataTransactions } from "../Chapters/ChapterTransactions";
+import { dataLists } from "../Chapters/ChapterLists";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -49,20 +50,28 @@ export const Chapter = () => {
         solution: dataConditionals.solution,
       });
     if (pathname === "/8")
-      setData({ course: dataLoops.course, exercise: dataLoops.exercise, solution: dataLoops.solution });
+      setData({
+        course: dataTuples.course,
+        exercise: dataTuples.exercise,
+        solution: dataTuples.solution,
+      });
     if (pathname === "/9")
       setData({ course: dataRecords.course, exercise: dataRecords.exercise, solution: dataRecords.solution });
     if (pathname === "/10")
       setData({ course: dataMaps.course, exercise: dataMaps.exercise, solution: dataMaps.solution });
     if (pathname === "/11")
-      setData({ course: dataTimestamps.course, exercise: dataTimestamps.exercise, solution: dataTimestamps.solution });
+      setData({ course: dataLists.course, exercise: dataLists.exercise, solution: dataLists.solution });
     if (pathname === "/12")
-      setData({ course: dataAddresses.course, exercise: dataAddresses.exercise, solution: dataAddresses.solution });
-    if (pathname === "/13")
       setData({
         course: dataMainFunction.course,
         exercise: dataMainFunction.exercise,
         solution: dataMainFunction.solution,
+      });
+    if (pathname === "/13")
+      setData({
+        course: dataTimestamps.course,
+        exercise: dataTimestamps.exercise,
+        solution: dataTimestamps.solution,
       });
     if (pathname === "/14")
       setData({ course: dataBuiltIns.course, exercise: dataBuiltIns.exercise, solution: dataBuiltIns.solution });

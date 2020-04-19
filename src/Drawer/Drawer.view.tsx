@@ -62,7 +62,7 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/8" ? "current-path" : "other-path"}>
         <Link to="/8" onClick={() => hideCallback()}>
-          8 - Loops
+          8 - Tuples
         </Link>
       </DrawerItem>
 
@@ -80,19 +80,19 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/11" ? "current-path" : "other-path"}>
         <Link to="/11" onClick={() => hideCallback()}>
-          11 - Timestamps
+          11 - Lists
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/12" ? "current-path" : "other-path"}>
         <Link to="/12" onClick={() => hideCallback()}>
-          12 - Addresses
+          12 - Main function
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/13" ? "current-path" : "other-path"}>
         <Link to="/13" onClick={() => hideCallback()}>
-          13 - Main function
+          13 - Timestamps
         </Link>
       </DrawerItem>
 
@@ -135,6 +135,12 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
       <DrawerItem className={pathname === "/20" ? "current-path" : "other-path"}>
         <Link to="/20" onClick={() => hideCallback()}>
           20 - Transactions
+        </Link>
+      </DrawerItem>
+
+      <DrawerItem className={pathname === "/coming-next" ? "current-path" : "other-path"}>
+        <Link to="/coming-next" onClick={() => hideCallback()}>
+          21 - What's next?
         </Link>
       </DrawerItem>
     </DrawerStyled>

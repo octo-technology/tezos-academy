@@ -6,6 +6,7 @@ import { ChapterAbout } from "../Chapters/ChapterAbout/ChapterAbout.controller";
 import { NotFound } from "../NotFound/NotFound.view";
 import { AppStyled, AppWrapper } from "./App.style";
 import { AppTransitions } from "./App.transitions";
+import { ComingNext } from "../ComingNext/ComingNext.view";
 
 export const AppView = () => {
   let previousLocation = window.location.pathname;
@@ -42,7 +43,8 @@ export const AppView = () => {
                     <Route exact path="/18" component={Chapter} />
                     <Route exact path="/19" component={Chapter} />
                     <Route exact path="/20" component={Chapter} />
-                    <Route exact path="/sign-up" component={NotFound} />
+                    <Route exact path="/coming-next" component={ComingNext} />
+                    <Route exact path="/sign-up" component={ComingNext} />
                     <Route component={NotFound} />
                   </Switch>
                 </AppTransitions>

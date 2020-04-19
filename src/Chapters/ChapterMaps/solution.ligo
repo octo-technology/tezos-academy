@@ -1,20 +1,9 @@
-type ship is
-    record [
-        name : string;
-        code : string;
-        price : tez
-    ]
-
-const my_ship : ship =
-    record [
-        name : "Galactica";
-        code : "222031";
-        price : 1tez
-    ]
-
+type coordinates is (nat * nat * nat)
 // Type your solution below
-type owner is map (string, string)
-const owner_of : owner =
+type name_to_coordinates is map (string, coordinates)
+const star_map : planet_to_coordinates =
     map [
-        ("Galactica" : "Adama")
+        "earth" -> (2,7,1);
+        "sun" -> (0,0,0);
+        "alpha-centory" -> (2232,7423,12342)
     ]

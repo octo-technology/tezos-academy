@@ -89,11 +89,8 @@ const is_a_nat : option (nat) = is_nat (1)
 
 ## Your mission
 
-<!-- prettier-ignore -->
-1- In the editor, define *required\_energy* for 1.21 gigawatts. Since Tezos doesn't support floating point numbers, let's work in megawatts instead so that you can write the amount of energy as an _int_.
+<!-- prettier-ignore -->1- In the editor, define *required\_energy* for 1.21 gigawatts. Since Tezos doesn't support floating point numbers, let's work in megawatts instead so that you can write the amount of energy as an _int_.
 
-<!-- prettier-ignore -->
-2- Define *energy\_per\_battery\_pack* for 0.16 gigawatts.
+<!-- prettier-ignore -->2- Define *energy\_per\_battery\_pack* for 0.16 gigawatts.
 
-<!-- prettier-ignore -->
-3- Define and compute *required\_battery\_packs* as the number of battery packs required to power your ship.
+<!-- prettier-ignore -->3- Define and compute *required\_battery\_packs* as the number of battery packs required to power your ship.

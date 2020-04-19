@@ -9,7 +9,7 @@ export const AppStyled = styled.div`
   color: #fff;
 
   @media (max-width: 900px) {
-    height: initial;
+    height: 100vh;
   }
 `;
 

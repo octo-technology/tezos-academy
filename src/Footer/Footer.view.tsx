@@ -9,7 +9,7 @@ export const FooterView = () => {
   let page = parseInt(pathname.replace("/", ""));
   if (!page) page = 1;
   const previousPage = page > 1 ? page - 1 : 1;
-  const nextPage = page < 20 ? page + 1 : 20;
+  const nextPage = page < 20 ? page + 1 : "coming-next";
 
   return (
     <FooterStyled>

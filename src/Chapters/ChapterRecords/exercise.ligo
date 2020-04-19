@@ -1,7 +1,4 @@
-// Type your solution below (section 1)
-
-function main (const p : unit; const store : unit) : (list(operation) * unit) is
-  block {
-    // Type your solution below (section 2)
-   
-  } with ((nil: list(operation)), unit)
+// Modify the code below
+type coordinates is (nat * nat * nat)
+var earth_coordinates := coordinates = (2,7,1)
+earth_coordinates.2 = 5

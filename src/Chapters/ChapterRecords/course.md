@@ -1,13 +1,15 @@
 # Chapter 9 : Records
 
-Records are like Javascript object. They hold a set of key/data pairs. To instanciate a record, you must first declare its type as follow :
+<dialog character="pilot">Thanks for the coordinates but I'm not sure I understand which value correspond to wich component. You may want to be more explicit.</dialog>
+
+Records are like tuples but with named parameters. In other words, they hold a set of key/data pairs. To instanciate a record, you must first declare its type as follow :
 
 ```
 type user is
   record [
-    id       : nat;
+    id : nat;
     is_admin : bool;
-    name     : string
+    name : string
   ]
 ```
 
@@ -16,9 +18,9 @@ And here is how to define an associated record value :
 ```
 const alice : user =
   record [
-    id       = 1n;
+    id = 1n;
     is_admin = true;
-    name     = "Alice"
+    name = "Alice"
   ]
 ```
 
@@ -35,7 +37,7 @@ const alice_is_admin : bool = alice.is_admin
 You can modify values in a record as follows :
 
 ```
-function change_name (const u : user ) : user is
+function change_name (const u : user) : user is
   block {
       const u : user = u with record [name = "Mark"]
   } with u
@@ -56,9 +58,8 @@ function change_name (const u : user) : user is
 
 ## Your mission
 
-Interstellar Academy annoucement: Congratulation young space pilot you have been granted a new space ship. It is time to fill the registration form for your new ship called Galactica.
+<!-- prettier-ignore -->1- Refactor the type of coordicanteas as a record instead of a tuple. Name the parameters x, y and z.
 
-1- Your mission (in section 1), is to create the _ship_ type as a record for the _name_ of your ship, its _code_, and its _price_ in tez.
+<!-- prettier-ignore -->2- Refactor *earth\_coordinates* with the record type.
 
-<!-- prettier-ignore -->
-2- In section 2, create *my\_ship* as a _ship_ with the name "Galactica", code "222031" and a price of 1 tez
+<!-- prettier-ignore -->2- Refactor the *earth\_coordinates* update of the last parameters with the record type.

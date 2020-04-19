@@ -1,6 +1,6 @@
 # Chapter 5 : Strings
 
-<dialog character="mechanics">When you powered the ship, the engines exploded... Seems like there was some kind of issue with it. You'll need to replace the part!</dialog>
+<dialog character="mechanics">When you powered the ship, the engines exploded... Seems like someone sabotaged it! We'll find out later. For now, you need to replace the part.</dialog>
 
 Strings are defined using the built-in string type as follows:
 
@@ -40,5 +40,4 @@ const length: nat = String.length(name) // length = 14
 
 ## Your mission
 
-<!-- prettier-ignore -->
-1- Reassign *my\_ship* by modifying the engine attribute (third number) from 0 to 1. Use substrings to leave  the attributes before and after the engine untouched.
+<!-- prettier-ignore -->1- Reassign *my\_ship* by modifying the engine attribute (third number) from 0 to 1. Use substrings for the attributes before and after to make sure they are untouched.

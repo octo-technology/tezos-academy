@@ -52,10 +52,8 @@ const my_account : account = record [
 
 ## Your mission
 
-<!-- prettier-ignore -->
-1- There is an online editor in the top right corner of this page. In the editor, define *ship\_code* as a string type.
+<!-- prettier-ignore -->1- There is an online editor in the top right corner of this page. In the editor, define *ship\_code* as a string type.
 
-<!-- prettier-ignore -->
-2- Then define the constant *my\_ship* as a *ship\_code* of value _"020433"_.
+<!-- prettier-ignore -->2- Then define the constant *my\_ship* as a *ship\_code* of value _"020433"_.
 
-3- Then go ahead and validate your mission for a comparative view with the solution.
+<!-- prettier-ignore -->3- Then go ahead and validate your mission for a comparative view with the solution.

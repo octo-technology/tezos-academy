@@ -1,4 +1,4 @@
 // Type your solution below
-type ship is (string * string * tez)
-const my_ship : ship = ("Galactica", "222031", 1tez);
-my_ship.0 := "Enterprise";
+type coordinates is (nat * nat * nat)
+var earth_coordinates := coordinates = (2,7,1)
+earth_coordinates.2 = 5

@@ -1,5 +1,5 @@
 type ship_code is string
-var my_ship : ship_code := "021433"
+var my_ship : ship_code := "020433"
 // Modify the code below
 function modify_ship (const my_ship : ship_code) : ship_code is
   block {

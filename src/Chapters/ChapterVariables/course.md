@@ -23,7 +23,6 @@ c := c - 3
 
 ## Your mission
 
-<!-- prettier-ignore -->
-1- In the top right editor, modify the code from the previous chapter to make *my\_ship* a variable.
+<!-- prettier-ignore -->1- In the top right editor, modify the code from the previous chapter to make *my\_ship* a variable.
 
-2- On the next line, modify its value to _"222031"_
+<!-- prettier-ignore -->2- On the next line, modify its value to _"222031"_
