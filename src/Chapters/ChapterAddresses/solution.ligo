@@ -1,29 +1,6 @@
-type ship is
-    record [
-        name : string;
-        code : string;
-        price : tez;
-        created_at : timestamp
-    ]
-
-// Type your solution below
-type owner is map (string, address)
-
-function main (const p : unit; const store : owner) : (list(operation) * owner) is
-  block {
-    const my_ship : ship =
-        record [
-            name = "Galactica";
-            code = "222031";
-            price = 1tez;
-            created_at = Tezos.now
-        ];
-
+function purchase (const purchase_price : tez) : bool is
     // Type your solution below
-    const owner_of : owner =
-    map [
-        "Galactica" -> ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address);
-        "Enterprise" -> ("tz1YfuHeaaPyKFGAjrCskb8kzEEkmaMhiDhd" : address);
-    ];
-    store := owner_of;
-  } with ((nil: list(operation)), store)
+    const ship_address : address = ("tz1TGu6TN5GSez2ndXXeDX6LgUDvLzPLqgYV" : address);
+    const vendor_address : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address);
+
+return True

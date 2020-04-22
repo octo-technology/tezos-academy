@@ -1,6 +1,6 @@
 # Chapter 5 : Strings
 
-<dialog character="mechanics">When you powered the ship, the engines exploded... Seems like someone sabotaged it! We'll find out later. For now, you need to replace the part.</dialog>
+<dialog character="mechanics">Red alert captain! When you powered the ship, the engines exploded... Seems like someone sabotaged the igniter! We should find out later. For now, you need to replace the damaged part.</dialog>
 
 Strings are defined using the built-in string type as follows:
 

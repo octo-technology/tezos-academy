@@ -1,6 +1,6 @@
 # Chapter 11 : Lists and Sets
 
-<dialog character="pilot">You should now plot our course.</dialog>
+<dialog character="pilot">Please now plot our course as a list of destinations.</dialog>
 
 Lists are linear collections of elements of the same type. Linear means that, in order to reach an element in a list, we must visit all the elements before (sequential access). Elements can be repeated, as only their order in the collection matters. The first element is called the head, and the sub-list after the head is called the tail.
 
@@ -11,6 +11,8 @@ To define an empty list :
 ```
 const empty_list : list (int) = list []
 ```
+
+ℹ️ You can also use _nil_ instead of list []
 
 To define list with values:
 
@@ -58,4 +60,4 @@ const smaller_set : set (int) = Set.remove (3, my_set)
 
 <!-- prettier-ignore -->2- On the next line, add _"sun"_ to the itinary.
 
-<!-- prettier-ignore -->2- On the next line, add _"alpha-centory"_ to the itinary.
+<!-- prettier-ignore -->2- On the next line, add _"alpha-centauri"_ to the itinary.

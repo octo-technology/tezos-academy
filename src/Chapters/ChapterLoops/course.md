@@ -1,4 +1,6 @@
-# Chapter 8 : Loops
+# Chapter 14 : Loops
+
+<dialog character="pilot">Captain, now that we left the atmosphere of earth, we should scan nearby star systems for alien activity. We know that the Xenomorphs like planets with high density, usually above 100 g/cm³ and that their machines trigger atmospheric activity. You should trigger a scan with these parameters.</dialog>
 
 LIGO integrate 2 kinds of loops. General while iterations and bounded for loops.
 
@@ -33,6 +35,8 @@ for i := 1 to 10 block {
 }
 ```
 
+## Iterations
+
 For-loops can also iterate through the contents of a collection, that is, a list, a set or a map. This is done with :
 
 ```
@@ -52,6 +56,12 @@ function sum_list (var l : list (int)) : int is block {
 } with total
 ```
 
+Same from sets with _for i in set s_ and maps with _for key -> value in map m_
+
 ## Your mission
 
-Modify the contract so that the function iterates over all attributes of the ship and changes all occurences of "2" by "1".
+<!-- prettier-ignore -->1- Check the proposed code in the editor. Notice that we created a star map as a list of planet records.
+
+<!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function with the *star\_map* variable as its input _l_. Code a for loop that iterates through each record of the list.
+
+<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* supperior to 100 and *atmospheric\_activity* true. If so, assign *destination* to its *name*.

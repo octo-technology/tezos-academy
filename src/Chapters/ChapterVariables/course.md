@@ -1,6 +1,6 @@
 # Chapter 3 : Variables
 
-<dialog character="mechanics">You're not very good, are you? Seems like you have locked the parameters. You should unlock them so we can later change the ship configuration if need be.</dialog>
+<dialog character="mechanics">Seems like you have locked-in the parameters. You should unlock them so we can later change the ship configuration if need be.</dialog>
 
 ## Constants
 

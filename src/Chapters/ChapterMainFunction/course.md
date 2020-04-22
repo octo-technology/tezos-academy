@@ -1,32 +1,19 @@
-# Chapter 8 : Main function
+# Chapter 13 : Main function
 
 <dialog character="admiral">God damn it rookie! What are you still doing at the space port? Take off already and go shoot some alien!!</dialog>
 
-A LIGO contract is made of a series of constants and function declarations. Only functions having a special type can be called when the contract is activated: we call them _main_ functions. A main function takes two parameters, the _contract parameter_ and the _on-chain storage_, and returns a pair made of a _list of operations_ and a _(new) storage_.
+A LIGO contract is made of a series of constant and function declarations. Only functions having a special type can be called when the contract is activated: we call them main functions. A main function takes two parameters, the contract parameter and the on-chain storage, and returns a pair made of a list of operations and a (new) storage.
 
 When the contract is originated, the initial value of the storage is provided. When a main function is later called, only the parameter is provided, but the type of a main function contains both.
 
-The type of the contract parameter and the storage are up to the contract designer, but the type for list operations is not. The return type of a main function is as follows, assuming that the type _storage_ has been defined elsewhere. (Note that you can use any type with any name for the storage.)
+The type of the contract parameter and the storage are up to the contract designer, but the type for list operations is not. The return type of a main function is as follows, assuming that the type storage has been defined elsewhere. (Note that you can use any type with any name for the storage.)
+
+```
+type storage is ...  // Any name, any type
+type return is list (operation) * storage
+```
 
 The contract storage can only be modified by activating a main function: given the state of the storage on-chain, a main function specifies how to create another state for it, depending on the contract's parameter.
-
-## Syntax
-
-The Main function of a smart contract follows syntax definition of regular function but must have a specific prototype.
-
-1- The Main function must contain exactly 2 parameters (one is the contract parameter, and the other is the storage)
-
-2- The Main function return a tuple (list(operation) \* <storage>) where <storage> is the storage type definition
-
-```
-function <main_function_name> (const <parameter_name>:<parameter_type>; const <storage_name>:<storage_type>) : (list(operation) * <storage_type>) is
-block { <functionBody> }
-with (<list_operation_value>, <new_storage_value>)
-```
-
-Note that most of the time the main fonction return an empty list of operations and the new state of the storage
-
-## Exemple
 
 Here is an example where the storage is a single natural number that is updated by the parameter.
 
@@ -39,13 +26,49 @@ function save (const action : parameter; const store : storage) : return is
   ((nil : list (operation)), store)
 ```
 
-# Your mission
+## Entrypoints
 
-<!-- prettier-ignore -->
-1- Define the _on-line storage_ type named *storage* which stores a single string
+In LIGO, the design pattern is to have one main function called main, that dispatches the control flow according to its parameter. Those functions called for those actions are called entrypoints.
 
-2- Create a Main function called _main_ which takes a first parameter named _p_ of type string and storage state as second parameter named _store_
+As an analogy, in the C programming language, the main function is the unique main function and any function called from it would be an entrypoint.
 
-3- The body of the Main function must do nothing
+The parameter of the contract is then a variant type, and, depending on the constructors of that type, different functions in the contract are called. In other terms, the unique main function dispatches the control flow depending on a pattern matching on the contract parameter.
 
-4- The return of the Main function will assign the value of _p_ as the new storage state
+In the following example, the storage contains a counter of type nat and a name of type string. Depending on the parameter of the contract, either the counter or the name is updated.
+
+```
+type Action is
+  Action_A of string
+| Action_B of string
+
+type Storage is record [
+  stored_string_A : string;
+  stored_string_B : string
+]
+
+type return is list (operation) * storage
+
+function entry_A (const input_string : string; const storage : Storage) : return is
+  ((nil : list (operation)), storage with record [stored_string_A = input_string])
+
+function entry_B (const input_string : string; const storage : Storage) : return is
+  ((nil : list (operation)), storage with record [stored_string_B = input_string])
+
+function main (const action : Action; const storage : Storage): return is
+  case action of
+    Action_A (input_string) -> entry_A (input_string, storage)
+  | Action_B (input_string) -> entry_B (input_string, storage)
+  end
+```
+
+ℹ️ Now that you created a main function, you can now transpile your code into Michaelson and deploy it on Tezos. Try it out on the <a href="https://ide.ligolang.org/" target="_blank">LIGOlang IDE</a>
+
+## Your mission
+
+<!-- prettier-ignore -->1- The editor contains an example of main function with two functions. In the Action variant, replace *Action\_A* and *Action\_B* with our actions *Set\_ship\_code* and *Go\_to*
+
+<!-- prettier-ignore -->2- In the Storage record, replace *stored\_string\_A* and *stored\_string\_B* with the strings we want to store in the contract: *ship\_code* and *destination*
+
+<!-- prettier-ignore -->3- Modify the name of our entrypoints *entry\_A* and *entry\_B* to *set\_ship\_code* and *go\_to*
+
+<!-- prettier-ignore -->4- Modify the main function to reflect the new names above

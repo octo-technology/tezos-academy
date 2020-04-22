@@ -1,23 +1,32 @@
-# Chapter 14 : Built-ins
+# Chapter 16 : Built-ins
+
+<dialog character="scientist">We need a Flux Capacitor, don't ask me why, you wouldn't get it. Just buy it!</dialog>
 
 A LIGO smart contract can query part of the state of the Tezos blockchain by means of built-in values. In this section you will find how those built-ins can be utilized.
 
-## Accepting or Declining Tokens in a Smart Contract
+## A few built-ins
 
-This example shows how Tezos.amount and failwith can be used to decline any transaction that sends more tez than 0tez, that is, no incoming tokens are accepted.
+_Tezos.balance_ : Get the balance for the contract.
+
+_Tezos.amount_ : Get the amount of tez provided by the sender to complete this transaction.
+
+_Tezos.sender_ : Get the address that initiated the current transaction.
+
+<!-- prettier-ignore -->*Tezos.self\_address* : Get the address of the currently running contract.
+
+_Tezos.source_ : Get the originator (address) of the current transaction. That is, if a chain of transactions led to the current execution get the address that began the chain. Not to be confused with Tezos.sender, which gives the address of the contract or user which directly caused the current transaction.
+
+<!-- prettier-ignore -->*Tezos.chain\_id* : Get the identifier of the chain to distinguish between main and test chains.
+
+ℹ️ A more complete list is available on <a href="https://ligolang.org/docs/reference/current-reference" target="_blank">ligolang.org</a>
+
+## Failwith
+
+The keyword _failwith_ throws an exception and stop the execution of the smart contract
 
 ```
-type parameter is unit
-type storage is unit
-type return is list (operation) \* storage
-
-function deny (const action : parameter; const store : storage) : return is
-if Tezos.amount > 0tez then
-(failwith ("This contract does not accept tokens.") : return)
-else ((nil : list (operation)), store)
+failwith(<string_message>)
 ```
-
-Note that amount is deprecated. Please use Tezos.amount.
 
 ## Access Control
 
@@ -27,62 +36,14 @@ This example shows how Tezos.source can be used to deny access to an entrypoint.
 const owner : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address);
 
 function main (const action : parameter; const store : storage) : return is
-if Tezos.source =/= owner then (failwith ("Access denied.") : return)
+    if Tezos.source =/= owner then (failwith ("Access denied.") : return)
 else ((nil : list (operation)), store)
 ```
 
-Note that source is deprecated. Please use Tezos.source.
-
-## Inter-Contract Invocations
-
-It would be somewhat misleading to speak of "contract calls", as this wording may wrongly suggest an analogy between contract "calls" and function "calls". Indeed, the control flow returns to the site of a function call, and composed function calls therefore are stacked, that is, they follow a last in, first out ordering. This is not what happens when a contract invokes another: the invocation is queued, that is, follows a first in, first our ordering, and the dequeuing only starts at the normal end of a contract (no failure). That is why we speak of "contract invocations" instead of "calls".
-
-The following example shows how a contract can invoke another by emiting a transaction operation at the end of an entrypoint.
-
-The same technique can be used to transfer tokens to an implicit account (tz1, ...): all you have to do is use a unit value as the parameter of the smart contract.
-
-In our case, we have a counter.ligo contract that accepts an action of type parameter, and we have a proxy.ligo contract that accepts the same parameter type, and forwards the call to the deployed counter contract.
-
-```
-// counter.ligo
-type parameter is
-Increment of nat
-| Decrement of nat
-| Reset
-
-type storage is unit
-
-type return is list (operation) \* storage
-```
-
-```
-// proxy.ligo
-
-type parameter is
-Increment of nat
-| Decrement of nat
-| Reset
-
-type storage is unit
-
-type return is list (operation) \* storage
-
-const dest : address = ("KT19wgxcuXG9VH4Af5Tpm1vqEKdaMFpznXT3" : address)
-
-function proxy (const action : parameter; const store : storage): return is
-block {
-const counter : contract (parameter) =
-case (Tezos.get*contract_opt (dest) : option (contract (parameter))) of
-Some (contract) -> contract
-| None -> (failwith ("Contract not found.") : contract (parameter))
-end;
-
-const mock_param : parameter = Increment (5n);
-const op : operation = Tezos.transaction (action, 0tez, counter);
-const ops : list (operation) = list [op]
-} with (ops, store)
-```
+_<string_message>_ must be a string value
 
 ## Your mission
 
-Coming soon ...
+<!-- prettier-ignore -->1- Check that the originitor address is indeed our *ship\_address*, or fail with _"Access denied"_
+
+<!-- prettier-ignore -->2- Check that the sent amount corresponds to the *purchase\_price*, or fail with _"Incorrect amount"_

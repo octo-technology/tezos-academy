@@ -5,5 +5,5 @@ const star_map : planet_to_coordinates =
     map [
         "earth" -> (2,7,1);
         "sun" -> (0,0,0);
-        "alpha-centory" -> (2232,7423,12342)
+        "alpha-centauri" -> (2232,7423,12342)
     ]

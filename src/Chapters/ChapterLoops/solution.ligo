@@ -1,17 +1,50 @@
-type ship_code is string
-var my_ship : ship_code := "020433"
-my_ship := "222031"
-const my_ship_price : tez = 3tez * 1.20
+type coordinates is (nat * nat * nat)
+type planet is
+    record [
+        name : string;
+        position : coordinates;
+        density : nat;
+        atmospheric_activity : bool
+    ]
 
-function modify_ship (const my_ship : ship_code) : ship_code is
-  block {
-    var modified_ship : ship_code := my_ship;
-    // Type your solution below
-    var i : nat := 0n;
-    while i < 5n block {
-        if String.sub(i, 1n, my_ship) = "2" then
-          modified_ship := String.sub(0n, i, my_ship) ^ "1" ^  String.sub(i + 2n, 5n - i, my_ship)
-        else skip;
-        i := i + 1n
-    }
-  } with modified_ship
+var star_map : list (planet) := list [
+  record [
+      name = "Earth";
+      position = (0,0,0);
+      density = 20;
+      atmospheric_activity = True
+  ];
+  record [
+      name = "Jupiter";
+      position = (2,7,1);
+      density = 340;
+      atmospheric_activity = False
+  ];
+  record [
+      name = "Methuselah";
+      position = (2232,7423,12342);
+      density = 44;
+      atmospheric_activity = False
+  ];
+  record [
+      name = "Osiris";
+      position = (134,454,1321);
+      density = 165;
+      atmospheric_activity = True
+  ];
+  record [
+      name = "Gliese";
+      position = (234,8045,435);
+      density = 11;
+      atmospheric_activity = True
+  ];
+]
+
+function scan (var l : list (planet)) : planet is block {
+  var destination : planet;
+  // Type your solution below
+  for i in list l block {
+    if i.density > 100 and i.atmospheric_activity then destination = i.name
+    else skip;
+  }
+} with destination

@@ -1,6 +1,6 @@
 # Chapter 10 : Maps
 
-<dialog character="pilot">Ok it's time to open our star map and decide where we want to go.</dialog>
+<dialog character="pilot">Ok it's now time to open our star map and decide where we want to go.</dialog>
 
 Maps are a data structure which associate values of the same type to values of the same type. The former are called key and the latter values. Together they make up a binding. An additional requirement is that the type of the keys must be comparable, in the Michelson sense.
 
@@ -74,4 +74,4 @@ remove "tim" from map user_balances
 
 <!-- prettier-ignore -->2- Define the type *name\_to\_coordinates* as a mapping from the celestial body name to its coordinates.
 
-<!-- prettier-ignore -->3- Add values for _earth_ at 2,7,1 , the _sun_ at 0,0,0 and _alpha-centory_ at 2232,7423,12342 .
+<!-- prettier-ignore -->3- Add values for _earth_ at 2,7,1 , the _sun_ at 0,0,0 and _alpha-centauri_ at 2232,7423,12342 .

@@ -1,6 +1,6 @@
 # Chapter 4 : Math
 
-<dialog character="scientist">Hello rookie, I'm Dr Zod, I hope you didn't sleep during your Math class in the academy because you're gonna need it! Your ship needs at least 1.21 gigawatts to function properly. Battery packs are 0.16 gigawatts per unit. How many battery packs do you need? Seems easy, right? Well, no, because the system doesn't run floating point numbers, so... good luck with that!</dialog>
+<dialog character="scientist">Hello, I'm Dr Zod, I hope you didn't sleep during your Math class in the academy because you're gonna need it! Your ship needs at least 1.21 gigawatts to function properly. Battery packs are 0.16 gigawatts per unit. How many battery packs do you need? Seems easy, right? Well, no, because the system doesn't run floating point numbers, so... good luck with that!</dialog>
  
 LIGO offers three built-in numerical types:
 
@@ -69,15 +69,6 @@ const b : int = 9
 const rem1 : nat = a mod b  // 3
 ```
 
-## From int to nat and back
-
-You can cast an int to a nat and vice versa using the _int_ or _abs_ functions. Here is how:
-
-```
-const a: int = int(1n)
-const b: nat = abs(1)
-```
-
 ## Checking a nat
 
 <!-- prettier-ignore -->
@@ -93,4 +84,4 @@ const is_a_nat : option (nat) = is_nat (1)
 
 <!-- prettier-ignore -->2- Define *energy\_per\_battery\_pack* for 0.16 gigawatts.
 
-<!-- prettier-ignore -->3- Define and compute *required\_battery\_packs* as the number of battery packs required to power your ship.
+<!-- prettier-ignore -->3- Define and compute *required\_battery\_packs* as the number of battery packs required to power your ship. Remember that floating point numbers are truncated to an integer, e.g. 10 / 3 = 3 in LIGO and not 3.33333333....

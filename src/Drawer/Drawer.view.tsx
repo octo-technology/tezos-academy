@@ -86,55 +86,55 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/12" ? "current-path" : "other-path"}>
         <Link to="/12" onClick={() => hideCallback()}>
-          12 - Main function
+          12 - Variant
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/13" ? "current-path" : "other-path"}>
         <Link to="/13" onClick={() => hideCallback()}>
-          13 - Timestamps
+          13 - Main function
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/14" ? "current-path" : "other-path"}>
         <Link to="/14" onClick={() => hideCallback()}>
-          14 - Built-ins
+          14 - Loops
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/15" ? "current-path" : "other-path"}>
         <Link to="/15" onClick={() => hideCallback()}>
-          15 - Cast
+          15 - Addresses
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/16" ? "current-path" : "other-path"}>
         <Link to="/16" onClick={() => hideCallback()}>
-          16 - Tuples
+          16 - Built-ins
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/17" ? "current-path" : "other-path"}>
         <Link to="/17" onClick={() => hideCallback()}>
-          17 - Fail with
+          17 - Transactions
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/18" ? "current-path" : "other-path"}>
         <Link to="/18" onClick={() => hideCallback()}>
-          18 - Variant
+          18 - Timestamps
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/19" ? "current-path" : "other-path"}>
         <Link to="/19" onClick={() => hideCallback()}>
-          19 - Pattern Matching
+          19 -
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/20" ? "current-path" : "other-path"}>
         <Link to="/20" onClick={() => hideCallback()}>
-          20 - Transactions
+          20 - Into battle
         </Link>
       </DrawerItem>
 

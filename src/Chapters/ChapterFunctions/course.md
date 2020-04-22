@@ -1,6 +1,6 @@
 # Chapter 6 : Functions
 
-<dialog character="mechanics">Hey, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
+<dialog character="mechanics">Captain, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
 
 LIGO functions are the basic building block of contracts. Each entrypoint of a contract is a function and each smart contract must have at least one function named _main_ that dispatches controls to the other functions.
 

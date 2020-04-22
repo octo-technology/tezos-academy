@@ -1,85 +1,76 @@
-# Chapter 18 : Variants
+# Chapter 12 : Unit, Variant, Option and Pattern matching
 
-## Description
+<dialog character="mechanics">Captain, before we go, you may want to setup your commands to set the ship code and go to a destination.</dialog>
 
-A variant type is a user-defined or a built-in type (in case of options) that defines a type by cases, so a value of a variant type is either this, or that or... The simplest variant type is equivalent to the enumerated types found in Java, C++, JavaScript.
+Optionals are a pervasive programing pattern in OCaml. Since Michelson and LIGO are both inspired by OCaml, optional types are available in LIGO as well. Similarly, OCaml features a unit type, and LIGO features it as well. Both the option type and the unit types are instances of a more general kind of types: variant types (sometimes called sum types).
 
-The "|" keyword allow to create variants. A variant is a user-defined type which can accept exclusively different types. The "|" operator can be understood as a "or" between types.
-
-For example, here is how we define a coin as being either head or tail
-
-```
-type coin is Head | Tail
-```
-
-And here is how a variable (of variant type _coin_) is initialized with one of the two possible values.
-
-```
-const head : coin = Head
-const tail : coin = Tail
-```
-
-Notice that all possibles values for a variant are capitalized (_Head_, _Tail_)
-
-In this particular, possibles values (_Head_, _Tail_) carry no information beyond their names, so they are called constant constructors, but variants can carry some information.
-
-## Syntax
-
-The variant definition follows the syntax :
-
-```
-type <typename> is
-| <Label1> of <typeDefinition1>
-| <Label2> of <typeDefinition2>
-```
-
-Types definitions (<typeDefinition>) refers to primitive type (nat, int,..) or predefined type such as unit or any other user custom types.
-
-### unit
+## Unit
 
 The unit type in Michelson or LIGO is a predefined type that contains only one value that carries no information. It is used when no relevant information is required or produced. Here is how it used.
 
 In PascaLIGO, the unique value of the unit type is Unit.
 
 ```
-const n : unit = Unit
+const n : unit = Unit // Note the capital letter
 ```
 
-(notice the capital letter for the value)
+## Variant
 
-## Assignement
+A variant type is a user-defined or a built-in type (in case of options) that defines a type by cases, so a value of a variant type is either this, or that or... The simplest variant type is equivalent to the enumerated types found in Java, C++, JavaScript etc.
 
-A variable can be define for a variant type <typename>, it follows the syntax:
-
-```
-const <variableName> : <typename> = <Label>(<Parameter>) | <Label>(<Parameter>)
-```
-
-## Exemple
-
-Here is a snippet of code that defines different type of users
+Here is how we define a coin as being either head or tail (and nothing else):
 
 ```
-type id is nat
+type Coin is Head | Tail
+const head : Coin = Head
+const tail : Coin = Tail
+```
 
-type user is
-  Admin   of id
-| Manager of id
+The names Head and Tail in the definition of the type coin are called data constructors, or variants. In this particular, they carry no information beyond their names, so they are called constant constructors.
+
+In general, it is interesting for variants to carry some information, and thus go beyond enumerated types. In the following, we show how to define different kinds of users of a system.
+
+```
+type Id is nat
+
+type User is
+Admin of Id
+| Manager of Id
 | Guest
 
-const u : user = Admin (1000n)
-const g : user = Guest
+const user : User = Admin (1000n)
+const guest : User = Guest
 ```
 
 In LIGO, a constant constructor is equivalent to the same constructor taking an argument of type unit, so, for example, Guest is the same value as Guest (unit).
 
-# Your mission
+## Option
 
-You received a laserbeam message from Interstellar Academy: "Today's lesson: space combat simulation - Attack / Defense"
-Two ships are meeting around AlphaCentory, a space battle is about to begin ! It is time to choose your strategy: you can either fire on a ship or activate your electromagnetic shield.
+The option type is a predefined variant type that is used to express whether there is a value of some type or none. This is especially useful when calling a partial function, that is, a function that is not defined for some inputs. In that case, the value of the option type would be None, otherwise Some (v), where v is some meaningful value of any type. An example in arithmetic is the division operation:
 
-<!-- prettier-ignore -->
-We need a new type to model battle actions
-1- In the Editor (first section), define a variant type named *battle\_action* which allows either an order of *Attack* with the _name_ of the targeted ship or an order of *Defense* (with no other information carried)
-2- In the Editor (second section), define a variable *ship1_order* of type *battle\_action* which order to defend itself
-3- In the Editor (second section), define a variable *ship2_order* of type *battle\_action* which order to attack _ship1_
+```
+function div (const a : nat; const b : nat) : option (nat) is
+if b = 0n then (None: option (nat)) else Some (a/b)
+```
+
+## Pattern matching
+
+Pattern matching is similiar to the switch construct in Javascript, and can be used to route the program's control flow based on the value of a variant. Consider for example the definition of a function flip that flips a coin.
+
+```
+type Coin is Head | Tail
+
+function flip (const coin : Coin) : coin is
+case coin of
+Head -> Tail
+| Tail -> Head
+end
+```
+
+## Your mission
+
+<!-- prettier-ignore -->1- Create the type _Action_ as a variant.
+
+<!-- prettier-ignore -->2- Define the first option of the variant as *Set\_ship\_code* which will be our action to set the ship code. Notice this will take a string as an input.
+
+<!-- prettier-ignore -->3- Define the second option of the variant as *Go\_to* which will be our action to set the ship on course to a new destination. Notice this will also take a string as an input.

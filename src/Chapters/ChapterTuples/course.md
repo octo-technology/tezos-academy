@@ -1,6 +1,6 @@
 # Chapter 8 : Tuples
 
-<dialog character="pilot">Hey, I'm James, the pilot of this piece of junk. Just let me know the coordinates of where you want to go and I'll try my best to bring us there in one piece...</dialog>
+<dialog character="pilot">Hey captain, I'm lieutenant Washburne, the pilot of this piece of junk. Just let me know the coordinates of where you want to go and I'll try my best to bring us there in one piece...</dialog>
 
 Tuples gather multiple values in a specific order which can be retrieved with their indexes.
 
