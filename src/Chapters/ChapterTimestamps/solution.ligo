@@ -1,23 +1,3 @@
+const one_day : int = 86_400
 // Type your solution below
-type ship is
-    record [
-        name : string;
-        code : string;
-        price : tez;
-        created_at : timestamp
-    ]
-
-const my_ship : ship =
-    record [
-        name : "Galactica";
-        code : "222031";
-        price : 1tez;
-        created_at : Tezos.now
-    ]
-
-// Type your solution below
-type owner is map (string, string)
-const owner_of : owner =
-    map [
-        ("Galactica" : "Adama")
-    ]
+const eta : timestamp = Tezos.now + 6 * one_day

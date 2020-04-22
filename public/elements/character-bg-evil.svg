@@ -1,26 +1,26 @@
 <svg width="164" height="164" viewBox="0 0 164 164" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect x="7.5" y="7.5" width="149" height="149" fill="url(#pattern0)" stroke="#541818"/>
-<rect width="22" height="22" fill="url(#pattern1)"/>
-<rect width="22" height="22" transform="matrix(1 0 0 -1 0 164)" fill="url(#pattern2)"/>
-<rect width="22" height="22" transform="matrix(-1 0 0 1 164 0)" fill="url(#pattern3)"/>
-<rect x="164" y="164" width="22" height="22" transform="rotate(-180 164 164)" fill="url(#pattern4)"/>
+<rect x="7.5" y="7.5" width="149" height="149" fill="url(#pattern0)" fill-opacity="0.5" stroke="#541818"/>
+<rect width="21.5789" height="21.5789" fill="url(#pattern1)"/>
+<rect y="164" width="21.5789" height="21.5789" transform="rotate(-90 0 164)" fill="url(#pattern2)"/>
+<rect x="164" y="164" width="21.5789" height="21.5789" transform="rotate(-180 164 164)" fill="url(#pattern3)"/>
+<rect x="164" width="21.5789" height="21.5789" transform="rotate(90 164 0)" fill="url(#pattern4)"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="0.00666667" height="0.0133333">
 <use xlink:href="#image0" transform="scale(0.00666667)"/>
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="scale(0.0454545)"/>
+<use xlink:href="#image1" transform="scale(0.0333333)"/>
 </pattern>
 <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="scale(0.0454545)"/>
+<use xlink:href="#image1" transform="scale(0.0333333)"/>
 </pattern>
 <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="scale(0.0454545)"/>
+<use xlink:href="#image1" transform="scale(0.0333333)"/>
 </pattern>
 <pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1" transform="scale(0.0454545)"/>
+<use xlink:href="#image1" transform="scale(0.0333333)"/>
 </pattern>
-<image id="image0" width="1" height="2" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0M2U1MDM3ZS02NjIwLTRkZjAtODZlNS03MDA2ZjM2MDMwMmQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUM5NEVGRkU2MzZGMTFFNDhCQTlBM0RERTdCOTBBMEIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUM5NEVGRkQ2MzZGMTFFNDhCQTlBM0RERTdCOTBBMEIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2ZjA1YmMzMy1iZTkzLTQyMjEtYjYxZS1mZGQ4ODljYzZiZWYiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo0YjY0NGQyMy1hMDE0LTExNzctYjc2Yi1jZmIyZTFlMWNkZjgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6NDIt0AAAAFUlEQVR42mJwevuDl+H///8MAAEGABnRBTJrCAbbAAAAAElFTkSuQmCC"/>
-<image id="image1" width="22" height="22" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAACs0lEQVRIDY2VS47bMBBEHyX6t/HCqxi5gY+QC2WVMwzmDFnlYJkreDcBDAT+SCSD6iYt2chPAC2Skqqrq6vpwPwqJcyXvPK4fngIvFAetkK4r6M9aIAN6EDgjcCewJHA7inAO4U9hVcKBwpvNUCpuCFUhgIWqAB/0BnYlp5Ex08CGwLnCr6hcDagDEyjBVAWIZTIM+iVDug5EVnRs6SzABBYPoFuSCwYiZZh4uD569el0ExMBXolsiZyYWHzSA90rAmMxlT5jixJZAInCts7YLLMS6nATVMxFWhmSWRJz8KCFzoGAj3FBNLsxsASWJNJFHZkqwuutzNWoaSp0hdTgRbWFFZ48M4EcsYjPYNRKhSy8c6MdOzJHI090air+ic601RSiKlAP/PdX/vD71c+Iu01lJsuZQ/FGctSXpzOYKV9k+kbn+yDkWxlzCbKhcjVwgeT5+7fZj05APOpLKUiaUhTn9tjcrWXyhdNhoFkASSARrbKHF1ffeTAmsmnN4JZJ1kQBxVTlUdOEFgbYwW+kOjJqGnk5XpNwNpQyVQgVV+V1iUXq1hwM7YKL9AVg7HdkoytN4u3uTVIjcDUUW4pMdQlTZV+YCBbTjcLcrVgI+fafa3zKp4zVhpTm47WCgLTFbjcx4jgrga8q8AHk0keLvNDyV2hA+VYI6ujZP7Wk6q+dG3pC1qgHxj5Yt9UjiIxnW6hnhVq28iGhdVXVtOQAHK03KAhB5wr0xfSHGhC95lL4dXMdqCIUTfTUsXSWvs6cKT6rPrPgG3dWloOkBfV2pgjgqXp54N8uq1e1Xvt/G0ov7lPdhOLdxInEitGY7etLLXWvp7/B1vFUbfxcCZr3f497CGgjmqArfqzQrXX5vcJuO22vyet/Ti9d9PcTn8rnD514Aaqe/v/m++1+T9Yttd0/wX8iktAgAwaXQAAAABJRU5ErkJggg=="/>
+<image id="image0" width="1" height="2" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAAHuhoaxAAAABGdBTUEAALGPC/xhBQAAAA9JREFUCB1j+M/AEMYAAgALBQFWjGFg1QAAAABJRU5ErkJggg=="/>
+<image id="image1" width="30" height="30" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAFMN540AAAABGdBTUEAALGPC/xhBQAAA8dJREFUSA2V1ktuXkUQBeDfSQhvkGCCCBtAQmLAgBmbYBmsCYm9sArGIEACCSk8kzj5OV/5npv2taNAScdV3V1Vp6q6fe2LU+R8Ol1EwfnutvgoiwfB33e2k3csgsfjHq+3gvvZOF0s8ZI8E/Jm8HHwYQ7v2Hg1eCV4GJzluB/IgXbPcTf2awFvchlgfXIvP3i+G3wQtJxfYz8NLlvF21lwSubh+kNFsa94Nr7h5BSD48hsHhwcjJP02lDHG4FWFPcIbKoc9/uB6lX9W3ApyuHrwXebLv+k3Bc5/D0wob+Cp9Lq7Z/gh0CvD+ONcya2zvVJ9h7l8KrXpQ3p9bj3OnyLQ86mDtmgMkFZyDhZo88dsyRmoEbteglsCTire0qKNif2Mw4CaeNw0y7SWI7yfTY+CzQr2VkQMUvMGOf9RX8eYDCpPwPDZ2NWzR5s0XI4ELeEBcz9cYBxAqOvPc72jFmv7RP79Jj+DG6XddoCrIt1wvv17JGb46y36+rZJO1i0ztrDscepy2wjCpoFY3nrNf2O5Xc2wIbYPp6N30gAvVvoMUk6VUJZveqOrRsTbBJq2yvAKkAm1i8rD4UWkKCzfVBq3A2vzINlkiCL4JvgqM8yIYg/iMCusHuXX8Z+8fA/XokXpi+AftIS6MLBwai3L4wJevbnjOYIdH7IGI7KKMgCQQ2GLva520LbLCgDkipDZ7vaNYS13+YLXqPWH4JBBXDHCZJr8n6UTSsQkLOKplqEjx9Zr2LCbfk6SXras4dEJ8bMneWk15XNccm9Y5vsHLATDgWs7H9sPdCGWan8apd3aCu6do9O+qSHTW/7u3XvAY3+VH38ZW452tCiQsjgq5LWn3qp0ACyVYCdj8JdNclpZs45v4rg9BlF3zYdIvZ76nJmryEPifu0rqaT/1LXDIvCgkNfFdScVNBH4iNkvZjgMxXxfq94JPA3gRHV9pFO0T4baAoQstNi519xBYrcbtz1r+0n8b+Ovgq+DkQDEjbbb8TiF8qa8ctAPERzshPG5CuHSLzueg3qLo+dIuN+fx3kV1i9ioCKhJIqkvaGilbx+ues06ELvHVH7hsVPaDbNQW3AfCT2KdrYS111GXtHlWLc/+qnvQ+9I9m0iCjPiXxGdcl+CsxO22OXI0IvdIkj63Y3XEvVf3ztZp7foIbOKSHvWt/7Uk7pr0cdlsh02OTFJaEXTP+N6GbP836T+rvNvVi3QzIi+Qs0n3JOre1cktP5GMxLN2tX32uh7f/NhJto0hiuNLCZvgtqRzthRS3xv6/xAdg/8FgvaVKDvXm98AAAAASUVORK5CYII="/>
 </defs>
 </svg>

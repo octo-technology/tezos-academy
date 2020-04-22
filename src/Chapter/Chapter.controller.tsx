@@ -8,12 +8,13 @@ import { dataAddresses } from "../Chapters/ChapterAddresses";
 import { dataBuiltIns } from "../Chapters/ChapterBuiltIns";
 import { dataConditionals } from "../Chapters/ChapterConditionals";
 import { dataFunctions } from "../Chapters/ChapterFunctions";
+import { dataInteractions } from "../Chapters/ChapterInteractions";
 import { dataLists } from "../Chapters/ChapterLists";
 import { dataLoops } from "../Chapters/ChapterLoops";
 import { dataMainFunction } from "../Chapters/ChapterMainFunction";
 import { dataMaps } from "../Chapters/ChapterMaps";
 import { dataMath } from "../Chapters/ChapterMath";
-import { dataPatternMatching } from "../Chapters/ChapterPatternMatching";
+import { dataOption } from "../Chapters/ChapterOption";
 import { dataRecords } from "../Chapters/ChapterRecords";
 import { dataStrings } from "../Chapters/ChapterStrings";
 import { dataTimestamps } from "../Chapters/ChapterTimestamps";
@@ -87,15 +88,15 @@ export const Chapter = () => {
       setData({ course: dataTimestamps.course, exercise: dataTimestamps.exercise, solution: dataTimestamps.solution });
     if (pathname === "/19")
       setData({
-        course: dataPatternMatching.course,
-        exercise: dataPatternMatching.exercise,
-        solution: dataPatternMatching.solution,
+        course: dataOption.course,
+        exercise: dataOption.exercise,
+        solution: dataOption.solution,
       });
     if (pathname === "/20")
       setData({
-        course: dataTransactions.course,
-        exercise: dataTransactions.exercise,
-        solution: dataTransactions.solution,
+        course: dataInteractions.course,
+        exercise: dataInteractions.exercise,
+        solution: dataInteractions.solution,
       });
   }, [pathname]);
 
@@ -119,7 +120,6 @@ export const Chapter = () => {
   };
 
   const proposedSolutionCallback = (e: string) => {
-    console.log({ course: data.course, exercise: e, solution: data.solution });
     // @ts-ignore
     setData({ ...data, exercise: e });
   };

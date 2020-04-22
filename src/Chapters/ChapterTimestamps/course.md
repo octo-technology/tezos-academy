@@ -1,4 +1,6 @@
-# Chapter 11 : Timestamps
+# Chapter 18 : Timestamps
+
+<dialog character="pilot">Osiris, here we come! [FTL ENGINE ACTIVATING] Make yourself comfortable captain, it's gonna take some time.</dialog>
 
 ## Now
 
@@ -31,7 +33,4 @@ const not_tommorow : bool = (Tezos.now = in_24_hrs)
 
 ## Your mission
 
-You received a laserbeam message from Interstellar Academy: "Time is almost up for your training. Real first test will be soon".
-
-<!-- prettier-ignore -->
-In the _ship_ record, add a *created\_at* key and implement it using the Now Timestamp.
+<!-- prettier-ignore --> 1- Compute the constant timestamp _eta_ as our estimated time from arrival in 6 days from now.

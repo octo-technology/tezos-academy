@@ -303,10 +303,20 @@ export const DialogTextInside = styled.div`
   padding: 10px 10px 30px 10px;
   margin-top: 7px;
 
+  &.evil {
+    font-family: "Modern vulcan 1.1";
+    font-size: 22px;
+    background-image: url("/elements/dialog-evil.png");
+  }
+
   @media (max-width: 900px) {
     grid-template-columns: auto;
     background-image: url("/elements/dialog-mobile.png");
     padding: 30px 10px 10px 10px;
     margin-top: -10px;
+
+    &.evil {
+      background-image: url("/elements/dialog-mobile-evil.png");
+    }
   }
 `;

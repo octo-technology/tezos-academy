@@ -8,6 +8,7 @@ import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.con
 //prettier-ignore
 import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/ChapterAbout/ChapterAbout.style";
 import { Dialog } from "../Dialog/Dialog.controller";
+import { Light } from "../Light/Light.view";
 
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split("\n").length * 22;
@@ -138,6 +139,9 @@ const Content = ({ course }: any) => (
         },
         dialog: {
           component: Dialog,
+        },
+        light: {
+          component: Light,
         },
       },
     }}

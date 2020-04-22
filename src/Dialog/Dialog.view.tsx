@@ -13,7 +13,11 @@ export const DialogView = ({ text, character }: DialogProps) => {
   return (
     <DialogStyled>
       <DialogCharacter>
-        <img alt="character-bg" className="character-bg" src="/elements/character-bg.svg" />
+        <img
+          alt="character-bg"
+          className="character-bg"
+          src={`${character === "alien" ? "/elements/character-bg-evil.svg" : "/elements/character-bg.svg"}`}
+        />
         <div className="glitch">
           <div className="glitch__item" style={characterStyle}></div>
           <div className="glitch__item" style={characterStyle}></div>
@@ -23,7 +27,7 @@ export const DialogView = ({ text, character }: DialogProps) => {
         </div>
       </DialogCharacter>
       <DialogText>
-        <DialogTextInside>{text}</DialogTextInside>
+        <DialogTextInside className={character === "alien" ? "evil" : "light"}>{text}</DialogTextInside>
       </DialogText>
     </DialogStyled>
   );

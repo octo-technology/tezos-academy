@@ -7,6 +7,14 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Modern vulcan 1.1';
+    src: url('/fonts/Modern-vulcan11.woff2') format('woff2'),
+        url('/fonts/Modern-vulcan11.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --glitch-height: 100vh;
     --gap-horizontal: 10px;

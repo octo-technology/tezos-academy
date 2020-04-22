@@ -9,7 +9,6 @@ type DialogProps = {
 };
 
 export const Dialog = ({ children, character }: DialogProps) => {
-  console.log(children);
   return <DialogView text={children[0]} character={character} />;
 };
 

@@ -34,6 +34,7 @@ export const ChapterCourse = styled.div`
   font-size: 14px;
   white-space: pre-wrap;
   overflow: auto;
+  position: relative;
 `;
 
 export const ChapterH1 = styled.div`

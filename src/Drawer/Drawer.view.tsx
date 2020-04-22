@@ -128,13 +128,13 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/19" ? "current-path" : "other-path"}>
         <Link to="/19" onClick={() => hideCallback()}>
-          19 -
+          19 - Option
         </Link>
       </DrawerItem>
 
       <DrawerItem className={pathname === "/20" ? "current-path" : "other-path"}>
         <Link to="/20" onClick={() => hideCallback()}>
-          20 - Into battle
+          20 - Interactions
         </Link>
       </DrawerItem>
 
