@@ -69,7 +69,7 @@ end
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Create the type _Action_ as a variant.
+<!-- prettier-ignore -->1- Create the type _action_ as a variant.
 
 <!-- prettier-ignore -->2- Define the first option of the variant as *Set\_ship\_code* which will be our action to set the ship code. Notice this will take a string as an input.
 
