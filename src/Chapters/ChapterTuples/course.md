@@ -39,4 +39,4 @@ my_name.1 := "Carter"
 
 <!-- prettier-ignore -->2- Define *earth_coodinates* at coordinates 2,7,1.
 
-<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Change the last parameters of *earth_coodinates* to 5.
+<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Change the last parameter of *earth_coodinates* to 5.

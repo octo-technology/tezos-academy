@@ -59,6 +59,6 @@ We want to add contional so that we change the engine attribute to 1 only if it 
 
 <!-- prettier-ignore -->1- Refactor *modified\_ship* as a variable equal to *my\_ship*
 
-<!-- prettier-ignore -->2- Then define a condition _if_ the engine attribute equal 0. Don't forget the attribates are defined as strings.
+<!-- prettier-ignore -->2- Then define a condition _if_ the engine attribute equal 0. Don't forget the attributes are defined as strings.
 
 <!-- prettier-ignore -->3- If the condition is met, change *modified\_ship* to it new value. Otherwise, _skip_ the instructions.
