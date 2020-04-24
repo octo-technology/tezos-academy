@@ -25,6 +25,10 @@ You can add elements to an existing list using the cons operator _#_ :
 ```
 const larger_list : list (int) = 5 # my_list // [5; 1; 2; 2]
 ```
+or
+```
+const larger_list : list (int) = cons(5, my_list) // [5; 1; 2; 2]
+```
 
 ## Sets
 

@@ -1,9 +1,9 @@
 // Modify the code below
 type coordinates is
     record [
-        x : nat;
-        y : nat;
-        z : nat
+        x : int;
+        y : int;
+        z : int
     ]
 
 var earth_coordinates : coordinates :=
@@ -13,4 +13,4 @@ var earth_coordinates : coordinates :=
         z = 1
     ]
 
-earth_coordinates : coordinates = earth_coordinates with record [earth_coordinates.z = 5]
+patch earth_coordinates with record [z = 5]

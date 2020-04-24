@@ -1,6 +1,6 @@
 # Chapter 2 : Types
 
-<dialog character="mechanics">Welcome onboard captain, I'm the ship's mechanics. The first thing to do before departing is to define your ship's paramaters. Go ahead!</dialog>
+<dialog character="mechanics">Welcome onboard captain, I'm the ship's mechanics. The first thing to do before departing is to define your ship's parameters. Go ahead!</dialog>
 
 LIGO is strongly and statically typed language. This means that the compiler checks how your contract processes data. If it passes the test, your contract will not fail at run-time due to inconsistent assumptions on your data. This is called type checking.
 
