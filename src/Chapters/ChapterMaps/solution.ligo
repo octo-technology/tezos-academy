@@ -1,4 +1,4 @@
-type coordinates is (nat * nat * nat)
+type coordinates is (int * int * int)
 // Type your solution below
 type name_to_coordinates is map (string, coordinates)
 const star_map : planet_to_coordinates =
