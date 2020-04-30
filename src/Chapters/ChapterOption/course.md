@@ -53,6 +53,16 @@ case my_balance of
 end
 ```
 
+Here is an example of pattern matching resolving an option type directly (usefull when we just want to retrieve the value behind the optional) :
+
+```
+const my_balance2 : expected_type = case user_balances[1n] of
+  Some (val) -> val
+| None -> (failwith ("Unknown user") : expected_type)
+end
+```
+Notice the cast of _failwith_ instruction into an _expected_type_
+
 ## Your mission
 
 <!-- prettier-ignore --> 1- Notice the _weapons_ mapping which maps the name of each weapon to its corresponding input of power. We want to increase the power of the _Main Laser_ but mapping returns optional results as they might not be found in the mapping. Define the constant *main\_laser\_power* as an optional int from selecting _"Main Laser"_ from the _weapons_ mapping.
