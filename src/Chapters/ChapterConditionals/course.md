@@ -55,7 +55,7 @@ else skip;
 
 ## Your mission
 
-We want to add contional so that we change the engine attribute to 1 only if it is equal to 0.
+We want to add conditional so that we change the engine attribute to 1 only if it is equal to 0.
 
 <!-- prettier-ignore -->1- Refactor *modified\_ship* as a variable equal to *my\_ship*
 
