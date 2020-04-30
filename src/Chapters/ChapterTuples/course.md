@@ -37,6 +37,6 @@ my_name.1 := "Carter"
 
 <!-- prettier-ignore -->1- Create a tuple type *coordinates* representing a 3D location.
 
-<!-- prettier-ignore -->2- Define *earth_coodinates* at coordinates 2,7,1.
+<!-- prettier-ignore -->2- Define *earth_coordinates* at coordinates 2,7,1.
 
-<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Change the last parameter of *earth_coodinates* to 5.
+<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Change the last parameter of *earth_coordinates* to 5.
