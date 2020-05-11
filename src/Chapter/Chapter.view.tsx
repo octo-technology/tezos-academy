@@ -38,7 +38,7 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback }: any) => {
   return (
     <div>
       <ControlledEditor
-        height="440px"
+        height="500px"
         value={proposedSolution}
         language="pascaligo"
         theme="myCustomTheme"
@@ -62,9 +62,9 @@ const MonacoDiff = ({ solution, proposedSolution }: any) => {
   return (
     <div>
       <DiffEditor
-        height="440px"
-        original={solution}
-        modified={proposedSolution}
+        height="500px"
+        original={proposedSolution}
+        modified={solution}
         language="pascaligo"
         // @ts-ignore
         theme="myCustomTheme"

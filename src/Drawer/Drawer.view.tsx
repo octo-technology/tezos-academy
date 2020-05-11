@@ -140,7 +140,7 @@ export const DrawerView = ({ showing, hideCallback, pathname, user, removeAuthUs
 
       <DrawerItem className={pathname === "/coming-next" ? "current-path" : "other-path"}>
         <Link to="/coming-next" onClick={() => hideCallback()}>
-          21 - What's next?
+          What's next?
         </Link>
       </DrawerItem>
     </DrawerStyled>

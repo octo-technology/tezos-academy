@@ -10,7 +10,7 @@ Tezos.transaction (<parameter>, <mutez>, <address>);
 
 where :
 
-- _paramater_ is the entrypoints of another contract, or use _unit_ if you are transfering to a wallet address,
+- _parameter_ is the entrypoints of another contract, or use _unit_ if you are transfering to a wallet address,
 - _mutez_ is the amount to transfer,
 - _address_ is the address of the other contract or the wallet.
 

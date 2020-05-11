@@ -8,7 +8,7 @@ LIGO offers three built-in numerical types:
 
 - _nat_ are natural numbers (integral numbers greater than or equal to zero). They are follwed by the suffix _n_ such as 3n, 12n and 0n for the natural zero.
 
-- _tez_ are units of measure of Tezos tokens. They can be decinmals and are followed by _tez_ or _tz_ such as 3tz or 12.4tez. You can also type units of millionth of tez, using the suffix _mutez_ after a natural literal, such as 10000mutez or 0mutez.
+- _tez_ are units of measure of Tezos tokens. They can be decimals and are followed by _tez_ or _tz_ such as 3tz or 12.4tez. You can also type units of millionth of tez, using the suffix _mutez_ after a natural literal, such as 10000mutez or 0mutez.
 
 ⚠️ Notice there are no floating point types in LIGO as they are not determinist in hardware modules.
 

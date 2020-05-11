@@ -2,6 +2,8 @@
 
 <dialog character="admiral">God damn it rookie! What are you still doing at the space port? Take off already and go shoot some alien!!</dialog>
 
+Smart contracts are small programs that are stored and executed on the blockchain. They allow people to cooperate and exchange tokens without requiring them to trust one another.
+
 A LIGO contract is made of a series of constant and function declarations. Only functions having a special type can be called when the contract is activated: we call them main functions. A main function takes two parameters, the contract parameter and the on-chain storage, and returns a pair made of a list of operations and a (new) storage.
 
 When the contract is originated, the initial value of the storage is provided. When a main function is later called, only the parameter is provided, but the type of a main function contains both.
@@ -37,27 +39,27 @@ The parameter of the contract is then a variant type, and, depending on the cons
 In the following example, the storage contains a counter of type nat and a name of type string. Depending on the parameter of the contract, either the counter or the name is updated.
 
 ```
-type Action is
+type parameter is
   Action_A of string
 | Action_B of string
 
-type Storage is record [
+type storage is record [
   stored_string_A : string;
   stored_string_B : string
 ]
 
 type return is list (operation) * storage
 
-function entry_A (const input_string : string; const storage : Storage) : return is
-  ((nil : list (operation)), storage with record [stored_string_A = input_string])
+function entry_A (const input_string : string; const store : storage) : return is
+  ((nil : list (operation)), store with record [stored_string_A = input_string])
 
-function entry_B (const input_string : string; const storage : Storage) : return is
-  ((nil : list (operation)), storage with record [stored_string_B = input_string])
+function entry_B (const input_string : string; const store : storage) : return is
+  ((nil : list (operation)), store with record [stored_string_B = input_string])
 
-function main (const action : Action; const storage : Storage): return is
+function main (const action : parameter; const store : storage): return is
   case action of
-    Action_A (input_string) -> entry_A (input_string, storage)
-  | Action_B (input_string) -> entry_B (input_string, storage)
+    Action_A (input_string) -> entry_A (input_string, store)
+  | Action_B (input_string) -> entry_B (input_string, store)
   end
 ```
 
@@ -65,9 +67,9 @@ function main (const action : Action; const storage : Storage): return is
 
 ## Your mission
 
-<!-- prettier-ignore -->1- The editor contains an example of main function with two functions. In the Action variant, replace *Action\_A* and *Action\_B* with our actions *Set\_ship\_code* and *Go\_to*
+<!-- prettier-ignore -->1- The editor contains an example of main function with two functions. In the parameter variant, replace *Action\_A* and *Action\_B* with our actions *Set\_ship\_code* and *Go\_to*
 
-<!-- prettier-ignore -->2- In the Storage record, replace *stored\_string\_A* and *stored\_string\_B* with the strings we want to store in the contract: *ship\_code* and *destination*
+<!-- prettier-ignore -->2- In the storage record, replace *stored\_string\_A* and *stored\_string\_B* with the strings we want to store in the contract: *ship\_code* and *destination*
 
 <!-- prettier-ignore -->3- Modify the name of our entrypoints *entry\_A* and *entry\_B* to *set\_ship\_code* and *go\_to*
 

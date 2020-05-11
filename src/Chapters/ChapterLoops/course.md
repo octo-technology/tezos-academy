@@ -14,7 +14,9 @@ while <condition> block {
 }
 ```
 
-⚠️ If the while condition is never met, the block will will repeatedly be evaluated until the contract run out of gas or fails.
+⚠️ If the while condition is never met, the block will repeatedly be evaluated until the contract run out of gas or fails.
+
+ℹ️ About gas : The smart contracts interpreter uses the concept of gas. Each low-level instruction evaluation burns an amount of gas which is crafted to be proportional to the actual execution time and if an execution exceeds its allowed gas consumption, it is stopped immediately and the effects of the execution are rolled back. The transaction is still included in the block and the fees are taken, to prevent the nodes from being spammed with failing transactions. In Tezos, the economic protocol sets the gas limit per block and for each transaction, and the emitter of the transaction also set an upper bound to the gas consumption for its transaction. The economic protocol does not require the transaction fee to be proportional to the gas upper bound, however the default strategy of the baking software (that forges blocks) provided with Tezos current implementation does require it.
 
 ## For Loops
 

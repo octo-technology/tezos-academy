@@ -16,7 +16,7 @@ export const ChapterStyled = styled.div`
 
 export const ChapterGrid = styled.div`
   display: grid;
-  grid-template-rows: 440px auto;
+  grid-template-rows: 500px auto;
   grid-gap: 20px;
   overflow-y: scroll;
 
@@ -102,7 +102,7 @@ export const Button = styled.div`
   position: relative;
   display: inline-block;
   cursor: pointer;
-  margin: 20px auto;
+  margin: 20px auto 10px auto;
 `;
 
 export const ButtonBorder = styled.div`
