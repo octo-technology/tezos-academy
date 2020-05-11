@@ -66,4 +66,4 @@ Same from sets with _for i in set s_ and maps with _for key -> value in map m_
 
 <!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function with the *star\_map* variable as its input _l_. Code a for loop that iterates through each record of the list.
 
-<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* supperior to 100 and *atmospheric\_activity* true. If so, assign *destination* to its *name*.
+<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* supperior to 100 and *atmospheric\_activity* true. If so, assign the planet to *destination*.
