@@ -58,8 +58,8 @@ function change_name (const u : user) : user is
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Refactor the type of coordinates as a record instead of a tuple. Name the parameters x, y and z.
+<!-- prettier-ignore -->1- Refactor the type of *coordinates* as a record instead of a tuple. Name the parameters x, y and z.
 
 <!-- prettier-ignore -->2- Refactor *earth\_coordinates* with the record type.
 
-<!-- prettier-ignore -->2- Refactor the *earth\_coordinates* update of the last parameters with the record type.
+<!-- prettier-ignore -->2- Refactor the *earth\_coordinates* update of the last parameters with the record type (using a patch).

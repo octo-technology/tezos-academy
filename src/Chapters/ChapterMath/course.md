@@ -27,9 +27,9 @@ const c : tez = 5mutez + 0.000_010tez
 
 ⚠️ You cannot add a tez and a int.
 
-## Substraction
+## Subtraction
 
-Substractions follow the same principles.
+Subtractions follow the same principles.
 
 ```
 const a : int = 5 - 10
