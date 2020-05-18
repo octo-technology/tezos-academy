@@ -3,13 +3,13 @@ import Markdown from "markdown-to-jsx";
 import * as PropTypes from "prop-types";
 import * as React from "react";
 
-import { CardBottomCorners, CardTopCorners } from "../../Card/Card.style";
-import { Dialog } from "../../Dialog/Dialog.controller";
-import { ShipSelector } from "../../ShipSelector/ShipSelector.controller";
+import { CardBottomCorners, CardTopCorners } from "../../../Card/Card.style";
 import { PENDING, RIGHT, WRONG } from "./ChapterAbout.constants";
 import { data } from "./ChapterAbout.data";
 //prettier-ignore
 import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
+import { Dialog } from "../../../Dialog/Dialog.controller";
+import { ShipSelector } from "../../../ShipSelector/ShipSelector.controller";
 
 monaco
   .init()

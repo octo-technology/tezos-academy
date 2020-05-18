@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { Chapter } from "../Chapter/Chapter.controller";
-import { ChapterAbout } from "../Chapters/ChapterAbout/ChapterAbout.controller";
+import { ChapterAbout } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.controller";
 import { NotFound } from "../NotFound/NotFound.view";
 import { AppStyled, AppWrapper } from "./App.style";
 import { AppTransitions } from "./App.transitions";

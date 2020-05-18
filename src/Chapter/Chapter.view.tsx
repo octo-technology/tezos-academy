@@ -4,9 +4,9 @@ import * as PropTypes from "prop-types";
 import * as React from "react";
 
 import { CardBottomCorners, CardTopCorners } from "../Card/Card.style";
-import { PENDING, RIGHT, WRONG } from "../Chapters/ChapterAbout/ChapterAbout.constants";
+import { PENDING, RIGHT, WRONG } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.constants";
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/ChapterAbout/ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.style";
 import { Dialog } from "../Dialog/Dialog.controller";
 import { Light } from "../Light/Light.view";
 
