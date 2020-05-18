@@ -13,8 +13,8 @@ LIGO comes with all basic types built-in like _string_, _int_ or _tez_ for accou
 Type aliasing consists in renaming a given type, when the context calls for a more precise name. This increases readability and maintainability of your smart contracts. For example we can choose to alias a string type as an animal breed - this will allow us to comunicate our intent with added clarity.
 
 ```
-type breed is string
-const dog_breed : breed = "Saluki"
+type breed = string
+let dog_breed : breed = "Saluki"
 ```
 
 ## Simple types
@@ -22,10 +22,10 @@ const dog_breed : breed = "Saluki"
 The type account_balances denotes a map from addresses to tez
 
 ```
-type account_balances is map (address, tez)
+type account_balances =  (address, tez) map
 
-const ledger : account_balances =
-map [("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address) -> 10mutez]
+let ledger : account_balances =
+Map.literal [(("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address), 10mutez)]
 
 ```
 
@@ -37,15 +37,15 @@ Often contracts require complex data structures, which in turn require well-type
 The first of those structured types is the record, which aggregates types as fields and index them with a field name. In the example below we define an account type whick keeps the balance and number of previous transactions for a given account.
 
 ```
-type account is record [
+type account = {
   balance : tez;
   transactions : nat
-]
+}
 
-const my_account : account = record [
+let my_account : account = {
     balance = 10mutez;
     transactions = 5n
-  ]
+}
 ```
 
 ℹ️We will look more deeply into the _record_ construct in the following chapters.
