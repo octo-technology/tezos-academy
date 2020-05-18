@@ -128,6 +128,8 @@ export const ButtonText = styled.div`
   height: 100%;
   line-height: 40px;
   z-index: 1;
+  color: #fff;
+  text-align: center;
 `;
 
 export const ChapterMonaco = styled.div`

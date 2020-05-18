@@ -4,26 +4,9 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { PENDING, RIGHT, WRONG } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.constants";
-import { dataAddresses } from "../Chapters/Pascal/ChapterAddresses";
-import { dataBuiltIns } from "../Chapters/Pascal/ChapterBuiltIns";
-import { dataConditionals } from "../Chapters/Pascal/ChapterConditionals";
-import { dataFunctions } from "../Chapters/Pascal/ChapterFunctions";
-import { dataInteractions } from "../Chapters/Pascal/ChapterInteractions";
-import { dataLists } from "../Chapters/Pascal/ChapterLists";
-import { dataLoops } from "../Chapters/Pascal/ChapterLoops";
-import { dataMainFunction } from "../Chapters/Pascal/ChapterMainFunction";
-import { dataMaps } from "../Chapters/Pascal/ChapterMaps";
-import { dataMath } from "../Chapters/Pascal/ChapterMath";
-import { dataOption } from "../Chapters/Pascal/ChapterOption";
-import { dataRecords } from "../Chapters/Pascal/ChapterRecords";
-import { dataStrings } from "../Chapters/Pascal/ChapterStrings";
-import { dataTimestamps } from "../Chapters/Pascal/ChapterTimestamps";
-import { dataTransactions } from "../Chapters/Pascal/ChapterTransactions";
-import { dataTuples } from "../Chapters/Pascal/ChapterTuples";
-import { dataTypes } from "../Chapters/Pascal/ChapterTypes";
-import { dataVariables } from "../Chapters/Pascal/ChapterVariables";
-import { dataVariant } from "../Chapters/Pascal/ChapterVariant";
+
 import { ChapterView } from "./Chapter.view";
+import { chapterData } from "./Chapter.data";
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING);
@@ -32,72 +15,10 @@ export const Chapter = () => {
   const [data, setData] = useState({ course: undefined, exercise: undefined, solution: undefined });
 
   useEffect(() => {
-    if (pathname === "/2")
-      setData({ course: dataTypes.course, exercise: dataTypes.exercise, solution: dataTypes.solution });
-    if (pathname === "/3")
-      setData({ course: dataVariables.course, exercise: dataVariables.exercise, solution: dataVariables.solution });
-    if (pathname === "/4")
-      setData({ course: dataMath.course, exercise: dataMath.exercise, solution: dataMath.solution });
-    if (pathname === "/5")
-      setData({ course: dataStrings.course, exercise: dataStrings.exercise, solution: dataStrings.solution });
-    if (pathname === "/6")
-      setData({ course: dataFunctions.course, exercise: dataFunctions.exercise, solution: dataFunctions.solution });
-    if (pathname === "/7")
-      setData({
-        course: dataConditionals.course,
-        exercise: dataConditionals.exercise,
-        solution: dataConditionals.solution,
-      });
-    if (pathname === "/8")
-      setData({
-        course: dataTuples.course,
-        exercise: dataTuples.exercise,
-        solution: dataTuples.solution,
-      });
-    if (pathname === "/9")
-      setData({ course: dataRecords.course, exercise: dataRecords.exercise, solution: dataRecords.solution });
-    if (pathname === "/10")
-      setData({ course: dataMaps.course, exercise: dataMaps.exercise, solution: dataMaps.solution });
-    if (pathname === "/11")
-      setData({ course: dataLists.course, exercise: dataLists.exercise, solution: dataLists.solution });
-    if (pathname === "/12")
-      setData({
-        course: dataVariant.course,
-        exercise: dataVariant.exercise,
-        solution: dataVariant.solution,
-      });
-    if (pathname === "/13")
-      setData({
-        course: dataMainFunction.course,
-        exercise: dataMainFunction.exercise,
-        solution: dataMainFunction.solution,
-      });
-    if (pathname === "/14")
-      setData({ course: dataLoops.course, exercise: dataLoops.exercise, solution: dataLoops.solution });
-    if (pathname === "/15")
-      setData({ course: dataAddresses.course, exercise: dataAddresses.exercise, solution: dataAddresses.solution });
-    if (pathname === "/16")
-      setData({ course: dataBuiltIns.course, exercise: dataBuiltIns.exercise, solution: dataBuiltIns.solution });
-    if (pathname === "/17")
-      setData({
-        course: dataTransactions.course,
-        exercise: dataTransactions.exercise,
-        solution: dataTransactions.solution,
-      });
-    if (pathname === "/18")
-      setData({ course: dataTimestamps.course, exercise: dataTimestamps.exercise, solution: dataTimestamps.solution });
-    if (pathname === "/19")
-      setData({
-        course: dataOption.course,
-        exercise: dataOption.exercise,
-        solution: dataOption.solution,
-      });
-    if (pathname === "/20")
-      setData({
-        course: dataInteractions.course,
-        exercise: dataInteractions.exercise,
-        solution: dataInteractions.solution,
-      });
+    chapterData.forEach((chapter) => {
+      if (pathname === chapter.pathname)
+        setData({ course: chapter.data.course, exercise: chapter.data.exercise, solution: chapter.data.solution });
+    });
   }, [pathname]);
 
   const validateCallback = () => {

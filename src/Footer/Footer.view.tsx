@@ -3,20 +3,26 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { FooterStyled, FooterCredits } from "./Footer.style";
+import { chapterData } from "../Chapter/Chapter.data";
 
 export const FooterView = () => {
   const { pathname } = useLocation();
-  let page = parseInt(pathname.replace("/", ""));
-  if (!page) page = 1;
-  const previousPage = page > 1 ? page - 1 : 1;
-  const nextPage = page < 20 ? page + 1 : "coming-next";
+  let previousChapter = "/";
+  let nextChapter = "/";
+
+  chapterData.forEach((chapter, i) => {
+    if (pathname === chapter.pathname) {
+      if (i - 1 >= 0) previousChapter = chapterData[i - 1].pathname;
+      if (i + 1 < chapterData.length) nextChapter = chapterData[i + 1].pathname;
+    }
+  });
 
   return (
     <FooterStyled>
-      <Link to={`/${previousPage}`}>
+      <Link to={previousChapter}>
         <img alt="Previous Chapter" src="/elements/previous-chapter.svg" />
       </Link>
-      <Link to={`/${nextPage}`}>
+      <Link to={nextChapter}>
         <img alt="Next Chapter" src="/elements/next-chapter.svg" />
       </Link>
       <FooterCredits>
