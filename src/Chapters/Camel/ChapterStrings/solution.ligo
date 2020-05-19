@@ -1,4 +1,4 @@
-type ship_code is string
-var my_ship : ship_code := "020433"
+type ship_code = string
+let my_ship : ship_code = "020433"
 // Type your solution below
-my_ship := String.sub(0n, 2n, my_ship) ^ "1" ^ String.sub(3n, 3n, my_ship)
+let my_ship = String.sub 0n 2n my_ship ^ "1" ^ String.sub 3n 3n my_ship

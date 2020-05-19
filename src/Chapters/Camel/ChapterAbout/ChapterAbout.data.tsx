@@ -30,5 +30,5 @@ For our tutorial, we only designed a few parts for each attribute, 3 different c
 
 On the top-right panel, go ahead and move the slider of each attribute. Notice the Ship ID above the ship image and how the different numerical values correspond to the different ship appearance. Your mission is to select the ship with ID 020433 and click _Validate Mission_ below.
 
-Next, we will start coding some LIGO!
+Next, we will start coding some LIGO (cameligo)!
 `;

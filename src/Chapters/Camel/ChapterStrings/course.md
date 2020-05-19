@@ -5,7 +5,7 @@
 Strings are defined using the built-in string type as follows:
 
 ```
-const a: string = "Hello Captain Rogers";
+let a: string = "Hello Captain Rogers"
 ```
 
 ## Concatenating Strings
@@ -13,9 +13,9 @@ const a: string = "Hello Captain Rogers";
 Strings can be concatenated using the _^_ operator.
 
 ```
-const name: string = "Captain Rogers"
-const greeting: string = "Hello"
-const full_greeting: string = greeting ^ " " ^ name
+let name: string = "Captain Rogers"
+let greeting: string = "Hello"
+let full_greeting: string = greeting ^ " " ^ name
 ```
 
 ## Slicing Strings
@@ -23,8 +23,8 @@ const full_greeting: string = greeting ^ " " ^ name
 Strings can be sliced using a built-in function _String.sub_ as follows:
 
 ```
-const name: string = "Captain Rogers"
-const slice: string = String.sub(0n, 1n, name)
+let name: string = "Captain Rogers"
+let slice: string = String.sub 0n 1n name
 ```
 
 ⚠️ Notice that the offset and length of the sub function are natural numbers.
@@ -34,8 +34,8 @@ const slice: string = String.sub(0n, 1n, name)
 The length of a string can be found using a built-in function _String.length_ as follows:
 
 ```
-const name: string = "Captain Rogers"
-const length: nat = String.length(name) // length = 14
+let name: string = "Captain Rogers"
+let length: nat = String.length name // length = 14
 ```
 
 ## Your mission

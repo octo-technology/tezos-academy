@@ -7,19 +7,19 @@
 Constants are immutable by design, which means their values cannot be reassigned. Put in another way, they can be assigned once, at their declaration. When defining a constant you need to provide a name, type and a value:
 
 ```
-const age: int = 25;
+let age: int = 25;
 ```
 
 ## Variables
 
-Variables, unlike constants, are mutable. They cannot be declared in a global scope, but they can be declared and used within functions, or as function parameters.
+
+As expected in the pure subset of a functional language, CameLIGO only features constant values: once they are declared, the value cannot be changed (or "mutated").
 
 ```
-var c: int := 2 + 3
-c := c - 3
+let c: int = 2 + 3
+let c : int = c - 3
 ```
 
-⚠️ Notice the assignment operator _:=_ for var, instead of _=_ for constants.
 
 ## Your mission
 
