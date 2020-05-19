@@ -96,7 +96,7 @@ type parameter =
   Fire of int
 | Stop
 
-type return = list (operation) * storage
+type return = operation list * storage
 
 let main (action, store : parameter * storage) : return is
  (([] : operation list),
