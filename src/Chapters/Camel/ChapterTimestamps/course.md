@@ -7,7 +7,7 @@
 You cannot get the current time in LIGO but you can get the starting time of the current block :
 
 ```
-const today : timestamp = Tezos.now
+let today : timestamp = Tezos.now
 ```
 
 ## Arithmetics
@@ -15,12 +15,12 @@ const today : timestamp = Tezos.now
 In LIGO, timestamps can be added to integers :
 
 ```
-const today : timestamp = Tezos.now
-const one_day : int = 86_400
-const in_24_hrs : timestamp = today + one_day
-const some_date : timestamp = ("2000-01-01T10:10:10Z" : timestamp)
-const one_day_later : timestamp = some_date + one_day
-const in_24_hrs : timestamp = today - one_day
+let today : timestamp = Tezos.now
+let one_day : int = 86_400
+let in_24_hrs : timestamp = today + one_day
+let some_date : timestamp = ("2000-01-01t10:10:10Z" : timestamp)
+let one_day_later : timestamp = some_date + one_day
+let in_24_hrs : timestamp = today - one_day
 ```
 
 ## Comparison
@@ -28,7 +28,7 @@ const in_24_hrs : timestamp = today - one_day
 You can compare timestamps using the same comparison operators applying to numbers.
 
 ```
-const not_tommorow : bool = (Tezos.now = in_24_hrs)
+let not_tomorrow : bool = (Tezos.now = in_24_hrs)
 ```
 
 ## Your mission

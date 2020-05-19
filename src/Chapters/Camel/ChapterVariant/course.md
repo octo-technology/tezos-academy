@@ -6,12 +6,12 @@ Optionals are a pervasive programing pattern in OCaml. Since Michelson and LIGO 
 
 ## Unit
 
-The unit type in Michelson or LIGO is a predefined type that contains only one value that carries no information. It is used when no relevant information is required or produced. Here is how it used.
+The *unit* type in Michelson or LIGO is a predefined type that contains only one value that carries no information. It is used when no relevant information is required or produced. Here is how it used.
 
-In PascaLIGO, the unique value of the unit type is Unit.
+In CameLIGO, the unique value of the unit type is (), following the OCaml convention.
 
 ```
-const n : unit = Unit // Note the capital letter
+let n : unit = ()
 ```
 
 ## Variant
@@ -21,9 +21,9 @@ A variant type is a user-defined or a built-in type (in case of options) that de
 Here is how we define a coin as being either head or tail (and nothing else):
 
 ```
-type coin is Head | Tail
-const head : coin = Head
-const tail : coin = Tail
+type coin = Head | Tail
+let head : coin = Head
+let tail : coin = Tail
 ```
 
 The names Head and Tail in the definition of the type coin are called data constructors, or variants. In this particular, they carry no information beyond their names, so they are called constant constructors.
@@ -31,32 +31,33 @@ The names Head and Tail in the definition of the type coin are called data const
 In general, it is interesting for variants to carry some information, and thus go beyond enumerated types. In the following, we show how to define different kinds of users of a system.
 
 ```
-type id is nat
+type id = nat
 
-type user is
-  Admin of id
+type user =
+  Admin   of id
 | Manager of id
 | Guest
 
-const admin : user = Admin (1000n)
-const guest : user = Guest
+let u : user = Admin 1000n
+let g : user = Guest
 ```
 
 In LIGO, a constant constructor is equivalent to the same constructor taking an argument of type unit, so, for example, Guest is the same value as Guest (unit).
 
 ## Pattern matching
 
-Pattern matching is similiar to the switch construct in Javascript, and can be used to route the program's control flow based on the value of a variant. Consider for example the definition of a function flip that flips a coin.
+Pattern matching is similiar to the *switch* construct in Javascript, and can be used to route the program's control flow based on the value of a variant. Consider for example the definition of a function flip that flips a coin.
 
 ```
-type coin is Head | Tail
+type coin = Head | Tail
 
-function flip (const input_coin : coin) : coin is
-case input_coin of
-  Head -> Tail
-| Tail -> Head
-end
+let flip (c : coin) : coin =
+  match c with
+    Head -> Tail
+  | Tail -> Head
 ```
+
+Notice the switch construct is using the _match_ _with_ instruction to discriminate all possible values of *c*
 
 ## Your mission
 

@@ -1,4 +1,4 @@
 // Type your solution below
-type parameter is
+type parameter =
   Set_ship_code of string
 | Go_to of string

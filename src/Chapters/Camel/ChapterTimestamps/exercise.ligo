@@ -1,3 +1,3 @@
-const one_day : int = 86_400
+let one_day : int = 86_400
 // Type your solution below
 
