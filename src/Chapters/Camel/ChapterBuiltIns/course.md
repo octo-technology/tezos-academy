@@ -33,11 +33,11 @@ failwith(<string_message>)
 This example shows how Tezos.source can be used to deny access to an entrypoint.
 
 ```
-const owner : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address);
+let owner : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address)
 
-function main (const action : parameter; const store : storage) : return is
-    if Tezos.source =/= owner then (failwith ("Access denied.") : return)
-else ((nil : list (operation)), store)
+let main (action, store: parameter * storage) : return =
+  if Tezos.source <> owner then (failwith "Access denied." : return)
+  else (([] : operation list), store)
 ```
 
 _<string_message>_ must be a string value
