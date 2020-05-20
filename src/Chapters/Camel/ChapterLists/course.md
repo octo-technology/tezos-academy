@@ -135,6 +135,6 @@ let sum_of_elements : int = Set.fold sum my_set 0
 
 <!-- prettier-ignore -->1- Define _itinary_ as a list of string names of celestial bodies representing your course. Start with _"earth"_
 
-<!-- prettier-ignore -->2- On the next line, add _"sun"_ to the itinary.
+<!-- prettier-ignore -->2- On the next line, add _"sun"_ to the *itinary* and save it into a *longer\_itinary* constant.
 
-<!-- prettier-ignore -->2- On the next line, add _"alpha-centauri"_ to the itinary.
+<!-- prettier-ignore -->2- On the next line, add _"alpha-centauri"_ to the *longer\_itinary* and save it into a *far\_itinary* constant.

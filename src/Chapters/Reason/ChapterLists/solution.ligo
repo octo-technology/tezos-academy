@@ -1,4 +1,4 @@
 // Type your solution below
-var itinary : list (string) := list ["earth"]
-itinary := "sun" # itinary
-itinary := "alpha-centauri" # itinary
+let itinary : list(string) = ["earth"];
+let longer_itinary : list(string) = ["sun", ...itinary];
+let far_itinary : list(string) = ["alpha-centauri", ...longer_itinary];

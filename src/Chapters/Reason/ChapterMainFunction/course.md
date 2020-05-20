@@ -11,8 +11,8 @@ When the contract is originated, the initial value of the storage is provided. W
 The type of the contract parameter and the storage are up to the contract designer, but the type for list operations is not. The return type of a main function is as follows, assuming that the type storage has been defined elsewhere. (Note that you can use any type with any name for the storage.)
 
 ```
-type storage is ...  // Any name, any type
-type return is list (operation) * storage
+type storage = ...;  // Any name, any type
+type return = (list (operation), storage);
 ```
 
 The contract storage can only be modified by activating a main function: given the state of the storage on-chain, a main function specifies how to create another state for it, depending on the contract's parameter.
@@ -20,12 +20,12 @@ The contract storage can only be modified by activating a main function: given t
 Here is an example where the storage is a single natural number that is updated by the parameter.
 
 ```
-type parameter is nat
-type storage is nat
-type return is list (operation) * storage
+type parameter = nat;
+type storage = nat;
+type return = (list (operation), storage);
 
-function save (const action : parameter; const store : storage) : return is
-  ((nil : list (operation)), store)
+let main = ((action, store): (parameter, storage)) : return =>
+  (([] : list (operation)), store);
 ```
 
 ## Entrypoints
@@ -36,31 +36,31 @@ As an analogy, in the C programming language, the main function is the unique ma
 
 The parameter of the contract is then a variant type, and, depending on the constructors of that type, different functions in the contract are called. In other terms, the unique main function dispatches the control flow depending on a pattern matching on the contract parameter.
 
-In the following example, the storage contains a counter of type nat and a name of type string. Depending on the parameter of the contract, either the counter or the name is updated.
+In the following example, the storage contains a *counter* of type _nat_ and a *name* of type _string_. Depending on the parameter of the contract, either the *counter* or the *name* is updated.
 
 ```
-type parameter is
-  Action_A of string
-| Action_B of string
+type parameter =
+| Action_A (nat)
+| Action_B (string);
 
-type storage is record [
-  stored_string_A : string;
-  stored_string_B : string
-]
+type storage = {
+  counter : nat,
+  name    : string
+};
 
-type return is list (operation) * storage
+type return = (list (operation), storage);
 
-function entry_A (const input_string : string; const store : storage) : return is
-  ((nil : list (operation)), store with record [stored_string_A = input_string])
+let entry_A = ((n, store): (nat, storage)) : return =>
+  (([] : list (operation)), {...store, counter : n});
 
-function entry_B (const input_string : string; const store : storage) : return is
-  ((nil : list (operation)), store with record [stored_string_B = input_string])
+let entry_B = ((s, store): (string, storage)) : return =>
+  (([] : list (operation)), {...store, name : s});
 
-function main (const action : parameter; const store : storage): return is
-  case action of
-    Action_A (input_string) -> entry_A (input_string, store)
-  | Action_B (input_string) -> entry_B (input_string, store)
-  end
+let main = ((action, store): (parameter, storage)) : return =>
+  switch (action) {
+  | Action_A (n) => entry_A ((n, store))
+  | Action_B (s) => entry_B ((s, store))
+  };
 ```
 
 ℹ️ Now that you created a main function, you can now transpile your code into Michaelson and deploy it on Tezos. Try it out on the <a href="https://ide.ligolang.org/" target="_blank">LIGOlang IDE</a>
