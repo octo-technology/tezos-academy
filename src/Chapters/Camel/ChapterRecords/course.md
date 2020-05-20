@@ -5,23 +5,22 @@
 Records are like tuples but with named parameters. In other words, they hold a set of key/data pairs. To instanciate a record, you must first declare its type as follow :
 
 ```
-type user is
-  record [
-    id : nat;
-    is_admin : bool;
-    name : string
-  ]
+type user = {
+  id : nat;
+  is_admin : bool;
+  name : string
+}
 ```
 
 And here is how to define an associated record value :
 
 ```
-const alice : user =
-  record [
+let alice : user =
+  {
     id = 1n;
     is_admin = true;
     name = "Alice"
-  ]
+  }
 ```
 
 ## Access
@@ -29,31 +28,56 @@ const alice : user =
 You can access the whole record or get one key in particular :
 
 ```
-const alice_is_admin : bool = alice.is_admin
+let alice_is_admin : bool = alice.is_admin
 ```
 
 ## Update
 
-You can modify values in a record as follows :
+Given a record value, it is a common design pattern to update only a small number of its fields. Instead of copying the fields that are unchanged, LIGO offers a way to only update the fields that are modified.
+
+One way to understand the update of record values is the functional update. The idea is to have an expression whose value is the updated record.
+
+Let us consider defining a function that translates three-dimensional points on a plane.
 
 ```
-function change_name (const u : user) : user is
-  block {
-      const u : user = u with record [name = "Mark"]
-  } with u
+type point = {x : int; y : int; z : int}
+type vector = {dx : int; dy : int}
+
+let origin : point = {x = 0; y = 0; z = 0}
+
+let xy_translate (p, vec : point * vector) : point =
+  {p with x = p.x + vec.dx; y = p.y + vec.dy}
 ```
 
-⚠️ Note that user has not been changed by the function. Rather, the function returned a nameless new version of it with the modified name.
+⚠️ Note that *p* has not been changed by the functional update: a nameless new version of it has been created and returned.
 
-## Patch
+## Nested records
 
-A patch takes a record to be updated and a record with a subset of the fields to update, then applies the latter to the former.
+CameLIGO provide the ability to perform nested updates on records.
+
+For example if you have the following record structure:
 
 ```
-function change_name (const u : user) : user is
-  block {
-      patch u with record [name = "Mark"]
-  } with u
+type color =
+  Blue
+| Green
+
+type preferences = {
+  color : color;
+  other : int;
+}
+
+type account = {
+  id: int;
+  preferences: preferences;
+}
+```
+
+You can update the nested record with the following code:
+
+```
+let change_color_preference (account : account) (color : color) : account =
+  { account with preferences.color = color }
 ```
 
 ## Your mission
@@ -62,4 +86,6 @@ function change_name (const u : user) : user is
 
 <!-- prettier-ignore -->2- Refactor *earth\_coordinates* with the record type.
 
-<!-- prettier-ignore -->2- Refactor the *earth\_coordinates* update of the last parameters with the record type (using a patch).
+<!-- prettier-ignore -->3- Create a function *change_coord_z* which takes 2 parameters *point* of type _coordinates_, *zval* of type _int_. That function returns the point patched with its third attribute equal to given *zval*. 
+
+<!-- prettier-ignore -->4- Create a new constant called *modified\_earth\_coordinates* initialized by calling the function *change_coord_z* for *earth\_coordinates* with *z* value to 5.

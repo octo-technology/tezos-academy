@@ -11,7 +11,7 @@ A contract can invoke another by emiting a transaction operation at the end of a
 We have already seen the _Tezos.transaction_ in chapter 17 in order to send money to an address. It is also possible to use _Tezos.transaction_ to call an entrypoint from another contract. In that case, we store the transaction in a type _operation_ which is a predefined type representing a contract invocation.
 
 ```
-const <operation_name> : operation = Tezos.transaction (<parameter>, <mutez>, <contract>);
+let <operation_name> : operation = Tezos.transaction <parameter> <mutez> <contract>
 ```
 
 where :
@@ -23,7 +23,7 @@ where :
 To get the contract we want to call and its entry points, we can use :
 
 ```
-Tezos.get_contract_opt(<address>)
+Tezos.get_contract_opt <address>
 ```
 
 The function take an address and return an optional _contract_ (remember to use _option_). When no contract is found or the contract doesn't match the type, _None_ is returned.
@@ -34,50 +34,48 @@ The following example shows how a contract can invoke another by emiting a trans
 In our case, we have a _counter.ligo_ contract that accepts an action of type _parameter_, and we have a _proxy.ligo_ contract that accepts the same parameter type, and forwards the call to the deployed counter contract.
 
 ```
-// counter.ligo
+// counter.mligo
 
-type storage is int
-
-type parameter is
-  Increment of int
-| Decrement of int
+type parameter =
+  Increment of nat
+| Decrement of nat
 | Reset
 
-type return is list (operation) * storage
+type return = operation list * int
 
-function main (const action : parameter; const store : storage) : return is
- ((nil : list (operation)),
-  case action of
-    Increment (n) -> store + n
-  | Decrement (n) -> store - n
-  | Reset         -> 0
- end)
+ let main (p,s: action * int) : return =
+  let storage =
+    match p with
+    | Increment n -> add (s, n)
+    | Decrement n -> sub (s, n)
+    | Reset -> 0
+  in ([] : operation list), storage
 ```
 
 ```
 // proxy.ligo
 
-type storage is unit
-
-type parameter is
+type parameter =
   Increment of nat
 | Decrement of nat
 | Reset
 
-type return is list (operation) * storage
+type storage = unit
 
-const dest : address = ("KT19wgxcuXG9VH4Af5Tpm1vqEKdaMFpznXT3" : address) // Deployment address of counter.ligo
+type return = operation list * storage
 
-function proxy (const action : parameter; const store : storage): return is
-  block {
-    const counter : contract (parameter) =
-      case (Tezos.get_contract_opt(dest) : option (contract (parameter))) of
-        Some (contract) -> contract
-      | None -> (failwith ("Contract not found.") : contract (parameter))
-      end;
-    const op : operation = Tezos.transaction (action, 0tez, counter); // E.g. with action = Increment (5n)
-    const operations : list (operation) = list [op]
-  } with (operations, store)
+let dest : address = ("KT19wgxcuXG9VH4Af5Tpm1vqEKdaMFpznXT3" : address)
+
+let proxy (action, store : parameter * storage) : return =
+  let counter : parameter contract =
+    match (Tezos.get_contract_opt (dest) : parameter contract option) with
+      Some contract -> contract
+    | None -> (failwith "Contract not found." : parameter contract) in
+  (* Reuse the parameter in the subsequent
+     transaction or use another one, `mock_param`. *)
+  let mock_param : parameter = Increment (5n) in
+  let op : operation = Tezos.transaction action 0tez counter
+  in [op], store
 ```
 
 Notice that :
@@ -92,20 +90,20 @@ Notice that :
 
 ```
 // weapon.ligo
-type storage is int
+type storage = int
 
-type parameter is
+type parameter =
   Fire of int
 | Stop
 
-type return is list (operation) * storage
+type return = operation list * storage
 
-function main (const action : parameter; const store : storage) : return is
- ((nil : list (operation)),
-  case action of
-    Fire (n) -> n
+let main (action, store : parameter * storage) : return is
+ (([] : operation list),
+  match action with
+    Fire n -> n
   | Stop -> 0
- end)
+ )
 ```
 
 <!-- prettier-ignore -->2- Consider the contract in the editor. Notice the addresses of each weapon, and that the _orders_ function fetch the corresponding contracts. Your job is now to define the list of operations to send to the weapons. For this, start by creating _operations_ a list of type _operation_.

@@ -1,2 +1,2 @@
-type coordinates is (int * int * int)
+type coordinates = (int * int * int)
 // Type your solution below

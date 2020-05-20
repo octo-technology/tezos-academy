@@ -16,4 +16,4 @@ where :
 
 ## Your mission
 
-<!-- prettier-ignore --> 1- Transfer the *purchase\_price* to the *vendor\_contract*
+<!-- prettier-ignore --> 1- Create a transaction that transfers the *purchase\_price* to the *vendor\_contract*. The resulting operation must be used to initialize a constant *op* of type *operation*. In our case we need to transfer directly to a wallet address (not another smart contract).
