@@ -7,7 +7,19 @@
 Booleans are typed _bool_ in LIGO :
 
 ```
-const a: bool = true // or false
+let a: bool = true // or false
+```
+
+Common logical operators on _bool_ :
+
+```
+let logical_and: bool = true && true;   // and
+let logical_or: bool = false || true;   // or
+let logical_not: bool = !false;         // not
+let eq: bool = 2 == 3;                  // equals
+let not_eq: bool = 2 != 3;              // different
+let gt: bool = 4 > 3;                   // greater than
+let gte: bool = 4 <= 3;                 // lesser than or equal
 ```
 
 ## Comparing Values
@@ -16,53 +28,44 @@ Only values of the same type can be natively compared, i.e. int, nat, string, te
 
 ```
 // Comparing Strings
-const a : string = "Alice"
-const b : string = "Alice"
-const c : bool = (a = b) // true
+let a : string = "Alice";
+let b : string = "Alice";
+let c : bool = (a == b); // true
 
 // Comparing numbers
-const a : int = 5
-const b : int = 4
-const c : bool = (a = b) // false
-const g : bool = (a >= b) // true
-const h : bool = (a =/= b) // true
+let a : int = 5;
+let b : int = 4;
+let c : bool = (a == b); // false
+let g : bool = (a >= b); // true
+let h : bool = (a != b); // true
 
 // Comparing tez
-const a : tez = 5mutez
-const b : tez = 10mutez
-const c : bool = (a = b) // false
+let a : tez = 5mutez;
+let b : tez = 10mutez;
+let c : bool = (a == b); // false
 ```
 
-⚠️ Notice that equality is checked with a single _=_ and not two like many languages.
+⚠️ Notice that equality is checked with a single _==_.
 
-⚠️ Also notice the use of _=/=_ for the inequality operator.
+⚠️ Also notice the use of _!=_ for the inequality operator.
 
 ## Conditionals
 
 Conditional logic enables forking the control flow depending on the state.
 
 ```
-function isSmall (const n : nat) : bool is
-if n < 10n then true else false
+let isSmall = (n : nat) : bool =>
+  if (n < 10n) { true; } else { false; };
 ```
 
-⚠️ When the branches of the conditional are not a single expression, as above, we need a block:
+⚠️ Notice the *then* clause and *else* clause are blocks of instructions between _{_ and _}_.
 
-```
-if x < y then
-block {
-x := x + 1;
-y := y - 1
-}
-else skip;
-```
+⚠️ Notice the _;_ at the end of _if_ instruction.
 
 ## Your mission
 
 We want to conditionally change the engine attribute (third number) to 1 only if it is equal to 0.
 
-<!-- prettier-ignore -->1- Refactor *modified\_ship* as a variable equal to *my\_ship*
+<!-- prettier-ignore -->1- Define a condition _if_ the engine attribute equal 0. Don't forget the attributes are defined as strings.
 
-<!-- prettier-ignore -->2- Then define a condition _if_ the engine attribute equal 0. Don't forget the attributes are defined as strings.
-
-<!-- prettier-ignore -->3- If the condition is met, change *modified\_ship* to it new value. Otherwise, _skip_ the instructions.
+<!-- prettier-ignore -->2- If the condition is met, compute the new ship_code value in a constant *modified\_ship* and return *modified\_ship*. Otherwise, return the *my\_ship* constant (given as parameter of the function).

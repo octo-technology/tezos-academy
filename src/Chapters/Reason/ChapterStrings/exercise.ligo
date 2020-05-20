@@ -1,3 +1,3 @@
-type ship_code is string
-var my_ship : ship_code := "020433"
+type ship_code = string
+let my_ship : ship_code = "020433";
 // Type your solution below
