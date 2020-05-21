@@ -4,22 +4,28 @@
 
 ## Constants
 
-Constants are immutable by design, which means their values cannot be reassigned. Put in another way, they can be assigned once, at their declaration. When defining a constant you need to provide a name, type and a value:
+Constants are immutable by design, which means their values cannot be reassigned. Put in another way, they can be assigned once, at their declaration. When defining a constant you need to provide a _name_, _type_ and a _value_:
 
 ```
-const age: int = 25;
+let age : int = 25;
+let age : string = "old";   //error illed type
+let age = 42;   // ok
 ```
+
+⚠️ Notice the constant *age* can be squashed by another constant definition with the same name. Once the type of constant has been defined or induced the constant cannot handle other types.
 
 ## Variables
 
-Variables, unlike constants, are mutable. They cannot be declared in a global scope, but they can be declared and used within functions, or as function parameters.
+As expected in the pure subset of a functional language, ReasonLIGO only features constant values: once they are declared, the value cannot be changed (or "mutated").
 
 ```
-var c: int := 2 + 3
-c := c - 3
+let add = ((a, b): (int, int)): int => {
+  let c : int = a + b;
+  c;
+};
 ```
 
-⚠️ Notice the assignment operator _:=_ for var, instead of _=_ for constants.
+⚠️ Notice the returned value of the function *add* is the temporary *c* constant.
 
 ## Your mission
 

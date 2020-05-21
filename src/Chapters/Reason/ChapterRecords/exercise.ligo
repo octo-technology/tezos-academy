@@ -1,4 +1,4 @@
 // Modify the code below
-type coordinates is (int * int * int)
-var earth_coordinates : coordinates := (2,7,1)
-earth_coordinates.2 := 5
+type coordinates = (int, int, int)
+let earth_coordinates : coordinates = (2,7,1);
+let modified_earth_coordinates = (earth_coordinates[0], earth_coordinates[1], 5);
