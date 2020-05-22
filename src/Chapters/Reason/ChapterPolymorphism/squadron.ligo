@@ -1,52 +1,55 @@
-#include "central_types.ligo"
-#include "squadron_types.ligo"
+#include "central_types.religo"
+#include "squadron_types.religo"
 
-function moduleRequest(const moduleName: string; const key: string; const callbackAddress: address; const m: modules) : (list(operation) * modules) is
-begin
-    const addr_opt : option(address) = m[moduleName];
-    const addr : address = case addr_opt of
-    | Some(a) -> a
-    | None -> (failwith("Service not registered: " ^ moduleName) : address)
-    end;
+let moduleRequest =((moduleName, key, callbackAddress, m): (string, string, address, modules)) : (list(operation), modules) =>
+{
+    let addr_opt : option(address) = Map.find_opt (moduleName,m);
+    let addr : address = switch (addr_opt) {
+    | Some(a) => a
+    | None => (failwith("Service not registered: " ++ moduleName) : address)
+    };
     // addr is the address of central smart contract
     // Type your solution below
-    const proposed_destination : contract(actionCentral) = get_contract(addr);
-    const actRetrieve: actionRetrieve = record
-        sKey = key;
-        callbackAddress = self_address;
-    end;
-    const proposedTransaction : operation = transaction( RetrieveShip(actRetrieve), 0mutez, proposed_destination);
+    let proposed_destination_opt : option(contract(actionCentral)) = Tezos.get_contract_opt(addr);
+    let proposed_destination : contract(actionCentral) = switch (proposed_destination_opt) {
+        | Some(ci) => ci
+        | None => (failwith("Unknown contract") : contract(actionCentral))
+    };
+    let actRetrieve: actionRetrieve = {
+        sKey : key,
+        callbackAddress : Tezos.self_address
+    };
+    let proposedTransaction : operation = Tezos.transaction( RetrieveShip(actRetrieve), 0mutez, proposed_destination);
     
-    const listoperation : list(operation) = list
-        proposedTransaction
-    end
-end with (listoperation, m) 
+    let listoperation : list(operation) = [ proposedTransaction ];
+    (listoperation, m);
+} 
 
-function moduleResponse(const e: ship; const m: modules) : (list(operation) * modules) is
-begin
-  const enemy : bool = e.hostile;
-  if enemy then
-    failwith("Fire !")
-  else
-    failwith("Patrol !")
-end with ((nil: list(operation)) , m)
+let moduleResponse = ((e, m) : (ship, modules)) : (list(operation), modules) =>
+{
+    let enemy : bool = e.hostile;
+    if (enemy) {
+        failwith("Fire !")
+    } else {
+        failwith("Patrol !")
+    };
+    (([]: list(operation)) , m);
+}
 
-function registerModule(const moduleName: string; const moduleAddress: address; const m: modules): (list(operation) * modules) is 
-  begin
-    const checkModule: option(address) = m[moduleName];
-    case checkModule of
-        | Some(e) -> failwith("Service already registered")
-        | None -> begin
-            m[moduleName] := moduleAddress;
-        end
-    end
-  end with ((nil: list(operation)) , m)
+let registerModule = ((moduleName, moduleAddress, m) : (string, address, modules)): (list(operation), modules) => 
+{
+    let checkModule: option(address) = Map.find_opt (moduleName,m);
+    let modified_storage = switch (checkModule) {
+        | Some(e) => (failwith("Service already registered") : modules)
+        | None => Map.add (moduleName, moduleAddress, m)
+    };
+    (([]: list(operation)) , modified_storage);
+}
 
-
-function squadron(const action : actionSquadron; const md: modules) : (list(operation) * modules) is 
-  block {skip} with 
-    case action of
-    | RegisterModule (m) -> registerModule(m.name, m.moduleAddress, md)
-    | ModuleRequest (mr) -> moduleRequest(mr.moduleName, mr.key, mr.callbackAddress, md)
-    | ModuleResponse (e) -> moduleResponse(e.e, md)
-  end
+let squadron = ((action,md) : (actionSquadron, modules)) : (list(operation), modules) => { 
+    switch (action) {
+    | RegisterModule (m) => registerModule ((m.name, m.moduleAddress, md))
+    | ModuleRequest (mr) => moduleRequest ((mr.moduleName, mr.key, mr.callbackAddress, md))
+    | ModuleResponse (e) => moduleResponse ((e.e, md))
+    }
+}
