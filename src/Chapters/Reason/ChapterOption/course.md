@@ -7,62 +7,60 @@ The _option_ type is a predefined variant type that is used to express whether t
 An example in arithmetic is the division operation:
 
 ```
-function div (const a : nat; const b : nat) : option (nat) is
-  if b = 0n then (None: option (nat)) else Some (a/b)
+let div = ((a, b) : (nat, nat)) : option (nat) =>
+  if (b == 0n) { (None: option (nat)); } else { Some (a/b); };
 ```
 
-## Map Access and Option evaluation
-
-Use the postfix [] operator to read a value of the map. When accessing to an element of a map (using [] operator), the returned result is the associated value or _None_ if the given key does not exist. This is the reason why the [] operator returns an _option_ of the expected type (and not just the expected type).
+## Initialization
 
 The keyword _Some_ can be used to create an _option_ variable for a given value.
 The keyword _None_ can be used to create an _option_ variable with no given value.
 
 ```
-const middleName : option(string) = Some("Foo");
-const middleName : option(string) = None;
+let middleName : string option = Some "Foo";
+let noMiddleName : string option = None;
 ```
 
 ## Option in Pattern matching
 
-In the previous chapters, you've seen how to do pattern matching using the _case_ operator.
+In the previous chapters, you've seen how to do pattern matching using the _switch_ operator.
 The keyword _Some_ can be used in a pattern matching to retrieve the value behind the _option_ variable.
 The keyword _None_ can be used in a pattern matching to verify the _option_ variable has no value.
 
 ```
-case <variable> of
-| Some(<value_name>) -> <block_code>
-| None -> <block_code>
-end
+switch <variable> {
+| Some (<value_name>) => <block_code>
+| None => <block_code>
+}
 ```
 
 _<block_code>_ can be a single instruction or a _block {}_
 _<value_name>_ is a local variable name. _<value_name>_ which holds the _option_ value and can be used inside the _<block_code>_
 
-Here is an example of [] operator returning an option type :
+Here is an example of accessing maps returning an option type and retrieving the value behind the optional :
 
 ```
-type expected_type is int
-type balance_type is map(nat, expected_type)
-const user_balances: balance_type = map[ 1n -> 10 ];
+type expected_type = int
+type balance_type = map(nat, expected_type)
+let user_balances: balance_type = Map.literal ([ (1n, 10) ]);
 
-const my_balance : option(expected_type) = user_balances[1n];
-case my_balance of
-  Some (val) -> block { skip }
-| None -> failwith ("Unknown user")
-end
+let my_balance : option(expected_type) = Map.find_opt (1n, user_balances);
+let bal : expected_type = switch (my_balance) {
+| Some (v) => v 
+| None => (failwith ("Unknown user") : expected_type)
+};
 ```
 
 Here is an example of pattern matching resolving an option type directly (usefull when we just want to retrieve the value behind the optional) :
 
 ```
-const my_balance2 : expected_type = case user_balances[1n] of
-  Some (val) -> val
-| None -> (failwith ("Unknown user") : expected_type)
-end
+let bal2 : expected_type = switch (Map.find_opt (1n, user_balances)) {
+| Some (v) => v 
+| None => (failwith ("Unknown user") : expected_type)
+};
 ```
 
-Notice the cast of _failwith_ instruction into an _expected_type_
+⚠️ Notice the cast of _failwith_ instruction into an _expected_type_
 
 ## Your mission
 

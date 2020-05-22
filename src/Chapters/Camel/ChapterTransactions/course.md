@@ -5,7 +5,7 @@
 You can transfer tez to an account, or to a function of another smart contract. For this, use :
 
 ```
-Tezos.transaction (<parameter>, <mutez>, <contract>);
+let op : operation = Tezos.transaction (<parameter>, <mutez>, <contract>);
 ```
 
 where :
@@ -13,6 +13,8 @@ where :
 - _parameter_ is the entrypoints of another contract, or use _unit_ if you are transfering to a wallet address,
 - _mutez_ is the amount to transfer,
 - _contract_ is the contract interface of the trageted contract. It can be retrieved from address of the other contract or the wallet.
+
+⚠️ Notice the _Tezos.transaction_ function returns *op* of type _operation_ .
 
 ## Your mission
 

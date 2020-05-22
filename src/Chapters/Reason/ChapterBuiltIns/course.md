@@ -28,19 +28,24 @@ The keyword _failwith_ throws an exception and stop the execution of the smart c
 failwith(<string_message>)
 ```
 
+_<string_message>_ must be a string value
+
 ## Access Control
 
 This example shows how Tezos.source can be used to deny access to an entrypoint.
 
 ```
-const owner : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address);
+type parameter = unit;
+type storage = unit;
+type return = (list (operation), storage);
+let owner : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address);
 
-function main (const action : parameter; const store : storage) : return is
-    if Tezos.source =/= owner then (failwith ("Access denied.") : return)
-else ((nil : list (operation)), store)
+let main = ((action, store) : (parameter, storage)) : return => {
+  if (Tezos.source != owner) { (failwith ("Access denied.") : return); }
+  else { (([] : list (operation)), store); };
+};
 ```
 
-_<string_message>_ must be a string value
 
 ## Your mission
 
