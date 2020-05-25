@@ -23,7 +23,7 @@ The problem is coming from the fact that _B_ must know the whole definition of _
 <!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* can be used in replacement of the *Tezos.get\_contract\_opt* function to retrieve contract interface but for only one entrypoint. It takes the requested entrypoint as parameter (with a special michelson syntax) and the address of the contract.
 
 ```
-const <variable_name>: contract(<type_of_target_contract_parameter>) = Tezos.get_entrypoint_opt(<entrypoint_name>, <target_contract_address>);
+let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tezos.get_entrypoint_opt(<entrypoint_name>, <target_contract_address>);
 ```
 
 <!-- prettier-ignore --> *entrypoint\_name* is a double-quoted string with first character is % followed by the name of the entrypoint (and its first letter must not be capitalized) exemple: for an entrypoint FooBar the corresponding *entrypoint\_name* is "%fooBar"

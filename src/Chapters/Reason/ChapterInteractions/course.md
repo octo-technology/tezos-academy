@@ -11,7 +11,7 @@ A contract can invoke another by emiting a transaction operation at the end of a
 We have already seen the _Tezos.transaction_ in chapter 17 in order to send money to an address. It is also possible to use _Tezos.transaction_ to call an entrypoint from another contract. In that case, we store the transaction in a type _operation_ which is a predefined type representing a contract invocation.
 
 ```
-const <operation_name> : operation = Tezos.transaction (<parameter>, <mutez>, <contract>);
+let <operation_name> : operation = Tezos.transaction (<parameter>, <mutez>, <contract>);
 ```
 
 where :
@@ -34,50 +34,52 @@ The following example shows how a contract can invoke another by emiting a trans
 In our case, we have a _counter.ligo_ contract that accepts an action of type _parameter_, and we have a _proxy.ligo_ contract that accepts the same parameter type, and forwards the call to the deployed counter contract.
 
 ```
-// counter.ligo
+// counter.religo
+type storage = int
 
-type storage is int
-
-type parameter is
-  Increment of int
-| Decrement of int
+type parameter =
+| Increment (int)
+| Decrement (int)
 | Reset
 
-type return is list (operation) * storage
+type return = (list (operation), storage)
 
-function main (const action : parameter; const store : storage) : return is
- ((nil : list (operation)),
-  case action of
-    Increment (n) -> store + n
-  | Decrement (n) -> store - n
-  | Reset         -> 0
- end)
+let main = ( (action,store) : (parameter, storage)) : return => {
+    let new_storage = switch (action) {
+    | Increment (n) => store + n
+    | Decrement (n) => store - n
+    | Reset         => 0
+    };
+    (([] : list (operation)), new_storage);
+}
 ```
 
 ```
-// proxy.ligo
+// proxy.religo
 
-type storage is unit
+type parameter =
+| Increment (nat)
+| Decrement (nat)
+| Reset;
 
-type parameter is
-  Increment of nat
-| Decrement of nat
-| Reset
+type storage = unit;
 
-type return is list (operation) * storage
+type return = (list (operation), storage);
 
-const dest : address = ("KT19wgxcuXG9VH4Af5Tpm1vqEKdaMFpznXT3" : address) // Deployment address of counter.ligo
+let dest : address = ("KT19wgxcuXG9VH4Af5Tpm1vqEKdaMFpznXT3" : address);
 
-function proxy (const action : parameter; const store : storage): return is
-  block {
-    const counter : contract (parameter) =
-      case (Tezos.get_contract_opt(dest) : option (contract (parameter))) of
-        Some (contract) -> contract
-      | None -> (failwith ("Contract not found.") : contract (parameter))
-      end;
-    const op : operation = Tezos.transaction (action, 0tez, counter); // E.g. with action = Increment (5n)
-    const operations : list (operation) = list [op]
-  } with (operations, store)
+let proxy = ((action, store): (parameter, storage)) : return => {
+  let counter : contract (parameter) =
+    switch (Tezos.get_contract_opt (dest) : option (contract (parameter))) {
+    | Some (contract) => contract;
+    | None => (failwith ("Contract not found.") : contract (parameter));
+    };
+  /* Reuse the parameter in the subsequent
+     transaction or use another one, `mock_param`. */
+  let mock_param : parameter = Increment (5n);
+  let op : operation = Tezos.transaction (action, 0tez, counter);
+  ([op], store)
+};
 ```
 
 Notice that :
@@ -91,21 +93,22 @@ Notice that :
 <!-- prettier-ignore -->1- Consider each of our weapons is managed by a smart contract  :
 
 ```
-// weapon.ligo
-type storage is int
+// weapon.religo
+type storage = int
 
-type parameter is
-  Fire of int
+type parameter =
+  Fire (int)
 | Stop
 
-type return is list (operation) * storage
+type return = (list (operation), storage)
 
-function main (const action : parameter; const store : storage) : return is
- ((nil : list (operation)),
-  case action of
-    Fire (n) -> n
-  | Stop -> 0
- end)
+let main = ((action, store) : (parameter, storage)) : return => {
+    let new_storage = switch (action) {
+    | Fire (n) => n
+    | Stop => 0
+    };
+ (([] : list (operation)), new_storage);
+}
 ```
 
 <!-- prettier-ignore -->2- Consider the contract in the editor. Notice the addresses of each weapon, and that the _orders_ function fetch the corresponding contracts. Your job is now to define the list of operations to send to the weapons. For this, start by creating _operations_ a list of type _operation_.

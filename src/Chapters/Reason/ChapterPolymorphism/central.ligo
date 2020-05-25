@@ -1,50 +1,48 @@
-#include "central_types.ligo"
-#include "squadron_types.ligo"
+#include "central_types.religo"
+#include "squadron_types.religo"
 
-function registerShip(const key: shipKey; const shipAddress: address; const shipName: string; const shipHostile: bool; const cs: centralStorage): (list(operation) * centralStorage) is 
-  begin
-    const checkship: option(ship) = cs[key];
-    case checkship of
-        | Some(e) -> failwith("ship already registered")
-        | None -> begin
-            cs[key] := record
-                id = shipAddress;
-                name = shipName;
-                hostile = shipHostile;
-            end
-        end
-    end
-  end with ((nil: list(operation)) , cs)
+let registerShip = ((key,shipAddress, shipName, shipHostile, cs): (shipKey, address, string, bool, centralStorage)): (list(operation), centralStorage) => 
+{    
+    let checkship: option(ship) = Map.find_opt (key,cs);
+    let modified_storage = switch (checkship) {
+        | Some(e) => (failwith("ship already registered") : centralStorage)
+        | None => Map.add (key, {
+                id : shipAddress,
+                name : shipName,
+                hostile : shipHostile
+            }, cs)
+    };
+    (([]: list(operation)) , modified_storage);
+}
 
-function sendTx(const e: ship; const callbackAddress: address): (list(operation)) is
-begin
+let sendTx = ((e,callbackAddress) : (ship, address)): (list(operation)) =>
+{
     // Type your solution below
-    const contractInterface: contract(actionSquadron) = get_entrypoint("%moduleResponse", callbackAddress);
-    const ee : actionModuleResponse = record
-        e = e
-    end;
-    const sendbackOperation: operation = transaction(ModuleResponse(ee), 0mutez, contractInterface);
-    
-    const listoperation : list(operation) = list
-        sendbackOperation
-    end
-end with (listoperation)
+    let contractInterfaceOpt: option(contract(actionSquadron)) = Tezos.get_entrypoint_opt("%moduleResponse", callbackAddress);
+    let contractInterface : contract(actionSquadron) = switch (contractInterfaceOpt) {
+        | Some (ci) => ci
+        | None => (failwith("Entrypoint not found in contract Squadron"): contract(actionSquadron))
+    };
+    let ee : actionModuleResponse = { e : e };
+    let sendbackOperation: operation = Tezos.transaction (ModuleResponse(ee), 0mutez, contractInterface);
+    let listoperation : list(operation) = [ sendbackOperation ];
+    listoperation;
+}
 
-function retrieveShip(const key: shipKey; const callbackAddress: address; const cs: centralStorage): (list(operation) * centralStorage) is 
-  begin
-    const checkship: option(ship) = cs[key];
-    var listop: list(operation) := list end;
-    case checkship of
-        | Some(e) -> begin
-            listop := sendTx(e, callbackAddress);
-        end
-        | None -> failwith("no ship")
-    end
-  end with (listop , cs)
+let retrieveShip = ((key, callbackAddress, cs): (shipKey, address, centralStorage)) : (list(operation), centralStorage) => 
+{
+    let checkship: option(ship) = Map.find_opt (key, cs);
+    let listop: list(operation) = switch (checkship) {
+        | Some(e) => sendTx((e, callbackAddress))
+        | None => (failwith("no ship") : list(operation)) 
+    };
+    (listop , cs);
+}
 
-function central(const action : actionCentral; const cs: centralStorage) : (list(operation) * centralStorage) is 
-  block {skip} with 
-    case action of
-    | RegisterShip (ar) -> registerShip (ar.sKey, ar.sAddr, ar.sName, ar.sHostile, cs)
-    | RetrieveShip (ret) -> retrieveShip(ret.sKey, ret.callbackAddress, cs)
-  end
+let central = ((action,cs) : (actionCentral, centralStorage)) : (list(operation), centralStorage) => 
+{
+    switch (action) {
+    | RegisterShip (ar) => registerShip ((ar.sKey, ar.sAddr, ar.sName, ar.sHostile, cs))
+    | RetrieveShip (ret) => retrieveShip ((ret.sKey, ret.callbackAddress, cs))
+    }
+}
