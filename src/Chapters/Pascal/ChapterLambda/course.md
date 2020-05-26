@@ -1,4 +1,4 @@
-# Chapter 23 : Lambda (anonymous function)
+# Chapter 23 : Versioning and Lambda (anonymous function)
 
 <dialog character="alien">red alert the humans are here battle station surrender dirty humans or die we are the master of this universe and we will easily destroy you hahahaha</dialog>
 
@@ -181,6 +181,6 @@ We want you to update our "starmap" contract in order to take this new rule into
 
 <!-- prettier-ignore -->2- First rule : if coordinates of a planet is (0,0,0) then celestial body is considered as a STAR.
 
-<!-- prettier-ignore -->3- Second rule : if mass of a planet is above 100n then celestial body is considered as a PLANET.
+<!-- prettier-ignore -->3- Second rule : if mass of a planet is above 100 then celestial body is considered as a PLANET.
 
-<!-- prettier-ignore -->4- Third rule : if mass of a planet is under 100n then celestial body is considered as an ASTEROID.
+<!-- prettier-ignore -->4- Third rule : if mass of a planet is under 100 then celestial body is considered as an ASTEROID.
