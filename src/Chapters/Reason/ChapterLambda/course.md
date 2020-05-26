@@ -104,7 +104,7 @@ ligo dry-run lambda.religo main 'ChangeFunc((c : coordinates) : coordinates => {
 ## Your mission
 
 We have a smart contract that reference planets is the Sol system. Since the beginning of the project , all celestial bodies were considered as planets. 
-Since 2006, the IAU decided that celetial bodies with a mass under 1000 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change ! A *DeduceCategoryChange* entrypoint allows us to change the lambda which determines the category of a celestial body. (All we have to do is define the new rule and all registered celestial bodies will be updated). 
+Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change ! A *DeduceCategoryChange* entrypoint allows us to change the lambda which determines the category of a celestial body. (All we have to do is define the new rule and all registered celestial bodies will be updated). 
 
 Take a look at the starmap contract :
 ```
