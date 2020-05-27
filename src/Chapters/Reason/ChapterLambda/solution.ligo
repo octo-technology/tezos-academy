@@ -1,6 +1,6 @@
 ligo dry-run lambda2.religo main \
 // Type your solution below
-'DeduceCategoryChange()' \
+'DeduceCategoryChange((p : planet) : planet_type => if (p.position.x==0) { STAR } else { if (p.mass > 100n) { PLANET } else { ASTEROID }})' \
 '{
     name:"Sol",
     func:((p : planet) : planet_type => if (p.mass > 100n) { PLANET } else { ASTEROID }),

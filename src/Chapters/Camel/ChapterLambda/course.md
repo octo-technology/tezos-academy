@@ -36,35 +36,32 @@ So the idea is to :
 Let's consider the "starmap" smart contract 
 ```
 // starmap.ligo
-type coordinates is record [ x : int; y : int; z : int ]
-type planets is map (string, coordinates)
-type storage is record[
+type coordinates = { x : int; y : int; z : int }
+type planets = (string, coordinates) map
+type storage = {
   name : string;
-  func : (coordinates) -> coordinates;
+  func : ((coordinates) -> coordinates);
   system_planets : planets
-]
-type return is (list(operation)  * storage)
+}
+type return = (operation list * storage)
 
-type parameter is ChangeFunc of (coordinates) -> coordinates | AddPlanet of (string * coordinates) | DoNothing
+type parameter = ChangeFunc of (coordinates) -> coordinates | AddPlanet of (string * coordinates) | DoNothing
 
-function addPlanet (const input : (string * coordinates); const store : storage) : return is
-block {
-    const modified : planets = case Map.find_opt(input.0, store.system_planets) of
-      Some (p) -> (failwith("planet already exist") : planets)
-    | None -> Map.add (input.0, store.func(input.1), store.system_planets)
-    end;
-} with ((nil :  list(operation)), record [name=store.name;func=store.func;system_planets=modified])
+let addPlanet (input, store : (string * coordinates) * storage) : return =
+    let modified : planets = match Map.find_opt input.0 store.system_planets with
+       Some (p) -> (failwith("planet already exist") : planets)
+     | None -> Map.add input.0 (store.func input.1) store.system_planets
+    in
+    (([] : operation list), {name=store.name;func=store.func;system_planets=modified})
 
-function changeFunc (const f : (coordinates) -> coordinates; const store : storage) : return is
-block { skip } 
-with ((nil :  list(operation)), record [name=store.name;func=f;system_planets=store.system_planets])
+let changeFunc (f,store : ((coordinates) -> coordinates) * storage) : return =
+  (([] : operation list), {name=store.name;func=f;system_planets=store.system_planets})
 
-function main (const action : parameter; const store : storage) : return is
-block { skip } with case action of
-    AddPlanet (input) -> addPlanet (input,store)
-  | ChangeFunc (f) -> changeFunc (f,store)
-  | DoNothing -> ((nil : list(operation)),store)
-  end
+let main ((action, store) : (parameter * storage)) : return =
+  match (action) with
+    AddPlanet (input) -> addPlanet ((input,store))
+  | ChangeFunc (f) -> changeFunc ((f,store))
+  | DoNothing -> (([] : operation list),store)
 ```
 
 
@@ -85,14 +82,25 @@ In "starmap" smart contract the type of *func* is
 
 Anonymous functions can be called like other functions. Here in our exemple, the lambda *func* is called in function *addPlanet* to transform planet's coordinates : 
 ```
-Map.add (input.0, store.func(input.1), store.system_planets)
+Map.add input.0 (store.func input.1) store.system_planets
 ```
 
 ## Lambda definition
 
+Defining a lambda in a ligo expression follows the syntax :
+```
+fun (<parameter_name> : <parameter_type>) -> <body>
+```
+
 The implementation of the lambda can be change with the *changeFunc* function which assigns new code to *func*. Here is an exemple of execution of the *ChangeFunc* entrypoint with the simulation ligo command line :  
 ```
-ligo dry-run lambda.ligo main 'ChangeFunc(function (const c : coordinates) : coordinates is record[x=c.x*100;y=c.y;z=c.z])' 'record[name="Sol";func=(function (const c : coordinates) : coordinates is record[x=c.x*10;y=c.y;z=c.z]);system_planets=map "earth" -> record [x=2;y=7;z=1] end]'
+ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});system_planets=Map.literal [("earth", {x=2;y=7;z=1})] }'
+
+```
+
+⚠️ Notice the returned type of the lambda is not specified
+```
+fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z}
 ```
 
 ⚠️ Notice the new implementation of *func* multiplies 'x' coordinate by 100 (defined as parameter of *ChangeFunc* entrypoint)
@@ -109,64 +117,57 @@ Since 2006, the IAU decided that celetial bodies with a mass under 100 are not c
 Take a look at the starmap contract :
 ```
 // starmap.ligo
-type coordinates is record [
-  x : int;
-  y : int;
-  z : int
-]
-type planet_type is PLANET | ASTEROID | STAR
-type planet is record [
+type coordinates = { x : int; y : int; z : int }
+type planet_type = PLANET | ASTEROID | STAR
+type planet = {
   position : coordinates;
   mass : nat;
   category : planet_type
-]
-type planets is map (string, planet)
-type storage is record[
+}
+type planets = (string, planet) map
+type storage = {
   name : string;
   func : (planet) -> planet_type;
   celestial_bodies : planets
-]
-type return is (list(operation)  * storage)
+}
+type return = (operation list * storage)
 
-type parameter is DeduceCategoryChange of (planet) -> planet_type | AddPlanet of (string * planet) | DoNothing
+type parameter = DeduceCategoryChange of (planet) -> planet_type | AddPlanet of (string * planet) | DoNothing
 
-function addPlanet (const input : (string * planet); const store : storage) : return is
-block {
-    const modified : planets = case Map.find_opt(input.0, store.celestial_bodies) of
-      Some (p) -> (failwith("planet already exist") : planets)
-    | None -> Map.add (input.0, record[position=input.1.position;mass=input.1.mass;category=store.func(input.1)], store.celestial_bodies)
-    end;
-} with ((nil :  list(operation)), record [name=store.name;func=store.func;celestial_bodies=modified])
+let addPlanet (input, store : (string * planet) * storage) : return =
+    let modified : planets = match Map.find_opt input.0 store.celestial_bodies with
+       Some (p) -> (failwith("planet already exist") : planets)
+     | None -> Map.add input.0 {position=input.1.position;mass=input.1.mass;category=store.func input.1} store.celestial_bodies
+    in
+    (([] : operation list), {name=store.name;func=store.func;celestial_bodies=modified})
 
-function deduceCategoryChange (const f : (planet) -> planet_type; const store : storage) : return is
-block { 
-  function applyDeduceCatg (const name : string; const p : planet) : planet is
-      record [position=p.position;mass=p.mass;category=f(p)];
-  const modified : planets = Map.map (applyDeduceCatg, store.celestial_bodies);
-} with ((nil :  list(operation)), record [name=store.name;func=f;celestial_bodies=modified])
+let deduceCategoryChange (f,store : ((planet) -> planet_type) * storage) : return =
+  let applyDeduceCatg = fun (name,p : string * planet) ->
+      {position=p.position;mass=p.mass;category=f p} in
+  let modified : planets = Map.map applyDeduceCatg store.celestial_bodies in
+  (([] : operation list), {name=store.name;func=f;celestial_bodies=modified})
 
-function main (const action : parameter; const store : storage) : return is
-block { skip } with case action of
-    AddPlanet (input) -> addPlanet (input,store)
-  | DeduceCategoryChange (f) -> deduceCategoryChange (f,store)
-  | DoNothing -> ((nil : list(operation)),store)
-  end
+let main ((action, store) : (parameter * storage)) : return =
+  match (action) with
+    AddPlanet (input) -> addPlanet ((input,store))
+  | DeduceCategoryChange (f) -> deduceCategoryChange ((f,store))
+  | DoNothing -> (([] : operation list),store)
 ```
 
 ⚠️ Notice in the function *deduceCategoryChange* allows to specify a new deduction function *f* which is assign to the lambda *func* with :
 ```
-record [name=store.name;func=f;celestial_bodies=modified]
+{name=store.name;func=f;celestial_bodies=modified}
 ```
 
 ⚠️ Notice in the function *deduceCategoryChange* the sub-function *applyDeduceCatg* apply the new category deduction to a planet (_category=f(p)_). 
 ```
-function applyDeduceCatg (const name : string; const p : planet) : planet is
-      record [position=p.position;mass=p.mass;category=f(p)];
+let applyDeduceCatg = fun (name,p : string * planet) ->
+      {position=p.position;mass=p.mass;category=f p} in
 ```
 
 ⚠️ Notice in the function *deduceCategoryChange* the *applyDeduceCatg* function is used to update all entries of the *celestial_bodies* map with : 
  ```
- Map.map (applyDeduceCatg, store.celestial_bodies);
+Map.map applyDeduceCatg store.celestial_bodies
  ```
 
 
