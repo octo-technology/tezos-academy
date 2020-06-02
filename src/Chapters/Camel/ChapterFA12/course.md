@@ -49,121 +49,115 @@ Possible actions :
 Let's see implementation in ReasonLigo of a fungible token (FA1.2) 
 
 ```
-type tokens = big_map (address, nat)
-type allowances = big_map ((address, address), nat) /* (sender,account) -> value */
+type tokens = (address, nat) big_map
+type allowances = (address * address, nat) big_map (* (sender,account) -> value *)
 
 type storage = {
-  tokens      : tokens,
-  allowances  : allowances,
-  total_amount : nat,
+  tokens      : tokens;
+  allowances  : allowances;
+  total_amount : nat;
 }
 
 type transfer = {
-	address_from : address,
-	address_to   : address,
-	value        : nat,
+	address_from : address;
+	address_to   : address;
+	value        : nat;
 }
 
 type approve = {
-	spender : address,
-	value   : nat,
+	spender : address;
+	value   : nat;
 }
 
 type getAllowance = {
-	owner    : address,
-	spender  : address,
-	callback : contract (nat),
+	owner    : address;
+	spender  : address;
+	callback : nat contract;
 }
 
 type getBalance = {
-	owner    : address,
-	callback : contract (nat),
+	owner    : address;
+	callback : nat contract;
 }
 
 type getTotalSupply = {
-	callback : contract (nat),
+	callback : nat contract;
 }
 
 type action =
-|	Transfer       ( transfer )
-|	Approve        ( approve )
-|	GetAllowance   ( getAllowance )
-|	GetBalance     ( getBalance )
-|	GetTotalSupply ( getTotalSupply )
+  	Transfer       of transfer
+|	Approve        of approve
+|	GetAllowance   of getAllowance
+|	GetBalance     of getBalance
+|	GetTotalSupply of getTotalSupply
 
-let transfer = ((p,s) : (transfer, storage)) : (list (operation), storage) => {
+let transfer (p,s : transfer * storage) : operation list * storage =
    let new_allowances =   
-		if (Tezos.sender == p.address_from) { s.allowances; }
-		else {
-			let authorized_value = switch (Big_map.find_opt ((Tezos.sender,p.address_from), s.allowances)) {
-			|	Some value => value
-			|	None       => 0n
-			};
-			if (authorized_value < p.value) { (failwith ("Not Enough Allowance") : allowances); }
-			else { Big_map.update ((Tezos.sender,p.address_from), (Some (abs(authorized_value - p.value))), s.allowances); };
-		};
-	let sender_balance = switch (Big_map.find_opt (p.address_from, s.tokens)) {
-	|	Some value => value
-	|	None       => 0n
-	};
-	if (sender_balance < p.value) { (failwith ("Not Enough Balance") : (list (operation), storage)); }
-	else {
-		let new_tokens = Big_map.update (p.address_from, (Some (abs(sender_balance - p.value))), s.tokens);
-		let receiver_balance = switch (Big_map.find_opt (p.address_to, s.tokens)) {
-		|	Some value => value
-		|	None       => 0n
-		};
-		let new_tokens = Big_map.update (p.address_to, (Some (receiver_balance + p.value)), new_tokens);
-		(([]: list (operation)), { ...s,tokens:new_tokens, allowances:new_allowances});
-	};
-};
+		if Tezos.sender = p.address_from then s.allowances
+		else
+			let authorized_value = match Big_map.find_opt (Tezos.sender,p.address_from) s.allowances with
+				Some value -> value
+			|	None       -> 0n
+			in
+			if (authorized_value < p.value)
+			then (failwith "Not Enough Allowance" : allowances)
+			else Big_map.update (Tezos.sender,p.address_from) (Some (abs(authorized_value - p.value))) s.allowances
+   in    
+	let sender_balance = match Big_map.find_opt p.address_from s.tokens with
+		Some value -> value
+	|	None        -> 0n
+	in
+	if (sender_balance < p.value)
+	then (failwith "Not Enough Balance" : operation list * storage)
+	else
+		let new_tokens = Big_map.update p.address_from (Some (abs(sender_balance - p.value))) s.tokens in
+		let receiver_balance = match Big_map.find_opt p.address_to s.tokens with
+			Some value -> value
+		|	None        -> 0n
+		in
+		let new_tokens = Big_map.update p.address_to (Some (receiver_balance + p.value)) new_tokens in
+		([]:operation list), {s with tokens = new_tokens; allowances = new_allowances}
 
-let approve = ((p,s) : (approve, storage)) : (list (operation), storage) => {
-	let previous_value = switch (Big_map.find_opt ((p.spender, Tezos.sender), s.allowances)){
-	|	Some value => value
-	|	None => 0n
-	};
-	if (previous_value > 0n && p.value > 0n)
-	{ (failwith ("Unsafe Allowance Change") : (list (operation), storage)); }
-	else {
-		let new_allowances = Big_map.update ((p.spender, Tezos.sender), (Some (p.value)), s.allowances);
-		(([] : list (operation)), { ...s, allowances : new_allowances});
-	};
-};
+let approve (p,s : approve * storage) : operation list * storage =
+	let previous_value = match Big_map.find_opt (p.spender, Tezos.sender) s.allowances with
+		Some value -> value
+	|	None -> 0n
+	in
+	if previous_value > 0n && p.value > 0n
+	then (failwith "Unsafe Allowance Change" : operation list * storage)
+	else
+		let new_allowances = Big_map.update (p.spender, Tezos.sender) (Some (p.value)) s.allowances in
+		([] : operation list), {s with allowances = new_allowances}
 
-let getAllowance = ((p,s) : (getAllowance, storage)) : (list (operation), storage) => {
-	let value = switch (Big_map.find_opt ((p.owner, p.spender), s.allowances)) {
-	|	Some value => value
-	|	None => 0n
-	};
-	let op = Tezos.transaction (value, 0mutez, p.callback);
+let getAllowance (p,s : getAllowance * storage) : operation list * storage =
+	let value = match Big_map.find_opt (p.owner, p.spender) s.allowances with
+		Some value -> value
+	|	None -> 0n
+	in
+	let op = Tezos.transaction value 0mutez p.callback in
 	([op],s)
-};
 
-let getBalance = ((p,s) : (getBalance, storage)) : (list (operation), storage) => {
-	let value = switch (Big_map.find_opt (p.owner, s.tokens)) {
-	|	Some value => value
-	|	None => 0n
-	};
-	let op = Tezos.transaction (value, 0mutez, p.callback);
+let getBalance (p,s : getBalance * storage) : operation list * storage =
+	let value = match Big_map.find_opt p.owner s.tokens with
+		Some value -> value
+	|	None -> 0n
+	in
+	let op = Tezos.transaction value 0mutez p.callback in
 	([op],s)
-};
 
-let getTotalSupply = ((p,s) : (getTotalSupply, storage)) : (list (operation), storage) => {
-  let total = s.total_amount;
-  let op    = Tezos.transaction (total, 0mutez, p.callback);
+let getTotalSupply (p,s : getTotalSupply * storage) : operation list * storage =
+  let total = s.total_amount in
+  let op    = Tezos.transaction total 0mutez p.callback in
   ([op],s)
-};
 
 
-let main = ((a,s): (action, storage)) =>  
- 	switch a {
-   |	Transfer p => transfer ((p,s))
-	|	Approve  p => approve ((p,s))
-	|	GetAllowance p => getAllowance ((p,s))
-	|  GetBalance p => getBalance ((p,s))
-	|	GetTotalSupply p => getTotalSupply ((p,s))
-	};
+let main (a,s:action * storage) = 
+ 	match a with
+   	Transfer p -> transfer (p,s)
+	|	Approve  p -> approve (p,s)
+	|	GetAllowance p -> getAllowance (p,s)
+	|  GetBalance p -> getBalance (p,s)
+	|	GetTotalSupply p -> getTotalSupply (p,s)
 
 ```
 
@@ -173,8 +167,8 @@ let main = ((a,s): (action, storage)) =>
 
 Let's assume the *TezosAcamedyToken* has been deployed. 
 
-Consider your account is *me* (at address tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ). 
-Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
+Consider your account is *me* (at address tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) which has been granted 1000000 token. 
+Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 
 <!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and no allowances.
 
@@ -189,6 +183,7 @@ Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
 <!-- prettier-ignore -->5-Write a tezos command line that simulate your invocation.
 
 <!-- prettier-ignore -->6-  Now that approval has been exeucted on blockchain, 2 TAT can be transfered from your address to *alice*. Write a ligo command line for preparing invocation of a *Transfer* of 2 TAT (Tezos Academy Token) from you to *alice*.
+
 
 <!-- prettier-ignore -->7- Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and allowances is initialized with 2 TAT that can be transfered from *me* to *alice* (tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
 

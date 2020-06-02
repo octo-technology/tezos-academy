@@ -46,125 +46,155 @@ Possible actions :
   GetTotalSupply - Returns the number total of token
 
 
-Let's see implementation in ReasonLigo of a fungible token (FA1.2) 
+Let's see implementation in PascalLigo of a fungible token (FA1.2) 
 
 ```
-type tokens = big_map (address, nat)
-type allowances = big_map ((address, address), nat) /* (sender,account) -> value */
+// This is an implimentation of the FA1.2 specification in PascaLIGO
 
-type storage = {
-  tokens      : tokens,
-  allowances  : allowances,
-  total_amount : nat,
-}
+type amt is nat;
 
-type transfer = {
-	address_from : address,
-	address_to   : address,
-	value        : nat,
-}
+type account is record
+    balance : amt;
+    allowances: map(address, amt);
+end
 
-type approve = {
-	spender : address,
-	value   : nat,
-}
+type action is
+| Transfer of (address * address * amt)
+| Approve of (address * amt)
+| GetAllowance of (address * address * contract(amt))
+| GetBalance of (address * contract(amt))
+| GetTotalSupply of (unit * contract(amt))
 
-type getAllowance = {
-	owner    : address,
-	spender  : address,
-	callback : contract (nat),
-}
+type contract_storage is record
+  totalSupply: amt;
+  ledger: big_map(address, account);
+end
 
-type getBalance = {
-	owner    : address,
-	callback : contract (nat),
-}
+function isAllowed ( const src : address ; const value : amt ; var s : contract_storage) : bool is 
+  begin
+    var allowed: bool := False;
+    if sender =/= source then block {
+      const src: account = get_force(src, s.ledger);
+      const allowanceAmount: amt = get_force(sender, src.allowances);
+      allowed := allowanceAmount >= value;
+    };
+    else allowed := True;
+  end with allowed
 
-type getTotalSupply = {
-	callback : contract (nat),
-}
+// Transfer a specific amount of tokens from the accountFrom address to a destination address
+// Pre conditions:
+//  The sender address is the account owner or is allowed to spend x in the name of accountFrom
+//  The accountFrom account has a balance higher than amount
+// Post conditions:
+//  The balance of accountFrom is decreased by amount
+//  The balance of destination is increased by amount
+function transfer (const accountFrom : address ; const destination : address ; const value : amt ; var s : contract_storage) : contract_storage is
+ begin  
+  // If accountFrom = destination transfer is not necessary
+  if accountFrom = destination then skip;
+  else block {
+    // Is sender allowed to spend value in the name of source
+    case isAllowed(accountFrom, value, s) of 
+    | False -> failwith ("Sender not allowed to spend token from source")
+    | True -> skip
+    end;
 
-type action =
-|	Transfer       ( transfer )
-|	Approve        ( approve )
-|	GetAllowance   ( getAllowance )
-|	GetBalance     ( getBalance )
-|	GetTotalSupply ( getTotalSupply )
+    // Fetch src account
+    const src: account = get_force(accountFrom, s.ledger);
 
-let transfer = ((p,s) : (transfer, storage)) : (list (operation), storage) => {
-   let new_allowances =   
-		if (Tezos.sender == p.address_from) { s.allowances; }
-		else {
-			let authorized_value = switch (Big_map.find_opt ((Tezos.sender,p.address_from), s.allowances)) {
-			|	Some value => value
-			|	None       => 0n
-			};
-			if (authorized_value < p.value) { (failwith ("Not Enough Allowance") : allowances); }
-			else { Big_map.update ((Tezos.sender,p.address_from), (Some (abs(authorized_value - p.value))), s.allowances); };
-		};
-	let sender_balance = switch (Big_map.find_opt (p.address_from, s.tokens)) {
-	|	Some value => value
-	|	None       => 0n
-	};
-	if (sender_balance < p.value) { (failwith ("Not Enough Balance") : (list (operation), storage)); }
-	else {
-		let new_tokens = Big_map.update (p.address_from, (Some (abs(sender_balance - p.value))), s.tokens);
-		let receiver_balance = switch (Big_map.find_opt (p.address_to, s.tokens)) {
-		|	Some value => value
-		|	None       => 0n
-		};
-		let new_tokens = Big_map.update (p.address_to, (Some (receiver_balance + p.value)), new_tokens);
-		(([]: list (operation)), { ...s,tokens:new_tokens, allowances:new_allowances});
-	};
-};
+    // Check that the source can spend that much
+    if value > src.balance 
+    then failwith ("Source balance is too low");
+    else skip;
 
-let approve = ((p,s) : (approve, storage)) : (list (operation), storage) => {
-	let previous_value = switch (Big_map.find_opt ((p.spender, Tezos.sender), s.allowances)){
-	|	Some value => value
-	|	None => 0n
-	};
-	if (previous_value > 0n && p.value > 0n)
-	{ (failwith ("Unsafe Allowance Change") : (list (operation), storage)); }
-	else {
-		let new_allowances = Big_map.update ((p.spender, Tezos.sender), (Some (p.value)), s.allowances);
-		(([] : list (operation)), { ...s, allowances : new_allowances});
-	};
-};
+    // Update the source balance
+    // Using the abs function to convert int to nat
+    src.balance := abs(src.balance - value);
 
-let getAllowance = ((p,s) : (getAllowance, storage)) : (list (operation), storage) => {
-	let value = switch (Big_map.find_opt ((p.owner, p.spender), s.allowances)) {
-	|	Some value => value
-	|	None => 0n
-	};
-	let op = Tezos.transaction (value, 0mutez, p.callback);
-	([op],s)
-};
+    s.ledger[accountFrom] := src;
 
-let getBalance = ((p,s) : (getBalance, storage)) : (list (operation), storage) => {
-	let value = switch (Big_map.find_opt (p.owner, s.tokens)) {
-	|	Some value => value
-	|	None => 0n
-	};
-	let op = Tezos.transaction (value, 0mutez, p.callback);
-	([op],s)
-};
+    // Fetch dst account or add empty dst account to ledger
+    var dst: account := record 
+        balance = 0n;
+        allowances = (map end : map(address, amt));
+    end;
+    case s.ledger[destination] of
+    | None -> skip
+    | Some(n) -> dst := n
+    end;
 
-let getTotalSupply = ((p,s) : (getTotalSupply, storage)) : (list (operation), storage) => {
-  let total = s.total_amount;
-  let op    = Tezos.transaction (total, 0mutez, p.callback);
-  ([op],s)
-};
+    // Update the destination balance
+    dst.balance := dst.balance + value;
 
+    // Decrease the allowance amount if necessary
+    if accountFrom =/= sender then block {
+        const allowanceAmount: amt = get_force(sender, src.allowances);
+        if allowanceAmount - value < 0 then failwith ("Allowance amount cannot be negative");
+        else src.allowances[sender] := abs(allowanceAmount - value);
+    } else skip;
 
-let main = ((a,s): (action, storage)) =>  
- 	switch a {
-   |	Transfer p => transfer ((p,s))
-	|	Approve  p => approve ((p,s))
-	|	GetAllowance p => getAllowance ((p,s))
-	|  GetBalance p => getBalance ((p,s))
-	|	GetTotalSupply p => getTotalSupply ((p,s))
-	};
+    s.ledger[destination] := dst;
+  }
+ end with s
 
+// Approve an amount to be spent by another address in the name of the sender
+// Pre conditions:
+//  The spender account is not the sender account
+// Post conditions:
+//  The allowance of spender in the name of sender is value
+function approve (const spender : address ; const value : amt ; var s : contract_storage) : contract_storage is
+ begin
+  // If sender is the spender approving is not necessary
+  if sender = spender then skip;
+  else block {
+    const src: account = get_force(sender, s.ledger);
+    src.allowances[spender] := value;
+    s.ledger[sender] := src; // Not sure if this last step is necessary
+  }
+ end with s
+
+// View function that forwards the allowance amount of spender in the name of tokenOwner to a contract
+// Pre conditions:
+//  None
+// Post conditions:
+//  The state is unchanged
+function getAllowance (const owner : address ; const spender : address ; const contr : contract(amt) ; var s : contract_storage) : list(operation) is
+ begin
+  const src: account = get_force(owner, s.ledger);
+  const destAllowance: amt = get_force(spender, src.allowances);
+ end with list [transaction(destAllowance, 0tz, contr)]
+
+// View function that forwards the balance of source to a contract
+// Pre conditions:
+//  None
+// Post conditions:
+//  The state is unchanged
+function getBalance (const src : address ; const contr : contract(amt) ; var s : contract_storage) : list(operation) is
+ begin
+  const src: account = get_force(src, s.ledger);
+ end with list [transaction(src.balance, 0tz, contr)]
+
+// View function that forwards the totalSupply to a contract
+// Pre conditions:
+//  None
+// Post conditions:
+//  The state is unchanged
+function getTotalSupply (const contr : contract(amt) ; var s : contract_storage) : list(operation) is
+  list [transaction(s.totalSupply, 0tz, contr)]
+
+function main (const p : action ; const s : contract_storage) :
+  (list(operation) * contract_storage) is
+ block { 
+   // Reject any transaction that try to transfer token to this contract
+   if amount =/= 0tz then failwith ("This contract do not accept token");
+   else skip;
+  } with case p of
+  | Transfer(n) -> ((nil : list(operation)), transfer(n.0, n.1, n.2, s))
+  | Approve(n) -> ((nil : list(operation)), approve(n.0, n.1, s))
+  | GetAllowance(n) -> (getAllowance(n.0, n.1, n.2, s), s)
+  | GetBalance(n) -> (getBalance(n.0, n.1, s), s)
+  | GetTotalSupply(n) -> (getTotalSupply(n.1, s), s)
+  end
 ```
 
 
@@ -173,8 +203,8 @@ let main = ((a,s): (action, storage)) =>
 
 Let's assume the *TezosAcamedyToken* has been deployed. 
 
-Consider your account is *me* (at address tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ). 
-Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
+Consider your account is *me* (at address tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) which has been granted 1000000 token. 
+Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 
 <!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and no allowances.
 
