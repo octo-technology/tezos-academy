@@ -1,0 +1,83 @@
+{
+  "name": "tezosacademy-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "PORT=3000 NODE_ENV=development react-scripts -r @cypress/instrument-cra start && open http://localhost:3000",
+    "build": "PORT=80 NODE_ENV=production react-scripts build",
+    "test": "react-scripts test",
+    "analyze": "react-scripts build && source-map-explorer 'build/static/js/*.js'",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
+    "import-shared": "rm -Rf src/shared && cp -R ../api/src/shared src/shared"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "3.2.1",
+    "@redux-offline/redux-offline": "^2.5.2",
+    "axios": "^0.19.2",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "connected-react-router": "^6.8.0",
+    "dayjs": "^1.8.26",
+    "history": "^4.10.1",
+    "jwt-decode": "^2.2.0",
+    "markdown-to-jsx": "^6.11.4",
+    "rc-slider": "9.2.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-google-recaptcha-v3": "^1.4.1",
+    "react-helmet": "^6.0.0",
+    "react-motion": "^0.5.2",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-router-transition": "^2.0.0",
+    "react-scripts": "^3.4.1",
+    "react-transition-group": "^4.3.0",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "reflect-metadata": "^0.1.13",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.7.0",
+    "@cypress/instrument-cra": "^1.1.1",
+    "@types/history": "^4.7.5",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/markdown-to-jsx": "^6.11.0",
+    "@types/mongodb": "^3.5.14",
+    "@types/node": "^13.13.4",
+    "@types/rc-slider": "^8.6.5",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-helmet": "^6.0.0",
+    "@types/react-motion": "^0.0.29",
+    "@types/react-redux": "^7.1.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/react-transition-group": "^4.2.4",
+    "@types/styled-components": "^5.1.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "cypress": "^4.5.0",
+    "eslint-config-react-app": "^5.2.1",
+    "mockdate": "^3.0.2",
+    "raw-loader": "^4.0.1",
+    "react-test-renderer": "^16.13.1",
+    "source-map-explorer": "^2.4.2"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

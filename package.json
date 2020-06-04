@@ -1,60 +1,54 @@
 {
-  "name": "tezos-academy",
-  "version": "0.1.0",
-  "private": true,
+  "name": "tezosacademy",
+  "version": "2.0.0",
   "scripts": {
-    "publish": "react-scripts build && wrangler publish",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "@monaco-editor/react": "3.2.1",
-    "@testing-library/jest-dom": "^5.5.0",
-    "@testing-library/react": "^10.0.3",
-    "@testing-library/user-event": "^10.0.2",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.2",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.6",
-    "connected-react-router": "^6.8.0",
-    "markdown-to-jsx": "^6.11.1",
-    "rc-slider": "^9.2.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "react-transition-group": "^4.3.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.0",
-    "typescript": "~3.8.3"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "lerna exec -- yarn run --parallel start",
+    "build": "lerna exec -- yarn run --parallel build",
+    "lint": "eslint '**/*.{js,jsx}'",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier -l '**/*.{js,jsx,ts,tsx,json,md}'",
+    "test": "lerna run --parallel test",
+    "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
-    "@types/markdown-to-jsx": "^6.11.0",
-    "@types/rc-slider": "^8.6.5",
-    "@types/react-redux": "^7.1.7",
-    "@types/react-router-dom": "^5.1.4",
-    "@types/react-transition-group": "^4.2.4",
-    "@types/styled-components": "^5.1.0",
-    "raw-loader": "^4.0.1"
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-sinon": "^4.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "jest": "24.9.0",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.10.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.9.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint"
+    ],
+    "*.{js,jsx,ts,tsx,json,md}": [
+      "prettier --check"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
