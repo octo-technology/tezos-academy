@@ -1,12 +1,14 @@
-import { GET_LOGIN_COMMIT, GET_LOGIN_REQUEST, GET_LOGIN_ROLLBACK } from 'pages/Login/Login.actions'
-import { VERIFY_EMAIL_COMMIT, VERIFY_EMAIL_REQUEST, VERIFY_EMAIL_ROLLBACK } from 'pages/VerifyEmail/VerifyEmail.actions'
+import { LOGIN_COMMIT, LOGIN_REQUEST, LOGIN_ROLLBACK, LOGOUT } from 'pages/Login/Login.actions'
+// prettier-ignore
+import { VERIFY_EMAIL_COMMIT, VERIFY_EMAIL_INIT, VERIFY_EMAIL_REQUEST, VERIFY_EMAIL_ROLLBACK } from 'pages/VerifyEmail/VerifyEmail.actions'
 // prettier-ignore
 import { GET_VERIFY_EMAIL_RESEND_COMMIT, GET_VERIFY_EMAIL_RESEND_REQUEST, GET_VERIFY_EMAIL_RESEND_ROLLBACK } from 'pages/VerifyEmail/VerifyEmail.components/VerifyEmailResend/VerifyEmailResend.actions'
 import { Jwt } from 'shared/user/Jwt'
 import { JwtDecoded } from 'shared/user/JwtDecoded'
 
 // prettier-ignore
-import { AUTH_LOADING_START, AUTH_LOADING_STOP, LOGOUT, SIGN_UP_COMMIT, SIGN_UP_REQUEST, SIGN_UP_ROLLBACK } from './SignUp.actions'
+import { SIGN_UP_COMMIT, SIGN_UP_REQUEST, SIGN_UP_ROLLBACK } from './SignUp.actions'
+import { SAFE_RESTORE, RECAPTCHA_START } from 'app/App.actions'
 
 export interface AuthState {
   jwt?: Jwt
@@ -24,6 +26,18 @@ const authState: AuthState = {
 
 export function auth(state = authState, action: any): AuthState {
   switch (action.type) {
+    case SAFE_RESTORE: {
+      return {
+        ...state,
+        loading: false,
+      }
+    }
+    case RECAPTCHA_START: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
     case SIGN_UP_REQUEST: {
       return {
         ...state,
@@ -53,16 +67,11 @@ export function auth(state = authState, action: any): AuthState {
         user: undefined,
         loading: false,
       }
-    case AUTH_LOADING_START: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case AUTH_LOADING_STOP: {
+    case VERIFY_EMAIL_INIT: {
       return {
         ...state,
         loading: false,
+        emailVerified: false,
       }
     }
     case VERIFY_EMAIL_REQUEST: {
@@ -103,13 +112,13 @@ export function auth(state = authState, action: any): AuthState {
         loading: false,
       }
     }
-    case GET_LOGIN_REQUEST: {
+    case LOGIN_REQUEST: {
       return {
         ...state,
         loading: true,
       }
     }
-    case GET_LOGIN_COMMIT: {
+    case LOGIN_COMMIT: {
       return {
         ...state,
         jwt: action.payload.jwt,
@@ -117,7 +126,7 @@ export function auth(state = authState, action: any): AuthState {
         loading: false,
       }
     }
-    case GET_LOGIN_ROLLBACK: {
+    case LOGIN_ROLLBACK: {
       return {
         ...state,
         jwt: undefined,

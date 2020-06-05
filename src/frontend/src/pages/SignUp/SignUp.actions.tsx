@@ -1,25 +1,7 @@
 import { SignUpInputs } from 'shared/user/SignUp'
-
-export const LOGOUT = 'LOGOUT'
-export const signout = () => (dispatch: any) => {
-  dispatch({
-    type: LOGOUT,
-  })
-}
-
-export const AUTH_LOADING_START = 'AUTH_LOADING_START'
-export const authLoadingStart = () => (dispatch: any) => {
-  dispatch({
-    type: AUTH_LOADING_START,
-  })
-}
-
-export const AUTH_LOADING_STOP = 'AUTH_LOADING_STOP'
-export const authLoadingStop = () => (dispatch: any) => {
-  dispatch({
-    type: AUTH_LOADING_STOP,
-  })
-}
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+import { redirect } from 'app/App.actions'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
 export const SIGN_UP_COMMIT = 'SIGN_UP_COMMIT'
@@ -37,8 +19,13 @@ export const signUp = ({ email, password, confirmPassword, username, recaptchaTo
           method: 'POST',
           json: { email, password, confirmPassword, username, recaptchaToken },
         },
-        commit: { type: SIGN_UP_COMMIT, meta: {} },
-        rollback: { type: SIGN_UP_ROLLBACK, meta: {} },
+        commit: {
+          type: SIGN_UP_COMMIT,
+          meta: {
+            thunks: [showToaster(SUCCESS, `Welcome ${username}!`, 'Happy to see you'), redirect('/verify-email')],
+          },
+        },
+        rollback: { type: SIGN_UP_ROLLBACK },
       },
     },
   })

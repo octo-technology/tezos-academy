@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { fadeIn, fadeInFromLeft, fadeInFromTop, fadeInFromRight, fadeInFromBottom } from './animations'
+import { fadeIn, fadeInFromBottom, fadeInFromLeft, fadeInFromRight, fadeInFromTop } from './animations'
 import { backgroundColor2, primaryColor, upColor } from './colors'
 
 export const Ellipsis = styled.div`
@@ -60,8 +60,11 @@ export const PrimaryText = styled.div`
 `
 
 export const Card = styled.div`
-  border-radius: 13px;
-  background: ${backgroundColor2};
+  background: rgba(0, 44, 69, 0.6);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(10, 86, 136);
+  border-image: initial;
   box-shadow: 0 1px 10px ${backgroundColor2}19;
 `
 

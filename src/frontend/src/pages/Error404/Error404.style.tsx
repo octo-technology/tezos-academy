@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro'
-import { CardPage, Card, primaryColor } from 'styles'
+import { CardPage, Card } from 'styles'
 
 export const Error404Styled = styled(CardPage)``
 

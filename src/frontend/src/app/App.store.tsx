@@ -1,11 +1,12 @@
 import { offline } from '@redux-offline/redux-offline'
 import { routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore, Store } from 'redux'
 import thunk from 'redux-thunk'
 
-import { reducers } from '../reducers'
-import { storeOfflineConfig } from './App.offline'
+import { reducers, State } from '../reducers'
+import { showToaster } from './App.components/Toaster/Toaster.actions'
+import { reduxOfflineThunkMiddleware, storeOfflineConfig } from './App.offline'
 
 export const history = createBrowserHistory()
 
@@ -19,10 +20,15 @@ export function configureStore(preloadedState: any) {
   const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })
     : compose
-  const store = createStore(
-    reducers(history),
+
+  const store: Store<State> = offline(storeOfflineConfig)(createStore)(
+    reducers(history) as any,
     preloadedState,
-    composeEnhancer(applyMiddleware(routerMiddleware(history)), applyMiddleware(thunk), offline(storeOfflineConfig)),
+    composeEnhancer(
+      applyMiddleware(routerMiddleware(history)),
+      applyMiddleware(thunk),
+      applyMiddleware(reduxOfflineThunkMiddleware({ showToaster })),
+    ),
   )
 
   return store

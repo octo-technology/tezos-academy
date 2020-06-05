@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export const AppStyled = styled.div`
   display: flex;
   justify-content: space-around;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 80px);
   background-image: url('/images/bg.png');
   background-position: center;
   background-repeat: no-repeat;

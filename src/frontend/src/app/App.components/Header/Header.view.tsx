@@ -9,9 +9,10 @@ import { HeaderBg, HeaderLogo, HeaderStyled, HeaderLoggedOut, HeaderLoggedIn, He
 
 type HeaderViewProps = {
   user?: JwtDecoded | undefined
+  removeAuthUserCallback: () => void
 }
 
-export const HeaderView = ({ user }: HeaderViewProps) => {
+export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
   return (
     <HeaderStyled>
       <HeaderBg>
@@ -27,7 +28,7 @@ export const HeaderView = ({ user }: HeaderViewProps) => {
         <HeaderLogo alt="logo" src="/elements/logo.svg" />
       </Link>
 
-      {user ? loggedInHeader(user) : loggedOutHeader()}
+      {user ? loggedInHeader({ user, removeAuthUserCallback }) : loggedOutHeader()}
     </HeaderStyled>
   )
 }
@@ -45,12 +46,25 @@ function loggedOutHeader() {
   )
 }
 
-function loggedInHeader(user: JwtDecoded | undefined) {
-  return <HeaderLoggedIn>{user?.username}</HeaderLoggedIn>
+function loggedInHeader({ user, removeAuthUserCallback }: HeaderViewProps) {
+  return (
+    <HeaderLoggedIn>
+      <HeaderMenuItem>{user?.username}</HeaderMenuItem>
+      <Link
+        to="/"
+        onClick={() => {
+          removeAuthUserCallback()
+        }}
+      >
+        <HeaderMenuItem>LOGOUT</HeaderMenuItem>
+      </Link>
+    </HeaderLoggedIn>
+  )
 }
 
 HeaderView.propTypes = {
   user: PropTypes.object,
+  removeAuthUserCallback: PropTypes.func.isRequired,
 }
 
 HeaderView.defaultProps = {}

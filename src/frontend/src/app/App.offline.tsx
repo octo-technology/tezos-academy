@@ -1,20 +1,9 @@
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults'
 
 import { store } from '../index'
-import { authLoadingStop } from '../pages/SignUp/SignUp.actions'
 import { showToaster } from './App.components/Toaster/Toaster.actions'
 import { ERROR } from './App.components/Toaster/Toaster.constants'
-
-// const effect = (effect: any, _action: any) => {
-//   return axios({
-//     ...effect,
-//     headers: {
-//       'Content-Type': 'application/json; charset=utf-8',
-//       Authorization: `Bearer ${store.getState().auth.jwt}`,
-//     },
-//     baseURL: 'http://localhost:3000',
-//   })
-// }
+import { safeRestore } from './App.actions'
 
 const discard = (error: any, _action: any, _retries: any) => {
   const { request, response } = error
@@ -29,11 +18,23 @@ const discard = (error: any, _action: any, _retries: any) => {
 }
 
 const persistCallback = () => {
-  store.dispatch<any>(authLoadingStop())
+  store.dispatch<any>(safeRestore())
 }
 
 export const storeOfflineConfig = {
   ...offlineConfig,
   discard,
   persistCallback,
+}
+
+export const reduxOfflineThunkMiddleware = (thunks: any) => (storex: any) => (next: any) => (action: any) => {
+  const result = next(action)
+
+  if (action.meta && action.meta.thunks && action.meta.thunks.length > 0) {
+    action.meta.thunks.forEach((thunk: any) => {
+      if (!!thunk) store.dispatch<any>(thunk)
+    })
+  }
+
+  return result
 }

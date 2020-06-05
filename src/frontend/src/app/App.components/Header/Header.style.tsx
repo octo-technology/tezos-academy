@@ -90,11 +90,9 @@ export const HeaderLoggedIn = styled.div`
   top: 0;
   right: 0;
   display: grid;
-  grid-template-columns: 56px 1px 53px 1px 53px 1px 62px;
-
-  a {
-    height: 40px;
-  }
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  text-transform: uppercase;
 `
 
 export const HeaderMenuItem = styled.div`
