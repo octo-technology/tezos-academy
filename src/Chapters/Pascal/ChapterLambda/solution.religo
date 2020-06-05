@@ -9,7 +9,7 @@ ligo dry-run starmap.ligo main \
 'record[
   name="Sol";
   func=(function (const p : planet) : planet_type is PLANET);
-  celestial_bodies=map 
+  celestialbodies=map 
     "earth" -> record [
       position=record [x=2;y=7;z=1];
       mass=1000n;

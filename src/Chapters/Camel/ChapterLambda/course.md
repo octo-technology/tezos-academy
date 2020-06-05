@@ -41,21 +41,21 @@ type planets = (string, coordinates) map
 type storage = {
   name : string;
   func : ((coordinates) -> coordinates);
-  system_planets : planets
+  systemplanets : planets
 }
 type return = (operation list * storage)
 
 type parameter = ChangeFunc of (coordinates) -> coordinates | AddPlanet of (string * coordinates) | DoNothing
 
 let addPlanet (input, store : (string * coordinates) * storage) : return =
-    let modified : planets = match Map.find_opt input.0 store.system_planets with
+    let modified : planets = match Map.find_opt input.0 store.systemplanets with
        Some (p) -> (failwith("planet already exist") : planets)
-     | None -> Map.add input.0 (store.func input.1) store.system_planets
+     | None -> Map.add input.0 (store.func input.1) store.systemplanets
     in
-    (([] : operation list), {name=store.name;func=store.func;system_planets=modified})
+    (([] : operation list), {name=store.name;func=store.func;systemplanets=modified})
 
 let changeFunc (f,store : ((coordinates) -> coordinates) * storage) : return =
-  (([] : operation list), {name=store.name;func=f;system_planets=store.system_planets})
+  (([] : operation list), {name=store.name;func=f;systemplanets=store.systemplanets})
 
 let main ((action, store) : (parameter * storage)) : return =
   match (action) with
@@ -82,7 +82,7 @@ In "starmap" smart contract the type of *func* is
 
 Anonymous functions can be called like other functions. Here in our exemple, the lambda *func* is called in function *addPlanet* to transform planet's coordinates : 
 ```
-Map.add input.0 (store.func input.1) store.system_planets
+Map.add input.0 (store.func input.1) store.systemplanets
 ```
 
 ## Lambda definition
@@ -94,7 +94,7 @@ fun (<parameter_name> : <parameter_type>) -> <body>
 
 The implementation of the lambda can be change with the *changeFunc* function which assigns new code to *func*. Here is an exemple of execution of the *ChangeFunc* entrypoint with the simulation ligo command line :  
 ```
-ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});system_planets=Map.literal [("earth", {x=2;y=7;z=1})] }'
+ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});systemplanets=Map.literal [("earth", {x=2;y=7;z=1})] }'
 
 ```
 
@@ -128,24 +128,24 @@ type planets = (string, planet) map
 type storage = {
   name : string;
   func : (planet) -> planet_type;
-  celestial_bodies : planets
+  celestialbodies : planets
 }
 type return = (operation list * storage)
 
 type parameter = DeduceCategoryChange of (planet) -> planet_type | AddPlanet of (string * planet) | DoNothing
 
 let addPlanet (input, store : (string * planet) * storage) : return =
-    let modified : planets = match Map.find_opt input.0 store.celestial_bodies with
+    let modified : planets = match Map.find_opt input.0 store.celestialbodies with
        Some (p) -> (failwith("planet already exist") : planets)
-     | None -> Map.add input.0 {position=input.1.position;mass=input.1.mass;category=store.func input.1} store.celestial_bodies
+     | None -> Map.add input.0 {position=input.1.position;mass=input.1.mass;category=store.func input.1} store.celestialbodies
     in
-    (([] : operation list), {name=store.name;func=store.func;celestial_bodies=modified})
+    (([] : operation list), {name=store.name;func=store.func;celestialbodies=modified})
 
 let deduceCategoryChange (f,store : ((planet) -> planet_type) * storage) : return =
   let applyDeduceCatg = fun (name,p : string * planet) ->
       {position=p.position;mass=p.mass;category=f p} in
-  let modified : planets = Map.map applyDeduceCatg store.celestial_bodies in
-  (([] : operation list), {name=store.name;func=f;celestial_bodies=modified})
+  let modified : planets = Map.map applyDeduceCatg store.celestialbodies in
+  (([] : operation list), {name=store.name;func=f;celestialbodies=modified})
 
 let main ((action, store) : (parameter * storage)) : return =
   match (action) with
@@ -156,7 +156,7 @@ let main ((action, store) : (parameter * storage)) : return =
 
 ⚠️ Notice in the function *deduceCategoryChange* allows to specify a new deduction function *f* which is assign to the lambda *func* with :
 ```
-{name=store.name;func=f;celestial_bodies=modified}
+{name=store.name;func=f;celestialbodies=modified}
 ```
 
 ⚠️ Notice in the function *deduceCategoryChange* the sub-function *applyDeduceCatg* apply the new category deduction to a planet (_category=f(p)_). 
@@ -165,9 +165,9 @@ let applyDeduceCatg = fun (name,p : string * planet) ->
       {position=p.position;mass=p.mass;category=f p} in
 ```
 
-⚠️ Notice in the function *deduceCategoryChange* the *applyDeduceCatg* function is used to update all entries of the *celestial_bodies* map with : 
+⚠️ Notice in the function *deduceCategoryChange* the *applyDeduceCatg* function is used to update all entries of the *celestialbodies* map with : 
  ```
-Map.map applyDeduceCatg store.celestial_bodies
+Map.map applyDeduceCatg store.celestialbodies
  ```
 
 
@@ -191,7 +191,7 @@ We want you to update our "starmap" contract in order to take this new rule into
 expected storage after simulation : 
 ```
 ( LIST_EMPTY() ,
-  record[celestial_bodies -> MAP_ADD("earth" ,
+  record[celestialbodies -> MAP_ADD("earth" ,
                                      record[category -> PLANET(unit) ,
                                             mass -> +1000 ,
                                             position -> record[x -> 2 ,

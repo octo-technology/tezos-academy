@@ -19,6 +19,12 @@ import { data as pascalDataTuples } from "../Chapters/Pascal/ChapterTuples";
 import { data as pascalDataTypes } from "../Chapters/Pascal/ChapterTypes";
 import { data as pascalDataVariables } from "../Chapters/Pascal/ChapterVariables";
 import { data as pascalDataVariant } from "../Chapters/Pascal/ChapterVariant";
+import { data as pascalDataPolymorphism } from "../Chapters/Pascal/ChapterPolymorphism";
+import { data as pascalDataDeployContract } from "../Chapters/Pascal/ChapterDeployContract";
+import { data as pascalDataFA12 } from "../Chapters/Pascal/ChapterFA12";
+import { data as pascalDataLambda } from "../Chapters/Pascal/ChapterLambda";
+import { data as pascalDataMultisig } from "../Chapters/Pascal/ChapterMultisig";
+
 
 import { data as camelDataAddresses } from "../Chapters/Camel/ChapterAddresses";
 import { data as camelDataBuiltIns } from "../Chapters/Camel/ChapterBuiltIns";
@@ -39,6 +45,11 @@ import { data as camelDataTuples } from "../Chapters/Camel/ChapterTuples";
 import { data as camelDataTypes } from "../Chapters/Camel/ChapterTypes";
 import { data as camelDataVariables } from "../Chapters/Camel/ChapterVariables";
 import { data as camelDataVariant } from "../Chapters/Camel/ChapterVariant";
+import { data as camelDataPolymorphism } from "../Chapters/Camel/ChapterPolymorphism";
+import { data as camelDataDeployContract } from "../Chapters/Camel/ChapterDeployContract";
+import { data as camelDataFA12 } from "../Chapters/Camel/ChapterFA12";
+import { data as camelDataLambda } from "../Chapters/Camel/ChapterLambda";
+import { data as camelDataMultisig } from "../Chapters/Camel/ChapterMultisig";
 
 import { data as reasonDataAddresses } from "../Chapters/Reason/ChapterAddresses";
 import { data as reasonDataBuiltIns } from "../Chapters/Reason/ChapterBuiltIns";
@@ -59,6 +70,11 @@ import { data as reasonDataTuples } from "../Chapters/Reason/ChapterTuples";
 import { data as reasonDataTypes } from "../Chapters/Reason/ChapterTypes";
 import { data as reasonDataVariables } from "../Chapters/Reason/ChapterVariables";
 import { data as reasonDataVariant } from "../Chapters/Reason/ChapterVariant";
+import { data as reasonDataPolymorphism } from "../Chapters/Reason/ChapterPolymorphism";
+import { data as reasonDataDeployContract } from "../Chapters/Reason/ChapterDeployContract";
+import { data as reasonDataFA12 } from "../Chapters/Reason/ChapterFA12";
+import { data as reasonDataLambda } from "../Chapters/Reason/ChapterLambda";
+import { data as reasonDataMultisig } from "../Chapters/Reason/ChapterMultisig";
 
 export const chapterData = [
   {
@@ -136,6 +152,36 @@ export const chapterData = [
     name: "20 - Pascal - Interactions",
     data: pascalDataInteractions,
   },
+  {
+    pathname: "/pascal/chapter-polymorphism",
+    language: "PascalLIGO",
+    name: "21 - Pascal - Polymorphism",
+    data: pascalDataPolymorphism,
+  },
+  {
+    pathname: "/pascal/chapter-lambda",
+    language: "PascaLIGO",
+    name: "22 - Pascal - Lambda",
+    data: pascalDataLambda,
+  },
+  {
+    pathname: "/pascal/chapter-deploycontract",
+    language: "PascaLIGO",
+    name: "23 - Pascal - Deploy contract",
+    data: pascalDataDeployContract,
+  },
+  {
+    pathname: "/pascal/chapter-multisig",
+    language: "PascaLIGO",
+    name: "24 - Pascal - Multisignature",
+    data: pascalDataMultisig,
+  },
+  {
+    pathname: "/pascal/chapter-fa12",
+    language: "PascaLIGO",
+    name: "25 - Pascal - FA12",
+    data: pascalDataFA12,
+  },
 
   {
     pathname: "/camel/chapter-about",
@@ -206,6 +252,36 @@ export const chapterData = [
     language: "CameLIGO",
     name: "20 - Camel - Interactions",
     data: camelDataInteractions,
+  },
+  {
+    pathname: "/camel/chapter-polymorphism",
+    language: "CameLIGO",
+    name: "21 - Camel - Polymorphism",
+    data: camelDataPolymorphism,
+  },
+  {
+    pathname: "/camel/chapter-lambda",
+    language: "CameLIGO",
+    name: "22 - Camel - Lambda",
+    data: camelDataLambda,
+  },
+  {
+    pathname: "/camel/chapter-deploycontract",
+    language: "CameLIGO",
+    name: "23 - Camel - Deploy contract",
+    data: camelDataDeployContract,
+  },
+  {
+    pathname: "/camel/chapter-multisig",
+    language: "CameLIGO",
+    name: "24 - Camel - Multisignature",
+    data: camelDataMultisig,
+  },
+  {
+    pathname: "/camel/chapter-fa12",
+    language: "CameLIGO",
+    name: "25 - Camel - FA12",
+    data: camelDataFA12,
   },
 
   {
@@ -292,5 +368,35 @@ export const chapterData = [
     language: "ReasonLIGO",
     name: "20 - Reason - Interactions",
     data: reasonDataInteractions,
+  },
+  {
+    pathname: "/reason/chapter-polymorphism",
+    language: "ReasonLIGO",
+    name: "21 - Reason - Polymorphism",
+    data: reasonDataPolymorphism,
+  },
+  {
+    pathname: "/reason/chapter-lambda",
+    language: "ReasonLIGO",
+    name: "22 - Reason - Lambda",
+    data: reasonDataLambda,
+  },
+  {
+    pathname: "/reason/chapter-deploycontract",
+    language: "ReasonLIGO",
+    name: "23 - Reason - Deploy contract",
+    data: reasonDataDeployContract,
+  },
+  {
+    pathname: "/reason/chapter-multisig",
+    language: "ReasonLIGO",
+    name: "24 - Reason - Multisignature",
+    data: reasonDataMultisig,
+  },
+  {
+    pathname: "/reason/chapter-fa12",
+    language: "ReasonLIGO",
+    name: "25 - Reason - FA12",
+    data: reasonDataFA12,
   },
 ];

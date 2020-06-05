@@ -20,13 +20,13 @@ The description of the storage is done by strongly-typing the data structure.
 
 Entrypoints of a smart contract describe how to mutate a storage. 
 Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
-
+```
                +--------------------+
 entrypoint ->  |                    |  -> modified storage
 parameters ->  |  smart contract    |  -> operations
 storage    ->  |                    |
                +--------------------+
-
+```
 Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
@@ -222,7 +222,7 @@ type coordinates is record [
 type planets is map (string, coordinates)
 type storage is record[
   name : string;
-  system_planets : planets
+  systemplanets : planets
 ]
 type return is (list(operation)  * storage)
 
@@ -230,11 +230,11 @@ type parameter is AddPlanet of (string * coordinates) | DoNothing
 
 function addPlanet (const input : (string * coordinates); const store : storage) : return is
 block {
-    const modified : planets = case Map.find_opt(input.0, store.system_planets) of
+    const modified : planets = case Map.find_opt(input.0, store.systemplanets) of
       Some (p) -> (failwith("planet already exist") : planets)
-    | None -> Map.add (input.0, input.1, store.system_planets)
+    | None -> Map.add (input.0, input.1, store.systemplanets)
     end;
-} with ((nil :  list(operation)), record [name=store.name;system_planets=modified])
+} with ((nil :  list(operation)), record [name=store.name;systemplanets=modified])
 
 function main (const action : parameter; const store : storage) : return is
 block { skip } with case action of

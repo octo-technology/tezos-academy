@@ -1,10 +1,10 @@
 ligo dry-run starmap.mligo main \
 // Type your solution below
-'DeduceCategoryChange(fun (p : planet) -> if p.position.x=0 then STAR else if p.mass > 100n then PLANET else ASTEROID)' \
+'DeduceCategoryChange(fun (p : planet) -> if p.position.x=0 && p.position.y=0 && p.position.z=0 then STAR else if p.mass > 100n then PLANET else ASTEROID)' \
 '{
     name="Sol";
-    func=( fun (p : planet) -> if p.mass > 100n then PLANET else ASTEROID);
-    celestial_bodies=Map.literal [
+    func=( fun (p : planet) -> PLANET);
+    celestialbodies=Map.literal [
         ("earth", {
             position={x=2;y=7;z=1};
             mass=1000n;
