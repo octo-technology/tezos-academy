@@ -3,8 +3,8 @@ ligo dry-run lambda2.religo main \
 'DeduceCategoryChange()' \
 '{
     name:"Sol",
-    func:((p : planet) : planet_type => if (p.mass > 100n) { PLANET } else { ASTEROID }),
-    celestial_bodies:Map.literal([
+    func:((p : planet) : planet_type => PLANET),
+    celestialbodies:Map.literal([
         ("earth", {
             position:{x:2,y:7,z:1},
             mass:1000n,

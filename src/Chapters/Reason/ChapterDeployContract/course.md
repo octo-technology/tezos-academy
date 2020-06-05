@@ -20,13 +20,13 @@ The description of the storage is done by strongly-typing the data structure.
 
 Entrypoints of a smart contract describe how to mutate a storage. 
 Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
-
+```
                +--------------------+
 entrypoint ->  |                    |  -> modified storage
 parameters ->  |  smart contract    |  -> operations
 storage    ->  |                    |
                +--------------------+
-
+```
 Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
@@ -44,7 +44,7 @@ tezos-client originate contract <contract_name> for <user> transferring <amount>
 
 <contract_name> name given to the contract
 <tz_file> path of the Michelson smart contract code (TZ file).
-<amount> is the quantity of tez being transfered to the newly deployed contract. if a contract balance reaches 0 then it is deactivated.
+\<amount> is the quantity of tez being transfered to the newly deployed contract. if a contract balance reaches 0 then it is deactivated.
 <from_user> account from which the tez are taken from (and given transfered to the new contract).
 <initial_storage> is a Michelson expression. The --init parameter is used to specify initial state of the storage.
 <gaz> it specifies the the maximal fee the user is willing to pay for this operation (using the --burn-cap parameter).
@@ -59,7 +59,7 @@ Here is the syntax of the tezos command line to invoke a smart contract :
 tezos-client transfer <amount> from <user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
 ```
 
-<amount> is the quantity of tez being transfered to the contract.
+\<amount> is the quantity of tez being transfered to the contract.
 <contract_name> name given to the contract
 <entrypoint_invocation> name of the entrypoint and corresponding parameters. exemple 'Increment(5)'. 
 
@@ -93,7 +93,7 @@ Here is how to transform ligo expression into Michelson expression using the lig
 ligo compile-storage [options] code.religo mainFunc '<expression>'
 ```
 
-<expression> is a ligo expression
+\<expression> is a ligo expression
 
 
 ### Invocation parameter
@@ -103,7 +103,7 @@ Here is how to transform ligo expression into Michelson expression using the lig
 ligo compile-parameter [options] code.religo mainFunc '<expression>'
 ```
 
-<expression> is a ligo expression
+\<expression> is a ligo expression
 
 
 ### Simulating 
@@ -224,7 +224,7 @@ type coordinates = { x : int, y : int, z : int}
 type planets = map (string, coordinates)
 type system = {
   name : string,
-  system_planets : planets
+  systemplanets : planets
 }
 type storage = system
 type return = (list (operation), storage);
@@ -232,11 +232,11 @@ type parameter = | AddPlanet ((string, coordinates)) | DoNothing
 
 let addPlanet = ((input,store) : ((string,coordinates),storage)) : return =>
 {
-    let modified : planets = switch (Map.find_opt (input[0], store.system_planets)) {
+    let modified : planets = switch (Map.find_opt (input[0], store.systemplanets)) {
     | Some (v) => (failwith("planet already exist") : planets)
-    | None => Map.add (input[0],input[1], store.system_planets)
+    | None => Map.add (input[0],input[1], store.systemplanets)
     };
-    (([] : list (operation)), {name : store.name, system_planets : modified});
+    (([] : list (operation)), {name : store.name, systemplanets : modified});
 }
 
 let main = ((action,store) : (parameter,storage)): return =>

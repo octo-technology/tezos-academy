@@ -20,13 +20,13 @@ The description of the storage is done by strongly-typing the data structure.
 
 Entrypoints of a smart contract describe how to mutate a storage. 
 Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
-
+```
                +--------------------+
 entrypoint ->  |                    |  -> modified storage
 parameters ->  |  smart contract    |  -> operations
 storage    ->  |                    |
                +--------------------+
-
+```
 Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
@@ -215,7 +215,7 @@ type coordinates = { x : int; y : int; z : int}
 type planets = (string, coordinates) map
 type storage = {
   name : string;
-  system_planets : planets
+  systemplanets : planets
 }
 
 type return = (operation list * storage)
@@ -223,11 +223,11 @@ type return = (operation list * storage)
 type parameter = AddPlanet of (string * coordinates) | DoNothing
 
 let addPlanet (input,store : (string * coordinates) * storage) : return =
-    let modified : planets = match Map.find_opt input.0 store.system_planets with
+    let modified : planets = match Map.find_opt input.0 store.systemplanets with
       Some (p) -> (failwith("planet already exist") : planets)
-    | None -> Map.add input.0 input.1 store.system_planets
+    | None -> Map.add input.0 input.1 store.systemplanets
     in
-    (([] : operation list), {name = store.name; system_planets = modified})
+    (([] : operation list), {name = store.name; systemplanets = modified})
 
 let main (action,store : parameter * storage): return =
   match action with
