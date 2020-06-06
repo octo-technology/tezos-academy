@@ -34,7 +34,7 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   if (usernameAlreadyTaken) throw new ResponseError(400, 'Username is already taken')
 
   const hashedPassword = await hash(password, 12)
-  const user: User = await new UserModel({ email, username, hashedPassword }).save()
+  const user: User = await UserModel.create({ email, username, hashedPassword } as User)
   const publicUser: PublicUser = toPublicUser(user)
 
   const jwt: Jwt = getSignedJwt(user._id.toHexString(), user.username)

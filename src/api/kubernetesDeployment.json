@@ -3,13 +3,7 @@
   "kind": "Deployment",
   "metadata": { "name": "tezosacademy-api" },
   "spec": {
-    "scaleTargetRef": {
-      "kind": "ReplicaSet",
-      "name": "tezosacademy-api"
-    },
-    "minReplicas": 3,
-    "maxReplicas": 10,
-    "targetCPUUtilizationPercentage": 50,
+    "replicas": 3,
     "selector": { "matchLabels": { "app": "tezosacademy-api" } },
     "template": {
       "metadata": { "labels": { "app": "tezosacademy-api" } },

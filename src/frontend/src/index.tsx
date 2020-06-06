@@ -14,6 +14,7 @@ import './styles/fonts.css'
 export const store = configureStore({})
 
 const Root = () => {
+  console.log('NODE_ENV', process.env.NODE_ENV)
   return (
     <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} language="en">
       <GlobalStyle />

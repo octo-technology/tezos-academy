@@ -23,12 +23,12 @@ describe('User', () => {
   })
 
   it('can reset his password', async (done) => {
-    let captcha: Captcha = await new CaptchaModel({
+    let captcha: Captcha = await CaptchaModel.create({
       userId: user._id,
       index: 0,
       solution: '0000',
       captchaFor: CaptchaFor.CAPTCHA_FOR_RESET_PASSWORD,
-    }).save()
+    } as Captcha)
 
     captcha = (await CaptchaModel.findOne({ _id: captcha._id }).lean()) as Captcha
 
@@ -51,12 +51,12 @@ describe('User', () => {
 
   it('throws if user not found', async () => {
     try {
-      let captcha: Captcha = await new CaptchaModel({
+      let captcha: Captcha = await CaptchaModel.create({
         userId: user._id,
         index: 0,
         solution: '0000',
         captchaFor: CaptchaFor.CAPTCHA_FOR_RESET_PASSWORD,
-      }).save()
+      } as Captcha)
 
       captcha = (await CaptchaModel.findOne({ _id: captcha._id }).lean()) as Captcha
 

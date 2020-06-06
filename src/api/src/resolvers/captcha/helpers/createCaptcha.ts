@@ -14,12 +14,12 @@ export const createCaptcha: CreateCaptcha = async (userId, captchaFor) => {
 
   const captchaPair: CaptchaPair = getRandomCaptchaPair()
 
-  const captcha: Captcha = await new CaptchaModel({
+  const captcha: Captcha = await CaptchaModel.create({
     userId,
     index: captchaPair.captchaIndex,
     solution: captchaPair.captchaSolution,
     captchaFor,
-  }).save()
+  } as Captcha)
 
   return captcha
 }

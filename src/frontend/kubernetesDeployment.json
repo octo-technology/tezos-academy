@@ -1,0 +1,23 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": { "name": "tezosacademy-frontend" },
+  "spec": {
+    "replicas": 3,
+    "selector": { "matchLabels": { "app": "tezosacademy-frontend" } },
+    "template": {
+      "metadata": { "labels": { "app": "tezosacademy-frontend" } },
+      "spec": {
+        "terminationGracePeriodSeconds": 30,
+        "containers": [
+          {
+            "name": "tezosacademy-frontend",
+            "image": "registry.digitalocean.com/neutrino/tezosacademy-frontend",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "nodeSelector": { "doks.digitalocean.com/node-pool": "frontend" }
+      }
+    }
+  }
+}

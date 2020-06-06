@@ -5,7 +5,7 @@ import * as bodyParser from 'koa-bodyparser'
 import * as helmet from 'koa-helmet'
 import * as mongoose from 'mongoose'
 
-import { DEVELOPMENT } from './constants'
+// import { DEVELOPMENT } from './constants'
 import { error } from './error'
 import { logger } from './logger'
 import { router } from './router'
@@ -15,7 +15,9 @@ import 'reflect-metadata'
 
 const start = async (): Promise<void> => {
   try {
-    if (process.env.NODE_ENV === DEVELOPMENT) dotenv.config()
+    // if (process.env.NODE_ENV === DEVELOPMENT)
+    dotenv.config()
+    console.log(process.env.NODE_ENV)
     if (!process.env.JWT_PRIVATE_KEY) throw new Error('Env variables not set')
 
     await mongoose.connect(process.env.MONGO_URL as string, {

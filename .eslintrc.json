@@ -8,13 +8,7 @@
     },
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": [
-      "./frontend/tsconfig.json",
-      "./api/tsconfig.json",
-      "./videos-converter/tsconfig.json",
-      "./images-converter/tsconfig.json",
-      "./uptime-scanner/tsconfig.json"
-    ],
+    "project": ["./frontend/tsconfig.json", "./api/tsconfig.json"],
     "tsconfigRootDir": "src"
   },
   "env": {
