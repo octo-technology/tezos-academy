@@ -7,6 +7,7 @@ import { Property, Index, getModel } from '../../helpers/typegoose'
 import { CaptchaFor } from './CaptchaFor'
 
 @Index({ userId: 1, captchaFor: 1 }, { unique: true })
+@Index({ expireAt: 1 }, { expireAfterSeconds: 0 })
 export class Captcha {
   @IsMongoId()
   readonly _id!: ObjectId
@@ -42,7 +43,6 @@ export class Captcha {
   @Property({
     required: true,
     default: DayJs().add(1, 'hour').toDate(),
-    expires: '1h',
   })
   @IsDate()
   expiresAt!: Date

@@ -10,6 +10,7 @@ import { register } from './serviceWorker'
 import { GlobalStyle } from './styles'
 
 import './styles/fonts.css'
+import { SW_INIT, SW_UPDATE } from 'reducers/serviceWorker'
 
 export const store = configureStore({})
 
@@ -30,4 +31,13 @@ const Root = () => {
 const rootElement = document.getElementById('root')
 ReactDOM.render(<Root />, rootElement)
 
-register()
+register({
+  onSuccess: () => {
+    console.log(SW_INIT)
+    store.dispatch({ type: SW_INIT })
+  },
+  onUpdate: (reg) => {
+    console.log(SW_UPDATE)
+    store.dispatch({ type: SW_UPDATE, payload: reg })
+  },
+})

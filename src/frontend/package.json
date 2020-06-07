@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "PORT=3000 NODE_ENV=development REACT_APP_BACKEND_URL=http://localhost:8080 react-scripts -r @cypress/instrument-cra start && open http://localhost:3000",
-    "build": "react-scripts build && cra-append-sw -s ./src/custom-sw.js",
+    "build": "react-scripts build",
     "docker-build": "yarn build && docker build -t neutrino/tezosacademy-frontend . --no-cache",
     "docker-run": "docker run --rm -it -p 80:80 neutrino/tezosacademy-frontend",
     "docker-push": "doctl registry login && docker tag neutrino/tezosacademy-frontend registry.digitalocean.com/neutrino/tezosacademy-frontend && docker push registry.digitalocean.com/neutrino/tezosacademy-frontend",
@@ -51,6 +51,9 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@cypress/code-coverage": "^3.8.1",
     "@cypress/instrument-cra": "^1.1.1",
     "@types/history": "^4.7.6",
