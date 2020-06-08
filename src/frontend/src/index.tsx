@@ -39,6 +39,8 @@ register({
   onUpdate: (reg) => {
     console.log(SW_UPDATE)
     store.dispatch({ type: SW_UPDATE, payload: reg })
-    window.location.reload()
+    setTimeout(function () {
+      window.location.reload()
+    }, 100)
   },
 })
