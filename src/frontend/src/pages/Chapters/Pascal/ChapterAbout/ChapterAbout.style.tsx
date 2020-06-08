@@ -5,7 +5,7 @@ export const ChapterStyled = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   height: calc(100vh - 130px);
-  margin: 0 20px;
+  margin: 74px 20px 0;
 
   @media (max-width: 900px) {
     grid-template-columns: auto;
@@ -97,12 +97,18 @@ export const ChapterValidatorContentWrapper = styled.div``
 
 export const Button = styled.div`
   font-size: 14px;
-  width: 200px;
+  width: 220px;
   height: 40px;
   position: relative;
   display: inline-block;
   cursor: pointer;
   margin: 20px auto 10px auto;
+
+  img {
+    display: inline-block;
+    margin: 10px 20px 10px -10px;
+    vertical-align: bottom;
+  }
 `
 
 export const ButtonBorder = styled.div`

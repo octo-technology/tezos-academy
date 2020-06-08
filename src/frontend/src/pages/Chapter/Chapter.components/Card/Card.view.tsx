@@ -1,12 +1,12 @@
-import * as React from "react";
-import * as PropTypes from "prop-types";
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
 
-import { CardStyled, CardTopCorners, CardBottomCorners, CardTitle } from "./Card.style";
-import { Ship } from "../Ship/Ship.controller";
+import { Ship } from '../Ship/Ship.controller'
+import { CardBottomCorners, CardStyled, CardTitle, CardTopCorners } from './Card.style'
 
 type CardProps = {
-  shipCode: string;
-};
+  shipCode: string
+}
 
 export const CardView = ({ shipCode }: CardProps) => (
   <CardStyled>
@@ -75,10 +75,10 @@ export const CardView = ({ shipCode }: CardProps) => (
     </svg>
     <Ship shipCode={shipCode} />
   </CardStyled>
-);
+)
 
 CardView.propTypes = {
-  shipCode: PropTypes.string.isRequired
-};
+  shipCode: PropTypes.string.isRequired,
+}
 
-CardView.defaultProps = {};
+CardView.defaultProps = {}

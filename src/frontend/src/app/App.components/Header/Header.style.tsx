@@ -1,10 +1,11 @@
 import styled from 'styled-components/macro'
-import { primaryColor, subTextColor, bgTextColor } from 'styles'
+import { bgTextColor, primaryColor, subTextColor } from 'styles'
 
 export const HeaderStyled = styled.div`
   margin-bottom: 20px;
   position: relative;
   text-align: center;
+  z-index: 1;
 
   .user {
     position: absolute;

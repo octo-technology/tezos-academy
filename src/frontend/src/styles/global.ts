@@ -28,8 +28,16 @@ h1 {
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: normal;
+  display: block;
+  margin: 0;
+}
+
+h3 {
+  font-size: 30px;
+  font-weight: normal;
+  display: block;
   margin: 0;
 }
 
@@ -94,7 +102,7 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    animation-delay: 1s;
+    animation-delay: 300ms;
     animation-name: autofill;
     animation-fill-mode: both;
 }
@@ -104,32 +112,66 @@ select:-webkit-autofill:focus {
   will-change: transform, opacity;
   animation: ${fadeInFromLeft} ease-in-out 1;
   animation-fill-mode: forwards;
-  animation-duration: 0.2s;
+  animation-duration: 0.3s;
 }
 
+.slide-right-enter {
+  opacity: 0;
+}
 .slide-right-enter-active {
-  animation: ${slideRightEnter} 300ms;
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.slide-right-exit {
+  opacity: 1;
+}
+.slide-right-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.slide-left-enter {
+  opacity: 0;
+}
+.slide-left-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.slide-left-exit {
+  opacity: 1;
+}
+.slide-left-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+/* .slide-right-enter-active {
+  animation-name: ${slideRightEnter};
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
 
 .slide-right-exit-active {
-  animation: ${slideRightExit} 300ms;
+  animation-name: ${slideRightExit};
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
 
 .slide-left-enter-active {
-  animation: ${slideLeftEnter} 300ms;
+  animation-name: ${slideLeftEnter};
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
 
 .slide-left-exit-active {
-  animation: ${slideLeftExit} 300ms;
+  animation-name: ${slideLeftExit};
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
-}
+} */
 
 .grecaptcha-badge {
   visibility: hidden;
@@ -185,26 +227,6 @@ select:-webkit-autofill:focus {
 
 .rc-slider-mark-text {
   display: none !important;
-}
-
-.slide-right-enter-active {
-  animation: ${slideRightEnter} 1000ms;
-  animation-fill-mode: forwards;
-}
-
-.slide-right-exit-active {
-  animation: ${slideRightExit} 1000ms;
-  animation-fill-mode: forwards;
-}
-
-.slide-left-enter-active {
-  animation: ${slideLeftEnter} 1000ms;
-  animation-fill-mode: forwards;
-}
-
-.slide-left-exit-active {
-  animation: ${slideLeftExit} 1000ms;
-  animation-fill-mode: forwards;
 }
 
 `

@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from 'styled-components/macro'
 
-const shakes = keyframes`
+export const shakes = keyframes`
   10% {
     transform: translate(2px, 2px);
   }
@@ -31,9 +31,9 @@ const shakes = keyframes`
   100% {
     transform: translate(0, 0);
   }
-`;
+`
 
-const jet = keyframes`
+export const jet = keyframes`
   0% {
     transform: scale(1.0);
   }
@@ -43,9 +43,9 @@ const jet = keyframes`
   100% {
     transform: scale(0.95);
   }
-`;
+`
 
-const pew = keyframes`
+export const pew = keyframes`
   0% {
     opacity: 0;
   }
@@ -94,53 +94,53 @@ const pew = keyframes`
   100% {
     opacity: 0;
   }
-`;
+`
 
 export const ShipStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   animation: ${shakes} 1s linear infinite;
-`;
+`
 
 export const ShipCabin = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-`;
+`
 
 export const ShipEngine = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-`;
+`
 
 export const ShipGun = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-`;
+`
 
 export const ShipWings = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-`;
+`
 
 export const ShipFlame = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   animation: ${jet} 0.02s ease alternate infinite;
-`;
+`
 
 export const ShipLaser = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   animation: ${jet} 0.02s ease alternate infinite, ${pew} 10s linear alternate infinite;
-`;
+`
 
 export const ShipPreloadedImages = styled.div`
   display: none;
-`;
+`

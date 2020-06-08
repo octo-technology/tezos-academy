@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
 export const CardStyled = styled.div`
   height: 370px;
@@ -169,7 +169,7 @@ export const CardStyled = styled.div`
   #comets line:nth-child(47) {
     animation-delay: 7.7s;
   }
-`;
+`
 
 export const CardTitle = styled.div`
   position: absolute;
@@ -184,7 +184,7 @@ export const CardTitle = styled.div`
   background-position-x: center;
   background-position-y: top;
   line-height: 27px;
-`;
+`
 
 export const CardTopCorners = styled.div`
   top: 0;
@@ -194,7 +194,7 @@ export const CardTopCorners = styled.div`
 
   &:empty::before,
   &:empty::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 8px;
     height: 8px;
@@ -215,7 +215,7 @@ export const CardTopCorners = styled.div`
     right: 0;
     border-width: 1px 1px 0 0;
   }
-`;
+`
 
 export const CardBottomCorners = styled.div`
   bottom: 9px;
@@ -225,7 +225,7 @@ export const CardBottomCorners = styled.div`
 
   &:empty::before,
   &:empty::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 8px;
     height: 8px;
@@ -242,4 +242,4 @@ export const CardBottomCorners = styled.div`
     right: 0;
     border-width: 0 1px 1px 0;
   }
-`;
+`

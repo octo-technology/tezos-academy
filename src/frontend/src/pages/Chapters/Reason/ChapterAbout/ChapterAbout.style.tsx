@@ -5,7 +5,7 @@ export const ChapterStyled = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   height: calc(100vh - 130px);
-  margin: 0 20px;
+  margin: 74px 20px 0;
 
   @media (max-width: 900px) {
     grid-template-columns: auto;
