@@ -1,0 +1,23 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": { "name": "tezosacademy-api" },
+  "spec": {
+    "replicas": 3,
+    "selector": { "matchLabels": { "app": "tezosacademy-api" } },
+    "template": {
+      "metadata": { "labels": { "app": "tezosacademy-api" } },
+      "spec": {
+        "terminationGracePeriodSeconds": 30,
+        "containers": [
+          {
+            "name": "tezosacademy-api",
+            "image": "registry.digitalocean.com/neutrino/tezosacademy-api",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "nodeSelector": { "doks.digitalocean.com/node-pool": "api" }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "tezosacademy-api-service"
+  },
+  "spec": {
+    "type": "LoadBalancer",
+    "selector": { "app": "tezosacademy-api" },
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 3000,
+        "name": "http"
+      }
+    ]
+  }
+}
