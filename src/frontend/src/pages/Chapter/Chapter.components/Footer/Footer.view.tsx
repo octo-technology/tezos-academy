@@ -1,9 +1,9 @@
+import { chapterData } from 'pages/Chapter/Chapter.data'
 import * as React from 'react'
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-import { FooterStyled, FooterCredits } from './Footer.style'
-import { chapterData } from 'pages/Chapter/Chapter.data'
+import { FooterCredits, FooterStyled } from './Footer.style'
 
 export const FooterView = () => {
   const { pathname } = useLocation()

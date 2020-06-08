@@ -6,6 +6,8 @@ import { Button, ButtonBorder, ButtonText } from '../Chapters/Pascal/ChapterAbou
 import { HomeAdventure, HomeAlert, HomeAlertBand, HomeAlertText, HomeBadge, HomeBadgeGrid, HomeComets, HomeEditor, HomeFooter, HomeFooterGrid, HomeHeader, HomeHeaderGrid, HomeHeaderLeft, HomeHeaderOcto, HomeHeaderRight, HomeLanguage, HomeLanguageGrid, HomeShip, HomeStyled } from './Home.style'
 
 export const HomeView = () => {
+  const isMobile = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= 600
+
   return (
     <HomeStyled>
       <HomeHeader>
@@ -72,6 +74,15 @@ export const HomeView = () => {
           </svg>
         </HomeComets>
         <HomeHeaderGrid>
+          {isMobile && (
+            <HomeHeaderRight>
+              <HomeShip>
+                <img className="laser" alt="laser" src="/images/laser.svg" />
+                <img className="ship" alt="ship" src="/images/ship.svg" />
+                <img className="flame" alt="flame" src="/images/flame.svg" />
+              </HomeShip>
+            </HomeHeaderRight>
+          )}
           <HomeHeaderLeft>
             <h1>Learn to code Tezos Smart Contracts the easy way!</h1>
             <p>Tezos academy is a fun interactive tutorial to the LIGO language</p>
@@ -85,13 +96,15 @@ export const HomeView = () => {
               </Button>
             </Link>
           </HomeHeaderLeft>
-          <HomeHeaderRight>
-            <HomeShip>
-              <img className="laser" alt="laser" src="/images/laser.svg" />
-              <img className="ship" alt="ship" src="/images/ship.svg" />
-              <img className="flame" alt="flame" src="/images/flame.svg" />
-            </HomeShip>
-          </HomeHeaderRight>
+          {!isMobile && (
+            <HomeHeaderRight>
+              <HomeShip>
+                <img className="laser" alt="laser" src="/images/laser.svg" />
+                <img className="ship" alt="ship" src="/images/ship.svg" />
+                <img className="flame" alt="flame" src="/images/flame.svg" />
+              </HomeShip>
+            </HomeHeaderRight>
+          )}
         </HomeHeaderGrid>
         <HomeHeaderOcto>
           <img alt="octo" src="/images/by-octo.svg" />

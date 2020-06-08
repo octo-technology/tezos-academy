@@ -177,30 +177,54 @@ export const HomeHeader = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: auto;
+
+  @media (max-width: 600px) {
+    height: initial;
+  }
 `
 
 export const HomeHeaderGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: auto;
+  }
 `
 
 export const HomeHeaderOcto = styled.div`
   margin: auto;
   text-align: center;
+
+  @media (max-width: 1000px) {
+    margin-top: -10vh;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `
 
 export const HomeHeaderLeft = styled.div`
-  margin: calc(50vh - 200px) 0 calc(50vh - 200px) 40px;
+  margin: calc(50vh - 200px) 0 calc(50vh - 200px) 50px;
 
   > p {
     font-size: 20px;
+  }
+
+  @media (max-width: 600px) {
+    margin: calc(50vh - 200px) 20px;
   }
 `
 
 export const HomeHeaderRight = styled.div`
   position: relative;
   margin: calc(50vh - 200px) 0 calc(50vh - 200px) 100px;
+
+  @media (max-width: 900px) {
+    margin: calc(50vh - 200px) 0 calc(50vh - 200px) 20px;
+  }
 `
 
 export const HomeShip = styled.div`
@@ -221,6 +245,11 @@ export const HomeShip = styled.div`
     top: -200px;
     left: 67px;
     animation: ${jet} 0.02s ease alternate infinite, ${pew} 10s linear alternate infinite;
+  }
+
+  @media (max-width: 600px) {
+    top: -50px;
+    left: calc(50% - 148px);
   }
 `
 
@@ -244,6 +273,10 @@ export const HomeAdventure = styled.div`
     width: 852px;
     max-width: 90vw;
     margin: 50px auto;
+  }
+
+  @media (max-width: 600px) {
+    padding: 20px;
   }
 `
 
@@ -278,6 +311,14 @@ export const HomeLanguageGrid = styled.div`
     display: block;
     margin: 30px;
     margin: 30px auto;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+  }
+
+  @media (max-width: 600px) {
+    margin: 0;
   }
 `
 
@@ -336,6 +377,16 @@ export const HomeBadgeGrid = styled.div`
     align-items: center;
     justify-content: space-around;
   }
+
+  @media (max-width: 600px) {
+    margin: 20px auto;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+
+    > img {
+      margin: auto;
+    }
+  }
 `
 
 export const HomeAlert = styled.div`
@@ -350,6 +401,10 @@ export const HomeAlert = styled.div`
   > img {
     width: 986px;
     max-width: 90vw;
+  }
+
+  @media (max-width: 600px) {
+    padding-bottom: 20px;
   }
 `
 
@@ -367,6 +422,10 @@ export const HomeAlertText = styled.div`
 
   > div {
     display: block;
+  }
+
+  @media (max-width: 600px) {
+    margin-top: -30px;
   }
 `
 
@@ -389,5 +448,14 @@ export const HomeFooterGrid = styled.div`
     text-decoration: underline !important;
     display: block;
     line-height: 20px;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto;
+    text-align: center;
+
+    img {
+      margin: auto;
+    }
   }
 `

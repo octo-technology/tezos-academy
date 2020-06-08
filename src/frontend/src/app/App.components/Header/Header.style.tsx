@@ -84,6 +84,10 @@ export const HeaderLoggedOut = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 10px;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 export const HeaderLoggedIn = styled.div`
@@ -94,6 +98,10 @@ export const HeaderLoggedIn = styled.div`
   grid-template-columns: auto auto;
   grid-gap: 10px;
   text-transform: uppercase;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 export const HeaderMenuItem = styled.div`

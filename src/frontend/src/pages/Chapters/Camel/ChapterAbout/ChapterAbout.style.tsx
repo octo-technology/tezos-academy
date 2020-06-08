@@ -10,7 +10,7 @@ export const ChapterStyled = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: auto;
     height: initial;
-    margin: 0 10px;
+    margin: 70px 10px;
   }
 `
 

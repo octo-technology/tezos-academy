@@ -16,7 +16,9 @@ export const FooterStyled = styled.div`
   }
 
   @media (max-width: 900px) {
-    display: none;
+    > a:nth-child(1) {
+      display: none;
+    }
   }
 `
 
@@ -35,5 +37,9 @@ export const FooterCredits = styled.div`
     display: inline-block;
     color: #08658b;
     text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
   }
 `

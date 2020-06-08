@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { SW_INIT, SW_UPDATE } from 'reducers/serviceWorker'
 
 import { App } from './app/App.controller'
 import { configureStore } from './app/App.store'
@@ -10,7 +11,6 @@ import { register } from './serviceWorker'
 import { GlobalStyle } from './styles'
 
 import './styles/fonts.css'
-import { SW_INIT, SW_UPDATE } from 'reducers/serviceWorker'
 
 export const store = configureStore({})
 
@@ -39,5 +39,6 @@ register({
   onUpdate: (reg) => {
     console.log(SW_UPDATE)
     store.dispatch({ type: SW_UPDATE, payload: reg })
+    window.location.reload()
   },
 })
