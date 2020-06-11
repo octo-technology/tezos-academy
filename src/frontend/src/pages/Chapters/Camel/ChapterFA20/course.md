@@ -12,6 +12,16 @@ The FA2 standard proposes a *unified token contract interface* that accommodates
 
 In the following chapter on Financial Asset 2.0 , we will focus on *TZIP-12* which stands for the 12th Tezos Improvement Proposal (same as EIP-721 for Ethereum).
 
+## Architecture
+
+FA2 proposes to leave it to implementers to handle common considerations such as defining the contract’s token type(s) (e.g. non-fungible vs. fungible vs. semi-fungible), administration and whitelisting, contract upgradability, and supply operations (e.g. mint/burn).
+
+FA2 also leaves to implementers to decide on architecture pattern for handling permissioning. Permission can be implemented 
+* in the the same contract as the core transfer behavior (i.e. a “monolith”), 
+* in a transfer hook to another contract, 
+* in a separate wrapper contract.
+
+
 ## Interface and library
 
 The FA2 interface formalize a standard way to design tokens and thus describes a list of entry points (that must be implemented) and data structures related to those entry points. A more detailed decription of the interface is broken down in following sections.
@@ -184,8 +194,6 @@ type transfer_aux = {
   from_ : address;
   txs : transfer_destination_michelson list;
 }
-
-
 ```
 
 ### Error Handling
@@ -203,53 +211,37 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 #### Standard error mnemonics:
 
-Error mnemonic
-Description
+Error mnemonic - Description
 
+"TOKEN_UNDEFINED" - One of the specified token_ids is not defined within the FA2 contract
 
+"INSUFFICIENT_BALANCE" - A token owner does not have sufficient balance to transfer tokens from owner's account
 
+"TX_DENIED" - A transfer failed because of operator_transfer_policy == No_transfer
 
-"TOKEN_UNDEFINED"
-One of the specified token_ids is not defined within the FA2 contract
+"NOT_OWNER" - A transfer failed because operator_transfer_policy == Owner_transfer and it is initiated not by the token owner
 
+"NOT_OPERATOR" - A transfer failed because operator_transfer_policy == Owner_or_operator_transfer and it is initiated neither by the token owner nor a permitted operator
 
-"INSUFFICIENT_BALANCE"
-A token owner does not have sufficient balance to transfer tokens from owner's account
+"RECEIVER_HOOK_FAILED" - The receiver hook failed. This error MUST be raised by the hook implementation
 
+"SENDER_HOOK_FAILED" - The sender failed. This error MUST be raised by the hook implementation
 
-"TX_DENIED"
-A transfer failed because of operator_transfer_policy == No_transfer
+"RECEIVER_HOOK_UNDEFINED" -Receiver hook is required by the permission behavior, but is not implemented by a receiver contract
 
-
-
-"NOT_OWNER"
-A transfer failed because operator_transfer_policy == Owner_transfer and it is initiated not by the token owner
-
-
-"NOT_OPERATOR"
-A transfer failed because operator_transfer_policy == Owner_or_operator_transfer and it is initiated neither by the token owner nor a permitted operator
-
-
-"RECEIVER_HOOK_FAILED"
-The receiver hook failed. This error MUST be raised by the hook implementation
-
-
-"SENDER_HOOK_FAILED"
-The sender failed. This error MUST be raised by the hook implementation
-
-
-"RECEIVER_HOOK_UNDEFINED"
-Receiver hook is required by the permission behavior, but is not implemented by a receiver contract
-
-
-"SENDER_HOOK_UNDEFINED"
-Sender hook is required by the permission behavior, but is not implemented by a sender contract
-
+"SENDER_HOOK_UNDEFINED" - Sender hook is required by the permission behavior, but is not implemented by a sender contract
 
 
 
 ## Your mission
 
+We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The Total_supply entry point is not yet implemented , please finish the job !
 
-<!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and no allowances.
+<!-- prettier-ignore -->1 - Modify the *get_total_supply* lambda function in order to retrieve the total_supply information related to the given *token_id* list.
+
+<!-- prettier-ignore -->2 - the *get_total_supply* lambda function For each given token_id, find the given *token_id* in the *tokens* map and retrieve the *total_supply* associated to a given *token_id* in the *tokens* map.
+
+<!-- prettier-ignore -->3 -If a given token_id is found then the function *get_total_supply* must return a *total_supply_response* record for each given *token_id*. As seen in the interface the *total_supply_response* record contains *token_id* and *total_supply* fields. (use v as temporary variable for the match with instruction)
+
+<!-- prettier-ignore -->4 -If a given token_id is not found then the function *get_total_supply* must throw an exception with the predefined error messsage *token_undefined*.
 

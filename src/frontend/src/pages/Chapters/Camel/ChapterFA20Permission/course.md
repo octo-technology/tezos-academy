@@ -8,10 +8,26 @@ The FA2 standard proposes a *unified token contract interface* that accommodates
 
 In this chapter we will focus on _Operators_ and _Permissions_.
 
+## Entry points
+
+Token contract implementing the FA2 standard MUST have the following entry points.
+
+```
+type fa2_entry_points =
+
+| Transfer of transfer list
+| Balance_of of balance_of_param
+| Total_supply of total_supply_param
+| Token_metadata of token_metadata_param
+| Permissions_descriptor of permissions_descriptor contract
+| Update_operators of update_operator list
+| Is_operator of is_operator_param
+```
 
 ### Operators
 
 #### Definition
+_Operator_ can be seen as delegate role.
 
 _Operator_ is a Tezos address that initiates token transfer operation on behalf of the owner.
 _Owner_ is a Tezos address which can hold tokens.
@@ -160,5 +176,17 @@ Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 ## Your mission
 
 
-<!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and no allowances.
+Our NFT "token" is almost ready but to allow a new rule. We need A to transfert a token taken from B account and send it to C account.
 
+<!-- prettier-ignore -->1- First we have to set the right operator policy to authorize delegation when deploying the contract. We want you to prepare the initial state of storage. Write the _ligo compile-storage_ command for the *token* contract with following recommandations :
+ * operator transfer is authorized, 
+ * A account has a balance set to 100
+ * B account has a balance set to 100
+ * C account has a balance set to 100
+ * D is the administrator of the contract
+   
+
+<!-- prettier-ignore -->2- Write the _ligo dry-run_ command for authorizing A to transfer token taken from B account, transaction emitted by D. (reuse the storage you made on step 1)
+
+
+<!-- prettier-ignore -->3- Write the _ligo dry-run_ command for simulating the transfer of 1 mutez from B'account to c's account, transaction emitted by A. You will have to modify the storage to take step 2 into account.
