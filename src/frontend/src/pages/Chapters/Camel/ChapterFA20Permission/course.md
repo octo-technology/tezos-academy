@@ -175,7 +175,7 @@ Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 
 ## Your mission
 
-
+We are working on a non_fungible/multi-asset token.
 Our NFT "token" is almost ready but to allow a new rule. We need A to transfert a token taken from B account and send it to C account.
 
 <!-- prettier-ignore -->1- First we have to set the right operator policy to authorize delegation when deploying the contract. We want you to prepare the initial state of storage. Write the _ligo compile-storage_ command for the *token* contract with following recommandations :

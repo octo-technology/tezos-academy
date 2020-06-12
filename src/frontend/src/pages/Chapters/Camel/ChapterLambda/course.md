@@ -10,10 +10,7 @@ Tezos as a public blockchain expects that contracts should have same behaviour f
 We call *antipattern* when a smart contract have special role (admin) or smart contract that may be evolving (changing rules of the smart contract).
 
 The need to modify the behaviour of a smart contract emerges when for exemple the law of the country has changed and you need to apply the same changes to the rules of your smart contract.
-One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by
-    * *Versioning by re-emission*   
-    * *Versioning by contract communication* : 
-    * *Versioning by lambda* :  
+One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by migrating sstorage information through transactions, or by forcing the new contract to request storage data from from the old contract or by customizing the contract implementation. In this chapter we will focus on the third solution.
 
 ### Versioning by re-emission
 
@@ -29,11 +26,11 @@ Versioning can be done by writing a single smart contract that can change its pr
 
 ## Lambda
 
-So the idea is to :
-* define an anonymous function in the storage which is called in entrypoint
-* write an entrypoint that allow to change implementation of this anonymous function 
+Changing the behavior of a smart contract can be done by customizing the implementation through lambda's function.
 
-Let's consider the "starmap" smart contract 
+So the idea is to define an anonymous function in the storage which is called in entrypoint and write an entrypoint that allow to change implementation of this anonymous function.
+
+Let's consider the "starmap" smart contract :
 ```
 // starmap.ligo
 type coordinates = { x : int; y : int; z : int }
