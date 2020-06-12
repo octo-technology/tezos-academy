@@ -235,14 +235,13 @@ Error mnemonic - Description
 
 ## Your mission
 
+We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The Total_supply entry point is not yet implemented , please finish the job !
 
- We want you to complete the existing implementation. The Total_supply entry point is not yet implemented , please finish the job !
+<!-- prettier-ignore -->1 - Modify the *get_total_supply* lambda function in order to retrieve the total_supply information related to the given *token_id* list.
 
-<!-- prettier-ignore -->1 - Modify the *get_total_supply* function in order to retrieve the total_supply information related to the given *token_id* list.
+<!-- prettier-ignore -->2 - the *get_total_supply* lambda function For each given token_id, find the given *token_id* in the *tokens* map and retrieve the *total_supply* associated to a given *token_id* in the *tokens* map.
 
-<!-- prettier-ignore -->2 -You must find each token in the *tokens* map.
-
-<!-- prettier-ignore -->3 -If a given token_id is found then the function *get_total_supply* must return a *total_supply_response* record for each *token_id*. As seen in the interface the *total_supply_response* record contains *token_id* and *total_supply* fields. (use v as temporary variable for the match with instruction)
+<!-- prettier-ignore -->3 -If a given token_id is found then the function *get_total_supply* must return a *total_supply_response* record for each given *token_id*. As seen in the interface the *total_supply_response* record contains *token_id* and *total_supply* fields. (use v as temporary variable for the match with instruction)
 
 <!-- prettier-ignore -->4 -If a given token_id is not found then the function *get_total_supply* must throw an exception with the predefined error messsage *token_undefined*.
 

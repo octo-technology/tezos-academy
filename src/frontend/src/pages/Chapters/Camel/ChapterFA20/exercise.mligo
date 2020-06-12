@@ -12,17 +12,13 @@ type tokens = {
     metadata : token_metadata;
 }
 
-type operator_ = {
-    owner : address;
-    operator : address;
-}
-
 type storage = { 
     paused : bool;
     ledger : ledger;
-    tokens : (nat,tokens) map;
-    operators : operator_ set;
+    tokens : (token_id,tokens) map;
+    operators : operator_param set;
     administrator : address;
+    permissions_descriptor : permissions_descriptor_aux;
 }
 
 type return = (operation list * storage)
@@ -30,10 +26,8 @@ type return = (operation list * storage)
 type entry_points = 
   |  Set_pause of bool
   |  Set_administrator of address
-  |  MyBalance_of of balance_of_param
-  |  MyTotal_supply of total_supply_param_michelson
-  |  MyToken_metadata of token_metadata_param_michelson
-  |  MyTransfer of transfer_michelson list
+
+type total_entry_points = (fa2_entry_points, "fa2_ep", entry_points, "specific_ep") michelson_or
 
 let set_pause(param,s : bool * storage): return =
     if Tezos.sender = s.administrator then
@@ -47,16 +41,19 @@ let set_administrator(param,s : address * storage): return =
     else 
         (failwith("only admin can do it") : return)
 
-let balance_of (balance_of_param, s : balance_of_param * storage) : return =
-    let get_balance = fun ( i : balance_of_request) -> match Map.find_opt (i.owner,i.token_id) s.ledger with
-        | Some e -> { request = i ; balance =e.balance }
-        | None -> (failwith("unknown owner") : balance_of_response)
+let balance_of (param, s : balance_of_param_michelson * storage) : return =
+    let param_bo_aux : balance_of_param_aux = Layout.convert_from_right_comb(param: balance_of_param_michelson) in
+    let get_balance = fun ( i : balance_of_request_michelson) -> 
+        let bor : balance_of_request = Layout.convert_from_right_comb(i) in
+        match Map.find_opt (bor.owner,bor.token_id) s.ledger with
+        | Some e -> { request = Layout.convert_to_right_comb(bor) ; balance =e.balance }
+        | None -> (failwith("unknown owner") : balance_of_response_aux)
     in
-    let balance_of_callback_param : balance_of_response list = List.map get_balance balance_of_param.requests in
-    let convert = fun ( r : balance_of_response) -> Layout.convert_to_right_comb(({request=Layout.convert_to_right_comb( r.request ); balance=r.balance} : balance_of_response_aux)) in
+    let balance_of_callback_param : balance_of_response_aux list = List.map get_balance param_bo_aux.requests in
+    let convert = fun ( r : balance_of_response_aux) -> Layout.convert_to_right_comb(r) in
     let balance_of_callback_param_michelson : balance_of_response_michelson list = List.map convert balance_of_callback_param in
     // sending back the processed map of balance requests/responses
-    let destination: (balance_of_response_michelson list) contract = balance_of_param.callback in
+    let destination: (balance_of_response_michelson list) contract = param_bo_aux.callback in
     let balance_of_response_operation : operation = Tezos.transaction balance_of_callback_param_michelson 0mutez destination in
     ([balance_of_response_operation], s)
 
@@ -65,9 +62,11 @@ let total_supply(params, s: total_supply_param_michelson * storage) : return =
         (failwith("contract in pause") : return)
     else 
         let p : total_supply_param = Layout.convert_from_right_comb(params: total_supply_param_michelson) in
-        let token_ids : token_id list = p.token_ids in
+        let token_ids : token_id list = p.token_ids in 
         // Modify the code below
-        let get_total_supply = fun ( i : token_id) -> 
+        let get_total_supply = fun ( i : token_id) -> match Map.find_opt i s.tokens with
+            | Some v -> { token_id = i ; total_supply =v.total_supply }
+            | None -> (failwith(token_undefined) : total_supply_response)
         in
         let responses : total_supply_response list = List.map get_total_supply token_ids in 
         let convert = fun ( r : total_supply_response) -> Layout.convert_to_right_comb(r) in
@@ -140,14 +139,57 @@ let transfer(params, s: transfer_michelson list * storage) : return =
             result_ledger
         in
         let new_ledger : ledger = List.fold apply_transfer params s.ledger in
-        (([] : operation list), new_ledger)
+        (([] : operation list), {s with ledger=new_ledger})
 
+let update_operators (params,s : (update_operator_michelson list * storage)) : return =
+    if Tezos.sender <> s.administrator then
+        (failwith("operators can only be modified by the admin") : return)
+    else
+        let convert = fun (i : update_operator_michelson) -> (Layout.convert_from_right_comb(i) : update_operator_aux) in
+        let params_aux_list : update_operator_aux list = List.map convert params in
+        let apply_order = fun (acc,j : operator_param set * update_operator_aux) ->   
+            match j with
+            | Add_operator opm ->
+                let p : operator_param = Layout.convert_from_right_comb(opm) in 
+                if (Tezos.sender = p.owner or Tezos.sender = s.administrator) then
+                    Set.add p acc
+                else
+                    (failwith("notautorized !!!! ") : operator_param set)
+            | Remove_operator opm -> 
+                let p : operator_param = Layout.convert_from_right_comb(opm) in
+                if (Tezos.sender = p.owner or Tezos.sender = s.administrator) then
+                    Set.remove p acc
+                else
+                    (failwith("notautorized !!!! ") : operator_param set)
+        in
+        let new_operators : operator_param set = List.fold apply_order params_aux_list s.operators in
+        (([] : operation list), {s with operators=new_operators})
 
-let main (p,s : entry_points * storage) : return =
-    match p with
-    | MyTotal_supply p -> total_supply (p,s)
-    | MyBalance_of p -> balance_of (p,s)
-    | MyToken_metadata p -> token_metadata (p,s)
+let is_operator(params,s : (is_operator_param_michelson * storage)) : return =
+    let p : is_operator_param_aux = Layout.convert_from_right_comb(params) in
+    let op_param : operator_param = Layout.convert_from_right_comb(p.operator) in
+    let response_aux : is_operator_response_aux = {operator=p.operator;is_operator=Set.mem op_param s.operators} in
+    let response : is_operator_response_michelson = Layout.convert_to_right_comb(response_aux) in
+    let destination: (is_operator_response_michelson) contract = p.callback in
+    let op : operation = Tezos.transaction response 0mutez destination in
+    ([ op ], s)
+
+let send_permissions_descriptor(param,s : (permissions_descriptor_michelson contract * storage)) : return =
+    let response : permissions_descriptor_michelson = Layout.convert_to_right_comb(s.permissions_descriptor) in
+    let destination: permissions_descriptor_michelson contract = param in
+    let op : operation = Tezos.transaction response 0mutez destination in
+    ([ op ], s)
+
+let main (param,s : total_entry_points * storage) : return =
+  match param with 
+  | M_left fa2_ep -> (match fa2_ep with 
+    | Transfer l -> transfer (l, s)
+    | Balance_of p -> balance_of (p, s)
+    | Total_supply p -> total_supply (p,s)
+    | Token_metadata p -> token_metadata (p,s)
+    | Permissions_descriptor callback -> send_permissions_descriptor (callback, s)
+    | Update_operators l -> update_operators (l,s)
+    | Is_operator o -> is_operator (o,s))
+  | M_right specific_ep -> (match specific_ep with
     | Set_pause p -> set_pause (p,s)
-    | Set_administrator p -> set_administrator (p,s)
-    | MyTransfer l -> transfer (l, s)
+    | Set_administrator p -> set_administrator (p,s))
