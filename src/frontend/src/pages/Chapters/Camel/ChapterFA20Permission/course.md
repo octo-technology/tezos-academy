@@ -176,17 +176,23 @@ Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 ## Your mission
 
 We are working on a non_fungible/multi-asset token.
-Our NFT "token" is almost ready but to allow a new rule. We need A to transfert a token taken from B account and send it to C account.
+Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to Alice account.
 
 <!-- prettier-ignore -->1- First we have to set the right operator policy to authorize delegation when deploying the contract. We want you to prepare the initial state of storage. Write the _ligo compile-storage_ command for the *token* contract with following recommandations :
- * operator transfer is authorized, 
- * A account has a balance set to 100
- * B account has a balance set to 100
- * C account has a balance set to 100
- * D is the administrator of the contract
+
+  * Jay 's account address is "tz1UK81V9ccgpDjq8MVUE9uP4mnmNiSZQm9J"
+  * Alice's account address is "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN"
+  * Bob's account address is "tz1faswCTDciRzE4oJ9jn2Vm2dvjeyA9fUzU"
+  * Vera's account address is "tz1b7tUupMgCNw2cCLpKTkSD1NZzB5TkP2sv"
+  * operator transfer is authorized, 
+  * Bob account has no token
+  * Vera account is owner of the token 1
+  * Alice account has no token
+  * Jay is the administrator of the contract
+  * the token type transfered is 0 (token_id)
    
 
-<!-- prettier-ignore -->2- Write the _ligo dry-run_ command for authorizing A to transfer token taken from B account, transaction emitted by D. (reuse the storage you made on step 1)
+<!-- prettier-ignore -->2- Write the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Jay. (reuse the storage you made on step 1)
 
 
-<!-- prettier-ignore -->3- Write the _ligo dry-run_ command for simulating the transfer of 1 mutez from B'account to c's account, transaction emitted by A. You will have to modify the storage to take step 2 into account.
+<!-- prettier-ignore -->3- Write the _ligo dry-run_ command for simulating the transfer of 1 mutez from Vera'account to Alice's account, transaction emitted by A. You will have to modify the storage to take step 2 into account.

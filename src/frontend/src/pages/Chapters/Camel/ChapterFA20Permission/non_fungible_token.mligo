@@ -1,5 +1,5 @@
-#include "tzip/proposals/tzip-12/fa2_interface.mligo"
-#include "tzip/proposals/tzip-12/fa2_errors.mligo"
+#include "../tzip/proposals/tzip-12/fa2_interface.mligo"
+#include "../tzip/proposals/tzip-12/fa2_errors.mligo"
 
 type entity = {
     code : string;
@@ -10,7 +10,6 @@ type entity_key = (entity_id * token_id)
 type entities = (entity_key, entity) map
 type entityIndexToOwner = (entity_key, address) map
 type owner_entities = (address, entity_key set) map
-//type owner_entities_count =  (address, nat) map
 
 type token = {
     total_supply : nat;
@@ -35,7 +34,9 @@ type entry_points =
   |  Set_administrator of address
   |  Mint of (entity * address * token_id)
 
-type total_entry_points = (fa2_entry_points, "fa2_ep", entry_points, "specific_ep") michelson_or
+type nft_entry_points =
+  | Fa2 of fa2_entry_points
+  | Nft of entry_points
 
 let set_pause(param,s : bool * storage): return =
     if Tezos.sender = s.administrator then
@@ -51,9 +52,10 @@ let set_administrator(param,s : address * storage): return =
 
 let mint (param,s : (entity * address * token_id) * storage) : return =
     if Tezos.sender = s.administrator then
-        let new_ent : entity = param.0 in
-        let owner : address = param.1 in
-        let tokenid : token_id = param.2 in
+        // let new_ent : entity = param.0 in
+        // let owner : address = param.1 in
+        // let tokenid : token_id = param.2 in
+        let new_ent, owner, tokenid = param in
         // NEVER burn an entity or entity_id will be provided an existing id (mint burn mint)
         let newid : entity_id = match Map.find_opt tokenid s.tokens with
         | Some tok -> tok.total_supply + 1n
@@ -237,9 +239,9 @@ let send_permissions_descriptor(param,s : (permissions_descriptor_michelson cont
     let op : operation = Tezos.transaction response 0mutez destination in
     ([ op ], s)
 
-let main (param,s : total_entry_points * storage) : return =
+let main (param,s : nft_entry_points * storage) : return =
   match param with 
-  | M_left fa2_ep -> (match fa2_ep with 
+  | Fa2 fa2_ep -> (match fa2_ep with 
     | Transfer l -> transfer (l, s)
     | Balance_of p -> balance_of (p, s)
     | Total_supply p -> total_supply (p,s)
@@ -248,7 +250,7 @@ let main (param,s : total_entry_points * storage) : return =
     | Update_operators l -> update_operators (l,s)
     | Is_operator o -> is_operator (o,s)
     )
-  | M_right specific_ep -> (match specific_ep with
+  | Nft specific_ep -> (match specific_ep with
     | Set_pause p -> set_pause (p,s)
     | Set_administrator p -> set_administrator (p,s)
     | Mint ent -> mint (ent,s)
