@@ -12,7 +12,7 @@ When invoking a smart contract, an entrypoint is called and usually an action is
 The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic. 
 The mutli-signature implementation can be done in a single contract with the smart contract logic or in a separated contract like a proxy contract (which emits transactions to the contract containg the logic).
 
-### rules
+### Rules
 
 The multi-signature pattern can be described with this set of rules :
 
