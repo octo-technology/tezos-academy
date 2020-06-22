@@ -6,6 +6,7 @@ import { Property, Index, getModel } from '../../helpers/typegoose'
 import { QuotaType } from './QuotaType'
 
 @Index({ userId: 1, quotaType: 1 }, { unique: true })
+@Index({ expireAt: 1 }, { expireAfterSeconds: 0 })
 export class Quota {
   @IsMongoId()
   readonly _id!: ObjectId
@@ -27,7 +28,6 @@ export class Quota {
   @Property({
     required: true,
     default: DayJs().add(24, 'hour').toDate(),
-    expires: '24h',
   })
   @IsDate()
   expiresAt!: Date

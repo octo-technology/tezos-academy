@@ -5,7 +5,7 @@ import { JwtDecoded } from 'shared/user/JwtDecoded'
 
 import { Hamburger } from '../Hamburger/Hamburger.controller'
 // prettier-ignore
-import { HeaderBg, HeaderLogo, HeaderStyled, HeaderLoggedOut, HeaderLoggedIn, HeaderMenuItem } from "./Header.style";
+import { HeaderBg, HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./Header.style";
 
 type HeaderViewProps = {
   user?: JwtDecoded | undefined
@@ -49,7 +49,14 @@ function loggedOutHeader() {
 function loggedInHeader({ user, removeAuthUserCallback }: HeaderViewProps) {
   return (
     <HeaderLoggedIn>
-      <HeaderMenuItem>{user?.username}</HeaderMenuItem>
+      <Link
+        to={`/user/${user?.username}`}
+        onClick={() => {
+          removeAuthUserCallback()
+        }}
+      >
+        <HeaderMenuItem>{user?.username}</HeaderMenuItem>
+      </Link>
       <Link
         to="/"
         onClick={() => {

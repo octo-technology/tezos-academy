@@ -25,6 +25,9 @@ export class User {
   @Property({ required: true })
   hashedPassword!: string
 
+  @Property({ nullable: true, optional: true })
+  progress?: string[]
+
   @IsDate()
   createdAt!: Date
 

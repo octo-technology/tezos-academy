@@ -1,7 +1,5 @@
-import { IsDate, IsEmail, IsEnum, IsInt, IsMongoId, Length, Matches } from 'class-validator'
+import { IsArray, IsDate, IsEmail, IsMongoId, Length, Matches } from 'class-validator'
 import { ObjectId } from 'mongodb'
-
-import { UserRole } from './UserRole'
 
 export class PublicUser {
   @IsMongoId()
@@ -14,11 +12,8 @@ export class PublicUser {
   @IsEmail()
   emailVerified?: boolean
 
-  @IsInt()
-  karmaTotal?: number
-
-  @IsEnum(UserRole)
-  userRole?: UserRole
+  @IsArray()
+  progress?: string[]
 
   @IsDate()
   createdAt!: Date

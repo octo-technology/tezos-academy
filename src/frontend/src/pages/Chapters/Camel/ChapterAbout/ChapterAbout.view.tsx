@@ -18,10 +18,10 @@ monaco
       base: 'vs-dark',
       inherit: true,
       rules: [
-        { token: 'comment', foreground: '666666', fontStyle: 'italic' },
-        { token: 'keyword', foreground: 'FF5A00' },
-        { token: 'number', foreground: '00FF47' },
-        { token: 'string', foreground: 'FA00FF' },
+        { token: 'comment', foreground: '#42edf8', fontStyle: 'italic' },
+        { token: 'keyword', foreground: '#FF5A00' },
+        { token: 'number', foreground: '#00FF47' },
+        { token: 'string', foreground: '#FA00FF' },
       ],
       colors: {
         'editor.foreground': '#F8F8F8',
@@ -51,7 +51,7 @@ const MonacoReadOnly = ({ height, value }: any) => {
           folding: false,
           readOnly: true,
           fontSize: 14,
-          fontFamily: 'Roboto',
+          fontFamily: 'Proxima Nova',
         }}
       />
     </div>

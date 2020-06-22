@@ -9,6 +9,7 @@ import { Home } from 'pages/Home/Home.controller'
 import { Login } from 'pages/Login/Login.controller'
 import { ResetPassword } from 'pages/ResetPassword/ResetPassword.controller'
 import { SignUp } from 'pages/SignUp/SignUp.controller'
+import { User } from 'pages/User/User.controller'
 import { VerifyEmail } from 'pages/VerifyEmail/VerifyEmail.controller'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
@@ -53,6 +54,9 @@ export const AppRoutes = ({ location }: any) => (
     </Route>
     <Route path="/camel/chapter-*">
       <Chapter />
+    </Route>
+    <Route exact path="/user/:username">
+      <User />
     </Route>
     <Route>
       <Error404 />

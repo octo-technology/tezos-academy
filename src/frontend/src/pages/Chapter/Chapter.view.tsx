@@ -3,10 +3,10 @@ import Markdown from 'markdown-to-jsx'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
-import { CardBottomCorners, CardTopCorners } from './Chapter.components/Card/Card.style'
 import { PENDING, RIGHT, WRONG } from '../Chapters/Pascal/ChapterAbout/ChapterAbout.constants'
 //prettier-ignore
 import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.style";
+import { CardBottomCorners, CardTopCorners } from './Chapter.components/Card/Card.style'
 import { Dialog } from './Chapter.components/Dialog/Dialog.controller'
 import { Light } from './Chapter.components/Light/Light.view'
 
@@ -27,7 +27,7 @@ const MonacoReadOnly = ({ children }: any) => {
           folding: false,
           readOnly: true,
           fontSize: 14,
-          fontFamily: 'Roboto',
+          fontFamily: 'Proxima Nova',
         }}
       />
     </div>
@@ -51,7 +51,7 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback }: any) => {
           folding: true,
           readOnly: false,
           fontSize: 14,
-          fontFamily: 'Roboto',
+          fontFamily: 'Proxima Nova',
         }}
       />
     </div>
@@ -76,7 +76,7 @@ const MonacoDiff = ({ solution, proposedSolution }: any) => {
           folding: true,
           readOnly: false,
           fontSize: 14,
-          fontFamily: 'Roboto',
+          fontFamily: 'Proxima Nova',
           renderSideBySide: false,
         }}
       />
