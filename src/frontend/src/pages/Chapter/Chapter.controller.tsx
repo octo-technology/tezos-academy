@@ -1,19 +1,23 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { State } from 'reducers'
 
-import { PENDING, RIGHT, WRONG } from '../Chapters/Pascal/ChapterAbout/ChapterAbout.constants'
-
-import { ChapterView } from './Chapter.view'
-import { chapterData } from './Chapter.data'
+import { PENDING, RIGHT, WRONG } from '../ChapterAbout/ChapterAbout.constants'
+import { addProgress } from './Chapter.actions'
 import { Footer } from './Chapter.components/Footer/Footer.controller'
+import { chapterData } from './Chapter.data'
+import { ChapterView } from './Chapter.view'
 
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const { pathname } = useLocation()
   const [data, setData] = useState({ course: undefined, exercise: undefined, solution: undefined })
+  const dispatch = useDispatch()
+  const user = useSelector((state: State) => state.auth.user)
 
   useEffect(() => {
     chapterData.forEach((chapter) => {
@@ -34,9 +38,10 @@ export const Chapter = () => {
           data.exercise.replace(/\s+|\/\/ Type your solution below/g, '') ===
           // @ts-ignore
           data.solution.replace(/\s+|\/\/ Type your solution below/g, '')
-        )
+        ) {
           setValidatorState(RIGHT)
-        else setValidatorState(WRONG)
+          if (user) dispatch(addProgress({ chapterDone: pathname }))
+        } else setValidatorState(WRONG)
       } else setValidatorState(WRONG)
     }
   }

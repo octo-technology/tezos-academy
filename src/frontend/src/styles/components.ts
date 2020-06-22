@@ -68,10 +68,7 @@ export const Card = styled.div`
   box-shadow: 0 1px 10px ${backgroundColor2}19;
 `
 
-export const AnimatedCard = styled.div`
-  border-radius: 13px;
-  background: ${backgroundColor2};
-  box-shadow: 0 1px 10px ${backgroundColor2}19;
+export const AnimatedCard = styled(Card)`
   will-change: opacity, transform;
   animation: ${fadeInFromLeft} 500ms;
 `

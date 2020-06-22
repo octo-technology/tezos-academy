@@ -10,6 +10,7 @@ import { progressBar, ProgressBarState } from '../app/App.components/ProgressBar
 import { toaster, ToasterState } from '../app/App.components/Toaster/Toaster.reducers'
 import { auth, AuthState } from '../pages/SignUp/SignUp.reducers'
 import { serviceWorker, ServiceWorkerState } from './serviceWorker'
+import { progress, ProgressState } from '../pages/Chapter/Chapter.reducers'
 
 export const reducers = (history: any) =>
   combineReducers({
@@ -22,7 +23,8 @@ export const reducers = (history: any) =>
     resetPassword,
     changePassword,
     serviceWorker,
-    user
+    user,
+    progress
   })
 
 export interface State {
@@ -35,4 +37,5 @@ export interface State {
   resetPassword: ResetPasswordState
   changePassword: ChangePasswordState
   serviceWorker: ServiceWorkerState
+  progress: ProgressState
 }

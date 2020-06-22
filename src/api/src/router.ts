@@ -21,10 +21,11 @@ router.post('/user/sign-up', signUp)
 router.post('/user/login', login)
 router.post('/user/verify-email', verifyEmail)
 router.post('/user/resend-email-verification', resendEmailVerification)
-router.post('/user/get-public-user', getPublicUser)
 router.post('/user/add-progress', addProgress)
 router.post('/user/reset-password', resetPassword)
 router.post('/user/forgot-password', forgotPassword)
 router.post('/user/change-password', changePassword)
+
+router.post('/page/get-user', getPublicUser)
 
 export { router }

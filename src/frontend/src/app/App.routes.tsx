@@ -1,8 +1,6 @@
 import { ChangePassword } from 'pages/ChangePassword/ChangePassword.controller'
 import { Chapter } from 'pages/Chapter/Chapter.controller'
-import { ChapterAbout as ChapterAboutCamel } from 'pages/Chapters/Camel/ChapterAbout/ChapterAbout.controller'
-import { ChapterAbout as ChapterAboutPascal } from 'pages/Chapters/Pascal/ChapterAbout/ChapterAbout.controller'
-import { ChapterAbout as ChapterAboutReason } from 'pages/Chapters/Reason/ChapterAbout/ChapterAbout.controller'
+import { ChapterAbout } from 'pages/ChapterAbout/ChapterAbout.controller'
 import { Error404 } from 'pages/Error404/Error404.controller'
 import { ForgotPassword } from 'pages/ForgotPassword/ForgotPassword.controller'
 import { Home } from 'pages/Home/Home.controller'
@@ -38,13 +36,13 @@ export const AppRoutes = ({ location }: any) => (
       <ChangePassword />
     </Route>
     <Route exact path="/pascal/chapter-about">
-      <ChapterAboutPascal />
+      <ChapterAbout />
     </Route>
     <Route exact path="/reason/chapter-about">
-      <ChapterAboutReason />
+      <ChapterAbout />
     </Route>
     <Route exact path="/camel/chapter-about">
-      <ChapterAboutCamel />
+      <ChapterAbout />
     </Route>
     <Route path="/pascal/chapter-*">
       <Chapter />

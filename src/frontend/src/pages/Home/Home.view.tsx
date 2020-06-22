@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Button, ButtonBorder, ButtonText } from '../Chapters/Pascal/ChapterAbout/ChapterAbout.style'
+import { Button, ButtonBorder, ButtonText } from '../ChapterAbout/ChapterAbout.style'
 //prettier-ignore
 import { HomeAdventure, HomeAlert, HomeAlertBand, HomeAlertText, HomeBadge, HomeBadgeGrid, HomeComets, HomeEditor, HomeFooter, HomeFooterGrid, HomeHeader, HomeHeaderGrid, HomeHeaderLeft, HomeHeaderOcto, HomeHeaderRight, HomeLanguage, HomeLanguageGrid, HomeShip, HomeStyled } from './Home.style'
 
@@ -181,8 +181,9 @@ export const HomeView = () => {
         <HomeBadgeGrid>
           <img alt="badge" src="/images/badge.svg" />
           <p>
-            This nominative badge will be available for you through a dedicated URL that you can then share on LinkedIn
-            or other social networks to prove to the world that you have completed your training on Tezos Academy.
+            If you complete all chapter in one language track, you will obtain this completion badge. This badge will
+            appear on your profile page so you can share it on LinkedIn or other social networks to prove that you have
+            completed your training on Tezos Academy.
           </p>
         </HomeBadgeGrid>
       </HomeBadge>

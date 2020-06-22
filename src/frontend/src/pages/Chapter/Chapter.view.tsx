@@ -3,9 +3,9 @@ import Markdown from 'markdown-to-jsx'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
-import { PENDING, RIGHT, WRONG } from '../Chapters/Pascal/ChapterAbout/ChapterAbout.constants'
+import { PENDING, RIGHT, WRONG } from '../ChapterAbout/ChapterAbout.constants'
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../Chapters/Pascal/ChapterAbout/ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
 import { CardBottomCorners, CardTopCorners } from './Chapter.components/Card/Card.style'
 import { Dialog } from './Chapter.components/Dialog/Dialog.controller'
 import { Light } from './Chapter.components/Light/Light.view'

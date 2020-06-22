@@ -36,6 +36,7 @@ describe('User', () => {
 
     expect(ctx.body.user).toBeDefined()
     expect(ctx.body.user.progress).toContain('/pascal/chapter-polymorphism')
+
     done()
   })
 

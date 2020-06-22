@@ -49,12 +49,7 @@ function loggedOutHeader() {
 function loggedInHeader({ user, removeAuthUserCallback }: HeaderViewProps) {
   return (
     <HeaderLoggedIn>
-      <Link
-        to={`/user/${user?.username}`}
-        onClick={() => {
-          removeAuthUserCallback()
-        }}
-      >
+      <Link to={`/user/${user?.username}`}>
         <HeaderMenuItem>{user?.username}</HeaderMenuItem>
       </Link>
       <Link

@@ -4,7 +4,7 @@ export const data = `#Chapter 1 : Tezos Academy
 
 Tezos Academy is a fun interactive tutorial developed by <a href="https://octo.com/" target="_blank">OCTO Technology</a> on how to code smart contracts for <a href="https://tezos.com/" target="_blank">Tezos</a>. You are about to create spaceship battles smart contracts!
 
-By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michelson</a>, but it is an hard to learn low level formal language. For this tutorial, we will use <a href="https://ligolang.org/" target="_blank">PascaLIGO</a> instead. The syntax is high level, close to Pascal and transpiles to Michelson.
+By default, Tezos smart contracts are written in <a href="https://tezos.gitlab.io/whitedoc/michelson.html" target="_blank">Michelson</a>, but it is an hard to learn low level formal language. For this tutorial, we will use <a href="https://ligolang.org/" target="_blank">LIGO</a> instead. The syntax is high level and transpiles to Michelson.
 
 ## Objectives
 
@@ -30,5 +30,5 @@ For our tutorial, we only designed a few parts for each attribute, 3 different c
 
 On the top-right panel, go ahead and move the slider of each attribute. Notice the Ship ID above the ship image and how the different numerical values correspond to the different ship appearance. Your mission is to select the ship with ID 020433 and click _Validate Mission_ below.
 
-Next, we will start coding some LIGO (cameligo)!
-`;
+Next, we will start coding some LIGO!
+`
