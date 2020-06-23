@@ -55,9 +55,11 @@ In addition to the hook standard, the FA2 standard provides helper functions to 
 
 #### FA2 standard hook library
 
+##### Register FA2 core with Hook permission contract
+
 Some helpers functions has been gatthered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type alias :
 
-The type _fa2_registry_ is a set of address
+The type *fa2_registry* is a set of address. 
 
 the function *get_hook_entrypoint* retrieves the contract interface of entrypoint "%tokens_transferred_hook" for a given contract address
 
@@ -70,6 +72,40 @@ the function *create_register_hook_op* sends a transaction to a FA2 contract (ha
 * a _permission descriptor_
 
 the function *validate_hook_call* ensures an address in registered in the registry (set of address).
+
+
+##### Transfer Hooks
+
+The function *owners_transfer_hook* defined in the library generates a list of Tezos operations invoking sender and receiver hooks according to
+the policies defined by the permissions descriptor.
+
+
+The hook pattern depends on the permission policy. A transfer hook may be unwanted, optional or required. 
+If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens_received". Otherwise transfer is not allowed.
+If the policy optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens_received". Otherwise transfer is allowed.
+
+It is the same for permission policies including senders, the entry point *tokens_sent* may need to be implemented.
+
+In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2_token_receiver*, and *fa2_token_sender* interfaces. This implies that token'owner contract must have entry points *tokens_received* and *token_sent*. If these entry points fail the transfer is rejected. 
+
+
+##### Transfer Hooks entry points
+ 
+The library defines some helper functions
+
+The function *to_receiver_hook* retrieves the entry point *"%tokens_received"* for a given _address_. It enables to check if the *fa2_token_receiver* interface is implemented.
+
+The function *to_sender_hook* retrieves the entry point *"%tokens_sent"* for a given _address_. It enables to check if the *fa2_token_sender* interface is implemented.
+
+These two functions return a variant *hook_result* type. If variant value is *Hook_contract* then the entrypoint exists an is provided. If variant value is Hook_undefined then the entry point is not implemented and a message error is provided.
+
+```
+type hook_result =
+  | Hook_contract of transfer_descriptor_param_michelson contract
+  | Hook_undefined of string
+```
+
+
 
 #### Hook Rules
 
@@ -102,109 +138,95 @@ invoked hook fails, the whole transfer transaction MUST fail.
 FA2 token contract implements mint and burn operations, these operations MUST
 invoke a transfer hook as well.
 
-#### Implementation of a custom hook
+#### Implementation of a hook permission contract
 
-Let's see an example of FA2 implementation. The following smart contract implements a token where transfer receiver must be in a whitelist. This whitelisting is done via a tranfer hook.
-It uses a combination of a receiver white list and *fa2_token_receiver* interface.
-Transfer is permitted if a receiver address is in the receiver white list OR implements *fa2_token_receiver* interface. 
+Let's see an example of FA2 Hook pattern implementation. The following smart contract implements a hook permission contract 
+
+Owners transfer hooks are triggered by the *owners_transfer_hook* function.
 If a receiver address implements *fa2_token_receiver* interface, its *tokens_received* entry point must be called.
+If a sender address implements *fa2_token_sender* interface, its *tokens_sent* entry point must be called. 
+
 
 ```
-#include "../lib/fa2_hook_lib.mligo"
-#include "../lib/fa2_behaviors.mligo"
+(**
+Implementation of a generic permission transfer hook that supports sender/receiver
+hooks. Contract behavior is driven by the permissions descriptor value in the
+contract storage and its particular settings for `sender` and `receiver` policies.
+*)
 
+#include "../lib/fa2_transfer_hook_lib.mligo"
+#include "../lib/fa2_owner_hooks_lib.mligo"
 
 type storage = {
   fa2_registry : fa2_registry;
-  receiver_whitelist : address set;
-} 
-
-let custom_validate_receivers (p, wl : transfer_descriptor_param * (address set))
-    : operation list =
-  let get_receiver : get_owners = fun (tx : transfer_descriptor) -> 
-    List.map (fun (t : transfer_destination_descriptor) -> t.to_) tx.txs in
-  let receivers = get_owners_from_batch (p.batch, get_receiver) in
-
-  Set.fold 
-    (fun (ops, r : (operation list) * address) ->
-      let hook, err = to_sender_hook r in
-      match hook with
-      | Some h ->
-        let pm = transfer_descriptor_param_to_michelson p in
-        let op = Operation.transaction pm 0mutez h in
-        op :: ops
-      | None -> 
-        if Set.mem r wl
-        then ops
-        else (failwith err : operation list)
-    )
-    receivers ([] : operation list)
-
-let custom_transfer_hook (p, s : transfer_descriptor_param * storage) : operation list =
-  custom_validate_receivers (p, s.receiver_whitelist)
-
-
-let get_policy_descriptor (u : unit) : permissions_descriptor =
-  {
-    operator = Owner_or_operator_transfer;
-    sender = Owner_no_hook;
-    receiver = Owner_no_hook ; (* overridden by the custom policy *)
-    custom = Some { 
-      tag = "receiver_hook_and_whitelist"; 
-      config_api = (Some Current.self_address);
-    };
-  }
-
-type config_whitelist = 
-  | Add_receiver_to_whitelist of address set
-  | Remove_receiver_from_whitelist of address set
-
-let configure_receiver_whitelist (cfg, wl : config_whitelist * (address set))
-    : address set =
-  match cfg with
-  | Add_receiver_to_whitelist rs ->
-    Set.fold 
-      (fun (l, a : (address set) * address) -> Set.add a l)
-      rs wl
-  | Remove_receiver_from_whitelist rs ->
-     Set.fold 
-      (fun (l, a : (address set) * address) -> Set.remove a l)
-      rs wl
+  descriptor : permissions_descriptor;
+}
 
 type  entry_points =
-  | Tokens_transferred_hook of transfer_descriptor_param
+  | Tokens_transferred_hook of transfer_descriptor_param_michelson
   | Register_with_fa2 of fa2_with_hook_entry_points contract
-  | Config_receiver_whitelist of config_whitelist
 
  let main (param, s : entry_points * storage) 
     : (operation list) * storage =
   match param with
-  | Tokens_transferred_hook p ->
-    // verify s.fa2_registry contains p.fa2 address otherwise throw exception 
-    let u = validate_hook_call (p.fa2, s.fa2_registry) in
-    let ops = custom_transfer_hook (p, s) in
+  | Tokens_transferred_hook pm ->
+    let p = transfer_descriptor_param_from_michelson pm in
+    let u = validate_hook_call (Tezos.sender, s.fa2_registry) in
+    let ops = owners_transfer_hook
+      ({ligo_param = p; michelson_param = pm}, s.descriptor) in
     ops, s
 
   | Register_with_fa2 fa2 ->
-    let descriptor = get_policy_descriptor unit in
-    let op , new_registry = register_with_fa2 (fa2, descriptor, s.fa2_registry) in
+    let op , new_registry = register_with_fa2 (fa2, s.descriptor, s.fa2_registry) in
     let new_s = { s with fa2_registry = new_registry; } in
     [op], new_s
 
-  | Config_receiver_whitelist cfg ->
-    let new_wl = configure_receiver_whitelist (cfg, s.receiver_whitelist) in
-    let new_s = { s with receiver_whitelist = new_wl; } in
-    ([] : operation list), new_s
 
+
+(** example policies *)
+
+(* the policy which allows only token owners to transfer their own tokens. *)
+let own_policy : permissions_descriptor = {
+  operator = Owner_transfer;
+  sender = Owner_no_hook;
+  receiver = Owner_no_hook;
+  custom = (None : custom_permission_policy option);
+}
 ```
 
+Notice this Hook Permission contract contains an entry point *Register_with_fa2* to register with the FA2 core contract.
+
+Notice this Hook Permission contract contains an entry point *Tokens_transferred_hook* triggered when FA2 core contract receive a transfer request. This entry point triggers the owner hook transfer (sending hooks to sender and receiver and waiting for their approval or rejection). 
 
 
 ## Your mission
 
+We are working on a Fungible token which can handle multiple assets. We decided to implement a Hook pattern. A FA2 core contract handle all fa2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules. 
+
+1 - we want to accept a transfer if transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
+
+2 - we want to accept a transfer if transfer receiver implements *fa2_token_receiver* interface.
+
+If a receiver address implements *fa2_token_receiver* interface, its *tokens_received* entry point must be called.
 
 
-<!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and no allowances.
+<!-- prettier-ignore -->Complete the hook permission smart contract by implementing our custom rules on receivers. Transfer is permitted if receiver address implements *fa2_token_receiver* interface OR a receiver address is in the receiver white list. 
 
+<!-- prettier-ignore -->1- Find receiver hook - Check if a receiver _r_ implements *fa2_token_receiver* interface, using *to_receiver_hook* function and a _match_ operator.
 
+<!-- prettier-ignore -->2- Retrieve hook - if the receiver _r_ implements *fa2_token_receiver* interface, introduce variable _h_ as hook entry point. 
+
+<!-- prettier-ignore -->3- Prepare parameter - cast parameter _p_ into type *transfer_descriptor_param_to_michelson* and store the result in a new variable _pm_
+
+<!-- prettier-ignore -->4- Call the entry point - create a variable _op_ of type *operation* which is a transaction sending variable _pm_ and no mutez to the retrieved entry point _h_
+
+<!-- prettier-ignore -->5- Return transactions - add this newly created operation _op_ in the returned list of operation _ops_ (and return _ops_)
+
+<!-- prettier-ignore -->6- if the receiver _r_ does not implement *fa2_token_receiver* interface, response of *to_receiver_hook* provided an error message with variable _err_.
+
+<!-- prettier-ignore -->7- Check if receiver _r_ is registered in the whitelist _wl_. 
+
+<!-- prettier-ignore -->8- If it is the case , everything is fine, just return the returned list of operation _ops_. 
+
+<!-- prettier-ignore -->9- Otherwise throw an exception with _err_ message. Don't forget to cast the exception.
 
