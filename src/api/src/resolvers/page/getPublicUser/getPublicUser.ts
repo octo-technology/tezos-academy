@@ -4,11 +4,11 @@ import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
-import { GetPublicUserInputs, GetPublicUserOutputs } from '../../../shared/user/GetPublicUser'
+import { GetPublicUserInputs, GetPublicUserOutputs } from '../../../shared/page/GetPublicUser'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { UserModel } from '../../../shared/user/User'
 
-export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified createdAt'
+export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified progress createdAt'
 
 export const getPublicUser = async (ctx: Context, next: Next): Promise<void> => {
   const getPublicUserArgs = plainToClass(GetPublicUserInputs, ctx.request.body, { excludeExtraneousValues: true })

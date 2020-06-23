@@ -2,6 +2,7 @@ import { connectRouter } from 'connected-react-router'
 import { changePassword, ChangePasswordState } from 'pages/ChangePassword/ChangePassword.reducers'
 import { forgotPassword, ForgotPasswordState } from 'pages/ForgotPassword/ForgotPassword.reducers'
 import { resetPassword, ResetPasswordState } from 'pages/ResetPassword/ResetPassword.reducers'
+import { user, UserState } from 'pages/User/User.reducers'
 import { combineReducers } from 'redux'
 
 import { drawer, DrawerState } from '../app/App.components/Drawer/Drawer.reducers'
@@ -9,6 +10,7 @@ import { progressBar, ProgressBarState } from '../app/App.components/ProgressBar
 import { toaster, ToasterState } from '../app/App.components/Toaster/Toaster.reducers'
 import { auth, AuthState } from '../pages/SignUp/SignUp.reducers'
 import { serviceWorker, ServiceWorkerState } from './serviceWorker'
+import { progress, ProgressState } from '../pages/Chapter/Chapter.reducers'
 
 export const reducers = (history: any) =>
   combineReducers({
@@ -20,10 +22,13 @@ export const reducers = (history: any) =>
     forgotPassword,
     resetPassword,
     changePassword,
-    serviceWorker
+    serviceWorker,
+    user,
+    progress
   })
 
 export interface State {
+  user: UserState
   toaster: ToasterState
   auth: AuthState
   drawer: DrawerState
@@ -32,4 +37,5 @@ export interface State {
   resetPassword: ResetPasswordState
   changePassword: ChangePasswordState
   serviceWorker: ServiceWorkerState
+  progress: ProgressState
 }

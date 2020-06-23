@@ -1,5 +1,5 @@
 import { store } from 'index'
-import { GetPublicUserInputs } from 'shared/user/GetPublicUser'
+import { GetPublicUserInputs } from 'shared/page/GetPublicUser'
 
 export const GET_BLANK_REQUEST = 'GET_BLANK_REQUEST'
 export const GET_BLANK_COMMIT = 'GET_BLANK_COMMIT'

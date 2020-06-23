@@ -1,6 +1,6 @@
 import { Length, Matches } from 'class-validator'
 import { Expose } from 'class-transformer'
-import { PublicUser } from './PublicUser'
+import { PublicUser } from '../user/PublicUser'
 
 export class GetPublicUserInputs {
   @Expose()

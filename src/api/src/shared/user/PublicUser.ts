@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsMongoId, Length, Matches } from 'class-validator'
+import { IsArray, IsDate, IsEmail, IsMongoId, Length, Matches } from 'class-validator'
 import { ObjectId } from 'mongodb'
 
 export class PublicUser {
@@ -11,6 +11,9 @@ export class PublicUser {
 
   @IsEmail()
   emailVerified?: boolean
+
+  @IsArray()
+  progress?: string[]
 
   @IsDate()
   createdAt!: Date
