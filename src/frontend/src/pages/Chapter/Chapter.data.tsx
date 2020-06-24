@@ -70,6 +70,7 @@ import { data as reasonDataLoops } from "../Chapters/Reason/ChapterLoops";
 import { data as reasonDataMainFunction } from "../Chapters/Reason/ChapterMainFunction";
 import { data as reasonDataMaps } from "../Chapters/Reason/ChapterMaps";
 import { data as reasonDataMath } from "../Chapters/Reason/ChapterMath";
+import { data as reasonDataMultisig } from "../Chapters/Reason/ChapterMultisig";
 import { data as reasonDataOption } from "../Chapters/Reason/ChapterOption";
 import { data as reasonDataPolymorphism } from "../Chapters/Reason/ChapterPolymorphism";
 import { data as reasonDataRecords } from "../Chapters/Reason/ChapterRecords";
@@ -81,10 +82,6 @@ import { data as reasonDataTypes } from "../Chapters/Reason/ChapterTypes";
 import { data as reasonDataVariables } from "../Chapters/Reason/ChapterVariables";
 import { data as reasonDataVariant } from "../Chapters/Reason/ChapterVariant";
 
-
-
-
-import { data as reasonDataMultisig } from "../Chapters/Reason/ChapterMultisig";
 
 
 export const chapterData = [
