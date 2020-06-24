@@ -27,7 +27,7 @@ FA2 also leaves to implementers to decide on architecture pattern for handling p
 The FA2 interface formalize a standard way to design tokens and thus describes a list of entry points (that must be implemented) and data structures related to those entry points. A more detailed decription of the interface is broken down in following sections.
 
 In addition to the FA2 interface, the FA2 standard provides helper functions to manipulate data structures involved in FA2 interface. The FA2 library contains helper functions for :
-* a generic behavior and transfer hook implementation (behavior based on *permissions_descriptor*), 
+<!-- prettier-ignore -->* a generic behavior and transfer hook implementation (behavior based on *permissions\_descriptor*), 
 * converting data structures, 
 * defining hooks between contracts when transfer is emitted, 
 * defining operators for managing allowance. 
@@ -51,9 +51,9 @@ type fa2_entry_points =
 
 ### Metadata
 
-FA2 token contracts MUST implement the *token_metadata* entry point which get the metadata for multiple token types.
+<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
 
-It accepts a list of *token_ids* and a callback contract, and sends back a list of *token_metadata* records.
+<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback contract, and sends back a list of *token\_metadata* records.
 
 FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
 transferred) is always 1.
@@ -83,14 +83,14 @@ type token_metadata_param = {
 
 ### Balance of
 
-FA2 token contracts MUST implement the _Balance of_ entry point which get the balance of multiple account/token pairs (because FA2 supports mutiple token).  
+<!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which get the balance of multiple account/token pairs (because FA2 supports mutiple token).  
 ```
 | Balance_of of balance_of_param
 ```
 
-It accepts a list of balance_of_requests and a callback and sends back to a callback contract a list of balance_of_response records. 
+<!-- prettier-ignore -->It accepts a list of *balance\_of\_requests* and a callback and sends back to a callback contract a list of *balance\_of\_response* records. 
 
-If one of the specified token_ids is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
+<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
 
 #### Interface
 
@@ -121,9 +121,9 @@ FA2 token contracts MUST implement the _Totalsupply_ entry point which get the t
 | Total_supply of total_supply_param
 ```
 
-It accepts a list of *token_ids* and a callback, and sends back to the callback contract a list of *total_supply_response* records.
+It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
 
-If one of the specified token_ids is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
+If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
 
 #### Interface
 
@@ -213,15 +213,15 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 Error mnemonic - Description
 
-"TOKEN_UNDEFINED" - One of the specified token_ids is not defined within the FA2 contract
+<!-- prettier-ignore -->"TOKEN_UNDEFINED" - One of the specified *token\_ids* is not defined within the FA2 contract
 
 "INSUFFICIENT_BALANCE" - A token owner does not have sufficient balance to transfer tokens from owner's account
 
-"TX_DENIED" - A transfer failed because of operator_transfer_policy == No_transfer
+<!-- prettier-ignore -->"TX_DENIED" - A transfer failed because of *operator\_transfer\_policy* == *No\_transfer*
 
-"NOT_OWNER" - A transfer failed because operator_transfer_policy == Owner_transfer and it is initiated not by the token owner
+<!-- prettier-ignore -->"NOT_OWNER" - A transfer failed because *operator\_transfer\_policy* == *Owner\_transfer* and it is initiated not by the token owner
 
-"NOT_OPERATOR" - A transfer failed because operator_transfer_policy == Owner_or_operator_transfer and it is initiated neither by the token owner nor a permitted operator
+<!-- prettier-ignore -->"NOT_OPERATOR" - A transfer failed because *operator\_transfer\_policy* == *Owner\_or\_operator\_transfer* and it is initiated neither by the token owner nor a permitted operator
 
 "RECEIVER_HOOK_FAILED" - The receiver hook failed. This error MUST be raised by the hook implementation
 
@@ -235,13 +235,13 @@ Error mnemonic - Description
 
 ## Your mission
 
-We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The Total_supply entry point is not yet implemented , please finish the job !
+<!-- prettier-ignore -->We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Total\_supply* entry point is not yet implemented , please finish the job !
 
-<!-- prettier-ignore -->1 - Modify the *get_total_supply* lambda function in order to retrieve the total_supply information related to the given *token_id* list.
+<!-- prettier-ignore -->1 - Modify the *get\_total\_supply* lambda function in order to retrieve the *total\_supply* information related to the given *token\_id* list.
 
-<!-- prettier-ignore -->2 - the *get_total_supply* lambda function For each given token_id, find the given *token_id* in the *tokens* map and retrieve the *total_supply* associated to a given *token_id* in the *tokens* map.
+<!-- prettier-ignore -->2 - the *get\_total\_supply* lambda function For each given *token\_id*, find the given *token\_id* in the *tokens* map and retrieve the *total\_supply* associated to a given *token\_id* in the *tokens* map.
 
-<!-- prettier-ignore -->3 -If a given token_id is found then the function *get_total_supply* must return a *total_supply_response* record for each given *token_id*. As seen in the interface the *total_supply_response* record contains *token_id* and *total_supply* fields. (use v as temporary variable for the match with instruction)
+<!-- prettier-ignore -->3 -If a given *token\_id* is found then the function *get\_total\_supply* must return a *total\_supply\_response* record for each given *token\_id*. As seen in the interface the *total\_supply\_response* record contains *token\_id* and *total\_supply* fields. (use v as temporary variable for the match with instruction)
 
-<!-- prettier-ignore -->4 -If a given token_id is not found then the function *get_total_supply* must throw an exception with the predefined error messsage *token_undefined*.
+<!-- prettier-ignore -->4 -If a given *token\_id* is not found then the function *get\_total\_supply* must throw an exception with the predefined error messsage *token\_undefined*.
 

@@ -45,7 +45,7 @@ FA2 interface specifies two entry points to update and inspect operators. Once p
 | Is_operator of is_operator_param
 ```
 
-where parameter type *update_operator* and *is_operator_param* are :
+<!-- prettier-ignore -->where parameter type *update\_operator* and *is\_operator\_param* are :
 ```
 type operator_param = {
   owner : address;
@@ -62,11 +62,11 @@ type is_operator_param = {
 }
 ```
 
-Notice the *update_operator* can only Add or Remove an _operator_ (an allowance between an operator address and a token owner address).
+<!-- prettier-ignore -->Notice the *update\_operator* can only Add or Remove an _operator_ (an allowance between an operator address and a token owner address).
 
-Notice the parameter _is_operator_param_ given to *Is_operator* entry point contains a *callback* property used to send back a response to the calling contract.
+<!-- prettier-ignore -->Notice the parameter _is\_operator\_param_ given to *Is\_operator* entry point contains a *callback* property used to send back a response to the calling contract.
 
-Notice entry point *Update_operators* expectes a list of *update_operator_michelson*. The fa2 convertor helper provide the *operator_param_to_michelson* function to convert *operator_param* format into *update_operator_michelson* format. 
+<!-- prettier-ignore -->Notice entry point *Update\_operators* expectes a list of *update\_operator\_michelson*. The fa2 convertor helper provide the *operator\_param\_to\_michelson* function to convert *operator\_param* format into *update\_operator\_michelson* format. 
 
 
 #### FA2 standard operator library
@@ -76,13 +76,13 @@ Some helpers functions has been implemented in the FA2 library which help manipu
 
 an _operator_ is a relationship between two address (owner address and operator address)
 
-function *is_operator* returns to a contract caller whether an operator address is associated to an owner address
+<!-- prettier-ignore -->function *is\_operator* returns to a contract caller whether an operator address is associated to an owner address
 
-function *update_operators* allows to Add or Remove an operator in the list of operators.
+<!-- prettier-ignore -->function *update\_operators* allows to Add or Remove an operator in the list of operators.
 
-function *validate_update_operators_by_owner*, it ensures the given adress is owner of an _operator_  
+<!-- prettier-ignore -->function *validate\_update\_operators\_by\_owner*, it ensures the given adress is owner of an _operator_  
 
-the function *validate_operator* validates operators for all transfers in the batch at once, depending on given operator_transfer_policy
+<!-- prettier-ignore -->function *validate\_operator* validates operators for all transfers in the batch at once, depending on given *operator\_transfer\_policy*
 
 
 
@@ -100,7 +100,7 @@ FA2 defines :
 
 #### permissions_descriptor
 
-FA2 specifies an interface permissions_descriptor allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
+<!-- prettier-ignore -->FA2 specifies an interface permissions_descriptor allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions\_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
 
 The *permission descriptor* indicates which standard permission policies are implemented by the FA2 contract and can be used by off-chain and on-chain tools to discover the properties of the particular FA2 contract implementation.
 
@@ -117,14 +117,9 @@ type permissions_descriptor = {
 
 #### operator_transfer_policy
 
-operator_transfer_policy - defines who can transfer tokens. Tokens can be
-transferred by the token owner or an operator (some address that is authorized to
-transfer tokens on behalf of the token owner). A special case is when neither owner
-nor operator can transfer tokens (can be used for non-transferable tokens). The
-FA2 standard defines two entry points to manage and inspect operators associated
-with the token owner address (*update_operators*,
-*is_operator*). Once an operator is added, it can manage all of
-its associated owner's tokens.
+<!-- prettier-ignore -->*operator\_transfer\_policy* - defines who can transfer tokens. Tokens can be transferred by the token owner or an operator (some address that is authorized to transfer tokens on behalf of the token owner). A special case is when neither owner nor operator can transfer tokens (can be used for non-transferable tokens). 
+
+<!-- prettier-ignore -->The FA2 standard defines two entry points to manage and inspect operators associated with the token owner address (*update\_operators*, *is\_operator*). Once an operator is added, it can manage all of its associated owner's tokens.
 
 ```
 type operator_transfer_policy =
@@ -135,11 +130,7 @@ type operator_transfer_policy =
 
 #### owner_hook_policy
 
-owner_hook_policy - defines if sender/receiver hooks should be called or
-not. Each token owner contract MAY implement either an *fa2_token_sender* or
-*fa2_token_receiver* hook interface. Those hooks MAY be called when a transfer sends
-tokens from the owner account or the owner receives tokens. The hook can either
-accept a transfer transaction or reject it by failing.
+<!-- prettier-ignore -->*owner\_hook\_policy* - defines if sender/receiver hooks should be called or not. Each token owner contract MAY implement either an *fa2\_token\_sender* or *fa2\_token\_receiver* hook interface. Those hooks MAY be called when a transfer sends tokens from the owner account or the owner receives tokens. The hook can either accept a transfer transaction or reject it by failing.
 
 ```
 type owner_hook_policy =
@@ -150,11 +141,7 @@ type owner_hook_policy =
 
 #### custom_permission_policy
 
-It is possible to extend permission policy with a custom behavior, which does
-not overlap with already existing standard policies. This standard does not specify
-exact types for custom config entry points. FA2 token contract clients that support
-custom config entry points must know their types a priori and/or use a tag hint
-of custom_permission_policy.
+<!-- prettier-ignore -->It is possible to extend permission policy with a custom behavior, which does not overlap with already existing standard policies. This standard does not specify exact types for custom config entry points. FA2 token contract clients that support custom config entry points must know their types a priori and/or use a tag hint of *custom\_permission\_policy*.
 
 ```
 type custom_permission_policy = {
@@ -194,8 +181,8 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 
   * Vera account is owner of the token 1
 
-<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *operator_update_to_michelson* function to convert your parameters into the format expected by *Update_operators* entry point.
+<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *operator\_update\_to\_michelson* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
 
-<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1. You can use the *transfer_to_michelson* function to convert your parameters into the format expected by *Transfer* entry point.
+<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1. You can use the *transfer\_to\_michelson* function to convert your parameters into the format expected by *Transfer* entry point.
 You will have to modify the storage to in the state where "Vera account is owner of the token 1" (step 1) and Bob is authorized to transfer token taken from Vera account (step 2).

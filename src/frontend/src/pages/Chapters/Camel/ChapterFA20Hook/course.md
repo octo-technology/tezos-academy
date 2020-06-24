@@ -14,6 +14,7 @@ In this chapter we will focus on _transfer hook_
 
 The FA2 standard proposes an approach in which a pluggable separate contract (permission transfer hook) is implemented and registered with the core FA2. Every time FA2 performs a transfer, it invokes a "hook" contract that validates a transaction and either approves it by finishing execution successfully or rejects it by failing.
 
+Although, it is recommended to implement "transfer hook design pattern" in many cases this pattern is prohibitively expensive in terms of gas cost due to extra inter-contract calls.
 
 #### definition
 
@@ -59,45 +60,45 @@ In addition to the hook standard, the FA2 standard provides helper functions to 
 
 Some helpers functions has been gatthered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type alias :
 
-The type *fa2_registry* is a set of address. 
+<!-- prettier-ignore -->The type *fa2\_registry* is a set of address. 
 
-the function *get_hook_entrypoint* retrieves the contract interface of entrypoint "%tokens_transferred_hook" for a given contract address
+<!-- prettier-ignore -->the function *get\_hook\_entrypoint* retrieves the contract interface of entrypoint "%tokens\_transferred\_hook" for a given contract address
 
-the function *register_with_fa2* 
-* takes the address of a FA2 contract (having hooks) and register it in the registry (set of address).
-* calls the *Set_transfer_hook* entrypoint of a FA2 contract
+<!-- prettier-ignore -->the function *register\_with\_fa2* 
+<!-- prettier-ignore -->* takes the address of a FA2 contract (having hooks) and register it in the registry (set of address).
+<!-- prettier-ignore -->* calls the *Set\_transfer\_hook* entrypoint of a FA2 contract
 
-the function *create_register_hook_op* sends a transaction to a FA2 contract (having hook entrypoints). The transaction intends to invoke the entrypoint *Set_transfer_hook*.  This entrypoint *Set_transfer_hook* requires as parameters : 
-* the contract interface of entrypoint "%tokens_transferred_hook" 
-* a _permission descriptor_
+<!-- prettier-ignore -->the function *create\_register\_hook\_op* sends a transaction to a FA2 contract (having hook entrypoints). The transaction intends to invoke the entrypoint *Set\_transfer\_hook*.  This entrypoint *Set\_transfer\_hook* requires as parameters : 
+<!-- prettier-ignore -->* the contract interface of entrypoint "%tokens\_transferred\_hook" 
+<!-- prettier-ignore -->* a _permission descriptor_
 
-the function *validate_hook_call* ensures an address in registered in the registry (set of address).
+<!-- prettier-ignore -->the function *validate\_hook\_call* ensures an address in registered in the registry (set of address).
 
 
 ##### Transfer Hooks
 
-The function *owners_transfer_hook* defined in the library generates a list of Tezos operations invoking sender and receiver hooks according to
+<!-- prettier-ignore -->The function *owners\_transfer\_hook* defined in the library generates a list of Tezos operations invoking sender and receiver hooks according to
 the policies defined by the permissions descriptor.
 
 
 The hook pattern depends on the permission policy. A transfer hook may be unwanted, optional or required. 
-If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens_received". Otherwise transfer is not allowed.
-If the policy optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens_received". Otherwise transfer is allowed.
+<!-- prettier-ignore -->If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens\_received". Otherwise transfer is not allowed.
+<!-- prettier-ignore -->If the policy optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
 
-It is the same for permission policies including senders, the entry point *tokens_sent* may need to be implemented.
+It is the same for permission policies including senders, the entry point *tokens\_sent* may need to be implemented.
 
-In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2_token_receiver*, and *fa2_token_sender* interfaces. This implies that token'owner contract must have entry points *tokens_received* and *token_sent*. If these entry points fail the transfer is rejected. 
+<!-- prettier-ignore -->In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2\_token\_receiver*, and *fa2\_token\_sender* interfaces. This implies that token'owner contract must have entry points *tokens\_received* and *token\_sent*. If these entry points fail the transfer is rejected. 
 
 
 ##### Transfer Hooks entry points
  
 The library defines some helper functions
 
-The function *to_receiver_hook* retrieves the entry point *"%tokens_received"* for a given _address_. It enables to check if the *fa2_token_receiver* interface is implemented.
+<!-- prettier-ignore -->The function *to\_receiver\_hook* retrieves the entry point *"%tokens\_received"* for a given _address_. It enables to check if the *fa2\_token\_receiver* interface is implemented.
 
-The function *to_sender_hook* retrieves the entry point *"%tokens_sent"* for a given _address_. It enables to check if the *fa2_token_sender* interface is implemented.
+<!-- prettier-ignore -->The function *to\_sender\_hook* retrieves the entry point *"%tokens\_sent"* for a given _address_. It enables to check if the *fa2\_token\_sender* interface is implemented.
 
-These two functions return a variant *hook_result* type. If variant value is *Hook_contract* then the entrypoint exists an is provided. If variant value is Hook_undefined then the entry point is not implemented and a message error is provided.
+<!-- prettier-ignore -->These two functions return a variant *hook\_result* type. If variant value is *Hook\_contract* then the entrypoint exists an is provided. If variant value is *Hook\_undefined* then the entry point is not implemented and a message error is provided.
 
 ```
 type hook_result =
@@ -121,13 +122,13 @@ without changing existing hook configuration.
 
 4) For each transfer operation, a token contract MUST invoke a transfer hook and
 return a corresponding operation as part of the transfer entry point result.
-(For more details see set_transfer_hook )
+<!-- prettier-ignore -->(For more details see set\_transfer\_hook )
 
 5) *operator* parameter for the hook invocation MUST be set to *SENDER*.
 
-6) *from_* parameter for each hook_transfer batch entry MUST be set to *Some(transfer.from_)*.
+<!-- prettier-ignore -->6) *from_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.from_)*.
 
-7) *to_* parameter for each hook_transfer batch entry MUST be set to *Some(transfer.to_)*.
+<!-- prettier-ignore -->7) *to_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.to_)*.
 
 8) A transfer hook MUST be invoked, and operation returned by the hook invocation
 MUST be returned by transfer entry point among other operations it might create.
@@ -142,9 +143,9 @@ invoke a transfer hook as well.
 
 Let's see an example of FA2 Hook pattern implementation. The following smart contract implements a hook permission contract 
 
-Owners transfer hooks are triggered by the *owners_transfer_hook* function.
-If a receiver address implements *fa2_token_receiver* interface, its *tokens_received* entry point must be called.
-If a sender address implements *fa2_token_sender* interface, its *tokens_sent* entry point must be called. 
+<!-- prettier-ignore -->Owners transfer hooks are triggered by the *owners\_transfer\_hook* function.
+<!-- prettier-ignore -->If a receiver address implements *fa2\_token\_receiver* interface, its *tokens\_received* entry point must be called.
+<!-- prettier-ignore -->If a sender address implements *fa2\_token\_sender* interface, its *tokens\_sent* entry point must be called. 
 
 
 ```
@@ -194,9 +195,9 @@ let own_policy : permissions_descriptor = {
 }
 ```
 
-Notice this Hook Permission contract contains an entry point *Register_with_fa2* to register with the FA2 core contract.
+<!-- prettier-ignore -->Notice this Hook Permission contract contains an entry point *Register\_with\_fa2* to register with the FA2 core contract.
 
-Notice this Hook Permission contract contains an entry point *Tokens_transferred_hook* triggered when FA2 core contract receive a transfer request. This entry point triggers the owner hook transfer (sending hooks to sender and receiver and waiting for their approval or rejection). 
+<!-- prettier-ignore -->Notice this Hook Permission contract contains an entry point *Tokens\_transferred\_hook* triggered when FA2 core contract receive a transfer request. This entry point triggers the owner hook transfer (sending hooks to sender and receiver and waiting for their approval or rejection). 
 
 
 ## Your mission
@@ -205,24 +206,24 @@ We are working on a Fungible token which can handle multiple assets. We decided 
 
 1 - we want to accept a transfer if transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
 
-2 - we want to accept a transfer if transfer receiver implements *fa2_token_receiver* interface.
+<!-- prettier-ignore -->2 - we want to accept a transfer if transfer receiver implements *fa2\_token\_receiver* interface.
 
-If a receiver address implements *fa2_token_receiver* interface, its *tokens_received* entry point must be called.
+<!-- prettier-ignore -->If a receiver address implements *fa2\_token\_receiver* interface, its *tokens\_received* entry point must be called.
 
 
-<!-- prettier-ignore -->Complete the hook permission smart contract by implementing our custom rules on receivers. Transfer is permitted if receiver address implements *fa2_token_receiver* interface OR a receiver address is in the receiver white list. 
+<!-- prettier-ignore -->Complete the hook permission smart contract by implementing our custom rules on receivers. Transfer is permitted if receiver address implements *fa2\_token\_receiver* interface OR a receiver address is in the receiver white list. 
 
-<!-- prettier-ignore -->1- Find receiver hook - Check if a receiver _r_ implements *fa2_token_receiver* interface, using *to_receiver_hook* function and a _match_ operator.
+<!-- prettier-ignore -->1- Find receiver hook - Check if a receiver _r_ implements *fa2\_token\_receiver* interface, using *to\_receiver\_hook* function and a _match_ operator.
 
-<!-- prettier-ignore -->2- Retrieve hook - if the receiver _r_ implements *fa2_token_receiver* interface, introduce variable _h_ as hook entry point. 
+<!-- prettier-ignore -->2- Retrieve hook - if the receiver _r_ implements *fa2\_token\_receiver* interface, introduce variable _h_ as hook entry point. 
 
-<!-- prettier-ignore -->3- Prepare parameter - cast parameter _p_ into type *transfer_descriptor_param_to_michelson* and store the result in a new variable _pm_
+<!-- prettier-ignore -->3- Prepare parameter - cast parameter _p_ into type *transfer\_descriptor\_param\_to\_michelson* and store the result in a new variable _pm_
 
 <!-- prettier-ignore -->4- Call the entry point - create a variable _op_ of type *operation* which is a transaction sending variable _pm_ and no mutez to the retrieved entry point _h_
 
 <!-- prettier-ignore -->5- Return transactions - add this newly created operation _op_ in the returned list of operation _ops_ (and return _ops_)
 
-<!-- prettier-ignore -->6- if the receiver _r_ does not implement *fa2_token_receiver* interface, response of *to_receiver_hook* provided an error message with variable _err_.
+<!-- prettier-ignore -->6- if the receiver _r_ does not implement *fa2\_token\_receiver* interface, response of *to\_receiver\_hook* provided an error message with variable _err_.
 
 <!-- prettier-ignore -->7- Check if receiver _r_ is registered in the whitelist _wl_. 
 
