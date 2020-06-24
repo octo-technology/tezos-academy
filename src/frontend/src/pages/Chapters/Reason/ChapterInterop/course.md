@@ -12,11 +12,13 @@ LIGO can work together with other smart contract languages on Tezos. However dat
 Michelson types consist of *or*'s and *pair*'s, combined with field annotations. Field annotations add contraints on a Michelson type, for example a _pair_ of *(pair (int %foo) (string %bar))* will only work with the exact equivalence or the same type without the field annotations.
 
 For example, the following _pair_ 
+
 ```
 (pair (int %foo) (string %bar))
 ```
 
 will accept these definitions and fail with the ones that does not respect the typing or the order of pair fields: 
+
 ```
 (pair (int %foo) (string %bar))       // OK
 (pair int string)                     // OK
@@ -27,9 +29,10 @@ will accept these definitions and fail with the ones that does not respect the t
 
 ### Entrypoints and annotations
 
-As seen in chapter Polymorphism, a contract can be called by another contract. Using the predefined function *Tezos.get_entrypoint_opt* allows to a calling contract ot point to a specific entry point of the called contract. 
+<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. Using the predefined function *Tezos.get\_entrypoint\_opt* allows to a calling contract ot point to a specific entry point of the called contract. 
 
 Here is an exemple. Let's consider the following "Counter" contract :
+
 ```
 type storage = int
 
@@ -66,13 +69,13 @@ let main = ((p, s): (parameter, storage)): (list(operation), storage) => {
 };
 ```
 
-⚠️ Notice how we directly use the *%left* entrypoint without mentioning the %right entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our int would be referring to.
+⚠️ Notice how we directly use the *%left* entrypoint without mentioning the *%right* entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our int would be referring to.
 
 These annotations works for _or_'s or _variant_ types in LIGO.
 
 ## Interop with Michelson
 
-To interop with existing Michelson code or for compatibility with certain development tooling, LIGO has two special interop types: *michelson_or* and *michelson_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
+<!-- prettier-ignore -->To interop with existing Michelson code or for compatibility with certain development tooling, LIGO has two special interop types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
 
 Take for example the following Michelson type that we want to interop with:
 ```
@@ -98,7 +101,7 @@ type z_or = michelson_or(unit, "z", y_or, "other")
 
 If you don't want to have an annotation, you need to provide an empty string.
 
-To use variables of type michelson_or you have to use *M_left* and *M_right*. *M_left* picks the left _or_ case while *M_right* picks the right _or_ case. For *michelson_pair* you need to use tuples.
+<!-- prettier-ignore -->To use variables of type *michelson\_or* you have to use *M\_left* and *M\_right*. *M\_left* picks the left _or_ case while *M\_right* picks the right _or_ case. For *michelson\_pair* you need to use tuples.
 
 ```
 let z: z_or = (M_left (unit) : z_or)
@@ -117,7 +120,8 @@ Conversions from Ligo types to michelson types requires a precise knowledge of d
 
 So it becomes even more relevant with nested pairs that there are many possible decomposition of a record in pairs of pairs. 
 
-The following record 
+The following record structure
+
 ```
 type l_record = {
   s: string,
@@ -127,6 +131,7 @@ type l_record = {
 ```
 
 can be transformed in a left combed data structure 
+
 ```
  (pair %other 
     (pair %other
@@ -136,7 +141,9 @@ can be transformed in a left combed data structure
     (nat %v)
   )
 ```
+
  or a right combed data structure
+
  ```
   (pair %other 
     (string %s)
@@ -153,7 +160,7 @@ Converting between different LIGO types and data structures can happen in two wa
 
 #### Pair
 
-Conversion between the Michelson type and record type is handled with the functions *Layout.convert_from_left_comb* and *Layout.convert_to_left_comb*.
+<!-- prettier-ignore -->Conversion between the Michelson type and record type is handled with the functions *Layout.convert\_from\_left\_comb* and *Layout.convert\_to\_left\_comb*.
 
 Here's an example of a left combed Michelson data structure using pairs:
 
@@ -168,6 +175,7 @@ Here's an example of a left combed Michelson data structure using pairs:
 ```
 
 Which could respond with the following record type:
+
 ```
 type l_record = {
   s: string,
@@ -177,8 +185,9 @@ type l_record = {
 ```
 
 This snippet of code shows 
-* how to use *Layout.convert_from_left_comb* to transform a michelson type into a record type.
-* how to use *Layout.convert_to_left_comb* to transform a record type into a michelson type.
+<!-- prettier-ignore -->* how to use *Layout.convert\_from\_left\_comb* to transform a michelson type into a record type.
+<!-- prettier-ignore -->* how to use *Layout.convert\_to\_left\_comb* to transform a record type into a michelson type.
+
 ```
 type michelson = michelson_pair_left_comb(l_record);
 
@@ -194,7 +203,7 @@ let to_michelson = (f: l_record) : michelson => {
 ```
 
 #### Variant
-In the case of a left combed Michelson or data structure, that you want to translate to a variant, you can use the *michelson_or_left_comb* type.
+<!-- prettier-ignore -->In the case of a left combed Michelson or data structure, that you want to translate to a variant, you can use the *michelson\_or\_left\_comb* type.
 
 ```
 type vari = 
@@ -205,7 +214,7 @@ type vari =
 type r = michelson_or_left_comb(vari)
 ```
 
-And then use these types in *Layout.convert_from_left_comb* or *Layout.convert_to_left_comb*, similar to the pairs example above
+<!-- prettier-ignore -->And then use these types in *Layout.convert\_from\_left\_comb* or *Layout.convert\_to\_left\_comb*, similar to the pairs example above
 
 ```
 let of_michelson_or = (f: r) : vari => { 
@@ -221,13 +230,14 @@ let to_michelson_or = (f: vari) : r => {
 
 ### Converting left combed Michelson data structures
 
-you can almost use the same code as that for the left combed data structures, but with *michelson_or_right_comb*, *michelson_pair_right_comb*, *Layout.convert_from_right_comb*, and *Layout.convert_to_left_comb* respectively.
+<!-- prettier-ignore -->you can almost use the same code as that for the left combed data structures, but with *michelson\_or\_right\_comb*, *michelson\_pair\_right\_comb*, *Layout.convert\_from\_right\_comb*, and *Layout.convert\_to\_left\_comb* respectively.
 
 ### Manual data structure conversion
 
 If you want to get your hands dirty, it's also possible to do manual data structure conversion.
 
 The following code can be used as inspiration:
+
 ```
 type z_to_v =
 | Z 

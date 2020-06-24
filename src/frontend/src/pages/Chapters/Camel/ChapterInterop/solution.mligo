@@ -18,7 +18,7 @@ type entry_points =
 // This function takes a list of item as parameter and transform each item in a right combed pair structure and add this transformed item in inventory
 let addInventory(params, s: item list * storage) : return =
     let item_list : item list = params in 
-    // Type your solution below
+    // Modify the code below
     let update_inventory = fun (acc,i : item_michelson list * item) -> Layout.convert_to_right_comb(i) :: acc in
     let new_inventory : item_michelson list = List.fold update_inventory item_list s.inventory in
     (([] : operation list), {s with inventory=new_inventory})

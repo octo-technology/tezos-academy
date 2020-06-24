@@ -121,9 +121,9 @@ FA2 token contracts MUST implement the _Totalsupply_ entry point which get the t
 | Total_supply of total_supply_param
 ```
 
-It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
+<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
 
-If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
+<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
 
 #### Interface
 

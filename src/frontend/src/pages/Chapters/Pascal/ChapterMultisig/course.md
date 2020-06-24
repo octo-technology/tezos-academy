@@ -43,7 +43,7 @@ type action is
 | Increment of int
 | Decrement of int 
 
-// MulitsigProxy storage type
+// MultisigProxy storage type
 type addr_set is set (address)
 type message_store is map (bytes, addr_set)
 type proposal_counters is map (address, nat)
@@ -60,11 +60,11 @@ type storage is
     proposal_counters    : proposal_counters
   ]
 
-// MulitsigProxy I/O types
+// MultisigProxy I/O types
 type message is string
 type return is list (operation) * storage
 
-//MulitsigProxy parameter
+// MultisigProxy parameter
 type parameter is
   Send     of message
 | Withdraw of message
@@ -186,10 +186,11 @@ function main (const param : parameter; const s : storage) : return  is
 
 ```
 
-Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached :  
-* the message *packed_msg* is removed from *message_storage*
+Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached : 
+
+<!-- prettier-ignore -->* the message *packed\_msg* is removed from *message\_storage*
 * the action is executed and takes the _string_ as parameter
-* the inner state *state_hash* of the contract is updated by creating a hash key of old state + treated message 
+<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message 
 * the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ```
@@ -209,6 +210,7 @@ Notice in the *Send* function the number of voters is compared to the threshold.
 ```
 
 Notice in the *Withdraw* function :
+
 * if a message proposal has no voters the it is removed
 * the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 

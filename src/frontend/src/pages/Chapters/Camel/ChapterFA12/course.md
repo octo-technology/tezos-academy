@@ -156,7 +156,7 @@ let main (a,s:action * storage) =
    	Transfer p -> transfer (p,s)
 	|	Approve  p -> approve (p,s)
 	|	GetAllowance p -> getAllowance (p,s)
-	|  GetBalance p -> getBalance (p,s)
+	|	GetBalance p -> getBalance (p,s)
 	|	GetTotalSupply p -> getTotalSupply (p,s)
 
 ```
