@@ -50,6 +50,9 @@ import { data as camelDataDeployContract } from "../Chapters/Camel/ChapterDeploy
 import { data as camelDataFA12 } from "../Chapters/Camel/ChapterFA12";
 import { data as camelDataLambda } from "../Chapters/Camel/ChapterLambda";
 import { data as camelDataMultisig } from "../Chapters/Camel/ChapterMultisig";
+import { data as camelFA20 } from "../Chapters/Camel/ChapterFA20";
+import { data as camelFA20Operator } from "../Chapters/Camel/ChapterFA20Operator";
+import { data as camelFA20Hook } from "../Chapters/Camel/ChapterFA20Hook";
 
 import { data as reasonDataAddresses } from "../Chapters/Reason/ChapterAddresses";
 import { data as reasonDataBuiltIns } from "../Chapters/Reason/ChapterBuiltIns";
@@ -282,6 +285,24 @@ export const chapterData = [
     language: "CameLIGO",
     name: "25 - Camel - FA12",
     data: camelDataFA12,
+  },
+  {
+    pathname: "/camel/chapter-fa2",
+    language: "CameLIGO",
+    name: "26 - Camel - FA2",
+    data: camelFA20,
+  },
+  {
+    pathname: "/camel/chapter-fa2-operator",
+    language: "CameLIGO",
+    name: "27 - Camel - FA2 Operator",
+    data: camelFA20Operator,
+  },
+  {
+    pathname: "/camel/chapter-fa2-hook",
+    language: "CameLIGO",
+    name: "28 - Camel - FA2 Hook",
+    data: camelFA20Hook,
   },
 
   {

@@ -64,9 +64,7 @@ let total_supply(params, s: total_supply_param_michelson * storage) : return =
         let p : total_supply_param = Layout.convert_from_right_comb(params: total_supply_param_michelson) in
         let token_ids : token_id list = p.token_ids in 
         // Modify the code below
-        let get_total_supply = fun ( i : token_id) -> match Map.find_opt i s.tokens with
-            | Some v -> { token_id = i ; total_supply =v.total_supply }
-            | None -> (failwith(token_undefined) : total_supply_response)
+        let get_total_supply = 
         in
         let responses : total_supply_response list = List.map get_total_supply token_ids in 
         let convert = fun ( r : total_supply_response) -> Layout.convert_to_right_comb(r) in
