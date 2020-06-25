@@ -28,7 +28,7 @@ The problem is coming from the fact that _B_ must know the whole definition of _
 
 <!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* can be used in replacement of the *Tezos.get\_contract\_opt* function to retrieve contract interface but for only one entry point. It takes the requested entry point as parameter (with a special michelson syntax) and the address of the contract.
 
-The predefined function *Tezos.get\_entrypoint\_opt* has the following syntax :
+<!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* has the following syntax :
 
 ```
 let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tezos.get_entrypoint_opt(<entrypoint_name>, <target_contract_address>);
@@ -36,16 +36,14 @@ let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tez
 
 <!-- prettier-ignore -->When function *get\_entrypoint\_opt* does not find any contract at  a given _address_ or the contract doesn't match the type, then  _None_ is returned. 
 
-As for *Tezos.get\_contract\_opt* function, *Tezos.get\_entrypoint\_opt* function returns an _option_ type of entry point. 
+<!-- prettier-ignore -->As for *Tezos.get\_contract\_opt* function, *Tezos.get\_entrypoint\_opt* function returns an _option_ type. 
 
 
 ## Entry point naming convention
 
-<!-- prettier-ignore --> *entrypoint\_name* is a double-quoted string with first character is % followed by the name of the entry point (and its first letter must not be capitalized) exemple: for an entry point *FooBar* the corresponding *entrypoint\_name* is *"%fooBar"*
+<!-- prettier-ignore --> Entry point name is a double-quoted string with first character is _%_ followed by the name of the entry point (and its first letter must not be capitalized) exemple: for an entry point *FooBar* the corresponding entry point name is *%fooBar*.
 
-<!-- prettier-ignore --> To get a contract from an address and entry point, we can use _Tezos.get_entrypoint_opt(<entrypoint>, <address>)_
-
-Entrypoints are written in the form of: _%myEntryPoint_ for the entry point _MyEntryPoint_. Notice we change the case of the first letter. 
+Entry point names are written in the form of: _%myEntryPoint_ for the entry point _MyEntryPoint_.  
 
 
 
