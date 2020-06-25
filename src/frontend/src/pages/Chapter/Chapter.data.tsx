@@ -26,6 +26,7 @@ import { data as pascalDataTuples } from "../Chapters/Pascal/ChapterTuples";
 import { data as pascalDataTypes } from "../Chapters/Pascal/ChapterTypes";
 import { data as pascalDataVariables } from "../Chapters/Pascal/ChapterVariables";
 import { data as pascalDataVariant } from "../Chapters/Pascal/ChapterVariant";
+import { data as pascalDataPreprocessor } from "../Chapters/Pascal/ChapterPreprocessor";
 
 import { data as camelDataAddresses } from "../Chapters/Camel/ChapterAddresses";
 import { data as camelDataBuiltIns } from "../Chapters/Camel/ChapterBuiltIns";
@@ -55,6 +56,7 @@ import { data as camelDataTuples } from "../Chapters/Camel/ChapterTuples";
 import { data as camelDataTypes } from "../Chapters/Camel/ChapterTypes";
 import { data as camelDataVariables } from "../Chapters/Camel/ChapterVariables";
 import { data as camelDataVariant } from "../Chapters/Camel/ChapterVariant";
+import { data as camelDataPreprocessor } from "../Chapters/Camel/ChapterPreprocessor";
 
 import { data as reasonDataAddresses } from "../Chapters/Reason/ChapterAddresses";
 import { data as reasonDataBuiltIns } from "../Chapters/Reason/ChapterBuiltIns";
@@ -81,7 +83,7 @@ import { data as reasonDataTuples } from "../Chapters/Reason/ChapterTuples";
 import { data as reasonDataTypes } from "../Chapters/Reason/ChapterTypes";
 import { data as reasonDataVariables } from "../Chapters/Reason/ChapterVariables";
 import { data as reasonDataVariant } from "../Chapters/Reason/ChapterVariant";
-
+import { data as reasonDataPreprocessor } from "../Chapters/Reason/ChapterPreprocessor";
 
 
 export const chapterData = [
@@ -196,6 +198,13 @@ export const chapterData = [
     name: '26- Pascal - Interoperability',
     data: pascalDataInterop,
   },
+  {
+    pathname: '/pascal/chapter-preprocessor',
+    language: 'PascaLIGO',
+    name: '27- Pascal - Preprocessor',
+    data: pascalDataPreprocessor,
+  },
+  
   
 
   {
@@ -292,18 +301,18 @@ export const chapterData = [
     name: '24 - Camel - Multisignature',
     data: camelDataMultisig,
   },
-  {
-    pathname: '/camel/chapter-interop',
-    language: 'CameLIGO',
-    name: '25 - Camel - Interoperability',
-    data: camelDataInterop,
-  },
   
   {
     pathname: '/camel/chapter-fa12',
     language: 'CameLIGO',
     name: '25 - Camel - FA12',
     data: camelDataFA12,
+  },
+  {
+    pathname: '/camel/chapter-interop',
+    language: 'CameLIGO',
+    name: '26 - Camel - Interoperability',
+    data: camelDataInterop,
   },
   {
     pathname: "/camel/chapter-fa2",
@@ -323,6 +332,13 @@ export const chapterData = [
     name: "28 - Camel - FA2 Hook",
     data: camelFA20Hook,
   },
+  {
+    pathname: "/camel/chapter-preprocessor",
+    language: "CameLIGO",
+    name: "30 - Camel - Preprocessor",
+    data: camelDataPreprocessor,
+  },
+  
 
   {
     pathname: '/reason/chapter-about',
@@ -445,5 +461,12 @@ export const chapterData = [
     name: '25 - Reason - Interoperability',
     data: reasonDataInterop,
   },
+  {
+    pathname: '/reason/chapter-preprocessor',
+    language: 'ReasonLIGO',
+    name: '25 - Reason - Preprocessor',
+    data: reasonDataPreprocessor,
+  },
+  
   
 ]
