@@ -161,7 +161,13 @@ The _map_ _end_ keywords can be used to initialize a *map*
 The command line *ligo compile-storage* for transpiling a map containg a tuple.
 
 ```
-ligo compile-storage starmap.ligo main 'map "earth" -> (1,1,1) end'
+ligo compile-storage starmap.ligo main 'map [ "earth" -> (1,1,1) ]'
+```
+
+When specifying an empty map, one must cast the *map []* into the expected type.
+
+```
+ligo compile-storage starmap.ligo main '(map []: map(string,coordinates))'
 ```
 
 #### Tuples
@@ -171,7 +177,7 @@ Initialization of elements of a tuple is specified between _(_ and _)_ separated
 The command line *ligo compile-storage* for transpiling a map containg a tuple.
 
 ```
-ligo compile-storage starmap.ligo main 'map "earth" -> (1,1,1) end'
+ligo compile-storage starmap.ligo main 'map [ "earth" -> (1,1,1) ]'
 ```
 
 This command returns :
@@ -211,7 +217,7 @@ block { skip } with case action of
 The command line *ligo compile-storage* for transpiling a map containg a record tuple.
 
 ```
-ligo compile-storage starmap2.ligo main 'map "earth" -> record [x=1;y=1;z=1] end'
+ligo compile-storage starmap2.ligo main 'map [ "earth" -> record [x=1;y=1;z=1] ]'
 ```
 
 This command returns :
