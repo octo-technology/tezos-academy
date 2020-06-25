@@ -16,7 +16,7 @@ let <operation_name> : operation = Tezos.transaction (<parameter>, <mutez>, <con
 
 where :
 
-- _parameter_ is the entrypoint to call on the target contract,
+- _parameter_ is the entry point to call on the target contract,
 - _mutez_ is the amount to transfer,
 - _contract_ is the contract we want to interact with.
 
@@ -30,7 +30,7 @@ The function take an address and return an optional _contract_ (remember to use 
 
 ## Example
 
-The following example shows how a contract can invoke another by emiting a transaction operation at the end of an entrypoint.
+The following example shows how a contract can invoke another by emiting a transaction operation at the end of an entry point.
 In our case, we have a _counter.ligo_ contract that accepts an action of type _parameter_, and we have a _proxy.ligo_ contract that accepts the same parameter type, and forwards the call to the deployed counter contract.
 
 ```

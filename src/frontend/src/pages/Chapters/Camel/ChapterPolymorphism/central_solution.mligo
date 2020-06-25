@@ -15,7 +15,13 @@ let registerShip ((key,shipAddress, shipName, shipHostile, cs): (shipKey * addre
 
 let sendTx ((e,callbackAddress) : (ship * address)): (operation list) =
     // Type your solution below
-
+    let contractInterfaceOpt: actionSquadron contract option = Tezos.get_entrypoint_opt "%moduleResponse" callbackAddress in
+    let contractInterface : actionSquadron contract = match (contractInterfaceOpt) with
+        | Some (ci) -> ci
+        | None -> (failwith("Entrypoint not found in contract Squadron"): actionSquadron contract)
+    in
+    let ee : actionModuleResponse = { e = e } in
+    let sendbackOperation: operation = Tezos.transaction (ModuleResponse(ee)) 0mutez contractInterface in
     let listoperation : operation list = [ sendbackOperation ] in 
     listoperation
 

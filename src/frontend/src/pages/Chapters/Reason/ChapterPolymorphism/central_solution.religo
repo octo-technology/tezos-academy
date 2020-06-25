@@ -18,7 +18,13 @@ let registerShip = ((key,shipAddress, shipName, shipHostile, cs): (shipKey, addr
 let sendTx = ((e,callbackAddress) : (ship, address)): (list(operation)) =>
 {
     // Type your solution below
-
+    let contractInterfaceOpt: option(contract(actionSquadron)) = Tezos.get_entrypoint_opt("%moduleResponse", callbackAddress);
+    let contractInterface : contract(actionSquadron) = switch (contractInterfaceOpt) {
+        | Some (ci) => ci
+        | None => (failwith("Entrypoint not found in contract Squadron"): contract(actionSquadron))
+    };
+    let ee : actionModuleResponse = { e : e };
+    let sendbackOperation: operation = Tezos.transaction (ModuleResponse(ee), 0mutez, contractInterface);
     let listoperation : list(operation) = [ sendbackOperation ];
     listoperation;
 }

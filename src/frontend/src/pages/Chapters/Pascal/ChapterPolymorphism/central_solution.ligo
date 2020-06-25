@@ -19,7 +19,16 @@ function registerShip(const key: shipKey; const shipAddress: address; const ship
 function sendTx(const e: ship; const callbackAddress: address): (list(operation)) is
 begin
     // Type your solution below
-    
+    const contractInterfaceOpt: option(contract(actionSquadron)) = Tezos.get_entrypoint_opt("%moduleResponse", callbackAddress);
+    const contractInterface: contract(actionSquadron) = case contractInterfaceOpt of
+    | Some(ci) -> ci
+    | None -> (failwith("Entrypoint not found in contract Squadron"): contract(actionSquadron))
+    end;
+    const ee : actionModuleResponse = record
+        e = e
+    end;
+    const sendbackOperation: operation = transaction(ModuleResponse(ee), 0mutez, contractInterface);
+
     const listoperation : list(operation) = list
         sendbackOperation
     end
