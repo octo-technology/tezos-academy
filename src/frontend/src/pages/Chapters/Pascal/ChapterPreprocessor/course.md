@@ -32,7 +32,7 @@ Such tags can be used with a conditionnal command.
 
 ## Conditionnal
 
-Preprocessor commands *#if* and *#endif* allows to consider / ignore some part of the file depending on tags. Tags are defined with the *#define* command.
+Preprocessor commands *#if*, *#else* and *#endif* allows to consider / ignore some part of the file depending on tags. Tags are defined with the *#define* command.
 
 ```
 #if !FA2_NFT_TOKEN
@@ -54,6 +54,8 @@ function substr_special (const s: string) : string is
 #endif
 ```
 
+⚠️ Notice that the conditionnal *#if* can be used to customize your includes.
+
 ⚠️ Notice that this pattern prevents from redefinition in case of cyclic inclusion.
 
 ```
@@ -65,8 +67,8 @@ function substr_special (const s: string) : string is
 ## Your mission
 
 Our service is modular. we provide to client only desired module and not the extra modules . They have to pay for it !
-The main module *inventory* can be customized. If we define WITH_EXTRA tag then the code in extra.religo will be included.
-The module *extra* defines the tag EXTRA and implements a function doSomethingExtra 
+The main module *inventory* can be customized. If we define WITH_EXTRA tag then the code in _extra.ligo_ file will be included.
+The module _extra_ defines the tag EXTRA and implements a function *doSomethingExtra*
 
 We want you to make the code responsive to the tag EXTRA
  
