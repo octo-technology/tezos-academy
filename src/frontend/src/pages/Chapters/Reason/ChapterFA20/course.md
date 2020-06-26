@@ -43,10 +43,6 @@ type parameter =
 | Update_operators(updateOperatorsParameter)
 ```
 
-
-
-
-
 ### Balance of
 
 The FA2 client (contracts using our token) may need to know the balance of a owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract. 
@@ -208,20 +204,24 @@ Error mnemonic - Description
 
 ## Your mission
 
-<!-- prettier-ignore -->We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Total\_supply* entry point is not yet implemented , please finish the job !
+<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Balance\_Of* entry point is not yet implemented , please finish the job !
 
-<!-- prettier-ignore -->1 - Modify the *get\_total\_supply* lambda function in order to retrieve the *total\_supply* information related to the given *token\_id* list.
-
-<!-- prettier-ignore -->2 - the *get\_total\_supply* lambda function For each given *token\_id*, find the given *token\_id* in the *tokens* map and retrieve the *total\_supply* associated to a given *token\_id* in the *tokens* map.
-
-<!-- prettier-ignore -->3 -If a given *token\_id* is found then the function *get\_total\_supply* must return a *total\_supply\_response* record for each given *token\_id*. As seen in the interface the *total\_supply\_response* record contains *token\_id* and *total\_supply* fields. (use v as temporary variable for the match with instruction)
-
-<!-- prettier-ignore -->4 -If a given *token\_id* is not found then the function *get\_total\_supply* must throw an exception with the predefined error messsage *token\_undefined*.
+<!-- prettier-ignore -->The function *balanceOfRequestsIterator* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balanceOfRequestMichelson*
 
 
+<!-- prettier-ignore -->1- First, we need to retieve information from the request. convert the request *balanceOfRequestMichelson* into a vairiable named *balanceOfRequest* of type _balanceOfRequest_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interop)
+
+<!-- prettier-ignore -->2- Now that request is readable, call the *getTokenBalance* function in order to retrieve the balance of the specified owner. Store the result in a variable *tokenBalance* of type _tokenBalance_. 
+
+<!-- prettier-ignore -->3- Now, we need to build a response for the balanceOfRequest. Declare a variable *balanceOfResponseAuxiliary* ot type _balanceOfResponseAuxiliary_ which contains the request and the retrieved balance *tokenBalance* (defined in the previous line).
+
+<!-- prettier-ignore -->4- Convert this response of type _balanceOfResponseAuxiliary_ into a variable *balanceOfResponseMichelson* of type _balanceOfResponseMichelson_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interop)
 
 
 
+
+
+## WIP
 
 ### Metadata
 
