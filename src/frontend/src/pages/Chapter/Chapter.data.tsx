@@ -33,9 +33,9 @@ import { data as camelDataBuiltIns } from "../Chapters/Camel/ChapterBuiltIns";
 import { data as camelDataConditionals } from "../Chapters/Camel/ChapterConditionals";
 import { data as camelDataDeployContract } from "../Chapters/Camel/ChapterDeployContract";
 import { data as camelDataFA12 } from "../Chapters/Camel/ChapterFA12";
-import { data as camelFA20 } from "../Chapters/Camel/ChapterFA20";
-import { data as camelFA20Operator } from "../Chapters/Camel/ChapterFA20Operator";
-import { data as camelFA20Hook } from "../Chapters/Camel/ChapterFA20Hook";
+import { data as camelDataFA20 } from "../Chapters/Camel/ChapterFA20";
+import { data as camelDataFA20Operator } from "../Chapters/Camel/ChapterFA20Operator";
+import { data as camelDataFA20Hook } from "../Chapters/Camel/ChapterFA20Hook";
 import { data as camelDataFunctions } from "../Chapters/Camel/ChapterFunctions";
 import { data as camelDataInteractions } from "../Chapters/Camel/ChapterInteractions";
 import { data as camelDataInterop } from "../Chapters/Camel/ChapterInterop";
@@ -63,6 +63,8 @@ import { data as reasonDataBuiltIns } from "../Chapters/Reason/ChapterBuiltIns";
 import { data as reasonDataConditionals } from "../Chapters/Reason/ChapterConditionals";
 import { data as reasonDataDeployContract } from "../Chapters/Reason/ChapterDeployContract";
 import { data as reasonDataFA12 } from "../Chapters/Reason/ChapterFA12";
+import { data as reasonDataFA20 } from "../Chapters/Reason/ChapterFA20";
+import { data as reasonDataFA20Operator } from "../Chapters/Reason/ChapterFA20Operator";
 import { data as reasonDataFunctions } from "../Chapters/Reason/ChapterFunctions";
 import { data as reasonDataInteractions } from "../Chapters/Reason/ChapterInteractions";
 import { data as reasonDataInterop } from "../Chapters/Reason/ChapterInterop";
@@ -315,28 +317,28 @@ export const chapterData = [
     data: camelDataInterop,
   },
   {
+    pathname: "/camel/chapter-preprocessor",
+    language: "CameLIGO",
+    name: "27 - Camel - Preprocessor",
+    data: camelDataPreprocessor,
+  },
+  {
     pathname: "/camel/chapter-fa2",
     language: "CameLIGO",
-    name: "26 - Camel - FA2",
-    data: camelFA20,
+    name: "28 - Camel - FA2",
+    data: camelDataFA20,
   },
   {
     pathname: "/camel/chapter-fa2-operator",
     language: "CameLIGO",
-    name: "27 - Camel - FA2 Operator",
-    data: camelFA20Operator,
+    name: "29 - Camel - FA2 Operator",
+    data: camelDataFA20Operator,
   },
   {
     pathname: "/camel/chapter-fa2-hook",
     language: "CameLIGO",
-    name: "28 - Camel - FA2 Hook",
-    data: camelFA20Hook,
-  },
-  {
-    pathname: "/camel/chapter-preprocessor",
-    language: "CameLIGO",
-    name: "30 - Camel - Preprocessor",
-    data: camelDataPreprocessor,
+    name: "30 - Camel - FA2 Hook",
+    data: camelDataFA20Hook,
   },
   
 
@@ -458,15 +460,26 @@ export const chapterData = [
   {
     pathname: '/reason/chapter-interop',
     language: 'ReasonLIGO',
-    name: '25 - Reason - Interoperability',
+    name: '26 - Reason - Interoperability',
     data: reasonDataInterop,
   },
   {
     pathname: '/reason/chapter-preprocessor',
     language: 'ReasonLIGO',
-    name: '25 - Reason - Preprocessor',
+    name: '27 - Reason - Preprocessor',
     data: reasonDataPreprocessor,
   },
-  
+  {
+    pathname: "/reason/chapter-fa2",
+    language: "ReasonLIGO",
+    name: "28 - Reason - FA2",
+    data: reasonDataFA20,
+  },
+  {
+    pathname: "/reason/chapter-fa2-operator",
+    language: "ReasonLIGO",
+    name: "29 - Reason - FA2 Operator",
+    data: reasonDataFA20Operator,
+  },
   
 ]

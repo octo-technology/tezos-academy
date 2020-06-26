@@ -1,4 +1,4 @@
-# Chapter 29 : Interoperability with Michelson
+# Chapter 26 : Interoperability with Michelson
 
 <dialog character="alien">We need to hack aliens, decompile their code to understand how their informatic works </dialog>
 

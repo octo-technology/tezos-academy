@@ -1,4 +1,4 @@
-# Chapter 23 : Financial Asset 2.0 
+# Chapter 28 : Financial Asset 2.0 
 
 <dialog character="mechanics">Captain, Let's create a ship token.</dialog>
 

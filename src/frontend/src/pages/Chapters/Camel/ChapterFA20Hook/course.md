@@ -1,4 +1,4 @@
-# Chapter 25 : Financial Asset 2.0 - Tranfer Hook
+# Chapter 30 : Financial Asset 2.0 - Tranfer Hook
 
 <dialog character="mechanics">Captain, all space pirate should have a hook like in old times.</dialog>
 
