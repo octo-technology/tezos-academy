@@ -26,7 +26,7 @@ The FA2 interface formalize a standard way to design tokens and thus describes a
 
 In addition to the FA2 interface, the FA2 standard provides helper functions to manipulate data structures involved in FA2 interface. The FA2 library contains helper functions for :
 <!-- prettier-ignore -->* a generic behavior and transfer hook implementation (behavior based on *permissions\_descriptor*), 
-* converting data structures, 
+* converting/manipulating data structures, 
 * defining hooks between contracts when transfer is emitted, 
 * defining operators for managing allowance. 
 
@@ -34,52 +34,22 @@ In addition to the FA2 interface, the FA2 standard provides helper functions to 
 
 Token contract implementing the FA2 standard MUST have the following entry points.
 
+TODO should be renamed fa2_entry_points
 ```
-type fa2_entry_points =
-
-| Transfer of transfer list
-| Balance_of of balance_of_param
-| Total_supply of total_supply_param
-| Token_metadata of token_metadata_param
-| Permissions_descriptor of permissions_descriptor contract
-| Update_operators of update_operator list
-| Is_operator of is_operator_param
+type parameter = 
+| Transfer(transferParameter)
+| Balance_of(balanceOfParameterMichelson)
+| Permissions_descriptor(permissionsDescriptorParameter)
+| Update_operators(updateOperatorsParameter)
 ```
 
 
-### Metadata
 
-<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
-
-<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback contract, and sends back a list of *token\_metadata* records.
-
-FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
-transferred) is always 1.
-
-The *decimals* property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
-
-
-#### Interface
-
-```
-type token_metadata = {
-  token_id : token_id;
-  symbol : string;
-  name : string;
-  decimals : nat;
-  extras : (string, string) map;
-}
-
-type token_metadata_michelson = token_metadata michelson_pair_right_comb
-
-type token_metadata_param = {
-  token_ids : token_id list;
-  callback : (token_metadata_michelson list) contract;
-}
-```
 
 
 ### Balance of
+
+The FA2 client (contracts using our token) may need to know the balance of a owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract. 
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which get the balance of multiple account/token pairs (because FA2 supports mutiple token).  
 ```
@@ -93,60 +63,55 @@ type token_metadata_param = {
 #### Interface
 
 The FA2 interface defines request/response parameters as follow :
-```
-type token_id = nat
-
-type balance_of_request = {
-  owner : address;
-  token_id : token_id;
-}
-
-type balance_of_response = {
-  request : balance_of_request;
-  balance : nat;
-}
-
-type balance_of_param = {
-  requests : balance_of_request list;
-  callback : (balance_of_response_michelson list) contract;
-}
-```
-
-### Totalsupply
-
-FA2 token contracts MUST implement the _Totalsupply_ entry point which get the total supply of tokens for multiple token types  (because FA2 supports mutiple token).
-```
-| Total_supply of total_supply_param
-```
-
-<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
-
-<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
-
-#### Interface
 
 ```
-type token_id = nat
+type balanceOfRequest = {
+    owner: tokenOwner,
+    token_id: tokenId,
+};
 
-type total_supply_response = {
-  token_id : token_id;
-  total_supply : nat;
-}
+type balanceOfResponse = {
+    request: balanceOfRequest,
+    balance: tokenBalance,
+};
 
-type total_supply_response_michelson = total_supply_response michelson_pair_right_comb
+type balanceOfCallback = contract(list(balanceOfResponse));
 
-type total_supply_param = {
-  token_ids : token_id list;
-  callback : (total_supply_response_michelson list) contract;
-}
+type balanceOfParameter = {
+    requests: list(balanceOfRequest),
+    callback: balanceOfCallback,
+};
+
+type balanceOfRequestMichelson = michelson_pair_right_comb(balanceOfRequest);
+
+type balanceOfResponseAuxiliary = {
+    request: balanceOfRequestMichelson,
+    balance: tokenBalance
+};
+
+type balanceOfResponseMichelson = michelson_pair_right_comb(balanceOfResponseAuxiliary);
+
+type balanceOfCallbackMichelson = contract(list(balanceOfResponseMichelson));
+
+type balanceOfParameterAuxiliary = {
+    requests: list(balanceOfRequestMichelson),
+    callback: balanceOfCallbackMichelson
+};
+
+type balanceOfParameterMichelson = michelson_pair_right_comb(balanceOfParameterAuxiliary);
 ```
+
+
 
 ### Transfer
 
-FA2 token contracts MUST implement the _Transfer_ entry point which transfer tokens between and MUST ensure following rules.
+Most basic feature of a token is to provide a way to exchange tokens between owners. The FA2 standard speficies an entry point _Transfer_ for this.
+
 ```
 | Transfer of transfer list
 ```
+
+FA2 token contracts MUST implement the _Transfer_ entry point which transfer tokens between owners and MUST ensure following rules.
 
 #### Rules
 
@@ -163,8 +128,7 @@ permission policies (transfer hook is the recommended design pattern to implemen
 
 If the additional permission hook fails, the whole transfer operation MUST fail with a custom error mnemonic.
 
-4) Core transfer behavior MUST update token balances exactly as the operation parameters specify it. No changes to amount values or additional transfers are
-allowed.
+4) Core transfer behavior MUST update token balances exactly as the operation parameters specify it. No changes to amount values or additional transfers are allowed.
 
 
 
@@ -173,25 +137,36 @@ allowed.
 It transfer tokens from a *from_* account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
 
 ```
-type token_id = nat
+type tokenId = nat;
 
-type transfer_destination = {
-  to_ : address;
-  token_id : token_id;
-  amount : nat;
-}
-
-type transfer_destination_michelson = transfer_destination michelson_pair_right_comb
+/**
+ * Types used within the contract for development purposes
+ */
+type transferContents = {
+    to_: tokenOwner,
+    token_id: tokenId,
+    amount: tokenAmount
+};
 
 type transfer = {
-  from_ : address;
-  txs : transfer_destination list;
-}
+    from_: tokenOwner,
+    txs: list(transferContents)
+};
 
-type transfer_aux = {
-  from_ : address;
-  txs : transfer_destination_michelson list;
-}
+/**
+ * Concrete parameter type definitions with
+ * their Michelson representations.
+ */
+type transferContentsMichelson = michelson_pair_right_comb(transferContents);
+
+type transferAuxiliary = {
+    from_: tokenOwner,
+    txs: list(transferContentsMichelson)
+};
+
+type transferMichelson = michelson_pair_right_comb(transferAuxiliary);
+
+type transferParameter = list(transferMichelson);
 ```
 
 ### Error Handling
@@ -243,3 +218,69 @@ Error mnemonic - Description
 
 <!-- prettier-ignore -->4 -If a given *token\_id* is not found then the function *get\_total\_supply* must throw an exception with the predefined error messsage *token\_undefined*.
 
+
+
+
+
+
+### Metadata
+
+The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range od ids (for non-fungible tokens) or total supply of assets (for fungible tokens). 
+
+<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
+
+<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback contract, and sends back a list of *token\_metadata* records.
+
+FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
+transferred) is always 1.
+
+The *decimals* property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
+
+
+#### Interface
+
+```
+type token_metadata = {
+  token_id : token_id;
+  symbol : string;
+  name : string;
+  decimals : nat;
+  extras : (string, string) map;
+}
+
+type token_metadata_michelson = token_metadata michelson_pair_right_comb
+
+type token_metadata_param = {
+  token_ids : token_id list;
+  callback : (token_metadata_michelson list) contract;
+}
+```
+
+### Totalsupply
+
+FA2 token contracts MUST implement the _Totalsupply_ entry point which get the total supply of tokens for multiple token types  (because FA2 supports mutiple token).
+```
+| Total_supply of total_supply_param
+```
+
+<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
+
+<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
+
+#### Interface
+
+```
+type token_id = nat
+
+type total_supply_response = {
+  token_id : token_id;
+  total_supply : nat;
+}
+
+type total_supply_response_michelson = total_supply_response michelson_pair_right_comb
+
+type total_supply_param = {
+  token_ids : token_id list;
+  callback : (total_supply_response_michelson list) contract;
+}
+```
