@@ -73,7 +73,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "cypress": "^4.7.0",
     "eslint-config-react-app": "^5.2.1",
-    "jest": "^26.0.1",
+    "jest": "^24.9.0",
     "mockdate": "^3.0.2",
     "raw-loader": "^4.0.1",
     "react-test-renderer": "^16.13.1",
