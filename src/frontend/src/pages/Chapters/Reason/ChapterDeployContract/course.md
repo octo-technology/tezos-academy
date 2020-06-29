@@ -90,20 +90,20 @@ ligo compile-contract code.religo mainFunc > code.tz
 
 Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
 ```
-ligo compile-storage [options] code.religo mainFunc '<expression>'
+ligo compile-storage [options] code.religo mainFunc '<ligo-expression>'
 ```
 
-\<expression> is a ligo expression
+<!-- prettier-ignore --><ligo-expression> is a ligo expression
 
 
 ### Invocation parameter
 
 Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
 ```
-ligo compile-parameter [options] code.religo mainFunc '<expression>'
+ligo compile-parameter [options] code.religo mainFunc '<ligo-expression>'
 ```
 
-\<expression> is a ligo expression
+<!-- prettier-ignore --><ligo-expression> is a ligo expression
 
 
 ### Simulating 
@@ -156,21 +156,18 @@ The command line *ligo compile-storage* for transpiling a map containg a tuple.
 ligo compile-storage starmap.religo main 'Map.literal ([("earth", (1,1,1))])'
 ```
 
-CAMEL
-```
-ligo compile-storage taco.mligo main 'Map.literal [(1n, {current_stock = 50n; max_price = 50tez})]'
-```
-
 #### Tuples
 
 Initialization of elements of a tuple is specified between _(_ and _)_ separated by comma _,_.
 
 The command line *ligo compile-storage* for transpiling a map containg a tuple.
+
 ```
 ligo compile-storage starmap.religo main 'Map.literal ([("earth", (1,1,1))])'
 ```
 
 This command returns :
+
 ```
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```
@@ -201,13 +198,14 @@ let main = ((action,store) : (parameter,storage)): return =>
   };
 ```
 
-
 The command line *ligo compile-storage* for transpiling a map containg a record tuple.
+
 ```
 ligo compile-storage starmap2.religo main 'Map.literal ([("earth", {x:1,y:1,z:1})])'
 ```
 
 This command returns :
+
 ```
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```

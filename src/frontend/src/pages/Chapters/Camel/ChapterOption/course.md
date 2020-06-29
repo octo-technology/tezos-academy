@@ -33,8 +33,8 @@ match <variable> with
 | None -> <block_code>
 ```
 
-_<block_code>_ can be a single instruction or a function call
-_<value_name>_ is a local variable name. _<value_name>_ which holds the _option_ value and can be used inside the _<block_code>_
+<!-- prettier-ignore -->_<block\_code>_ can be a single instruction or a function call
+<!-- prettier-ignore -->_<value\_name>_ is a local variable name. _<value\_name>_ which holds the _option_ value and can be used inside the _<block\_code>_
 
 Here is an example of accessing maps returning an option type and retrieving the value behind the optional :
 
@@ -57,7 +57,7 @@ let my_balance : expected_type = match Map.find_opt 1n user_balances with
 | None -> (failwith ("Unknown user") : expected_type)
 ```
 
-Notice the cast of _failwith_ instruction into an _expected_type_
+<!-- prettier-ignore -->Notice the cast of _failwith_ instruction into an _expected\_type_
 
 ## Your mission
 

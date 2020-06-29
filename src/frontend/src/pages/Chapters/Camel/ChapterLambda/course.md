@@ -44,7 +44,7 @@ type return = (operation list * storage)
 
 type parameter = ChangeFunc of (coordinates) -> coordinates | AddPlanet of (string * coordinates) | DoNothing
 
-let addPlanet (input, store : (string * coordinates) * storage) : return =
+<!-- prettier-ignore -->let addPlanet (input, store : (string \* coordinates) \* storage) : return =
     let modified : planets = match Map.find_opt input.0 store.systemplanets with
        Some (p) -> (failwith("planet already exist") : planets)
      | None -> Map.add input.0 (store.func input.1) store.systemplanets
@@ -92,13 +92,10 @@ fun (<parameter_name> : <parameter_type>) -> <body>
 The implementation of the lambda can be change with the *changeFunc* function which assigns new code to *func*. Here is an exemple of execution of the *ChangeFunc* entrypoint with the simulation ligo command line :  
 ```
 ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});systemplanets=Map.literal [("earth", {x=2;y=7;z=1})] }'
-
 ```
 
 ⚠️ Notice the returned type of the lambda is not specified
-```
-fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z}
-```
+<!-- prettier-ignore -->``` fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z} ```
 
 ⚠️ Notice the new implementation of *func* multiplies 'x' coordinate by 100 (defined as parameter of *ChangeFunc* entrypoint)
 
@@ -112,6 +109,7 @@ We have a smart contract that reference planets is the Sol system. Since the beg
 Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change ! A *DeduceCategoryChange* entrypoint allows us to change the lambda which determines the category of a celestial body. (All we have to do is define the new rule and all registered celestial bodies will be updated). 
 
 Take a look at the starmap contract :
+
 ```
 // starmap.ligo
 type coordinates = { x : int; y : int; z : int }
@@ -131,7 +129,7 @@ type return = (operation list * storage)
 
 type parameter = DeduceCategoryChange of (planet) -> planet_type | AddPlanet of (string * planet) | DoNothing
 
-let addPlanet (input, store : (string * planet) * storage) : return =
+<!-- prettier-ignore -->let addPlanet (input, store : (string \* planet) \* storage) : return =
     let modified : planets = match Map.find_opt input.0 store.celestialbodies with
        Some (p) -> (failwith("planet already exist") : planets)
      | None -> Map.add input.0 {position=input.1.position;mass=input.1.mass;category=store.func input.1} store.celestialbodies

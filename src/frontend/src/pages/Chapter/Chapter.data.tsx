@@ -26,15 +26,16 @@ import { data as pascalDataTuples } from "../Chapters/Pascal/ChapterTuples";
 import { data as pascalDataTypes } from "../Chapters/Pascal/ChapterTypes";
 import { data as pascalDataVariables } from "../Chapters/Pascal/ChapterVariables";
 import { data as pascalDataVariant } from "../Chapters/Pascal/ChapterVariant";
+import { data as pascalDataPreprocessor } from "../Chapters/Pascal/ChapterPreprocessor";
 
 import { data as camelDataAddresses } from "../Chapters/Camel/ChapterAddresses";
 import { data as camelDataBuiltIns } from "../Chapters/Camel/ChapterBuiltIns";
 import { data as camelDataConditionals } from "../Chapters/Camel/ChapterConditionals";
 import { data as camelDataDeployContract } from "../Chapters/Camel/ChapterDeployContract";
 import { data as camelDataFA12 } from "../Chapters/Camel/ChapterFA12";
-import { data as camelFA20 } from "../Chapters/Camel/ChapterFA20";
-import { data as camelFA20Operator } from "../Chapters/Camel/ChapterFA20Operator";
-import { data as camelFA20Hook } from "../Chapters/Camel/ChapterFA20Hook";
+import { data as camelDataFA20 } from "../Chapters/Camel/ChapterFA20";
+import { data as camelDataFA20Operator } from "../Chapters/Camel/ChapterFA20Operator";
+import { data as camelDataFA20Hook } from "../Chapters/Camel/ChapterFA20Hook";
 import { data as camelDataFunctions } from "../Chapters/Camel/ChapterFunctions";
 import { data as camelDataInteractions } from "../Chapters/Camel/ChapterInteractions";
 import { data as camelDataInterop } from "../Chapters/Camel/ChapterInterop";
@@ -55,12 +56,15 @@ import { data as camelDataTuples } from "../Chapters/Camel/ChapterTuples";
 import { data as camelDataTypes } from "../Chapters/Camel/ChapterTypes";
 import { data as camelDataVariables } from "../Chapters/Camel/ChapterVariables";
 import { data as camelDataVariant } from "../Chapters/Camel/ChapterVariant";
+import { data as camelDataPreprocessor } from "../Chapters/Camel/ChapterPreprocessor";
 
 import { data as reasonDataAddresses } from "../Chapters/Reason/ChapterAddresses";
 import { data as reasonDataBuiltIns } from "../Chapters/Reason/ChapterBuiltIns";
 import { data as reasonDataConditionals } from "../Chapters/Reason/ChapterConditionals";
 import { data as reasonDataDeployContract } from "../Chapters/Reason/ChapterDeployContract";
 import { data as reasonDataFA12 } from "../Chapters/Reason/ChapterFA12";
+import { data as reasonDataFA20 } from "../Chapters/Reason/ChapterFA20";
+import { data as reasonDataFA20Operator } from "../Chapters/Reason/ChapterFA20Operator";
 import { data as reasonDataFunctions } from "../Chapters/Reason/ChapterFunctions";
 import { data as reasonDataInteractions } from "../Chapters/Reason/ChapterInteractions";
 import { data as reasonDataInterop } from "../Chapters/Reason/ChapterInterop";
@@ -81,7 +85,7 @@ import { data as reasonDataTuples } from "../Chapters/Reason/ChapterTuples";
 import { data as reasonDataTypes } from "../Chapters/Reason/ChapterTypes";
 import { data as reasonDataVariables } from "../Chapters/Reason/ChapterVariables";
 import { data as reasonDataVariant } from "../Chapters/Reason/ChapterVariant";
-
+import { data as reasonDataPreprocessor } from "../Chapters/Reason/ChapterPreprocessor";
 
 
 export const chapterData = [
@@ -196,6 +200,13 @@ export const chapterData = [
     name: '26- Pascal - Interoperability',
     data: pascalDataInterop,
   },
+  {
+    pathname: '/pascal/chapter-preprocessor',
+    language: 'PascaLIGO',
+    name: '27- Pascal - Preprocessor',
+    data: pascalDataPreprocessor,
+  },
+  
   
 
   {
@@ -292,12 +303,6 @@ export const chapterData = [
     name: '24 - Camel - Multisignature',
     data: camelDataMultisig,
   },
-  {
-    pathname: '/camel/chapter-interop',
-    language: 'CameLIGO',
-    name: '25 - Camel - Interoperability',
-    data: camelDataInterop,
-  },
   
   {
     pathname: '/camel/chapter-fa12',
@@ -306,23 +311,36 @@ export const chapterData = [
     data: camelDataFA12,
   },
   {
+    pathname: '/camel/chapter-interop',
+    language: 'CameLIGO',
+    name: '26 - Camel - Interoperability',
+    data: camelDataInterop,
+  },
+  {
+    pathname: "/camel/chapter-preprocessor",
+    language: "CameLIGO",
+    name: "27 - Camel - Preprocessor",
+    data: camelDataPreprocessor,
+  },
+  {
     pathname: "/camel/chapter-fa2",
     language: "CameLIGO",
-    name: "26 - Camel - FA2",
-    data: camelFA20,
+    name: "28 - Camel - FA2",
+    data: camelDataFA20,
   },
   {
     pathname: "/camel/chapter-fa2-operator",
     language: "CameLIGO",
-    name: "27 - Camel - FA2 Operator",
-    data: camelFA20Operator,
+    name: "29 - Camel - FA2 Operator",
+    data: camelDataFA20Operator,
   },
   {
     pathname: "/camel/chapter-fa2-hook",
     language: "CameLIGO",
-    name: "28 - Camel - FA2 Hook",
-    data: camelFA20Hook,
+    name: "30 - Camel - FA2 Hook",
+    data: camelDataFA20Hook,
   },
+  
 
   {
     pathname: '/reason/chapter-about',
@@ -442,8 +460,26 @@ export const chapterData = [
   {
     pathname: '/reason/chapter-interop',
     language: 'ReasonLIGO',
-    name: '25 - Reason - Interoperability',
+    name: '26 - Reason - Interoperability',
     data: reasonDataInterop,
+  },
+  {
+    pathname: '/reason/chapter-preprocessor',
+    language: 'ReasonLIGO',
+    name: '27 - Reason - Preprocessor',
+    data: reasonDataPreprocessor,
+  },
+  {
+    pathname: "/reason/chapter-fa2",
+    language: "ReasonLIGO",
+    name: "28 - Reason - FA2",
+    data: reasonDataFA20,
+  },
+  {
+    pathname: "/reason/chapter-fa2-operator",
+    language: "ReasonLIGO",
+    name: "29 - Reason - FA2 Operator",
+    data: reasonDataFA20Operator,
   },
   
 ]

@@ -203,10 +203,11 @@ let main = ((param,s) : (parameter, storage)) : return  =>
   }
 ```
 
-Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached :  
-* the message *packed_msg* is removed from *message_storage*
+Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached : 
+
+<!-- prettier-ignore -->* the message *packed\_msg* is removed from *message\_storage*
 * the action is executed and takes the _string_ as parameter
-* the inner state *state_hash* of the contract is updated by creating a hash key of old state + treated message 
+<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message 
 * the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ```
@@ -234,6 +235,7 @@ if (sender_proposal_counter > s.max_proposal) {
 ```
 
 Notice in the *Withdraw* function :
+
 * if a message proposal has no voters the it is removed
 * the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
@@ -244,6 +246,6 @@ Notice in the *Withdraw* function :
 
 <!-- prettier-ignore --> 1- Notice the storage contains a property called *reputation* which associates a _nat_ number to a voter.
 
-<!-- prettier-ignore --> 2- Modify *increment* function to modify the reputation of a given *addr* address by granting a point of reputation.  (use *count* as temporary variable for the _switch_ operator_). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
+<!-- prettier-ignore --> 2- Modify *increment* function to modify the reputation of a given *addr* address by granting a point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
 
-<!-- prettier-ignore --> 3- Modify *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation. 
+<!-- prettier-ignore --> 3- Modify *reputation\_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation. 

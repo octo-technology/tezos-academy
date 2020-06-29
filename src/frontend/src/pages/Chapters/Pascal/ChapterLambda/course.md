@@ -105,6 +105,7 @@ We have a smart contract that reference planets is the Sol system. Since the beg
 Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change ! A *DeduceCategoryChange* entrypoint allows us to change the lambda which determines the category of a celestial body. (All we have to do is define the new rule and all registered celestial bodies will be updated). 
 
 Take a look at the starmap contract :
+
 ```
 // starmap.ligo
 type coordinates is record [
@@ -167,9 +168,6 @@ function applyDeduceCatg (const name : string; const p : planet) : planet is
  Map.map (applyDeduceCatg, store.celestialbodies);
  ```
 
-
-
- 
 
 
 We want you to update our "starmap" contract in order to take this new rule into account. 

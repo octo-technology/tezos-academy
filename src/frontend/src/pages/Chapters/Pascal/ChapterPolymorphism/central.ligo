@@ -19,11 +19,6 @@ function registerShip(const key: shipKey; const shipAddress: address; const ship
 function sendTx(const e: ship; const callbackAddress: address): (list(operation)) is
 begin
     // Type your solution below
-    const contractInterface: contract(actionSquadron) = get_entrypoint("%moduleResponse", callbackAddress);
-    const ee : actionModuleResponse = record
-        e = e
-    end;
-    const sendbackOperation: operation = transaction(ModuleResponse(ee), 0mutez, contractInterface);
     
     const listoperation : list(operation) = list
         sendbackOperation

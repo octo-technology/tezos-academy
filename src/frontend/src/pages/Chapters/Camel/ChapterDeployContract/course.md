@@ -20,6 +20,7 @@ The description of the storage is done by strongly-typing the data structure.
 
 Entrypoints of a smart contract describe how to mutate a storage. 
 Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
+
 ```
                +--------------------+
 entrypoint ->  |                    |  -> modified storage
@@ -27,6 +28,7 @@ parameters ->  |  smart contract    |  -> operations
 storage    ->  |                    |
                +--------------------+
 ```
+
 Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
@@ -36,6 +38,7 @@ Operations are transactions (smart contract invocation) that will be sent to som
 A smart contract must be deployed to the blockchain in order to be invoked. When deploying a smart contract ot the blockchain , one must specify the initial state of the storage. 
 Deployment of a smart contract in Tezos is called "origination".
 Here is the syntax of the tezos command line to deploy a smart contract : 
+
 ```
 tezos-client originate contract <contract_name> for <user> transferring <amount> from <from_user> \
              running <tz_file> \
@@ -55,6 +58,7 @@ tezos-client originate contract <contract_name> for <user> transferring <amount>
 Once the smart contract has been deployed on the blockchain (contract-origination operation baked into a block), it is possible to invoke an entrypoint of the smart contract using the command line.
 
 Here is the syntax of the tezos command line to invoke a smart contract : 
+
 ```
 tezos-client transfer <amount> from <user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
 ```
@@ -79,6 +83,7 @@ This ligo compiler is also used to transform "Ligo expression" into "Michelson e
 ### Compile
 
 Here is how to transform ligo code into Michelson code using the ligo compiler in command line.
+
 ```
 ligo compile-contract code.mligo mainFunc > code.tz
 ```
@@ -89,6 +94,7 @@ ligo compile-contract code.mligo mainFunc > code.tz
 ### Initial storage
 
 Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
+
 ```
 ligo compile-storage [options] code.mligo mainFunc '<expression>'
 ```
@@ -99,6 +105,7 @@ ligo compile-storage [options] code.mligo mainFunc '<expression>'
 ### Invocation parameter
 
 Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
+
 ```
 ligo compile-parameter [options] code.mligo mainFunc '<expression>'
 ```
@@ -109,6 +116,7 @@ ligo compile-parameter [options] code.mligo mainFunc '<expression>'
 ### Simulating 
 
 Here is how to simulate execution of an entrypoint using the ligo compiler in command line.
+
 ```
 ligo dry-run [options] code.mligo mainFunc '<entrypoint(p)>' '<storage_state>'
 ```
@@ -158,11 +166,13 @@ ligo compile-storage starmap.mligo main 'Map.literal [("earth", (1,1,1))]'
 Initialization of elements of a tuple is specified between _(_ and _)_ separated by comma _,_.
 
 The command line *ligo compile-storage* for transpiling a map containg a tuple.
+
 ```
 ligo compile-storage starmap.mligo main 'Map.literal [("earth", (1,1,1))]'
 ```
 
 This command returns :
+
 ```
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```
@@ -170,6 +180,7 @@ This command returns :
 #### Record
 
 Initialization of elements of a record is specified between _{_ and _}_ separated by comma _;_. Each element is a key/value pair seperated by _=_ and follow the syntax :
+
 ```
 { <key1> = <value1>; <key2> = <value2> } 
 ```
@@ -194,11 +205,13 @@ let main (action,store : parameter * storage): return =
 
 
 The command line *ligo compile-storage* for transpiling a map containg a record tuple.
+
 ```
 ligo compile-storage starmap2.mligo main 'Map.literal [("earth", {x=1;y=1;z=1})]'
 ```
 
 This command returns :
+
 ```
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```
