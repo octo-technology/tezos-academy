@@ -16,11 +16,13 @@ The FA2 standard proposes an approach in which a pluggable separate contract (pe
 
 Although, it is recommended to implement "transfer hook design pattern" in many cases this pattern is prohibitively expensive in terms of gas cost due to extra inter-contract calls.
 
-#### definition
+#### Definition
 
 _Transfer hook_ is one recommended design pattern to implement FA2 that enables separation of the core token transfer logic and a permission policy.
 
 Instead of implementing FA2 as a monolithic contract, a permission policy can be implemented as a separate contract. Permission policy contract provides an entry point invoked by the core FA2 contract to accept or reject a particular transfer operation (such an entry point is called *transfer hook*).
+
+![](/images/small-fa2-hook.png)
 
 Although this approach introduces gas consumption overhead (compared to an all-in-one contract) by requiring an extra inter-contract call, it also offers some other advantages: 
 1) FA2 core implementation can be verified once, and certain properties (not related to permission policy) remain unchanged.
@@ -203,6 +205,8 @@ let own_policy : permissions_descriptor = {
 ## Your mission
 
 We are working on a Fungible token which can handle multiple assets. We decided to implement a Hook pattern. A FA2 core contract handle all fa2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules. 
+
+![](/images/small-fa2-hook-exercise.png)
 
 1 - we want to accept a transfer if transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
 
