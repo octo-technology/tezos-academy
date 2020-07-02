@@ -13,15 +13,13 @@ In this chapter we will focus on _Operators_ and _Permissions_.
 Token contract implementing the FA2 standard MUST have the following entry points.
 
 ```
-type fa2_entry_points =
-
-| Transfer of transfer list
-| Balance_of of balance_of_param
-| Total_supply of total_supply_param
-| Token_metadata of token_metadata_param
-| Permissions_descriptor of permissions_descriptor contract
-| Update_operators of update_operator list
-| Is_operator of is_operator_param
+type fa2_entry_points is
+  Transfer                of transfer_params
+| Balance_of              of balance_of_params
+| Token_metadata_registry of token_metadata_registry_params
+| Permissions_descriptor  of permissions_descriptor_params
+| Update_operators        of update_operator_params
+| Is_operator             of is_operator_params
 ```
 
 ### Operators
@@ -41,33 +39,46 @@ an _operator_ is defined as a relationship between two address (owner address an
 FA2 interface specifies two entry points to update and inspect operators. Once permitted for the specific token owner, an operator can transfer any tokens belonging to the owner.
 
 ```
-| Update_operators of update_operator_michelson list
-| Is_operator of is_operator_param
+| Update_operators  of update_operator_params
+| Is_operator of is_operator_params
 ```
 
-<!-- prettier-ignore -->where parameter type *update\_operator* and *is\_operator\_param* are :
+<!-- prettier-ignore -->where parameter type *update\_operator\_params* and *is\_operator\_params* are :
 
 ```
-type operator_param = {
-  owner : address;
-  operator : address;
-}
+type operator_param_ is record
+  owner    : address
+; operator : address
+end
 
-type update_operator =
-  | Add_operator_p of operator_param
-  | Remove_operator_p of operator_param
+type operator_param is michelson_pair_right_comb(operator_param_)
 
-type is_operator_param = {
-  operator : operator_param;
-  callback : (is_operator_response_michelson) contract;
-}
+type update_operator_param is
+| Add_operator    of operator_param
+| Remove_operator of operator_param
+
+type update_operator_params is list (update_operator_param)
+
+type is_operator_response_ is record
+  operator    : operator_param
+; is_operator : bool
+end
+
+type is_operator_response is michelson_pair_right_comb(is_operator_response_)
+
+type is_operator_params_ is record
+  operator : operator_param
+; callback : contract (is_operator_response)
+end
+
+type is_operator_params is michelson_pair_right_comb(is_operator_params_)
 ```
 
 <!-- prettier-ignore -->Notice the *update\_operator* can only Add or Remove an _operator_ (an allowance between an operator address and a token owner address).
 
-<!-- prettier-ignore -->Notice the parameter _is\_operator\_param_ given to *Is\_operator* entry point contains a *callback* property used to send back a response to the calling contract.
+<!-- prettier-ignore -->Notice the parameter _is\_operator\_params_ given to *Is\_operator* entry point contains a *callback* property used to send back a response to the calling contract.
 
-<!-- prettier-ignore -->Notice entry point *Update\_operators* expectes a list of *update\_operator\_michelson*. The fa2 convertor helper provide the *operator\_param\_to\_michelson* function to convert *operator\_param* format into *update\_operator\_michelson* format. 
+<!-- prettier-ignore -->Notice entry point *Update\_operators* expectes a list of *update\_operator\_param*. 
 
 
 #### FA2 standard operator library
@@ -77,11 +88,7 @@ Some helpers functions has been implemented in the FA2 library which help manipu
 
 an _operator_ is a relationship between two address (owner address and operator address)
 
-<!-- prettier-ignore -->function *is\_operator* returns to a contract caller whether an operator address is associated to an owner address
-
 <!-- prettier-ignore -->function *update\_operators* allows to Add or Remove an operator in the list of operators.
-
-<!-- prettier-ignore -->function *validate\_update\_operators\_by\_owner*, it ensures the given adress is owner of an _operator_  
 
 <!-- prettier-ignore -->function *validate\_operator* validates operators for all transfers in the batch at once, depending on given *operator\_transfer\_policy*
 
@@ -107,12 +114,29 @@ The *permission descriptor* indicates which standard permission policies are imp
 
 The FA2 standard defines a special metadata entry point *permission descriptor* containing standard permission policies. 
 ```
-type permissions_descriptor = {
-  operator : operator_transfer_policy;
-  receiver : owner_hook_policy;
-  sender : owner_hook_policy;
-  custom : custom_permission_policy option;
-}
+type permissions_descriptor_ is record
+  operator : operator_transfer_policy
+; receiver : owner_hook_policy
+; sender   : owner_hook_policy
+; custom   : option (custom_permission_policy)
+end
+```
+
+#### Interface
+
+<!-- prettier-ignore -->FA2 token contract MUST implement the *Permissions\_descriptor* entry point which provides token policies.
+ 
+```
+| Permissions_descriptor  of permissions_descriptor_params
+```
+
+<!-- prettier-ignore -->The expected parameter *permissions\_descriptor\_params* for this entry point is a callback function sending back a *permissions\_descriptor\_* to calling contract. Those calling contract are considered as "Fa2 client contract".
+
+```
+type permissions_descriptor is michelson_pair_right_comb(permissions_descriptor_)
+
+type permissions_descriptor_params is
+  contract (permissions_descriptor)
 ```
 
 
@@ -182,8 +206,8 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 
   * Vera account is owner of the token 1
 
-<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *operator\_update\_to\_michelson* function to convert your parameters into the format expected by *Update\_operators* entry point.
+<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
 
-<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1  (token\_id and and amount must be 1). You can use the *transfer\_to\_michelson* function to convert your parameters into the format expected by *Transfer* entry point.
+<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
 You will have to modify the storage to in the state where "Vera account is owner of the token 1" (step 1) and Bob is authorized to transfer token taken from Vera account (step 2).

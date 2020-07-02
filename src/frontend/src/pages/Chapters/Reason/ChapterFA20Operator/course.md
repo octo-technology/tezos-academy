@@ -41,6 +41,7 @@ FA2 interface specifies two entry points to update and inspect operators. Once p
 ```
 
 <!-- prettier-ignore -->where parameter type *updateOperatorsParameter* is :
+
 ```
 type operatorParameter = {
     owner: tokenOwner,
@@ -48,7 +49,7 @@ type operatorParameter = {
 }
 
 type updateOperatorsAddOrRemove =
-// There's an extra `_p` in the constructors below to avoid 'redundant constructor' error 
+// There's an extra '_p' in the constructors below to avoid 'redundant constructor' error 
 // due to the interop type conversions below
 | Add_operator_p(operatorParameter)
 | Remove_operator_p(operatorParameter)
@@ -117,7 +118,7 @@ FA2 defines :
 * a set of predefined permission policies that are optional
 
 
-#### permissions_descriptor
+#### Permissions descriptor
 
 <!-- prettier-ignore -->FA2 specifies an interface *permissions\_descriptor* allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions\_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
 
@@ -139,7 +140,7 @@ type permissionsDescriptor = {
 ```
 
 
-#### operator_transfer_policy
+#### Operator transfer policy
 
 <!-- prettier-ignore -->*operatorTransferPolicy* - defines who can transfer tokens. Tokens can be transferred by the token owner or an operator (some address that is authorized to transfer tokens on behalf of the token owner). A special case is when neither owner nor operator can transfer tokens (can be used for non-transferable tokens). 
 
@@ -152,7 +153,7 @@ type operatorTransferPolicy =
 | Owner_or_operator_transfer // default
 ```
 
-#### owner_hook_policy
+#### Owner hook policy
 
 <!-- prettier-ignore -->*ownerHookPolicy* - defines if sender/receiver hooks should be called or not. Each token owner contract MAY implement either an *fa2\_token\_sender* or *fa2\_token\_receiver* hook interface. Those hooks MAY be called when a transfer sends tokens from the owner account or the owner receives tokens. The hook can either accept a transfer transaction or reject it by failing.
 
@@ -164,7 +165,7 @@ type ownerHookPolicy =
 
 ```
 
-#### custom_permission_policy
+#### Custom permission policy
 
 <!-- prettier-ignore -->It is possible to extend permission policy with a custom behavior, which does not overlap with already existing standard policies. This standard does not specify exact types for custom config entry points. FA2 token contract clients that support custom config entry points must know their types a priori and/or use a tag hint of *customPermissionPolicy*.
 
@@ -179,17 +180,19 @@ type customPermissionPolicy = {
 #### Permission Policy Formulae
 
 Each concrete implementation of the permission policy can be described by a formula which combines permission behaviors in the following form:
+
 ```
 Operator(?) * Receiver(?) * Sender(?)
 ```
 
 This formula describes the policy which allows only token owners to transfer their own
 tokens :
+
 ```
 Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 ```
 
-#### interface 
+#### Interface 
 
 Updating permissions requires specific parameters, and thus follow these type definitions.
 
@@ -229,5 +232,5 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 <!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
 
-<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1. You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
+<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1  (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
 You will have to modify the storage to in the state where "Vera account is owner of the token 1" (step 1) and Bob is authorized to transfer token taken from Vera account (step 2).
