@@ -14,7 +14,7 @@
 
 function get_hook_entrypoint (const hook_contract : address) : (unit) -> contract(transfer_descriptor_param) is
 block {
-  const hook_entry_opt : option(contract(transfer_descriptor_param)) = (None : option(contract(transfer_descriptor_param)) ); //Tezos.get_entrypoint_opt("%tokens_transferred_hook", hook_contract);
+  const hook_entry_opt : option(contract(transfer_descriptor_param)) = Tezos.get_entrypoint_opt("%tokens_transferred_hook", hook_contract);
   const hook_entry : contract(transfer_descriptor_param) = case (hook_entry_opt) of
   | Some (hook_entry) -> hook_entry
   | None -> (failwith("Undefined hook"): contract(transfer_descriptor_param))
