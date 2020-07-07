@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export const ChapterStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 10px;
   height: calc(100vh - 130px);
   margin: 74px 20px 0;
 
@@ -14,15 +14,15 @@ export const ChapterStyled = styled.div`
   }
 `
 
-export const ChapterGrid = styled.div`
+export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
   display: grid;
-  grid-template-rows: 500px auto;
-  grid-gap: 20px;
+  grid-template-rows: ${(props) => (props.hasTabs ? 'auto 500px auto' : '500px auto')};
+  grid-gap: 0;
   overflow-y: scroll;
 
   @media (max-width: 900px) {
     overflow-y: initial;
-    grid-template-rows: auto auto;
+    grid-template-rows: ${(props) => (props.hasTabs ? 'auto auto auto' : 'auto auto')};
     margin-bottom: 20px;
   }
 `
@@ -62,6 +62,7 @@ export const ChapterH2 = styled.div`
 export const ChapterValidator = styled.div`
   border: 1px solid #0a5688;
   position: relative;
+  margin-top: 10px;
 
   &.ok {
     border-color: #12650a;
@@ -147,4 +148,17 @@ export const ChapterItalic = styled.em`
   /* text-shadow: 0px 0px 25px rgba(11, 183, 226, 0.65), 0px 0px 15px rgba(0, 112, 202, 0.6); */
   text-transform: none;
   font-style: normal;
+`
+
+export const ChapterTab = styled.div<{ isSelected?: boolean }>`
+  height: 30px;
+  line-height: 20px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  display: inline-block;
+  cursor: pointer;
+  border-top: 1px solid #0a5688;
+  border-right: 1px solid #0a5688;
+  border-left: 1px solid #0a5688;
+  background-color: ${(props) => (props.isSelected ? '#0a5688' : 'initial')};
 `

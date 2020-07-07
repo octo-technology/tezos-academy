@@ -8,4 +8,4 @@ import exercise from "!raw-loader!./exercise.religo";
 // @ts-ignore
 import solution from "!raw-loader!./solution.religo";
 
-export const data = { course, exercise, solution };
+export const data = { course, exercise, solution, supports: {} };

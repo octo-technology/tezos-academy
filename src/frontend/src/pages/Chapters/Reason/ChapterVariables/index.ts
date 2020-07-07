@@ -8,4 +8,4 @@ import solution from "!raw-loader!./solution.ligo";
 // @ts-ignore
 import course from "!raw-loader!./course.md";
 
-export const data = { course, exercise, solution };
+export const data = { course, exercise, solution, supports: {} };
