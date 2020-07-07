@@ -27,6 +27,8 @@ import { data as pascalDataTypes } from "../Chapters/Pascal/ChapterTypes";
 import { data as pascalDataVariables } from "../Chapters/Pascal/ChapterVariables";
 import { data as pascalDataVariant } from "../Chapters/Pascal/ChapterVariant";
 import { data as pascalDataPreprocessor } from "../Chapters/Pascal/ChapterPreprocessor";
+import { data as pascalDataFA20 } from "../Chapters/Pascal/ChapterFA20";
+import { data as pascalDataFA20Operator } from "../Chapters/Pascal/ChapterFA20Operator";
 
 import { data as camelDataAddresses } from "../Chapters/Camel/ChapterAddresses";
 import { data as camelDataBuiltIns } from "../Chapters/Camel/ChapterBuiltIns";
@@ -206,7 +208,19 @@ export const chapterData = [
     name: '27- Pascal - Preprocessor',
     data: pascalDataPreprocessor,
   },
-  
+  {
+    pathname: '/pascal/chapter-fa2',
+    language: 'PascaLIGO',
+    name: '28- Pascal - FA2',
+    data: pascalDataFA20,
+  },
+  {
+    pathname: '/pascal/chapter-fa2-operator',
+    language: 'PascaLIGO',
+    name: '29- Pascal - FA2 Operator',
+    data: pascalDataFA20Operator,
+  },
+ 
   
 
   {

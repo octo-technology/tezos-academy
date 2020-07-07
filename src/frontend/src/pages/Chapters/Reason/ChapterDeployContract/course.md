@@ -20,13 +20,9 @@ The description of the storage is done by strongly-typing the data structure.
 
 Entrypoints of a smart contract describe how to mutate a storage. 
 Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
-```
-               +--------------------+
-entrypoint ->  |                    |  -> modified storage
-parameters ->  |  smart contract    |  -> operations
-storage    ->  |                    |
-               +--------------------+
-```
+
+![](/images/contract_in_out.png)
+
 Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
