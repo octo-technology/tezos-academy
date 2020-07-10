@@ -1,20 +1,20 @@
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import course from "!raw-loader!./course.md";
+import course from '!raw-loader!./course.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from "!raw-loader!./exercise.cmd";
+import exercise from '!raw-loader!./exercise.cmd'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from "!raw-loader!./solution.cmd";
+import non_fungible_token from '!raw-loader!./non_fungible_token.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support1 from "!raw-loader!./tzip-12/fa2_interface.religo";
+import solution from '!raw-loader!./solution.cmd'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support2 from "!raw-loader!./tzip-12/errors.religo";
+import errors from '!raw-loader!./tzip-12/errors.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support3 from "!raw-loader!./non_fungible_token.religo";
+import fa2_interface from '!raw-loader!./tzip-12/fa2_interface.religo'
 
-export const data = { course, exercise, solution, support1, support2, support3 };
+export const data = { course, exercise, solution, supports: {fa2_interface, errors, non_fungible_token} }

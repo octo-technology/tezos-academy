@@ -11,18 +11,30 @@ import { Footer } from './Chapter.components/Footer/Footer.controller'
 import { chapterData } from './Chapter.data'
 import { ChapterView } from './Chapter.view'
 
+interface Data {
+  course: string | undefined
+  exercise: string | undefined
+  solution: string | undefined
+  supports: Record<string, string | undefined>
+}
+
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const { pathname } = useLocation()
-  const [data, setData] = useState({ course: undefined, exercise: undefined, solution: undefined })
+  const [data, setData] = useState<Data>({ course: undefined, exercise: undefined, solution: undefined, supports: {} })
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
   useEffect(() => {
     chapterData.forEach((chapter) => {
       if (pathname === chapter.pathname)
-        setData({ course: chapter.data.course, exercise: chapter.data.exercise, solution: chapter.data.solution })
+        setData({
+          course: chapter.data.course,
+          exercise: chapter.data.exercise,
+          solution: chapter.data.solution,
+          supports: chapter.data.supports,
+        })
     })
   }, [pathname])
 
@@ -61,6 +73,7 @@ export const Chapter = () => {
         proposedSolutionCallback={proposedSolutionCallback}
         showDiff={showDiff}
         course={data.course}
+        supports={data.supports}
       />
       <Footer />
     </>

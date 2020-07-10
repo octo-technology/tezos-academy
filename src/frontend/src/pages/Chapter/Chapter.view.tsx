@@ -2,10 +2,12 @@ import Editor, { ControlledEditor, DiffEditor } from '@monaco-editor/react'
 import Markdown from 'markdown-to-jsx'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { PENDING, RIGHT, WRONG } from '../ChapterAbout/ChapterAbout.constants'
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
 import { CardBottomCorners, CardTopCorners } from './Chapter.components/Card/Card.style'
 import { Dialog } from './Chapter.components/Dialog/Dialog.controller'
 import { Light } from './Chapter.components/Light/Light.view'
@@ -25,6 +27,29 @@ const MonacoReadOnly = ({ children }: any) => {
           minimap: { enabled: false },
           scrollbar: { vertical: 'hidden', verticalScrollbarSize: 0, alwaysConsumeMouseWheel: false },
           folding: false,
+          readOnly: true,
+          fontSize: 14,
+          fontFamily: 'Proxima Nova',
+        }}
+      />
+    </div>
+  )
+}
+
+const MonacoEditorSupport = ({ support }: any) => {
+  return (
+    <div>
+      <Editor
+        height="500px"
+        value={support}
+        language="pascaligo"
+        theme="myCustomTheme"
+        options={{
+          lineNumbers: true,
+          scrollBeyondLastLine: true,
+          minimap: { enabled: false },
+          scrollbar: { vertical: 'hidden', verticalScrollbarSize: 0 },
+          folding: true,
           readOnly: true,
           fontSize: 14,
           fontFamily: 'Proxima Nova',
@@ -156,6 +181,7 @@ type ChapterViewProps = {
   proposedSolutionCallback: (e: string) => void
   showDiff: boolean
   course?: string
+  supports: Record<string, string | undefined>
 }
 
 export const ChapterView = ({
@@ -166,20 +192,47 @@ export const ChapterView = ({
   proposedSolutionCallback,
   showDiff,
   course,
+  supports,
 }: ChapterViewProps) => {
+  const [display, setDisplay] = useState('solution')
+  const { pathname } = useLocation()
+
+  let extension = ''
+  if (pathname.match(/pascal/i)) extension = 'ligo'
+  if (pathname.match(/camel/i)) extension = 'mligo'
+  if (pathname.match(/reason/i)) extension = 'religo'
+
   return (
     <ChapterStyled>
       <ChapterCourse>
         <Content course={course || ''} />
       </ChapterCourse>
-      <ChapterGrid>
-        <ChapterMonaco>
-          {showDiff ? (
-            <MonacoDiff solution={solution} proposedSolution={proposedSolution} />
-          ) : (
-            <MonacoEditor proposedSolution={proposedSolution} proposedSolutionCallback={proposedSolutionCallback} />
-          )}
-        </ChapterMonaco>
+      <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
+        {Object.keys(supports).length > 0 && (
+          <div>
+            <ChapterTab isSelected={display === 'solution'} onClick={() => setDisplay('solution')}>
+              Exercice
+            </ChapterTab>
+            {Object.keys(supports).map((key, index) => (
+              <ChapterTab isSelected={display === key} onClick={() => setDisplay(key)}>
+                {`${key}.${extension}`}
+              </ChapterTab>
+            ))}
+          </div>
+        )}
+        {display === 'solution' ? (
+          <ChapterMonaco>
+            {showDiff ? (
+              <MonacoDiff solution={solution} proposedSolution={proposedSolution} />
+            ) : (
+              <MonacoEditor proposedSolution={proposedSolution} proposedSolutionCallback={proposedSolutionCallback} />
+            )}
+          </ChapterMonaco>
+        ) : (
+          <ChapterMonaco>
+            <MonacoEditorSupport support={supports[display]} />
+          </ChapterMonaco>
+        )}
         <Validator validatorState={validatorState} validateCallback={validateCallback} />
       </ChapterGrid>
     </ChapterStyled>
@@ -194,6 +247,7 @@ ChapterView.propTypes = {
   showDiff: PropTypes.bool.isRequired,
   proposedSolutionCallback: PropTypes.func.isRequired,
   course: PropTypes.string,
+  supports: PropTypes.array.isRequired,
 }
 
 ChapterView.defaultProps = {

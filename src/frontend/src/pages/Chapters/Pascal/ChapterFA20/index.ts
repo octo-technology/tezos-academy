@@ -1,15 +1,14 @@
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import course from "!raw-loader!./course.md";
+import course from '!raw-loader!./course.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from "!raw-loader!./exercise.ligo";
+import exercise from '!raw-loader!./exercise.ligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from "!raw-loader!./solution.ligo";
+import fungible_token from '!raw-loader!./fungible_token.ligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support1 from "!raw-loader!./fungible_token.ligo";
+import solution from '!raw-loader!./solution.ligo'
 
-
-export const data = { course, exercise, solution, support1 };
+export const data = { course, exercise, solution, supports: {fungible_token} }

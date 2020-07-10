@@ -8,4 +8,4 @@ import exercise from "!raw-loader!./exercise.mligo";
 // @ts-ignore
 import solution from "!raw-loader!./solution.mligo";
 
-export const data = { course, exercise, solution };
+export const data = { course, exercise, solution, supports: {} };

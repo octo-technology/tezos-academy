@@ -1,20 +1,20 @@
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import course from "!raw-loader!./course.md";
+import solution from '!raw-loader!./central_solution.mligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support1 from "!raw-loader!./squadron.mligo";
+import central_types from '!raw-loader!./central_types.mligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support2 from "!raw-loader!./squadron_types.mligo";
+import exercise from '!raw-loader!./central.mligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support3 from "!raw-loader!./central_types.mligo";
+import course from '!raw-loader!./course.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from "!raw-loader!./central.mligo";
+import squadron_types from '!raw-loader!./squadron_types.mligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from "!raw-loader!./central_solution.mligo";
+import squadron from '!raw-loader!./squadron.mligo'
 
-export const data = { course, exercise, solution, support1, support2, support3 };
+export const data = { course, exercise, solution, supports: {squadron, squadron_types, central_types} }

@@ -1,20 +1,20 @@
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import course from "!raw-loader!./course.md";
+import solution from '!raw-loader!./central_solution.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support1 from "!raw-loader!./squadron.religo";
+import central_types from '!raw-loader!./central_types.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support2 from "!raw-loader!./squadron_types.religo";
+import exercise from '!raw-loader!./central.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support3 from "!raw-loader!./central_types.religo";
+import course from '!raw-loader!./course.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from "!raw-loader!./central.religo";
+import squadron_types from '!raw-loader!./squadron_types.religo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from "!raw-loader!./central_solution.religo";
+import squadron from '!raw-loader!./squadron.religo'
 
-export const data = { course, exercise, solution, support1, support2, support3 };
+export const data = { course, exercise, solution, supports: {squadron, squadron_types, central_types} }
