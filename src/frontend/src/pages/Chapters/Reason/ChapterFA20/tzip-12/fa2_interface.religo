@@ -138,7 +138,9 @@ type permissionsDescriptorMichelson = michelson_pair_right_comb(permissionsDescr
 
 type permissionsDescriptorParameter = contract(permissionsDescriptorMichelson);
 
-
+/////////////////////////////// METADATA ///////////////////
+type tokenMetadataRegistryTarget = address;
+type tokenMetadataRegistryParameter = contract(tokenMetadataRegistryTarget);
 
 
 /////////////////////////////// ENTRYPOINTS ///////////////////
@@ -147,3 +149,4 @@ type parameter =
 | Balance_of(balanceOfParameterMichelson)
 | Permissions_descriptor(permissionsDescriptorParameter)
 | Update_operators(updateOperatorsParameter)
+| Token_metadata_registry(tokenMetadataRegistryParameter)
