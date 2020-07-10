@@ -41,6 +41,7 @@ type parameter =
 | Balance_of(balanceOfParameterMichelson)
 | Permissions_descriptor(permissionsDescriptorParameter)
 | Update_operators(updateOperatorsParameter)
+| Token_metadata_registry(tokenMetadataRegistryParameter)
 ```
 
 ### Balance of
@@ -165,6 +166,63 @@ type transferMichelson = michelson_pair_right_comb(transferAuxiliary);
 type transferParameter = list(transferMichelson);
 ```
 
+### Metadata
+
+The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range od ids (for non-fungible tokens) or total supply of assets (for fungible tokens). 
+
+<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
+
+<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback contract, and sends back a list of *token\_metadata* records.
+
+FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
+transferred) is always 1.
+
+The *decimals* property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
+
+
+#### Interface
+
+<!-- prettier-ignore -->A basic feature of a token is to provide a meatadata related to the token. The FA2 standard speficies an entry point _Token\_metadata\_registry_ for this.
+
+```
+| Token_metadata_registry(tokenMetadataRegistryParameter)
+```
+
+Interacting with the FA2 core contract in order to retrieve token metadata must follow these datastructures and parameter:
+
+```
+type tokenSymbol = string;
+type tokenName = string;
+type tokenDecimals = nat;
+type tokenExtrasKey = string;
+type tokenExtrasValue = string;
+type tokenExtras = map(tokenExtrasKey, tokenExtrasValue);
+
+type tokenMetadata = {
+    token_id: tokenId,
+    symbol: tokenSymbol,
+    name: tokenName,
+    decimals: tokenDecimals,
+    extras: tokenExtras
+};
+
+type tokenMetadataRegistry = map(tokenId, tokenMetadata);
+
+type tokenMetadataRegistryTarget = address;
+type tokenMetadataRegistryParameter = contract(tokenMetadataRegistryTarget);
+```
+
+A FA2 client contract can ask metadata information from the FA2 core contract by sending a transaction and gets information via a callback :
+
+```
+let tokenMetadataRegistry = ((tokenMetadataRegistryParameter, storage): (tokenMetadataRegistryParameter, storage)): entrypointReturn => {
+    let callbackTarget = tokenMetadataRegistryParameter;
+    let callbackOperation: operation = Tezos.transaction(Tezos.self_address, 0tez, callbackTarget);
+    ([callbackOperation], storage);
+}
+```
+
+
 ### Error Handling
 
 This FA2 tandard defines the set of standard errors to make it easier to integrate FA2 contracts with wallets, DApps and other generic software, and enable
@@ -217,70 +275,3 @@ Error mnemonic - Description
 
 <!-- prettier-ignore -->4- Convert this response of type _balanceOfResponseAuxiliary_ into a variable *balanceOfResponseMichelson* of type _balanceOfResponseMichelson_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interop)
 
-
-
-
-
-## WIP
-
-### Metadata
-
-The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range od ids (for non-fungible tokens) or total supply of assets (for fungible tokens). 
-
-<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
-
-<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback contract, and sends back a list of *token\_metadata* records.
-
-FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
-transferred) is always 1.
-
-The *decimals* property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
-
-
-#### Interface
-
-```
-type token_metadata = {
-  token_id : token_id;
-  symbol : string;
-  name : string;
-  decimals : nat;
-  extras : (string, string) map;
-}
-
-type token_metadata_michelson = token_metadata michelson_pair_right_comb
-
-type token_metadata_param = {
-  token_ids : token_id list;
-  callback : (token_metadata_michelson list) contract;
-}
-```
-
-### Totalsupply
-
-FA2 token contracts MUST implement the _Totalsupply_ entry point which get the total supply of tokens for multiple token types  (because FA2 supports mutiple token).
-```
-| Total_supply of total_supply_param
-```
-
-<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
-
-<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
-
-#### Interface
-
-```
-type token_id = nat
-
-type total_supply_response = {
-  token_id : token_id;
-  total_supply : nat;
-}
-
-type total_supply_response_michelson = total_supply_response michelson_pair_right_comb
-
-type total_supply_param = {
-  token_ids : token_id list;
-  callback : (total_supply_response_michelson list) contract;
-}
-```
