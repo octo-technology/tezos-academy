@@ -4,7 +4,7 @@
 
 ## Definition
 
-A financial asset is a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, and stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
+A Financial Applicationis a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, and stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
 
 Financial assets are opposed to non-financial assets, property rights which include both tangible property (sometimes also called real assets) such as land, real estate or commodities and intangible assets such as intellectual property, like copyrights, patents, Trademarks etc.
 
@@ -14,19 +14,19 @@ When talking about _token_ or _crypto-currency_, it is a numerical asset emitted
 
 Fungible means secable
 
-Fungible token is a financial asset where account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
+Fungible token is a Financial Applicationwhere account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
 
-Non-fungible token (NFT) is a financial asset whose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For exemple, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
+Non-fungible token (NFT) is a Financial Applicationwhose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For exemple, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
 
 ### Standard
 
 A standard is a set of rules commonly accepted by the community.
-The rules of financial asset describes how to create currencies (and transfer between accounts, etc).
+The rules of Financial Applicationdescribes how to create currencies (and transfer between accounts, etc).
 
 Depending on the usage of the currency, many sets of rules have been commonly accepted :
 
-- Financial asset 1.2 (FA1.2) are rules for fungible token.
-- Financia asset 2.0 (FA20) are rules for non fungible token.
+- Financial Application1.2 (FA1.2) are rules for fungible token.
+- Financial Application2.0 (FA20) are rules for non fungible token.
 
 For exemple, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
 All smart contracts supporting the FA12 standard can interact with account and other contracts by transfering coins of our crypto-currency.
