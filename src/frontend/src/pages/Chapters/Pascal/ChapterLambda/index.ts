@@ -7,5 +7,8 @@ import exercise from "!raw-loader!./exercise.ligo";
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import solution from "!raw-loader!./solution.ligo";
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import starmap from "!raw-loader!./starmap.ligo";
 
-export const data = { course, exercise, solution, supports: {} };
+export const data = { course, exercise, solution, supports: { starmap } };
