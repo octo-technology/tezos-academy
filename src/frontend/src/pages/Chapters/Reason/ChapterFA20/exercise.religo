@@ -228,6 +228,12 @@ let updateOperators = ((updateOperatorsParameter, storage): (updateOperatorsPara
     (([]: list(operation)), storage)
 }
 
+let tokenMetadataRegistry = ((tokenMetadataRegistryParameter, storage): (tokenMetadataRegistryParameter, storage)): entrypointReturn => {
+    let callbackTarget = tokenMetadataRegistryParameter;
+    let callbackOperation: operation = Tezos.transaction(Tezos.self_address, 0tez, callbackTarget);
+    ([callbackOperation], storage);
+}
+
 let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
     switch (parameter) {
         | Fa2 fa2 => {
@@ -236,12 +242,13 @@ let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
             | Balance_of(balanceOfParameterMichelson) => balanceOf((balanceOfParameterMichelson, storage))
             | Permissions_descriptor(permissionsDescriptorParameter) => permissionsDescriptor((permissionsDescriptorParameter, storage))
             | Update_operators(updateOperatorsParameter) => updateOperators((updateOperatorsParameter, storage))
+            | Token_metadata_registry(tokenMetadataRegistryParameter) => tokenMetadataRegistry((tokenMetadataRegistryParameter, storage))
             }
         }
         | Asset ast => {
             switch (ast) {
-            | Mint(mintParameter) => (([]: list(operation)), storage) //mint(mintParameter)
-            | Burn(burnParameter) => (([]: list(operation)), storage) //burn(burnParameter)
+            | Mint(mintParameter) => (([]: list(operation)), storage)
+            | Burn(burnParameter) => (([]: list(operation)), storage)
             }
         } 
     }
