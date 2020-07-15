@@ -28,7 +28,7 @@ optionnaly
 
 More complex rules can be added these basic ones.
 
-### Implementation of multisig
+### Implementation of multi-signature pattern
 
 Let's consider this implementation of the multi-signature pattern. This implementation takes all previously mentionned rules into account.
 
@@ -36,7 +36,7 @@ This smart contract _MultisigProxy_ intends to play the role of a proxy pattern 
 The _Counter_ contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
 The _Counter_ contract handle a simple integer counter which can be incemented or decremented.
 
-Instead of invoking the _Counter_ contract, users propose a modification of the counter to the  _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
+Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the  _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
 
 A user can invoke the entry point *Send* of the smart contract _MultisigProxy_ to propose or approve a modification of the counter. When the number of approvals is reached, the desired modification is sent to the contract _Counter_ via a transaction. A user can invoke the entry point *Withdraw* of the smart contract _MultisigProxy_ to reject a proposed modification.
 
@@ -222,10 +222,10 @@ Notice in the _Withdraw_ function :
 
 ## Your mission
 
-<!-- prettier-ignore --> We have a basic mutli-signature contract but voters doesn't approve quickly enough. Maybe if we grant a reward for signers it will speed the process. Modify the existing *Multisig* contract in order to handle reputation level for each voters. We plan to grant reputation points when the message is really executed (one point of reputation for each voters).
+<!-- prettier-ignore --> We have a basic mutli-signature contract but voters don't approve quickly enough. Maybe if we grant a reward to signers it may speed the voting process. Modify the existing *Multisig* contract in order to handle a reputation level for each voters. We plan to grant "reputation" points when the message is really executed (one "reputation" point for each voters).
 
-<!-- prettier-ignore --> 1- Notice the storage contains a property called *reputation* which associates a _nat_ number to a voter.
+<!-- prettier-ignore --> 1- Notice that the storage contains a property called *reputation* which associates a _nat_ number to a voter.
 
-<!-- prettier-ignore --> 2- Modify *increment* function to modify the reputation of a given *addr* address by granting a point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
+<!-- prettier-ignore --> 2- Modify the *increment* function to modify the reputation of a given *addr* address by granting one point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* registry then add him. Otherwise update its reputation by incrementing by one its actual level. It is recommanded to use Map.add and Map.update when modifying a _map_.
 
-<!-- prettier-ignore --> 3- Modify *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.
+<!-- prettier-ignore --> 3- Modify the *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.

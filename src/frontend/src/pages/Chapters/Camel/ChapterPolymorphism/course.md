@@ -34,7 +34,7 @@ let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tez
 
 <!-- prettier-ignore -->When the function *get\_entrypoint\_opt* does not find any contract at a given _address_ or the contract doesn't match the type, then _None_ is returned.
 
-<!-- prettier-ignore -->As for the *Tezos.get\_contract\_opt* function, the *Tezos.get\_entrypoint\_opt* function returns an _option_ .type.
+<!-- prettier-ignore -->As for the *Tezos.get\_contract\_opt* function, the *Tezos.get\_entrypoint\_opt* function returns an _option_ type.
 
 ## Entry point naming convention
 

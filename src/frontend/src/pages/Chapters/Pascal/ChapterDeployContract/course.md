@@ -4,27 +4,29 @@
 
 ## Smart contract
 
-A smart contract is code written in Michelson langage (a low-level stack-based turing-complete language).
-It contains entrypoints which describe all possible way to interact with a smart contract.
-It defines the prototype of each entrypoint (it specifies the parameters types of the entrypoint)
-It contains the description of storage.
+A smart contract is some code written in Michelson langage (a low-level stack-based turing-complete language).
+
+It defines all _entry points_ (invokable functions) of the smart contract.
+It defines the prototype of each entry point (e.g. specifies the parameters types of the entry point).
+It defines the _storage_ of the smart contract.
 
 ### Storage
 
-The storage is an allocated memory space associated to a smart contract. The storage is a persistent data store for a smart contract.
+The storage is an allocated memory space associated to a smart contract. The storage is a persistent data store for the smart contract.
 
 The description of the storage is done by strongly-typing the data structure.
 
-### Entrypoints
+### Entry points
 
-Entrypoints of a smart contract describe how to mutate a storage.
-Executing an entrypoint takes some parameters and a state of a storage and returns a new state of storage and some operations
+Entry points of a smart contract describe how to mutate a storage.
+
+Executing an entry point takes some parameters and a state of a storage and returns a new state of storage and some operations
 
 ![](/images/contract_in_out.png)
 
-Execution of an entrypoint produces a new state of the storage of the smart contract. If the entrypoint execution did not throw an exception and did not fail then the new state of storage is applied.
+Execution of an entry point produces a new state of the storage of the smart contract. If the entry point execution did not throw an exception and did not fail then the new state of storage is applied.
 
-Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entrypoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (an ordered list of transactions) then they are sent and executed following order of the list of operation.
+Operations are transactions (smart contract invocation) that will be sent to some other contracts. They will trigger an entry point of the targeted contract or a tez transfer (no invocation of entry point). If execution of an entry point produces operations (an ordered list of transactions) then they are sent and executed following the order of the list of operations.
 
 ## Deploy
 
@@ -35,46 +37,46 @@ Deployment of a smart contract in Tezos is called "origination".
 Here is the syntax of the tezos command line to deploy a smart contract :
 
 ```
-tezos-client originate contract <contract_name> for <user> transferring <amount> from <from_user> \
+tezos-client originate contract <contract_name> for <user> transferring <amount_tez> from <from_user> \
              running <tz_file> \
-             --init '<initial_storage>' --burn-cap <gaz>
+             --init '<initial_storage>' --burn-cap <gaz_fee>
 ```
 
 <contract_name> name given to the contract
 <tz_file> path of the Michelson smart contract code (TZ file).
-<amount> is the quantity of tez being transfered to the newly deployed contract. if a contract balance reaches 0 then it is deactivated.
+<amount_tez> is the quantity of tez being transfered to the newly deployed contract. if a contract balance reaches 0 then it is deactivated.
 <from_user> account from which the tez are taken from (and given transfered to the new contract).
 <initial_storage> is a Michelson expression. The --init parameter is used to specify initial state of the storage.
-<gaz> it specifies the the maximal fee the user is willing to pay for this operation (using the --burn-cap parameter).
+<gaz_fee> it specifies the the maximal fee the user is willing to pay for this operation (using the --burn-cap parameter).
 
 ## Invoke
 
-Once the smart contract has been deployed on the blockchain (contract-origination operation baked into a block), it is possible to invoke an entrypoint of the smart contract using the command line.
+Once the smart contract has been deployed on the blockchain (contract-origination operation baked into a block), it is possible to invoke an entry point of the smart contract using the command line.
 
 Here is the syntax of the tezos command line to invoke a smart contract :
 
 ```
-tezos-client transfer <amount> from <user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
+tezos-client transfer <amount_tez> from <user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
 ```
 
-<amount> is the quantity of tez being transfered to the contract.
+<amount_tez> is the quantity of tez being transfered to the contract.
 <contract_name> name given to the contract
-<entrypoint_invocation> name of the entrypoint and corresponding parameters. exemple 'Increment(5)'.
+<entrypoint_invocation> name of the entry point and corresponding parameters. exemple 'Increment(5)'.
 
-⚠️ Notice that the --arg parameter specifies an entrypoint call.
+⚠️ Notice that the --arg parameter specifies an entry point call.
 
-⚠️ Notice that the --dry-run parameter simulate invocation of the entrypoint.
+⚠️ Notice that the --dry-run parameter simulate invocation of the entry point.
 
 ## Ligo compiler
 
 In order to produce a smart contract, a tool called transpiler (aka LIGO compiler) is used to transform LIGO code into Michelson code.
 Michelson smart contract are stored in a file with .tz extension.
 
-This ligo compiler is also used to transform "Ligo expression" into "Michelson expression" as needed to deploy or invoke a smart contract.
+This LIGO compiler is also used to transform "LIGO expression" into "Michelson expression" as needed to deploy or invoke a smart contract.
 
 ### Compile
 
-Here is how to transform ligo code into Michelson code using the ligo compiler in command line.
+Here is how to transform LIGO code into Michelson code using the LIGO compiler in command line.
 
 ```
 ligo compile-contract code.ligo mainFunc > code.tz
@@ -86,38 +88,38 @@ ligo compile-contract code.ligo mainFunc > code.tz
 
 ### Initial storage
 
-Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
+Here is how to transform LIGO expression into Michelson expression using the LIGO compiler in command line.
 
 ```
-ligo compile-storage [options] code.ligo mainFunc '<expression>'
+ligo compile-storage [options] code.ligo mainFunc '<ligo_expression>'
 ```
 
-<expression> is a ligo expression
+<ligo_expression> is a LIGO expression
 
 ### Invocation parameter
 
-Here is how to transform ligo expression into Michelson expression using the ligo compiler in command line.
+Here is how to transform LIGO expression into Michelson expression using the LIGO compiler in command line.
 
 ```
-ligo compile-parameter [options] code.ligo mainFunc '<expression>'
+ligo compile-parameter [options] code.ligo mainFunc '<ligo_expression>'
 ```
 
-<expression> is a ligo expression
+<ligo_expression> is a LIGO expression
 
 ### Simulating
 
-Here is how to simulate execution of an entrypoint using the ligo compiler in command line.
+Here is how to simulate execution of an entry point using the LIGO compiler in command line.
 
 ```
 ligo dry-run [options] code.ligo mainFunc '<entrypoint(p)>' '<storage_state>'
 ```
 
-<storage*state> state of the storage when simulating execution of the entrypoint
-<entrypoint(p)> entrypoint of the smart contract that is invoked (parameter \_p* of this entrypoint is specified between parantheses).
+<storage*state> state of the storage when simulating execution of the entry point
+<entrypoint(p)> entry point of the smart contract that is invoked (parameter \_p* of this entry point is specified between parantheses).
 
 ### Ligo Expression in command line
 
-Let's see some exemple how to transpile a storage ligo expression into a Michelson one.
+Let's see some exemple how to transpile a storage LIGO expression into a Michelson one.
 
 Let's consider this smart contract which associate coordinates to a planet name.
 
@@ -146,9 +148,13 @@ block { skip } with case action of
 
 #### Maps
 
-The _map_ _end_ keywords can be used to initialize a _map_
+Initialization of elements of a map is specified between _map[_ and _]_ and elements separated by semi-colon _;_. Each element is a key/value pair separated by _->_ and follow the syntax :
 
-The command line _ligo compile-storage_ for transpiling a map containg a tuple.
+```
+map[ <key1> -> <value1>; <key2> -> <value2> ]
+```
+
+Here, an exemple of a command line _ligo compile-storage_ for transpiling a map containg a tuple.
 
 ```
 ligo compile-storage starmap.ligo main 'map [ "earth" -> (1,1,1) ]'
@@ -178,10 +184,10 @@ This command returns :
 
 #### Record
 
-Initialization of elements of a record is specified between _record[_ and _]_ separated by comma _;_. Each element is a key/value pair seperated by _->_ and follow the syntax :
+Initialization of elements of a record is specified between _record[_ and _]_ separated by semi-colons _;_. Each element is a key/value pair seperated by _=_ and follow the syntax :
 
 ```
-record[ <key1> -> <value1>; <key2> -> <value2> ]
+record[ <key1> = <value1>; <key2> = <value2> ]
 ```
 
 Let's modify our type _coordinates_ to be a record instead of a tuple.
@@ -219,7 +225,7 @@ This command returns :
 
 ## Your mission
 
-We want to prepare the initial state of our star system database before deploying the following smart contract. Just to be sure everything works as expected it would be nice to simulate our entrypoint _AddPlanet_.
+We want to prepare the initial state of our star system database before deploying the following smart contract. Just to be sure everything works as expected it would be nice to simulate our entry point _AddPlanet_.
 
 ```
 //starmap3.mligo
@@ -252,6 +258,6 @@ block { skip } with case action of
   end
 ```
 
-<!-- prettier-ignore -->1- Write _compile-storage_ command and the ligo expression for initializing the *Sol* system containing planet "earth" with coordinates (2,7,1).
+<!-- prettier-ignore -->1- Write the _compile-storage_ command and the LIGO expression for initializing the *Sol* system containing planet "earth" with coordinates (2,7,1).
 
-<!-- prettier-ignore -->2- Write the _dry-run_ command and the ligo expression for adding a planet "mars" with coordinates (4,15,2) in our *Sol* system. Reuse the *Sol* system of step 1.
+<!-- prettier-ignore -->2- Write the _dry-run_ command and the LIGO expression for adding a planet "mars" with coordinates (4,15,2) in our *Sol* system. Reuse the *Sol* system of step 1.
