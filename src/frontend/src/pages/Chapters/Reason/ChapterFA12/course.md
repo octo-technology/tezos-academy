@@ -16,7 +16,7 @@ Fungible means secable
 
 Fungible token is a Financial Application where account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
 
-Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
+Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller part. Crypto-kitties is an example of non fungible token (on Ethereum blcockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
 
 ### Standard
 

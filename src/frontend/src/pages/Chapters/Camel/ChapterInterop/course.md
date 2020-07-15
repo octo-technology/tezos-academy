@@ -29,7 +29,7 @@ will accept these definitions and fail with the ones that does not respect the t
 
 <!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. The predefined function *Tezos.get\_entrypoint\_opt* allows to call a specific entry point of the called contract.
 
-Here is an exemple. Let's consider the following "Counter" contract :
+Here is an example. Let's consider the following "Counter" contract :
 
 ```
 type storage = int

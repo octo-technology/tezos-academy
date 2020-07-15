@@ -33,7 +33,7 @@ More complex rules can be added these basic ones.
 Let's consider this implementation of the multi-signature pattern. This implementation takes all previously mentionned rules into account.
 
 This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for _Counter_ contract.
-The _Counter_ contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
+The _Counter_ contract (the example at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
 The _Counter_ contract handle a simple integer counter which can be incemented or decremented.
 
 Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the  _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).

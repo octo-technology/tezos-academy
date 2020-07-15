@@ -62,7 +62,7 @@ tezos-client transfer <amount_tez> from <user> to <contract_name> --arg '<entryp
 
 <amount_tez> is the quantity of tez being transfered to the contract.
 <contract_name> name given to the contract
-<entrypoint_invocation> name of the entry point and corresponding parameters. exemple 'Increment(5)'.
+<entrypoint_invocation> name of the entry point and corresponding parameters. example 'Increment(5)'.
 
 ⚠️ Notice that the --arg parameter specifies an entry point call.
 
@@ -120,7 +120,7 @@ ligo dry-run [options] code.religo mainFunc '<entrypoint(p)>' '<storage_state>'
 
 ### Ligo Expression in command line
 
-Let's see some exemple how to transpile a storage LIGO expression into a Michelson one.
+Let's see some example how to transpile a storage LIGO expression into a Michelson one.
 
 Let's consider this smart contract which associate coordinates to a planet name.
 

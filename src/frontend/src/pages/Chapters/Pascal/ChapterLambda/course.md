@@ -90,7 +90,7 @@ In the "starmap" smart contract, the type of _func_ is
 
 ## Lambda call
 
-Anonymous functions can be called like other functions. Here in our exemple, the lambda _func_ is called in _addPlanet_ to transform the planet's coordinates :
+Anonymous functions can be called like other functions. Here in our example, the lambda _func_ is called in _addPlanet_ to transform the planet's coordinates :
 
 ```
 Map.add (input.0, store.func(input.1), store.systemplanets)
@@ -98,7 +98,7 @@ Map.add (input.0, store.func(input.1), store.systemplanets)
 
 ## Lambda definition
 
-The implementation of the lambda can be changed with the _changeFunc_ function which assigns new code to _func_. Here is an exemple of execution of the _ChangeFunc_ entrypoint with the simulation ligo command line :
+The implementation of the lambda can be changed with the _changeFunc_ function which assigns new code to _func_. Here is an example of execution of the _ChangeFunc_ entrypoint with the simulation ligo command line :
 
 ```
 ligo dry-run lambda.ligo main 'ChangeFunc(function (const c : coordinates) : coordinates is record[x=c.x*100;y=c.y;z=c.z])' 'record[name="Sol";func=(function (const c : coordinates) : coordinates is record[x=c.x*10;y=c.y;z=c.z]);systemplanets=map "earth" -> record [x=2;y=7;z=1] end]'
