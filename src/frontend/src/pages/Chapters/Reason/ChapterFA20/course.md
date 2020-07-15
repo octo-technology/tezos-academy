@@ -121,8 +121,7 @@ FA2 token contracts MUST implement the transfer logic defined by the following r
 2. The amount of a token transfer MUST NOT exceed the existing token owner's balance. If the transfer amount for the particular token type and token owner
    exceeds the existing balance, the whole transfer operation MUST fail with the error mnemonic "INSUFFICIENT_BALANCE"
 
-3. Core transfer behavior MAY be extended. If additional constraints on tokens transfer are required, FA2 token contract implementation MAY invoke additional
-   permission policies (transfer hook is the recommended design pattern to implement core behavior extension). (See Chapter FA2 - Hook)
+3. Core transfer behavior MAY be extended. If additional constraints on tokens transfer are required, FA2 token contract implementation MAY invoke additional permission policies (transfer hook is the recommended design pattern to implement core behavior extension). (See Chapter FA2 - Hook)
 
 If the additional permission hook fails, the whole transfer operation MUST fail with a custom error mnemonic.
 
@@ -268,4 +267,4 @@ Error mnemonic - Description
 
 <!-- prettier-ignore -->3- Now, we need to build a response for the balanceOfRequest. Declare a variable *balanceOfResponseAuxiliary* ot type _balanceOfResponseAuxiliary_ which contains the request and the retrieved balance *tokenBalance* (defined in the previous line).
 
-<!-- prettier-ignore -->4- Convert this response of type _balanceOfResponseAuxiliary_ into a variable *balanceOfResponseMichelson* of type _balanceOfResponseMichelson_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interop)
+<!-- prettier-ignore -->4- Convert this response of type _balanceOfResponseAuxiliary_ into a variable *balanceOfResponseMichelson* of type _balanceOfResponseMichelson_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interoperability)
