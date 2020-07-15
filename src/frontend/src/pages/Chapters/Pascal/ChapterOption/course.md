@@ -13,7 +13,7 @@ function div (const a : nat; const b : nat) : option (nat) is
 
 ## Map Access and Option evaluation
 
-Use the postfix [] operator to read a value of the map. When accessing to an element of a map (using [] operator), the returned result is the associated value or _None_ if the given key does not exist. This is the reason why the [] operator returns an _option_ of the expected type (and not just the expected type).
+Use the postfix [] operator to read a value of the map. When accessing to an element of a map (using [] operator), the returned result is the associated value or _None_ if the given key does not exist. This is the reason why the [] operator returns an _option_ .of the expected type (and not just the expected type).
 
 The keyword _Some_ can be used to create an _option_ variable for a given value.
 The keyword _None_ can be used to create an _option_ variable with no given value.

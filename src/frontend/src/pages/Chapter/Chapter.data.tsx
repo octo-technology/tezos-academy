@@ -195,26 +195,32 @@ export const chapterData = [
   {
     pathname: '/pascal/chapter-interop',
     language: 'PascaLIGO',
-    name: '26- Pascal - Interoperability',
+    name: '26 - Pascal - Interoperability',
     data: pascalDataInterop,
   },
   {
     pathname: '/pascal/chapter-preprocessor',
     language: 'PascaLIGO',
-    name: '27- Pascal - Preprocessor',
+    name: '27 - Pascal - Preprocessor',
     data: pascalDataPreprocessor,
   },
   {
     pathname: '/pascal/chapter-fa2',
     language: 'PascaLIGO',
-    name: '28- Pascal - FA2',
+    name: '28 - Pascal - FA2',
     data: pascalDataFA20,
   },
   {
     pathname: '/pascal/chapter-fa2-operator',
     language: 'PascaLIGO',
-    name: '29- Pascal - FA2 Operator',
+    name: '29 - Pascal - FA2 Operator',
     data: pascalDataFA20Operator,
+  },
+  {
+    pathname: '/pascal/chapter-fa2-hook',
+    language: 'PascaLIGO',
+    name: '30 - Pascal - FA2 Hook',
+    data: camelDataFA20Hook,
   },
 
   {
@@ -487,5 +493,11 @@ export const chapterData = [
     language: 'ReasonLIGO',
     name: '29 - Reason - FA2 Operator',
     data: reasonDataFA20Operator,
+  },
+  {
+    pathname: '/reason/chapter-fa2-hook',
+    language: 'ReasonLIGO',
+    name: '30 - Reason - FA2 Hook',
+    data: camelDataFA20Hook,
   },
 ]

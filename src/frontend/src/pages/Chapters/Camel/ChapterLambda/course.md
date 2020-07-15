@@ -1,36 +1,41 @@
-# Chapter 23 : Versioning and Lambda (anonymous function)
+# Chapter 22 : Lambda (anonymous function)
 
 <dialog character="alien">red alert the humans are here battle station surrender dirty humans or die we are the master of this universe and we will easily destroy you hahahaha</dialog>
 
-
 ## Versioning
 
-Tezos as a public blockchain expects that contracts should have same behaviour for all users. In theory once a contract is deployed, it should be changed. 
+Tezos as a public blockchain expects that contracts should have the same behaviour for all users. In theory, once a contract is deployed, it should not be changed.
 
-We call *antipattern* when a smart contract have special role (admin) or smart contract that may be evolving (changing rules of the smart contract).
+We call _antipattern_ when a smart contract has a special role (admin) or may be evolving (changing the rules of the smart contract).
 
-The need to modify the behaviour of a smart contract emerges when for exemple the law of the country has changed and you need to apply the same changes to the rules of your smart contract.
-One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by migrating sstorage information through transactions, or by forcing the new contract to request storage data from from the old contract or by customizing the contract implementation. In this chapter we will focus on the third solution.
+The need to modify the behaviour of a smart contract emerges when for exemple the laws of a country have changed and you need to apply the same changes to the rules in your smart contract.
+One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by :
+1- migrating storage information through transactions,
+2- or by forcing the new contract to request storage data from the old contract,
+3- or by customizing the contract implementation.
+
+In this chapter we will focus on the third solution.
 
 ### Versioning by re-emission
 
-Versioning can be done by writing a new smart contract and emitting transactions from the old contract (V1) to migrate storage information to the new contract (V2). This can require a lot of transactions and thus a lot of fee spent (resulting in a non negligeable price). This price could be paid by the smart contract that would emit transactions or by each user which would invoke a "migrate" entrypoint of V1 contract to send storage information to the new contract. Transaction emission has been seen in chapter 17 with the _Tezos.transaction_ predefined function.
+Versioning can be done by writing a new smart contract and emitting transactions from the old contract (V1) to migrate storage information to the new contract (V2). This may require a lot of transactions and thus a lot of fees (resulting in a significant price). This price could be paid by the smart contract that would emit transactions or by each user which would invoke a "migrate" entrypoint of V1 contract to send storage information to the new contract. Transaction emission has been seen in chapter 17 with the _Tezos.transaction_ predefined function.
 
 ### Versioning by contract communication
 
-Versioning can be done by writing a new smart contract that can ask information to the old contract. This pattern need a 2-way communication where the new contract sends a "request" transaction and reacts when the old contract is sending back the requested information. Execution of entrypoint would become asynchronous (due to 2-way transactions). The old contract V1 must be implemented in a way to allow to send transaction to a not yet deployed contract (see chapter Polymorphism).
+Versioning can be done by writing a new smart contract that can ask information to the old contract. This pattern needs a 2-way communication where the new contract sends a "request" transaction and reacts when the old contract is sending back the requested information. Execution of entrypoint would become asynchronous (due to the 2-way transactions). The old contract V1 must be implemented in a way that allows to send transaction to a not yet deployed contract (see chapter Polymorphism).
 
 ### Versioning by lambda
 
-Versioning can be done by writing a single smart contract that can change its properties and functions (lambdas). This implies to be able to forecast what kind of change might be needed. It also implies a special admin role who is allowed to change the behavior of smart contract. The admin role could be a multi-signature pattern that allow changing behavior of the smart contract if enough user agreed on the proposed change.
+Versioning can be done by writing a single smart contract that can change its properties and functions (lambdas). This implies to be able to forecast what kind of change might be needed. It also implies a special admin role who is allowed to change the behavior of the smart contract. The admin role could be a multi-signature pattern that allows changing the behavior of the smart contract if enough user agree on the proposed change.
 
 ## Lambda
 
-Changing the behavior of a smart contract can be done by customizing the implementation through lambda's function.
+Changing the behavior of a smart contract can be done by customizing the implementation through lambda functions.
 
-So the idea is to define an anonymous function in the storage which is called in entrypoint and write an entrypoint that allow to change implementation of this anonymous function.
+The idea is to define an anonymous function in the storage which is called by an entrypoint and writes a new entrypoint that allows to change the implementation of this anonymous function.
 
 Let's consider the "starmap" smart contract :
+
 ```
 // starmap.ligo
 type coordinates = { x : int; y : int; z : int }
@@ -61,23 +66,26 @@ let main ((action, store) : (parameter * storage)) : return =
   | DoNothing -> (([] : operation list),store)
 ```
 
-
 ## Lambda prototype
 
-Defining the prototype of an anonymous function (lambda) follow the syntax :
+The prototype of a lambda follows the following syntax :
+
 ```
 (<parameter_type1>,<parameter_type2>) -> <returned type>
 ```
 
-In "starmap" smart contract the type of *func* is 
+In the "starmap" smart contract, the type of _func_ is
+
 ```
 (coordinates) -> coordinates
 ```
-⚠️ Note that *func* is transforming coordinates of a planet into coordinates of a planet.
+
+⚠️ Note that _func_ is transforming coordinates of a planet into coordinates of a planet as well.
 
 ## Lambda call
 
-Anonymous functions can be called like other functions. Here in our exemple, the lambda *func* is called in function *addPlanet* to transform planet's coordinates : 
+Anonymous functions can be called like other functions. Here in our exemple, the lambda _func_ is called in _addPlanet_ to transform the planet's coordinates :
+
 ```
 Map.add input.0 (store.func input.1) store.systemplanets
 ```
@@ -85,126 +93,84 @@ Map.add input.0 (store.func input.1) store.systemplanets
 ## Lambda definition
 
 Defining a lambda in a ligo expression follows the syntax :
+
 ```
 fun (<parameter_name> : <parameter_type>) -> <body>
 ```
 
-The implementation of the lambda can be change with the *changeFunc* function which assigns new code to *func*. Here is an exemple of execution of the *ChangeFunc* entrypoint with the simulation ligo command line :  
+The implementation of the lambda can be changed with the _changeFunc_ function which assigns new code to _func_. Here is an exemple of execution of the _ChangeFunc_ entrypoint with the simulation ligo command line :
+
 ```
 ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});systemplanets=Map.literal [("earth", {x=2;y=7;z=1})] }'
 ```
 
 ⚠️ Notice the returned type of the lambda is not specified
+
 <!-- prettier-ignore -->``` fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z} ```
 
-⚠️ Notice the new implementation of *func* multiplies 'x' coordinate by 100 (defined as parameter of *ChangeFunc* entrypoint)
+⚠️ Notice the new implementation of _func_ multiplies the 'x' coordinate by 100 (defined as parameter of _ChangeFunc_ entrypoint)
 
-⚠️ Notice the old implementation of *func* multiplies 'x' coordinate by 10 (defined in storage)
-
-
+⚠️ Notice the old implementation of _func_ multiplies the 'x' coordinate by 10 (defined in storage)
 
 ## Your mission
 
-We have a smart contract that reference planets is the Sol system. Since the beginning of the project , all celestial bodies were considered as planets. 
-Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change ! A *DeduceCategoryChange* entrypoint allows us to change the lambda which determines the category of a celestial body. (All we have to do is define the new rule and all registered celestial bodies will be updated). 
+We have a smart contract that reference planets is the Sol system. Since the beginning of the project, all celestial bodies were considered as planets.
+Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change! A _DeduceCategoryChange_ entrypoint allows us to change the lambda which determines the category of a celestial body. All we have to do is define the new rule and all registered celestial bodies will be updated.
 
-Take a look at the starmap contract :
+Take a look at the starmap contract in the editor tabs.
 
-```
-// starmap.ligo
-type coordinates = { x : int; y : int; z : int }
-type planet_type = PLANET | ASTEROID | STAR
-type planet = {
-  position : coordinates;
-  mass : nat;
-  category : planet_type
-}
-type planets = (string, planet) map
-type storage = {
-  name : string;
-  func : (planet) -> planet_type;
-  celestialbodies : planets
-}
-type return = (operation list * storage)
+⚠️ Notice that the function _deduceCategoryChange_ allows to specify a new deduction function _f_ which is assign to the lambda _func_ with :
 
-type parameter = DeduceCategoryChange of (planet) -> planet_type | AddPlanet of (string * planet) | DoNothing
-
-<!-- prettier-ignore -->let addPlanet (input, store : (string \* planet) \* storage) : return =
-    let modified : planets = match Map.find_opt input.0 store.celestialbodies with
-       Some (p) -> (failwith("planet already exist") : planets)
-     | None -> Map.add input.0 {position=input.1.position;mass=input.1.mass;category=store.func input.1} store.celestialbodies
-    in
-    (([] : operation list), {name=store.name;func=store.func;celestialbodies=modified})
-
-let deduceCategoryChange (f,store : ((planet) -> planet_type) * storage) : return =
-  let applyDeduceCatg = fun (name,p : string * planet) ->
-      {position=p.position;mass=p.mass;category=f p} in
-  let modified : planets = Map.map applyDeduceCatg store.celestialbodies in
-  (([] : operation list), {name=store.name;func=f;celestialbodies=modified})
-
-let main ((action, store) : (parameter * storage)) : return =
-  match (action) with
-    AddPlanet (input) -> addPlanet ((input,store))
-  | DeduceCategoryChange (f) -> deduceCategoryChange ((f,store))
-  | DoNothing -> (([] : operation list),store)
-```
-
-⚠️ Notice in the function *deduceCategoryChange* allows to specify a new deduction function *f* which is assign to the lambda *func* with :
 ```
 {name=store.name;func=f;celestialbodies=modified}
 ```
 
-⚠️ Notice in the function *deduceCategoryChange* the sub-function *applyDeduceCatg* apply the new category deduction to a planet (_category=f(p)_). 
+⚠️ Notice in the function _deduceCategoryChange_ the sub-function _applyDeduceCatg_ which applies the new category deduction to a planet (_category=f(p)_).
+
 ```
 let applyDeduceCatg = fun (name,p : string * planet) ->
       {position=p.position;mass=p.mass;category=f p} in
 ```
 
-⚠️ Notice in the function *deduceCategoryChange* the *applyDeduceCatg* function is used to update all entries of the *celestialbodies* map with : 
- ```
+⚠️ Notice in the function _deduceCategoryChange_ the _applyDeduceCatg_ function that is used to update all entries of the _celestialbodies_ map with :
+
+```
 Map.map applyDeduceCatg store.celestialbodies
- ```
+```
 
+We want you to update our "starmap" contract in order to take this new rule into account.
 
+<!-- prettier-ignore -->1- Write the _dry-run_ command and the associated invocation (entrypoint) for taking the new rule into account.
 
- 
+<!-- prettier-ignore -->2- First rule : if the coordinates of a planet is (0,0,0) then the celestial body is considered as a STAR.
 
+<!-- prettier-ignore -->3- Second rule : if the mass of a planet is above 100 then the celestial body is considered as a PLANET.
 
-We want you to update our "starmap" contract in order to take this new rule into account. 
+<!-- prettier-ignore -->4- Third rule : if the mass of a planet is under 100 then the celestial body is considered as an ASTEROID.
 
+expected storage after simulation :
 
-<!-- prettier-ignore -->1- Write _dry-run_ command and the associated invocation (entrypoint) for taking the new rule into account.
-
-<!-- prettier-ignore -->2- First rule : if coordinates of a planet is (0,0,0) then celestial body is considered as a STAR.
-
-<!-- prettier-ignore -->3- Second rule : if mass of a planet is above 100 then celestial body is considered as a PLANET.
-
-<!-- prettier-ignore -->4- Third rule : if mass of a planet is under 100 then celestial body is considered as an ASTEROID.
-
-
-
-expected storage after simulation : 
 ```
 ( LIST_EMPTY() ,
   record[celestialbodies -> MAP_ADD("earth" ,
-                                     record[category -> PLANET(unit) ,
-                                            mass -> +1000 ,
-                                            position -> record[x -> 2 ,
-                                                               y -> 7 ,
-                                                               z -> 1]] ,
-                                     MAP_ADD("pluto" ,
-                                             record[category -> ASTEROID(unit) ,
-                                                    mass -> +10 ,
-                                                    position -> record[x -> 200 ,
-                                                                    y -> 750 ,
-                                                                    z -> 100]] ,
-                                             MAP_ADD("sun" ,
-                                                     record[category -> STAR(unit) ,
-                                                            mass -> +1000000 ,
-                                                            position -> record[x -> 0 ,
-                                                                    y -> 0 ,
-                                                                    z -> 0]] ,
-                                                     MAP_EMPTY()))) ,
+            record[category -> PLANET(unit) ,
+                  mass -> +1000 ,
+                  position -> record[x -> 2 ,
+                                      y -> 7 ,
+                                      z -> 1]] ,
+            MAP_ADD("pluto" ,
+                    record[category -> ASTEROID(unit) ,
+                          mass -> +10 ,
+                          position -> record[x -> 200 ,
+                                          y -> 750 ,
+                                          z -> 100]] ,
+                    MAP_ADD("sun" ,
+                            record[category -> STAR(unit) ,
+                                  mass -> +1000000 ,
+                                  position -> record[x -> 0 ,
+                                          y -> 0 ,
+                                          z -> 0]] ,
+                            MAP_EMPTY()))) ,
          func -> "[lambda of type: (lambda\n   (pair (pair (or %category (or (unit %aSTEROID) (unit %pLANET)) (unit %sTAR)) (nat %mass))\n         (pair %position (pair (int %x) (int %y)) (int %z)))\n   (or (or (unit %aSTEROID) (unit %pLANET)) (unit %sTAR))) ]" ,
          name -> "Sol"] )
 ```

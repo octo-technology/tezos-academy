@@ -1,47 +1,45 @@
-# Chapter 25 : Multi-signature pattern
+# Chapter 24 : Multi-signature pattern
 
 <dialog character="mechanics">Captain, we should warm up the weapons while we are still in FTL, we don't know what awaits us on the other side.</dialog>
-Before any nuke strike, the admiral and the president of Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.  
+Before any nuke strike, the admiral and the president of Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.
 
-  
-In some case one may want to execute an action only if many users approve this action. This kind of pattern is called _multi-signature_. 
+In some case one may want to execute an action only if many users approve this action. This kind of pattern is called _multi-signature_.
 
 ## Multi-signature
 
 When invoking a smart contract, an entrypoint is called and usually an action is executed (triggering a storage modification and/or transactions emmission).
-The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic. 
+The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic.
 The mutli-signature implementation can be done in a single contract with the smart contract logic or in a separated contract like a proxy contract (which emits transactions to the contract containg the logic).
 
 ### Rules
 
 The multi-signature pattern can be described with this set of rules :
 
-* a user can propose an action
-* a user can approve an action (proposed by someone else)
-* a user can cancel his approval on an action.
-* an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
-* the smart contract must also handle a list of user allowed to approve an action
+- a user can propose an action
+- a user can approve an action (proposed by someone else)
+- a user can cancel his approval on an action.
+- an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
+- the smart contract must also handle a list of user allowed to approve an action
 
 optionnaly
 
-* the smart contract can also handle the number of approval per user and set maximum number of approvals.
-* the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
+- the smart contract can also handle the number of approval per user and set maximum number of approvals.
+- the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
 
 More complex rules can be added these basic ones.
-
 
 ### Implementation of multisig
 
 Let's consider this implementation of the multi-signature pattern. This implementation takes all previously rules into account.
-The smart contract *MultisigProxy* accepts a proposed message (parameter typed _string_)), when number of approvals is reached the string is used to generate transaction to an other contract *Counter*. 
-This smart contract *MultisigProxy* intends to play the role of a proxy pattern for *Counter* contract. 
-The *Counter* contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
+The smart contract _MultisigProxy_ accepts a proposed message (parameter typed _string_)), when number of approvals is reached the string is used to generate transaction to an other contract _Counter_.
+This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for _Counter_ contract.
+The _Counter_ contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
 
 ```
 // Counter contract types
 type action is
 | Increment of int
-| Decrement of int 
+| Decrement of int
 
 // MultisigProxy storage type
 type addr_set is set (address)
@@ -186,12 +184,13 @@ function main (const param : parameter; const s : storage) : return  is
 
 ```
 
-Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached : 
+Notice in the _Send_ function the number of voters is compared to the threshold. If threshold is reached :
 
 <!-- prettier-ignore -->* the message *packed\_msg* is removed from *message\_storage*
-* the action is executed and takes the _string_ as parameter
-<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message 
-* the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
+
+- the action is executed and takes the _string_ as parameter
+<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message
+- the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ```
   if Set.cardinal (new_store) >= s.threshold then {
@@ -209,11 +208,10 @@ Notice in the *Send* function the number of voters is compared to the threshold.
   }
 ```
 
-Notice in the *Withdraw* function :
+Notice in the _Withdraw_ function :
 
-* if a message proposal has no voters the it is removed
-* the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
-
+- if a message proposal has no voters the it is removed
+- the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ## Your mission
 
@@ -224,5 +222,3 @@ Notice in the *Withdraw* function :
 <!-- prettier-ignore --> 2- Iterate on voters with a _for_ loop (use *addr* as temporary variable for the loop).
 
 <!-- prettier-ignore --> 3- Modify *reputation* in a single instruction using a _case_ operator to verify if voter has already a reputation account (use *count* as temporary variable for the _Some_). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
-
-

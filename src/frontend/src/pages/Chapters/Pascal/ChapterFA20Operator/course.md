@@ -1,10 +1,10 @@
-# Chapter 29 : Financial Asset 2.0 - Operators and Permissions
+# Chapter 29 : FA 2.0 - Operators and Permissions
 
 <dialog character="mechanics">Captain, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
 
 ## Definition
 
-The FA2 standard proposes a *unified token contract interface* that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
+The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
 In this chapter we will focus on _Operators_ and _Permissions_.
 
@@ -25,6 +25,7 @@ type fa2_entry_points is
 ### Operators
 
 #### Definition
+
 _Operator_ can be seen as delegate role.
 
 _Operator_ is a Tezos address that initiates token transfer operation on behalf of the owner.
@@ -78,13 +79,11 @@ type is_operator_params is michelson_pair_right_comb(is_operator_params_)
 
 <!-- prettier-ignore -->Notice the parameter _is\_operator\_params_ given to *Is\_operator* entry point contains a *callback* property used to send back a response to the calling contract.
 
-<!-- prettier-ignore -->Notice entry point *Update\_operators* expectes a list of *update\_operator\_param*. 
-
+<!-- prettier-ignore -->Notice entry point *Update\_operators* expectes a list of *update\_operator\_param*.
 
 #### FA2 standard operator library
 
 Some helpers functions has been implemented in the FA2 library which help manipulating _operator_. This library contains following functions and type alias :
-
 
 an _operator_ is a relationship between two address (owner address and operator address)
 
@@ -92,27 +91,26 @@ an _operator_ is a relationship between two address (owner address and operator 
 
 <!-- prettier-ignore -->function *validate\_operator* validates operators for all transfers in the batch at once, depending on given *operator\_transfer\_policy*
 
-
-
 ### FA2 Permission Policies and Configuration
 
-Most token standards specify logic that validates a transfer transaction and can either approve or reject a transfer. 
+Most token standards specify logic that validates a transfer transaction and can either approve or reject a transfer.
 Such logic (called _Permission Policy_) could validate who initiates a transfer, the transfer amount, and who can receive tokens.
 
 This FA2 standard defines a framework to compose and configure such permission policies from the standard behaviors and configuration APIs.
 
 FA2 defines :
-* the default core transfer behavior, that MUST always be implemented
-* a set of predefined permission policies that are optional
 
+- the default core transfer behavior, that MUST always be implemented
+- a set of predefined permission policies that are optional
 
 #### Permissions descriptor
 
 <!-- prettier-ignore -->FA2 specifies an interface permissions_descriptor allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions\_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
 
-The *permission descriptor* indicates which standard permission policies are implemented by the FA2 contract and can be used by off-chain and on-chain tools to discover the properties of the particular FA2 contract implementation.
+The _permission descriptor_ indicates which standard permission policies are implemented by the FA2 contract and can be used by off-chain and on-chain tools to discover the properties of the particular FA2 contract implementation.
 
-The FA2 standard defines a special metadata entry point *permission descriptor* containing standard permission policies. 
+The FA2 standard defines a special metadata entry point _permission descriptor_ containing standard permission policies.
+
 ```
 type permissions_descriptor_ is record
   operator : operator_transfer_policy
@@ -125,7 +123,7 @@ end
 #### Interface
 
 <!-- prettier-ignore -->FA2 token contract MUST implement the *Permissions\_descriptor* entry point which provides token policies.
- 
+
 ```
 | Permissions_descriptor  of permissions_descriptor_params
 ```
@@ -139,10 +137,9 @@ type permissions_descriptor_params is
   contract (permissions_descriptor)
 ```
 
-
 #### Operator transfer policy
 
-<!-- prettier-ignore -->*operator\_transfer\_policy* - defines who can transfer tokens. Tokens can be transferred by the token owner or an operator (some address that is authorized to transfer tokens on behalf of the token owner). A special case is when neither owner nor operator can transfer tokens (can be used for non-transferable tokens). 
+<!-- prettier-ignore -->*operator\_transfer\_policy* - defines who can transfer tokens. Tokens can be transferred by the token owner or an operator (some address that is authorized to transfer tokens on behalf of the token owner). A special case is when neither owner nor operator can transfer tokens (can be used for non-transferable tokens).
 
 <!-- prettier-ignore -->The FA2 standard defines two entry points to manage and inspect operators associated with the token owner address (*update\_operators*, *is\_operator*). Once an operator is added, it can manage all of its associated owner's tokens.
 
@@ -175,39 +172,36 @@ type custom_permission_policy = {
 }
 ```
 
-
 #### Permission Policy Formulae
 
 Each concrete implementation of the permission policy can be described by a formula which combines permission behaviors in the following form:
+
 ```
 Operator(?) * Receiver(?) * Sender(?)
 ```
 
 This formula describes the policy which allows only token owners to transfer their own
 tokens :
+
 ```
 Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 ```
-
-
-
-
 
 ## Your mission
 
 We are working on a non_fungible/single-asset token.
 Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to Alice account.
 
-  * Alice's account address is "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN"
-  * Bob's account address is "tz1faswCTDciRzE4oJ9jn2Vm2dvjeyA9fUzU"
-  * Vera's account address is "tz1b7tUupMgCNw2cCLpKTkSD1NZzB5TkP2sv"
+- Alice's account address is "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN"
+- Bob's account address is "tz1faswCTDciRzE4oJ9jn2Vm2dvjeyA9fUzU"
+- Vera's account address is "tz1b7tUupMgCNw2cCLpKTkSD1NZzB5TkP2sv"
 
 <!-- prettier-ignore -->1- First we want you to prepare the initial state of storage. Modify the _ligo compile-storage_ command for the *token* contract with following recommandations :
 
-  * Vera account is owner of the token 1
+- Vera account is owner of the token 1
 
 <!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
-
 <!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
+
 You will have to modify the storage to in the state where "Vera account is owner of the token 1" (step 1) and Bob is authorized to transfer token taken from Vera account (step 2).

@@ -50,12 +50,6 @@ export const DrawerView = ({
           )
         else return <div key={chapter.pathname} />
       })}
-
-      <DrawerItem className={pathname === '/coming-next' ? 'current-path' : 'other-path'}>
-        <Link to="/coming-next" onClick={() => hideCallback()}>
-          What's next?
-        </Link>
-      </DrawerItem>
     </DrawerStyled>
   </>
 )
