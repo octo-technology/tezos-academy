@@ -2,7 +2,7 @@
 
 <dialog character="pilot"></dialog>
 
-When sending transactions between contracts, each contract must know the target contract interface and the parameter type of the target contract. This is done basically by separating type definition and function implementation and by using inclusion.
+When sending transactions between contracts, each contract must know the target contract interface and the parameter type of the target contract. This is done basically by separating type definition and function implementation and by using code inclusion.
 
 But a problem arises when creating a new contract which must communicate way and back (two-way communication) with an already deployed contract. The deployed contract cannot know the signature of a contract not yet created !
 
@@ -12,7 +12,7 @@ But a problem arises when creating a new contract which must communicate way and
 
 Let's consider two contracts _A_ and _B_. Contract _A_ asks some information from contract _B_ and they communicate between each other with transactions.
 A sends a request to B, meanings _A_ calls an entry point of _B_, so contract _A_ includes type definition of _B_.
-B receives the request, processesthe request and sends a response back to _A_, meaning _B_ calls an entry point of _A_, so contract _B_ includes type definition of _A_.
+B receives the request, processes the request and sends a response back to _A_, meaning _B_ calls an entry point of _A_, so contract _B_ includes type definition of _A_.
 Once they are deployed, we cannot change their _includes_.
 
 Now let's consider a third smart contract _C_ which will communicate with _B_. (Like _A_)
@@ -22,9 +22,9 @@ The problem is coming from the fact that _B_ must know the whole definition of _
 
 ## Retrieving entry points
 
-<!-- prettier-ignore -->For this purpose, the predefined function *Tezos.get\_entrypoint\_opt* can be used to retrieve the definition of a single entry point (from the whole variant).
+<!-- prettier-ignore -->For this purpose, the predefined function *Tezos.get\_entrypoint\_opt* can be used to retrieve the definition of a single entry point.
 
-<!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* can be used in replacement of the *Tezos.get\_contract\_opt* function to retrieve contract interface but for only one entry point. It takes the requested entry point as parameter (with a special Michelsonsyntax) and the address of the contract.
+<!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* can be used in replacement of the *Tezos.get\_contract\_opt* function to retrieve contract interface but for only one entry point. It takes the requested entry point as parameter (with a special Michelson syntax) and the address of the contract.
 
 <!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* has the following syntax :
 
@@ -42,13 +42,6 @@ let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tez
 
 Entry point names are written in the form of: _%myEntryPoint_ for the entry point _MyEntryPoint_.
 
-## Entry point naming convention
-
-<!-- prettier-ignore --> *entrypoint\_name* is a double-quoted string where the first character is % followed by the name of the entry point (and its first letter must not be capitalized), e.g. for an entry point *FooBar* the corresponding *entrypoint\_name* is *"%fooBar"*
-
-<!-- prettier-ignore --> To get a contract from an address and entry point, we can use _Tezos.get_entrypoint_opt(<entrypoint>, <address>)_
-
-Entrypoints are written in the form of: _%myEntryPoint_ for the entry point _MyEntryPoint_. Notice we change the case of the first letter.
 
 ## Your mission
 

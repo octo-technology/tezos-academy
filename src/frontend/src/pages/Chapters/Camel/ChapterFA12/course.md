@@ -16,7 +16,7 @@ Fungible means secable
 
 Fungible token is a Financial Application where account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
 
-Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For exemple, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
+Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
 
 ### Standard
 
@@ -28,7 +28,7 @@ Depending on the usage of the currency, many sets of rules have been commonly ac
 - Financial Application 1.2 (FA1.2) are rules for fungible token.
 - Financial Application 2.0 (FA20) are rules for non fungible token.
 
-For exemple, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
+For example, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
 All smart contracts supporting the FA12 standard can interact with account and other contracts by transfering coins of our crypto-currency.
 
 Similarily for ethereum, fungible token rules have been specified in a Ethereum forum blog (Ethereum Request Comment) the 20th answer was describing a good rule set and the ERC20 became the name for this standard (rule set).

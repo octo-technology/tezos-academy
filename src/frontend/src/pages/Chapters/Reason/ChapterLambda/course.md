@@ -8,7 +8,7 @@ Tezos as a public blockchain expects that contracts should have the same behavio
 
 We call _antipattern_ when a smart contract has a special role (admin) or may be evolving (changing the rules of the smart contract).
 
-The need to modify the behaviour of a smart contract emerges when for exemple the laws of a country have changed and you need to apply the same changes to the rules in your smart contract.
+The need to modify the behaviour of a smart contract emerges when for example the laws of a country have changed and you need to apply the same changes to the rules in your smart contract.
 One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by :
 1- migrating storage information through transactions,
 2- or by forcing the new contract to request storage data from the old contract,
@@ -31,9 +31,11 @@ Versioning can be done by writing a single smart contract that can change its pr
 
 ## Lambda
 
-Changing the behavior of a smart contract can be done by customizing the implementation through lambda functions.
+Changing the behavior of a smart contract can be done by customizing the implementation through lambda functions. The idea is to implement smart contract logic in a lambda funtion that can be modified after the contract deployment.
 
-The idea is to define an anonymous function in the storage which is called by an entrypoint and writes a new entrypoint that allows to change the implementation of this anonymous function.
+This pattern requires to:
+- define an anonymous function in the storage which is called by an entrypoint
+- write a new entrypoint that allows to change the implementation of this anonymous function.
 
 Let's consider the "starmap" smart contract :
 
@@ -102,9 +104,9 @@ The implementation of the lambda can be changed with the _changeFunc_ function w
 ligo dry-run lambda.religo main 'ChangeFunc((c : coordinates) : coordinates => {x:c.x*100,y:c.y,z:c.z})' '{name:"Sol",func:((c : coordinates) : coordinates => {x:c.x*10,y:c.y,z:c.z}),systemplanets:Map.literal([("earth", {x:2,y:7,z:1})])}'
 ```
 
-⚠️ Notice the new implementation of _func_ multiplies the 'x' coordinate by 100 (defined as parameter of _ChangeFunc_ entrypoint)
+⚠️ Notice that the new implementation of _func_ multiplies the 'x' coordinate by 100 (defined as parameter of _ChangeFunc_ entrypoint)
 
-⚠️ Notice the old implementation of _func_ multiplies the 'x' coordinate by 10 (defined in storage)
+⚠️ Notice that the old implementation of _func_ multiplies the 'x' coordinate by 10 (defined in storage)
 
 ## Your mission
 
@@ -119,14 +121,14 @@ Take a look at the starmap contract in the editor tabs.
 {name:store.name, func:f, celestialbodies:modified}
 ```
 
-⚠️ Notice in the function _deduceCategoryChange_ the sub-function _applyDeduceCatg_ which applies the new category deduction to a planet (_category:f(p)_).
+⚠️ Notice that in the function _deduceCategoryChange_ the sub-function _applyDeduceCatg_ applies the new category deduction to a planet (_category:f(p)_).
 
 ```
 let applyDeduceCatg = ((name,p) : (string, planet)) : planet =>
     {position:p.position, mass:p.mass, category:f(p)};
 ```
 
-⚠️ Notice in the function _deduceCategoryChange_ the _applyDeduceCatg_ function that is used to update all entries of the _celestialbodies_ map with :
+⚠️ Notice that in the function _deduceCategoryChange_ the  sub-function _applyDeduceCatg_ is used to update all entries of the _celestialbodies_ map with :
 
 ```
 Map.map (applyDeduceCatg, store.celestialbodies);
@@ -141,30 +143,3 @@ We want you to update our "starmap" contract in order to take this new rule into
 <!-- prettier-ignore -->3- Second rule : if the mass of a planet is above 100 then the celestial body is considered as a PLANET.
 
 <!-- prettier-ignore -->4- Third rule : if the mass of a planet is under 100 then the celestial body is considered as an ASTEROID.
-
-expected storage after simulation :
-
-```
-( LIST_EMPTY() ,
-  record[celestialbodies -> MAP_ADD("earth" ,
-            record[category -> PLANET(unit) ,
-                  mass -> +1000 ,
-                  position -> record[x -> 2 ,
-                                      y -> 7 ,
-                                      z -> 1]] ,
-            MAP_ADD("pluto" ,
-                    record[category -> ASTEROID(unit) ,
-                          mass -> +10 ,
-                          position -> record[x -> 200 ,
-                                          y -> 750 ,
-                                          z -> 100]] ,
-                    MAP_ADD("sun" ,
-                            record[category -> STAR(unit) ,
-                                  mass -> +1000000 ,
-                                  position -> record[x -> 0 ,
-                                          y -> 0 ,
-                                          z -> 0]] ,
-                            MAP_EMPTY()))) ,
-         func -> "[lambda of type: (lambda\n   (pair (pair (or %category (or (unit %aSTEROID) (unit %pLANET)) (unit %sTAR)) (nat %mass))\n         (pair %position (pair (int %x) (int %y)) (int %z)))\n   (or (or (unit %aSTEROID) (unit %pLANET)) (unit %sTAR))) ]" ,
-         name -> "Sol"] )
-```

@@ -99,7 +99,7 @@ type z_or = (unit, "z", y_or, "other") michelson_or
 
 If you don't want to have an annotation, you need to provide an empty string.
 
-To use variables of type michelson*or you have to use *M_left* and *M_right*. *M_left* picks the left \_or* case while _M_right_ picks the right _or_ case. For _michelson_pair_ you need to use tuples.
+<!-- prettier-ignore -->To use variables of type *michelson\_or* you have to use *M\_left* and *M\_right*. *M\_left* picks the left _or_ case while *M\_right* picks the right _or_ case. For *michelson\_pair* you need to use tuples.
 
 ```
 let z: z_or = (M_left (unit) : z_or)
