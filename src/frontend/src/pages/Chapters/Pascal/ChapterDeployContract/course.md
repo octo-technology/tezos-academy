@@ -6,12 +6,12 @@
 
 A smart contract is code written in Michelson langage (a low-level stack-based turing-complete language).
 It contains entrypoints which describe all possible way to interact with a smart contract.
-It contains prototype of each entrypoint. What kind of parameters are exepected to execute an entrypoint
+It defines the prototype of each entrypoint (it specifies the parameters types of the entrypoint)
 It contains the description of storage.
 
 ### Storage
 
-storage is an allocated memory space associated to smart contract. Storage is a persistent data for a smart contract.
+The storage is an allocated memory space associated to a smart contract. The storage is a persistent data store for a smart contract.
 
 The description of the storage is done by strongly-typing the data structure.
 
@@ -22,14 +22,16 @@ Executing an entrypoint takes some parameters and a state of a storage and retur
 
 ![](/images/contract_in_out.png)
 
-Execution of an entrypoint produces a new state of the storage of the smart contract. If executopn did not throw an exception and did not fail then the new state of storage is applied.
+Execution of an entrypoint produces a new state of the storage of the smart contract. If the entrypoint execution did not throw an exception and did not fail then the new state of storage is applied.
 
-Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entryppoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (ordered list of transactions) then they are sent and executed following order of the list of operation.
+Operations are transactions (smart contract invocation) that will be sent to some other contracts and will trigger an entrypoint of the targeted contract or a tez transfer (no invocation of entrypoint). If execution of an entrypoint produces operations (an ordered list of transactions) then they are sent and executed following order of the list of operation.
 
 ## Deploy
 
-A smart contract must be deployed to the blockchain in order to be invoked. When deploying a smart contract ot the blockchain , one must specify the initial state of the storage.
+A smart contract must be deployed on the blockchain in order to be invoked. When deploying a smart contract on the blockchain, one must specify the initial state of the storage.
+
 Deployment of a smart contract in Tezos is called "origination".
+
 Here is the syntax of the tezos command line to deploy a smart contract :
 
 ```
@@ -59,9 +61,9 @@ tezos-client transfer <amount> from <user> to <contract_name> --arg '<entrypoint
 <contract_name> name given to the contract
 <entrypoint_invocation> name of the entrypoint and corresponding parameters. exemple 'Increment(5)'.
 
-⚠️ Notice the --arg parameter specifies an entrypoint call.
+⚠️ Notice that the --arg parameter specifies an entrypoint call.
 
-⚠️ Notice the --dry-run parameter simulate invocation of the entrypoint.
+⚠️ Notice that the --dry-run parameter simulate invocation of the entrypoint.
 
 ## Ligo compiler
 
@@ -115,7 +117,7 @@ ligo dry-run [options] code.ligo mainFunc '<entrypoint(p)>' '<storage_state>'
 
 ### Ligo Expression in command line
 
-Let's see some exemple how to transpile a storage ligo expression into a Michelsonone.
+Let's see some exemple how to transpile a storage ligo expression into a Michelson one.
 
 Let's consider this smart contract which associate coordinates to a planet name.
 

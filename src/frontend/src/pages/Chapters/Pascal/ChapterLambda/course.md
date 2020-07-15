@@ -16,6 +16,7 @@ One could write a new smart contract (V2) and deploy it but it would imply that 
 
 In this chapter we will focus on the third solution.
 
+
 ### Versioning by re-emission
 
 Versioning can be done by writing a new smart contract and emitting transactions from the old contract (V1) to migrate storage information to the new contract (V2). This may require a lot of transactions and thus a lot of fees (resulting in a significant price). This price could be paid by the smart contract that would emit transactions or by each user which would invoke a "migrate" entrypoint of V1 contract to send storage information to the new contract. Transaction emission has been seen in chapter 17 with the _Tezos.transaction_ predefined function.
