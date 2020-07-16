@@ -86,7 +86,7 @@ In the "starmap" smart contract, the type of _func_ is
 (coordinates) -> coordinates
 ```
 
-⚠️ Note that _func_ is transforming coordinates of a planet into coordinates of a planet as well.
+⚠️ Note that lambda function _func_ takes as parameter some coordinates of a planet and returns coordinates of a planet as well.
 
 ## Lambda call
 
