@@ -4,7 +4,7 @@
 
 ## Definition
 
-A Financial Applicationis a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, and stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
+A Financial Application is a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, and stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
 
 Financial assets are opposed to non-financial assets, property rights which include both tangible property (sometimes also called real assets) such as land, real estate or commodities and intangible assets such as intellectual property, like copyrights, patents, Trademarks etc.
 
@@ -14,21 +14,21 @@ When talking about _token_ or _crypto-currency_, it is a numerical asset emitted
 
 Fungible means secable
 
-Fungible token is a Financial Applicationwhere account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
+Fungible token is a Financial Application where account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
 
-Non-fungible token (NFT) is a Financial Applicationwhose balance cannot be splitted into smaller part. Crypto-kitties is an exemple of non fungible token (on Ethereum blcockchain). For exemple, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
+Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller part. Crypto-kitties is an example of non fungible token (on Ethereum blcockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity, ...) one can want to sell its avatar , but cannot sell strength property of its avatar separately. It makes sense to keep tha whole avatar into a unsecable set of attributes.
 
 ### Standard
 
 A standard is a set of rules commonly accepted by the community.
-The rules of Financial Applicationdescribes how to create currencies (and transfer between accounts, etc).
+The rules of Financial Application describes how to create currencies (and transfer between accounts, etc).
 
 Depending on the usage of the currency, many sets of rules have been commonly accepted :
 
-- Financial Application1.2 (FA1.2) are rules for fungible token.
-- Financial Application2.0 (FA20) are rules for non fungible token.
+- Financial Application 1.2 (FA1.2) are rules for fungible token.
+- Financial Application 2.0 (FA2) are rules for non fungible token.
 
-For exemple, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
+For example, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
 All smart contracts supporting the FA12 standard can interact with account and other contracts by transfering coins of our crypto-currency.
 
 Similarily for ethereum, fungible token rules have been specified in a Ethereum forum blog (Ethereum Request Comment) the 20th answer was describing a good rule set and the ERC20 became the name for this standard (rule set).
@@ -39,11 +39,11 @@ ERC721 is the standard rule set for non-fungible token.
 This Fungible token standard provides basic functionality to transfer tokens, as well as allow tokens to be approved so they can be spent by another on-chain third party.
 
 Possible actions :
-Appove - Sender can specify an amount of token that can be spent by someone else (from his account)
-Transfer - Transfer an amount a token from an account to another account (or third-party on-chain smart contract)
-GetAllowance - Return the amount that can be spent by someone from sender's account
-GetBalance - Returns sender's account balance
-GetTotalSupply - Returns the number total of token
+*Appove* - Sender can specify an amount of token that can be spent by someone else (from his account)
+*Transfer* - Transfer an amount a token from an account to another account (or third-party on-chain smart contract)
+*GetAllowance* - Return the amount that can be spent by someone from sender's account
+*GetBalance* - Returns sender's account balance
+*GetTotalSupply* - Returns the number total of token
 
 Let's see implementation in PascalLigo of a fungible token (FA1.2)
 
@@ -209,24 +209,24 @@ Consider alice account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 
 <!-- prettier-ignore -->3- Write a ligo command line that simulate your invocation of previous *Approval* on storage prepared at step 1. (Don't forget to specify that you are sending this transaction).
 
-<!-- prettier-ignore -->4- Now that ligo compiler ensured us that simulation is good, we will try to simulate it with the tezos-client command line in order to know the right amount of gas needed to run execute *approval*. You can consider that step 2 produced the following Michelsonexpression:
+<!-- prettier-ignore -->4- Now that ligo compiler ensured us that simulation is good, we will try to simulate it with the tezos-client command line in order to know the right amount of gas needed to run execute *approval*. You can consider that step 2 produced the following Michelson expression:
 
 ```
 (Left (Left (Left (Pair "tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7" 2))))
 ```
 
-<!-- prettier-ignore -->5-Write a tezos command line that simulate your invocation.
+<!-- prettier-ignore -->5- Write a tezos command line that simulate your invocation.
 
-<!-- prettier-ignore -->6-  Now that approval has been exeucted on blockchain, 2 TAT can be transfered from your address to *alice*. Write a ligo command line for preparing invocation of a *Transfer* of 2 TAT (Tezos Academy Token) from you to *alice*.
+<!-- prettier-ignore -->6- Now that approval has been exeucted on blockchain, 2 TAT can be transfered from your address to *alice*. Write a ligo command line for preparing invocation of a *Transfer* of 2 TAT (Tezos Academy Token) from you to *alice*.
 
 <!-- prettier-ignore -->7- Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1000000 of token and allowances is initialized with 2 TAT that can be transfered from *me* to *alice* (tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
 
 <!-- prettier-ignore -->8- Write a ligo command line that simulate your invocation of previous *Transfer* on storage prepared at step 7. (Don't forget to specify that you are sending this transaction).
 
-<!-- prettier-ignore -->9- Now that ligo compiler ensured us that simulation is good, we will try to simulate it with the tezos-client command line in order to know the right amount of gas needed to run execute *transfer*. You can consider that step 6 produces the following Michelsonexpression:
+<!-- prettier-ignore -->9- Now that ligo compiler ensured us that simulation is good, we will try to simulate it with the tezos-client command line in order to know the right amount of gas needed to run execute *transfer*. You can consider that step 6 produces the following Michelson expression:
 
 ```
 (Right (Pair (Pair "tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ" "tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7") 2))
 ```
 
-<!-- prettier-ignore -->10-Write a tezos command line that simulate your *Transfer* invocation.
+<!-- prettier-ignore -->10- Write a tezos command line that simulate your *Transfer* invocation.

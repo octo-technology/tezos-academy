@@ -236,7 +236,7 @@ Error mnemonic - Description
 
 <!-- prettier-ignore -->1 - Modify the *get\_total\_supply* lambda function in order to retrieve the *total\_supply* information related to the given *token\_id* list.
 
-<!-- prettier-ignore -->2 - the *get\_total\_supply* lambda function For each given *token\_id*, find the given *token\_id* in the *tokens* map and retrieve the *total\_supply* associated to a given *token\_id* in the *tokens* map.
+<!-- prettier-ignore -->2 - In the *get\_total\_supply* lambda function, for each given *token\_id*, find the given *token\_id* in the *tokens* map and retrieve the *total\_supply* associated to a given *token\_id* in the *tokens* map.
 
 <!-- prettier-ignore -->3 -If a given *token\_id* is found then the function *get\_total\_supply* must return a *total\_supply\_response* record for each given *token\_id*. As seen in the interface the *total\_supply\_response* record contains *token\_id* and *total\_supply* fields. (use v as temporary variable for the match with instruction)
 

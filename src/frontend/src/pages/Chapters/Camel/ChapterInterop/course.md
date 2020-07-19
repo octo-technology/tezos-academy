@@ -27,9 +27,9 @@ will accept these definitions and fail with the ones that does not respect the t
 
 ### Entrypoints and annotations
 
-<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. Using the predefined function *Tezos.get\_entrypoint\_opt* allows to a calling contract ot point to a specific entry point of the called contract.
+<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. The predefined function *Tezos.get\_entrypoint\_opt* allows to call a specific entry point of the called contract.
 
-Here is an exemple. Let's consider the following "Counter" contract :
+Here is an example. Let's consider the following "Counter" contract :
 
 ```
 type storage = int
@@ -72,7 +72,7 @@ These annotations works for _or_'s or _variant_ types in LIGO.
 
 ## Interop with Michelson
 
-<!-- prettier-ignore -->To interop with existing Michelson code or for compatibility with certain development tooling, LIGO has two special interop types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
+<!-- prettier-ignore -->To interop with existing Michelson code or for compatibility with some development tooling, LIGO has two special interop types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
 
 Take for example the following Michelson type that we want to interop with:
 
@@ -99,7 +99,7 @@ type z_or = (unit, "z", y_or, "other") michelson_or
 
 If you don't want to have an annotation, you need to provide an empty string.
 
-To use variables of type michelson*or you have to use *M_left* and *M_right*. *M_left* picks the left \_or* case while _M_right_ picks the right _or_ case. For _michelson_pair_ you need to use tuples.
+<!-- prettier-ignore -->To use variables of type *michelson\_or* you have to use *M\_left* and *M\_right*. *M\_left* picks the left _or_ case while *M\_right* picks the right _or_ case. For *michelson\_pair* you need to use tuples.
 
 ```
 let z: z_or = (M_left (unit) : z_or)
@@ -114,9 +114,9 @@ let x: z_or = (M_right (y_1) : z_or)
 
 ## Helper functions
 
-Conversions from Ligo types to Michelsontypes requires a precise knowledge of data structures representation.
+Conversions from Ligo types to Michelson types require a precise knowledge of data structures representation.
 
-So it becomes even more relevant with nested pairs that there are many possible decomposition of a record in pairs of pairs.
+So it becomes even more relevant with nested pairs because there are many possible decompositions of a record in pairs of pairs.
 
 The following record structure
 
@@ -288,4 +288,4 @@ let make_abstract_record (z: string) (y: int) (x: string) (w: bool) (v: int) : t
 
 We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pairs. The contract possess a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
 
-<!-- prettier-ignore -->1- Complete the implementation of the *update\_inventory* lambda function. This function takes a list of item as parameter and must transform each item in a combed pair structure and add this transformed structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)
+<!-- prettier-ignore -->1- Complete the implementation of the *update\_inventory* lambda function. This function takes a list of item as parameter and must transform each item in a combed pair structure and add this resulting structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)

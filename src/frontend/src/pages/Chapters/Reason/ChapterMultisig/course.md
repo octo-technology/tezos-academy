@@ -9,7 +9,7 @@ In some case one may want to execute an action only if many users approve this a
 
 When invoking a smart contract, an entrypoint is called and usually an action is executed (triggering a storage modification and/or transactions emmission).
 The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic.
-The mutli-signature implementation can be done in a single contract with the smart contract logic or in a separated contract like a proxy contract (which emits transactions to the contract containg the logic).
+The mutli-signature implementation can be done in a single contract with the smart contract logic or in a separated contract like a proxy contract which emits transactions to the contract containing the logic.
 
 ### Rules
 
@@ -19,7 +19,7 @@ The multi-signature pattern can be described with this set of rules :
 - a user can approve an action (proposed by someone else)
 - a user can cancel his approval on an action.
 - an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
-- the smart contract must also handle a list of user allowed to approve an action
+- the smart contract must also handle a list of user in order to specify who is allowed to approve an action
 
 optionnaly
 
@@ -28,12 +28,18 @@ optionnaly
 
 More complex rules can be added these basic ones.
 
-### Implementation of multisig
+### Implementation of multi-signature pattern
 
-Let's consider this implementation of the multi-signature pattern. This implementation takes all previously rules into account.
-The smart contract _MultisigProxy_ accepts a proposed message (parameter typed _string_)), when number of approvals is reached the string is used to generate transaction to an other contract _Counter_.
+Let's consider this implementation of the multi-signature pattern. This implementation takes all previously mentionned rules into account.
+
 This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for _Counter_ contract.
-The _Counter_ contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
+The _Counter_ contract (the example at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
+The _Counter_ contract handle a simple integer counter which can be incemented or decremented.
+
+Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the  _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
+
+A user can invoke the entry point *Send* of the smart contract _MultisigProxy_ to propose or approve a modification of the counter. When the number of approvals is reached, the desired modification is sent to the contract _Counter_ via a transaction. A user can invoke the entry point *Withdraw* of the smart contract _MultisigProxy_ to reject a proposed modification.
+
 
 ```
 // Counter contract types
@@ -203,10 +209,10 @@ let main = ((param,s) : (parameter, storage)) : return  =>
 
 Notice in the _Send_ function the number of voters is compared to the threshold. If threshold is reached :
 
-<!-- prettier-ignore -->* the message *packed\_msg* is removed from *message\_storage*
+<!-- prettier-ignore -->- the message *packed\_msg* is removed from *message\_storage*
 
 - the action is executed and takes the _string_ as parameter
-<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message
+<!-- prettier-ignore -->- the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message
 - the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ```
@@ -235,15 +241,15 @@ if (sender_proposal_counter > s.max_proposal) {
 
 Notice in the _Withdraw_ function :
 
-- if a message proposal has no voters the it is removed
+- if a message proposal has no voters then it is removed
 - the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ## Your mission
 
-<!-- prettier-ignore --> We have a basic mutli-signature contract but voters doesn't approve quickly enough. Maybe if we grant a reward for signers it will speed the process. Modify the existing *Multisig* contract in order to handle reputation level for each voters. We plan to grant reputation points when the message is really executed (one point of reputation for each voters).
+<!-- prettier-ignore --> We have a basic mutli-signature contract but voters don't approve quickly enough. Maybe if we grant a reward to signers it may speed the voting process. Modify the existing *Multisig* contract in order to handle a reputation level for each voters. We plan to grant "reputation" points when the message is really executed (one "reputation" point for each voters).
 
-<!-- prettier-ignore --> 1- Notice the storage contains a property called *reputation* which associates a _nat_ number to a voter.
+<!-- prettier-ignore --> 1- Notice that the storage contains a property called *reputation* which associates a _nat_ number to a voter.
 
-<!-- prettier-ignore --> 2- Modify *increment* function to modify the reputation of a given *addr* address by granting a point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
+<!-- prettier-ignore --> 2- Modify the *increment* function to modify the reputation of a given *addr* address by granting one point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* registry then add him. Otherwise update its reputation by incrementing by one its actual level. It is recommanded to use Map.add and Map.update when modifying a _map_.
 
-<!-- prettier-ignore --> 3- Modify *reputation\_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.
+<!-- prettier-ignore --> 3- Modify the *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.

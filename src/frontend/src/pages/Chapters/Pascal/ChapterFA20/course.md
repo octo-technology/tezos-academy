@@ -54,7 +54,7 @@ type fa2_entry_points is
 | Balance_of of balance_of_params
 ```
 
-<!-- prettier-ignore -->It accepts a list of *balance\_of\_requests* and a callback and sends back to a callback contract a list of *balance\_of\_response* records.
+<!-- prettier-ignore -->It accepts a list of *balance\_of\_requests* and a callback and sends back a list of *balance\_of\_response* records to a callback contract.
 
 <!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
 
@@ -134,6 +134,36 @@ type transfer_aux = {
 }
 ```
 
+### Metadata
+
+<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata\_registry* entry point which get the metadata for multiple token types.
+
+<!-- prettier-ignore -->It expects a callback contract, and sends back a list of *token\_metadata\_* records.
+
+FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or transferred) is always 1.
+
+The _decimals_ property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
+
+#### Interface
+
+```
+type token_metadata_ is record
+  token_id  : token_id
+; symbol    : string
+; name      : string
+; decimals  : nat
+; extras    : map (string, string)
+end
+
+type token_metadata is michelson_pair_right_comb(token_metadata_)
+
+
+type token_metadata_param is record
+  token_ids : list(token_id);
+  callback : contract(list(token_metadata)) ;
+end
+```
+
 ### Error Handling
 
 This FA2 tandard defines the set of standard errors to make it easier to integrate FA2 contracts with wallets, DApps and other generic software, and enable
@@ -178,71 +208,10 @@ Error mnemonic - Description
 
 <!-- prettier-ignore -->1- Declare a variable *retreived\_balance* of type natural initialized to 0.
 
-<!-- prettier-ignore -->2- Retrieve balance associated to the request owner in the ledger. and store it in the variable *retreived\_balance*. In the _case_ instruction use *ledger_balance* as temporary name for the _Some_. If no balance is retrieve do nothing (do not modify *retreived\_balance*).
+<!-- prettier-ignore -->2- Retrieve the balance associated to the request owner in the ledger and store it in the variable *retreived\_balance*. In the _case_ instruction use *ledger_balance* as temporary name for the _Some_. If no balance is retrieve do nothing (do not modify *retreived\_balance*).
 
-<!-- prettier-ignore -->3- Create a constant *response* of type *balance\_of\_response\_* containing a record with the request and the retrieved balance
+<!-- prettier-ignore -->3- Create a constant *response* of type *balance\_of\_response\_* containing a record with the request and the retrieved balance.
 
-<!-- prettier-ignore -->4- The function *retreive\_balance* must return a type *balance\_of\_response*. You can use the *convert\_to\_right\_comb* function (seen in Chapter Interop) to convert constant *response* into the right format. Don't forget to cast *response* as type *balance\_of\_response\_*.
-
-## WIP
-
-### Totalsupply
-
-FA2 token contracts MUST implement the _Totalsupply_ entry point which get the total supply of tokens for multiple token types (because FA2 supports mutiple token).
-
-```
-| Total_supply of total_supply_param
-```
-
-<!-- prettier-ignore -->It accepts a list of *token\_ids* and a callback, and sends back to the callback contract a list of *total\_supply\_response* records.
-
-<!-- prettier-ignore -->If one of the specified *token\_ids* is not defined within the FA2 contract, the entry point MUST fail with the error mnemonic "TOKEN_UNDEFINED" (see section Error Handling).
-
-#### Interface
-
-```
-type token_id = nat
-
-type total_supply_response = {
-  token_id : token_id;
-  total_supply : nat;
-}
-
-type total_supply_response_michelson = total_supply_response michelson_pair_right_comb
-
-type total_supply_param = {
-  token_ids : token_id list;
-  callback : (total_supply_response_michelson list) contract;
-}
-```
-
-### Metadata
-
-<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata\_registry* entry point which get the metadata for multiple token types.
-
-<!-- prettier-ignore -->It expects a callback contract, and sends back a list of *token\_metadata* records.
-
-FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or
-transferred) is always 1.
-
-The _decimals_ property is the number of digits to use after the decimal point when displaying the token amounts. If 0, the asset is not divisible. Decimals are used for display purposes only and MUST NOT affect transfer operation.
-
-#### Interface
-
-```
-type token_metadata_ is record
-  token_id  : token_id
-; symbol    : string
-; name      : string
-; decimals  : nat
-; extras    : map (string, string)
-end
-
-type token_metadata is michelson_pair_right_comb(token_metadata_)
+<!-- prettier-ignore -->4- The function *retreive\_balance* must return a type *balance\_of\_response*. You can use the *convert\_to\_right\_comb* function (seen in Chapter Interoperability) to convert constant *response* into the right format. Don't forget to cast *response* as type *balance\_of\_response\_*.
 
 
-type token_metadata_param is record
-  token_ids : list(token_id);
-  callback : contract(list(token_metadata)) ;
-end
-```
