@@ -1,41 +1,39 @@
-# Chapter 25 : Multi-signature pattern
+# Chapter 24 : Multi-signature pattern
 
 <dialog character="mechanics">Captain, we should warm up the weapons while we are still in FTL, we don't know what awaits us on the other side.</dialog>
-Before any nuke strike, the admiral and the president of Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.  
+Before any nuke strike, the admiral and the president of Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.
 
-  
-In some case one may want to execute an action only if many users approve this action. This kind of pattern is called _multi-signature_. 
+In some case one may want to execute an action only if many users approve this action. This kind of pattern is called _multi-signature_.
 
 ## Multi-signature
 
 When invoking a smart contract, an entrypoint is called and usually an action is executed (triggering a storage modification and/or transactions emmission).
-The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic. 
+The purpose of a multi-signature pattern is to execute an action when all preconditions has been verified. The action that need to be executed depends on the smart contract logic.
 The mutli-signature implementation can be done in a single contract with the smart contract logic or in a separated contract like a proxy contract (which emits transactions to the contract containg the logic).
 
 ### Rules
 
 The multi-signature pattern can be described with this set of rules :
 
-* a user can propose an action
-* a user can approve an action (proposed by someone else)
-* a user can cancel his approval on an action.
-* an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
-* the smart contract must also handle a list of user allowed to approve an action
+- a user can propose an action
+- a user can approve an action (proposed by someone else)
+- a user can cancel his approval on an action.
+- an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
+- the smart contract must also handle a list of user allowed to approve an action
 
 optionnaly
 
-* the smart contract can also handle the number of approval per user and set maximum number of approvals.
-* the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
+- the smart contract can also handle the number of approval per user and set maximum number of approvals.
+- the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
 
 More complex rules can be added these basic ones.
-
 
 ### Implementation of multisig
 
 Let's consider this implementation of the multi-signature pattern. This implementation takes all previously rules into account.
-The smart contract *MultisigProxy* accepts a proposed message (parameter typed _string_)), when number of approvals is reached the string is used to generate transaction to an other contract *Counter*. 
-This smart contract *MultisigProxy* intends to play the role of a proxy pattern for *Counter* contract. 
-The *Counter* contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
+The smart contract _MultisigProxy_ accepts a proposed message (parameter typed _string_)), when number of approvals is reached the string is used to generate transaction to an other contract _Counter_.
+This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for _Counter_ contract.
+The _Counter_ contract (the exemple at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
 
 ```
 // Counter contract types
@@ -69,8 +67,8 @@ type parameter =
 | Withdraw of message
 | Default  of unit
 
-// Function executed when {threshold} approvals has been reached 
-let execute_action (str, s : (string * storage) ) : operation list = 
+// Function executed when {threshold} approvals has been reached
+let execute_action (str, s : (string * storage) ) : operation list =
   if String.sub 1n 1n str  = "3" then
     let ci_opt : action contract option = Tezos.get_contract_opt s.target_contract in
     let op : operation = match (ci_opt) with
@@ -79,34 +77,34 @@ let execute_action (str, s : (string * storage) ) : operation list =
     in
     let listop : operation list = [ op ] in
     listop
-  else  ([] : operation list) 
+  else  ([] : operation list)
 
 let send (param,s : (message * storage)) : return =
     // check sender against the authorized addresses
-    if (Set.mem Tezos.sender s.authorized_addresses = false) then 
+    if (Set.mem Tezos.sender s.authorized_addresses = false) then
         (failwith("Unauthorized address") : return)
     else
         // check message size against the stored limit
-        let msg : message = param in 
+        let msg : message = param in
         let packed_msg : bytes = Bytes.pack (msg) in
-        if (Bytes.length packed_msg > s.max_message_size) then 
+        if (Bytes.length packed_msg > s.max_message_size) then
           ( failwith ("Message size exceed maximum limit") : return )
-        else  
+        else
         // compute the new set of addresses associated with the message and update counters
           let voters_opt : addr_set option = Map.find_opt packed_msg s.message_store in
           let (new_store, proposal_counters_updated) : (addr_set * proposal_counters) = match (voters_opt) with
-            Some (voters) -> 
+            Some (voters) ->
               // The message is already stored. Increment the counter only if the sender is not already associated with the message.
               if (Set.mem Tezos.sender voters) then
                 ((Set.empty : addr_set), s.proposal_counters)
-              else 
+              else
                 let updated : proposal_counters = match (Map.find_opt Tezos.sender s.proposal_counters) with
                   | Some(count) -> Map.update Tezos.sender (Some(count + 1n)) s.proposal_counters
                   | None -> Map.add Tezos.sender 1n s.proposal_counters
                 in
                 ( Set.add Tezos.sender voters, updated)
-          
-          | None -> 
+
+          | None ->
               // the message has never been received before
               let updated : proposal_counters = match (Map.find_opt Tezos.sender s.proposal_counters) with
                     Some(count) -> Map.update Tezos.sender (Some(count + 1n)) s.proposal_counters
@@ -123,9 +121,9 @@ let send (param,s : (message * storage)) : return =
           //let sender_proposal_counter : nat = get_force (Tezos.sender, proposal_counters_updated);
           if (sender_proposal_counter > s.max_proposal) then
             (failwith ("Maximum number of proposal reached") : return )
-          else 
+          else
             // check the threshold
-            if (Set.cardinal new_store >= s.threshold) then 
+            if (Set.cardinal new_store >= s.threshold) then
               //remove packed_msg from map s.message_store;
               let message_store_updated : message_store = Map.update packed_msg (None : addr_set option) s.message_store in
               // trigger action execution
@@ -135,9 +133,9 @@ let send (param,s : (message * storage)) : return =
               // decrement the counters
               let decrement = fun (addr,ctr: (address * nat)) -> if (Set.mem addr new_store) then abs(ctr - 1n) else ctr in
               let decremented_proposal_counters : proposal_counters = Map.map decrement proposal_counters_updated in
-              
+
               (ret_ops, {s with proposal_counters=decremented_proposal_counters; state_hash=new_state_hash; message_store=message_store_updated})
-            else 
+            else
               //update map s.message_store with (packed_msg, new_store);
               (([]:operation list), {s with proposal_counters=proposal_counters_updated; message_store=Map.update packed_msg (Some(new_store)) s.message_store})
 
@@ -148,8 +146,8 @@ let withdraw (param, s : (message * storage)) : return =
     match (Map.find_opt packed_msg s.message_store) with
       Some (voters) ->  // The message is stored
           let new_set : addr_set = Set.remove Tezos.sender voters in
-          // Decrement the counter only if the sender was already associated with the message 
-          let proposal_counters_updated : proposal_counters =           
+          // Decrement the counter only if the sender was already associated with the message
+          let proposal_counters_updated : proposal_counters =
             if (Set.cardinal voters <> Set.cardinal (new_set)) then
               //s.proposal_counters[Tezos.sender] := abs (get_force (Tezos.sender, s.proposal_counters) - 1n)
               let updated : proposal_counters = match (Map.find_opt Tezos.sender s.proposal_counters) with
@@ -157,21 +155,21 @@ let withdraw (param, s : (message * storage)) : return =
               | None -> Map.add Tezos.sender 1n s.proposal_counters
               in
               updated
-            else 
+            else
               s.proposal_counters
           in
           // If the message is left without any associated addresses, remove the corresponding message_store field
-          let message_store_updated : message_store = 
+          let message_store_updated : message_store =
             if (Set.cardinal (new_set) = 0n) then
               //remove packed_msg from map s.message_store
               Map.update packed_msg (None : addr_set option) s.message_store
-            else 
+            else
               //s.message_store[packed_msg] := new_set
               Map.update packed_msg (Some(new_set)) s.message_store
           in
           (([] : operation list),{s with message_store=message_store_updated; proposal_counters=proposal_counters_updated})
     | None -> (([] : operation list), s)    // The message is not stored, ignore.
- 
+
 let default (p,s : (unit * storage)) : return =
     (([] : operation list), s)
 
@@ -179,21 +177,22 @@ let main (param,s : (parameter * storage)) : return  =
   match (param) with
     // Propagate message p if the number of authorized addresses having voted for the same message p equals the threshold.
       Send p -> send (p, s)
-    // Withdraw vote for message p 
+    // Withdraw vote for message p
     | Withdraw p -> withdraw (p, s)
-    // Use this action to transfer tez to the contract 
+    // Use this action to transfer tez to the contract
     | Default p -> default (p, s)
 ```
 
-Notice in the *Send* function the number of voters is compared to the threshold. If threshold is reached : 
+Notice in the _Send_ function the number of voters is compared to the threshold. If threshold is reached :
 
 <!-- prettier-ignore -->* the message *packed\_msg* is removed from *message\_storage*
-* the action is executed and takes the _string_ as parameter
-<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message 
-* the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
+
+- the action is executed and takes the _string_ as parameter
+<!-- prettier-ignore -->* the inner state *state\_hash* of the contract is updated by creating a hash key of old state + treated message
+- the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ```
-if (Set.cardinal new_store >= s.threshold) then 
+if (Set.cardinal new_store >= s.threshold) then
   //remove packed_msg from map s.message_store;
   let message_store_updated : message_store = Map.update packed_msg (None : addr_set option) s.message_store in
   // trigger action execution
@@ -203,18 +202,17 @@ if (Set.cardinal new_store >= s.threshold) then
   // decrement the counters
   let decrement = fun (addr,ctr: (address * nat)) -> if (Set.mem addr new_store) then abs(ctr - 1n) else ctr in
   let decremented_proposal_counters : proposal_counters = Map.map decrement proposal_counters_updated in
-  
+
   (ret_ops, {s with proposal_counters=decremented_proposal_counters; state_hash=new_state_hash; message_store=message_store_updated})
-else 
+else
   //update map s.message_store with (packed_msg, new_store);
   (([]:operation list), {s with proposal_counters=proposal_counters_updated; message_store=Map.update packed_msg (Some(new_store)) s.message_store})
 ```
 
-Notice in the *Withdraw* function :
+Notice in the _Withdraw_ function :
 
-* if a message proposal has no voters then it is removed
-* the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
-
+- if a message proposal has no voters then it is removed
+- the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
 ## Your mission
 
@@ -224,4 +222,4 @@ Notice in the *Withdraw* function :
 
 <!-- prettier-ignore --> 2- Modify *increment* function to modify the reputation of a given *addr* address by granting a point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level !. It is recommanded to use Map.add and Map.update when modifying a _map_.
 
-<!-- prettier-ignore --> 3- Modify *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation. 
+<!-- prettier-ignore --> 3- Modify *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.

@@ -40,4 +40,4 @@ let length: nat = String.length name // length = 14
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Reassign *my\_ship* by modifying the engine attribute (third number) from 0 to 1. Use substrings for the attributes before and after to make sure they are untouched.
+<!-- prettier-ignore -->1 - Reassign *my\_ship* by modifying the engine attribute (third number) from 0 to 1. Use substrings for the attributes before and after to make sure they are untouched.

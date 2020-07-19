@@ -2,22 +2,21 @@
 
 <dialog character="alien">We need to hack aliens, decompile their code to understand how their informatic works </dialog>
 
-
-LIGO can work together with other smart contract languages on Tezos. However data structures might have different representations in Michelson and not correctly match the standard LIGO types. 
+LIGO can work together with other smart contract languages on Tezos. However data structures might have different representations in Michelson and not correctly match the standard LIGO types.
 
 ## Annotations
 
 ### Michelson types and annotations
 
-Michelson types consist of *or*'s and *pair*'s, combined with field annotations. Field annotations add contraints on a Michelson type, for example a _pair_ of *(pair (int %foo) (string %bar))* will only work with the exact equivalence or the same type without the field annotations.
+Michelson types consist of _or_'s and _pair_'s, combined with field annotations. Field annotations add contraints on a Michelson type, for example a _pair_ of _(pair (int %foo) (string %bar))_ will only work with the exact equivalence or the same type without the field annotations.
 
-For example, the following _pair_ 
+For example, the following _pair_
 
 ```
 (pair (int %foo) (string %bar))
 ```
 
-will accept these definitions and fail with the ones that does not respect the typing or the order of pair fields: 
+will accept these definitions and fail with the ones that does not respect the typing or the order of pair fields:
 
 ```
 (pair (int %foo) (string %bar))       // OK
@@ -26,17 +25,16 @@ will accept these definitions and fail with the ones that does not respect the t
 (pair (string %bar) (int %foo))       // KO
 ```
 
-
 ### Entrypoints and annotations
 
-<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. Using the predefined function *Tezos.get\_entrypoint\_opt* allows to a calling contract ot point to a specific entry point of the called contract. 
+<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. Using the predefined function *Tezos.get\_entrypoint\_opt* allows to a calling contract ot point to a specific entry point of the called contract.
 
 Here is an exemple. Let's consider the following "Counter" contract :
 
 ```
 type storage = int
 
-type parameter = 
+type parameter =
  | Left(int)
  | Right(int)
 
@@ -58,7 +56,7 @@ type parameter = int;
 type x = Left(int);
 
 let main = ((p, s): (parameter, storage)): (list(operation), storage) => {
-  let contract: contract(x) = 
+  let contract: contract(x) =
     switch (Tezos.get_entrypoint_opt("%left", ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx": address)): option(contract(x))) {
       | Some c => c
       | None => (failwith ("contract does not match"): contract(x))
@@ -69,7 +67,7 @@ let main = ((p, s): (parameter, storage)): (list(operation), storage) => {
 };
 ```
 
-⚠️ Notice how we directly use the *%left* entrypoint without mentioning the *%right* entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our int would be referring to.
+⚠️ Notice how we directly use the _%left_ entrypoint without mentioning the _%right_ entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our int would be referring to.
 
 These annotations works for _or_'s or _variant_ types in LIGO.
 
@@ -78,16 +76,17 @@ These annotations works for _or_'s or _variant_ types in LIGO.
 <!-- prettier-ignore -->To interop with existing Michelson code or for compatibility with certain development tooling, LIGO has two special interop types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
 
 Take for example the following Michelson type that we want to interop with:
+
 ```
-(or 
+(or
   (unit %z)
-  (or %other 
-    (unit %y) 
-    (pair %other 
-      (string %x) 
-      (pair %other 
-        (int %w) 
-        (nat %v))))) 
+  (or %other
+    (unit %y)
+    (pair %other
+      (string %x)
+      (pair %other
+        (int %w)
+        (nat %v)))))
 ```
 
 To reproduce this type we can use the following LIGO code:
@@ -116,9 +115,9 @@ let x: z_or = (M_right (y_1) : z_or)
 
 ## Helper functions
 
-Conversions from Ligo types to michelson types requires a precise knowledge of data structures representation.
+Conversions from Ligo types to Michelsontypes requires a precise knowledge of data structures representation.
 
-So it becomes even more relevant with nested pairs that there are many possible decomposition of a record in pairs of pairs. 
+So it becomes even more relevant with nested pairs that there are many possible decomposition of a record in pairs of pairs.
 
 The following record structure
 
@@ -130,10 +129,10 @@ type l_record = {
 }
 ```
 
-can be transformed in a left combed data structure 
+can be transformed in a left combed data structure
 
 ```
- (pair %other 
+ (pair %other
     (pair %other
       (string %s)
       (int %w)
@@ -142,19 +141,19 @@ can be transformed in a left combed data structure
   )
 ```
 
- or a right combed data structure
+or a right combed data structure
 
- ```
-  (pair %other 
-    (string %s)
-    (pair %other
-      (int %w)    
-      (nat %v)
-    )
-  )
- ```
+```
+ (pair %other
+   (string %s)
+   (pair %other
+     (int %w)
+     (nat %v)
+   )
+ )
+```
 
-Converting between different LIGO types and data structures can happen in two ways. The first way is to use the provided layout conversion functions, and the second way is to handle the layout conversion manually. 
+Converting between different LIGO types and data structures can happen in two ways. The first way is to use the provided layout conversion functions, and the second way is to handle the layout conversion manually.
 
 ### Converting left combed Michelson data structures
 
@@ -165,7 +164,7 @@ Converting between different LIGO types and data structures can happen in two wa
 Here's an example of a left combed Michelson data structure using pairs:
 
 ```
- (pair %other 
+ (pair %other
     (pair %other
       (string %s)
       (int %w)
@@ -184,29 +183,31 @@ type l_record = {
 }
 ```
 
-This snippet of code shows 
-<!-- prettier-ignore -->* how to use *Layout.convert\_from\_left\_comb* to transform a michelson type into a record type.
-<!-- prettier-ignore -->* how to use *Layout.convert\_to\_left\_comb* to transform a record type into a michelson type.
+This snippet of code shows
+
+<!-- prettier-ignore -->* how to use *Layout.convert\_from\_left\_comb* to transform a Michelsontype into a record type.
+<!-- prettier-ignore -->* how to use *Layout.convert\_to\_left\_comb* to transform a record type into a Michelsontype.
 
 ```
-type michelson = michelson_pair_left_comb(l_record);
+type Michelson= michelson_pair_left_comb(l_record);
 
-let of_michelson = (f: michelson) : l_record => { 
+let of_michelson = (f: michelson) : l_record => {
   let p: l_record = Layout.convert_from_left_comb(f);
   p
 };
 
-let to_michelson = (f: l_record) : michelson => {
+let to_michelson = (f: l_record) : Michelson=> {
   let p = Layout.convert_to_left_comb(f: l_record);
   p
 }
 ```
 
 #### Variant
+
 <!-- prettier-ignore -->In the case of a left combed Michelson or data structure, that you want to translate to a variant, you can use the *michelson\_or\_left\_comb* type.
 
 ```
-type vari = 
+type vari =
 | Foo(int)
 | Bar(nat)
 | Other(bool)
@@ -217,7 +218,7 @@ type r = michelson_or_left_comb(vari)
 <!-- prettier-ignore -->And then use these types in *Layout.convert\_from\_left\_comb* or *Layout.convert\_to\_left\_comb*, similar to the pairs example above
 
 ```
-let of_michelson_or = (f: r) : vari => { 
+let of_michelson_or = (f: r) : vari => {
   let p: vari = Layout.convert_from_left_comb(f);
   p
 };
@@ -240,7 +241,7 @@ The following code can be used as inspiration:
 
 ```
 type z_to_v =
-| Z 
+| Z
 | Y
 | X
 | W
@@ -269,7 +270,7 @@ let make_concrete_sum = (r: z_to_v) : z_or =>
   }
 
 let make_concrete_record = (r: test) : (string, int, string, bool, int) =>
-  (r.z, r.y, r.x, r.w, r.v)  
+  (r.z, r.y, r.x, r.w, r.v)
 
 let make_abstract_sum = (z_or: z_or) : z_to_v =>
   switch (z_or) {
@@ -292,15 +293,11 @@ let make_abstract_sum = (z_or: z_or) : z_to_v =>
 
 let make_abstract_record = (z: string, y: int, x: string, w: bool, v: int) : test =>
   { z : z, y, x, w, v }
-  
+
 ```
-
-
 
 ## Your mission
 
-We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pairs. The contract possess a single entry point AddInventory. This *AddInventory* function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
+We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pairs. The contract possess a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
 
 <!-- prettier-ignore -->1- Complete the implementation of the *update_inventory* lambda function. This function takes a list of item as parameter and must transform each item in a combed pair structure and add this transformed structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)
-
-
