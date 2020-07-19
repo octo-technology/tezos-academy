@@ -1,41 +1,32 @@
 import { connectRouter } from 'connected-react-router'
-import { changePassword, ChangePasswordState } from 'pages/ChangePassword/ChangePassword.reducers'
-import { forgotPassword, ForgotPasswordState } from 'pages/ForgotPassword/ForgotPassword.reducers'
-import { resetPassword, ResetPasswordState } from 'pages/ResetPassword/ResetPassword.reducers'
-import { user, UserState } from 'pages/User/User.reducers'
 import { combineReducers } from 'redux'
 
-import { drawer, DrawerState } from '../app/App.components/Drawer/Drawer.reducers'
-import { progressBar, ProgressBarState } from '../app/App.components/ProgressBar/ProgressBar.reducers'
-import { toaster, ToasterState } from '../app/App.components/Toaster/Toaster.reducers'
-import { auth, AuthState } from '../pages/SignUp/SignUp.reducers'
+import { auth, AuthState } from './auth'
+import { drawer, DrawerState } from './drawer'
+import { loading, LoadingState } from './loading'
+import { progressBar, ProgressBarState } from './progressBar'
 import { serviceWorker, ServiceWorkerState } from './serviceWorker'
-import { progress, ProgressState } from '../pages/Chapter/Chapter.reducers'
+import { toaster, ToasterState } from './toaster'
+import { users, UsersState } from './users'
 
 export const reducers = (history: any) =>
   combineReducers({
     router: connectRouter(history),
-    toaster,
     auth,
+    loading,
+    users,
+    toaster,
     drawer,
     progressBar,
-    forgotPassword,
-    resetPassword,
-    changePassword,
     serviceWorker,
-    user,
-    progress
   })
 
 export interface State {
-  user: UserState
-  toaster: ToasterState
   auth: AuthState
+  loading: LoadingState
+  users: UsersState
+  toaster: ToasterState
   drawer: DrawerState
   progressBar: ProgressBarState
-  forgotPassword: ForgotPasswordState
-  resetPassword: ResetPasswordState
-  changePassword: ChangePasswordState
   serviceWorker: ServiceWorkerState
-  progress: ProgressState
 }

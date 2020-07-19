@@ -1,7 +1,7 @@
-import { SignUpInputs } from 'shared/user/SignUp'
-import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { redirect } from 'app/App.actions'
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
+import { SignUpInputs } from 'shared/user/SignUp'
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
 export const SIGN_UP_COMMIT = 'SIGN_UP_COMMIT'

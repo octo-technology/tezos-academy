@@ -1,13 +1,15 @@
+import { State } from 'reducers'
+
 export const SHOW_TOASTER = 'SHOW_TOASTER'
 export const HIDE_TOASTER = 'HIDE_TOASTER'
 
 export const showToaster = (status: string, title: string, message: string) => (dispatch: any, getState: any) => {
-  const currentToaster = getState().toaster
-  if (!currentToaster.showing) {
+  const state: State = getState()
+  if (!state.toaster.showing) {
     dispatch({
       type: SHOW_TOASTER,
       status,
-      title,
+      title: title.indexOf('jwt malformed') >= 0 ? 'Please first login!' : title,
       message,
     })
     setTimeout(() => {

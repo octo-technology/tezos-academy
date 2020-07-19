@@ -1,9 +1,11 @@
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 
-import { store } from '../index'
+import { Root, store } from '../index'
+import { restore } from './App.actions'
 import { showToaster } from './App.components/Toaster/Toaster.actions'
 import { ERROR } from './App.components/Toaster/Toaster.constants'
-import { safeRestore } from './App.actions'
 
 const discard = (error: any, _action: any, _retries: any) => {
   const { request, response } = error
@@ -18,16 +20,22 @@ const discard = (error: any, _action: any, _retries: any) => {
 }
 
 const persistCallback = () => {
-  store.dispatch<any>(safeRestore())
+  store.dispatch<any>(restore())
+  const rootElement = document.getElementById('root')
+  ReactDOM.render(<Root />, rootElement)
 }
 
 export const storeOfflineConfig = {
   ...offlineConfig,
   discard,
   persistCallback,
+  persistOptions: {
+    blacklist: ['router'],
+  },
 }
 
-export const reduxOfflineThunkMiddleware = (thunks: any) => (storex: any) => (next: any) => (action: any) => {
+export const reduxOfflineThunkMiddleware = () => (storex: any) => (next: any) => (action: any) => {
+  if (action && action.type === 'Offline/JS_ERROR') console.error(action.meta.error)
   const result = next(action)
 
   if (action.meta && action.meta.thunks && action.meta.thunks.length > 0) {

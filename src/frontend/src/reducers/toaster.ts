@@ -1,5 +1,7 @@
-import { HIDE_TOASTER, SHOW_TOASTER } from './Toaster.actions'
-import { ERROR } from './Toaster.constants'
+import { RESET, RESTORE } from 'app/App.actions'
+
+import { HIDE_TOASTER, SHOW_TOASTER } from '../app/App.components/Toaster/Toaster.actions'
+import { ERROR } from '../app/App.components/Toaster/Toaster.constants'
 
 export interface ToasterState {
   showing: boolean
@@ -8,18 +10,23 @@ export interface ToasterState {
   message?: string
 }
 
-const toasterState: ToasterState = {
+const toasterDefaultState: ToasterState = {
   showing: false,
   status: ERROR,
   title: undefined,
   message: undefined,
 }
 
-export function toaster(state = toasterState, action: any): ToasterState {
+export function toaster(state = toasterDefaultState, action: any): ToasterState {
   switch (action.type) {
+    case RESET: {
+      return toasterDefaultState
+    }
+    case RESTORE: {
+      return toasterDefaultState
+    }
     case SHOW_TOASTER:
       return {
-        ...state,
         showing: true,
         status: action.status,
         title: action.title,

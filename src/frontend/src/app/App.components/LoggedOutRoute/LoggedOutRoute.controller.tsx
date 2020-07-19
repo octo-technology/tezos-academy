@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect, Route, useLocation } from 'react-router-dom'
+import { State } from 'reducers'
 
 type LoggedOutRouteProps = {
   children: any
@@ -10,7 +11,7 @@ type LoggedOutRouteProps = {
 }
 
 export const LoggedOutRoute = ({ children, path, exact }: LoggedOutRouteProps) => {
-  const jwt = useSelector((state: any) => state.auth.jwt)
+  const jwt = useSelector((state: State) => state.auth.jwt)
   const location = useLocation()
 
   return (

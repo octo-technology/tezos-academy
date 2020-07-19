@@ -7,7 +7,7 @@ import { VerifyEmailResendView } from './VerifyEmailResend.view'
 
 export const VerifyEmailResend = () => {
   const dispatch = useDispatch()
-  const loading = useSelector((state: State) => state.auth.loading)
+  const loading = useSelector((state: State) => state.loading)
 
   const resendEmailCallback = () => {
     dispatch(resendVerifyEmail())

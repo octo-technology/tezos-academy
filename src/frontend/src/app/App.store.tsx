@@ -5,7 +5,6 @@ import { applyMiddleware, compose, createStore, Store } from 'redux'
 import thunk from 'redux-thunk'
 
 import { reducers, State } from '../reducers'
-import { showToaster } from './App.components/Toaster/Toaster.actions'
 import { reduxOfflineThunkMiddleware, storeOfflineConfig } from './App.offline'
 
 export const history = createBrowserHistory()
@@ -27,7 +26,7 @@ export function configureStore(preloadedState: any) {
     composeEnhancer(
       applyMiddleware(routerMiddleware(history)),
       applyMiddleware(thunk),
-      applyMiddleware(reduxOfflineThunkMiddleware({ showToaster })),
+      applyMiddleware(reduxOfflineThunkMiddleware()),
     ),
   )
 

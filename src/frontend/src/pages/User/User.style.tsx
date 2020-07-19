@@ -16,7 +16,7 @@ export const UserTitle = styled(FadeInFromTop)``
 export const UserProgress = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(25, auto);
+  grid-template-rows: repeat(30, auto);
   grid-gap: 10px;
   grid-auto-flow: column;
 `

@@ -1,15 +1,11 @@
+import { redirect } from 'app/App.actions'
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { ForgotPasswordInputs } from 'shared/user/ForgotPassword'
 
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 export const FORGOT_PASSWORD_COMMIT = 'FORGOT_PASSWORD_COMMIT'
 export const FORGOT_PASSWORD_ROLLBACK = 'FORGOT_PASSWORD_ROLLBACK'
-
-export const FORGOT_PASSWORD_INIT = 'FORGOT_PASSWORD_INIT'
-export const forgotPasswordInit = () => (dispatch: any) => {
-  dispatch({
-    type: FORGOT_PASSWORD_INIT,
-  })
-}
 
 export const forgotPassword = ({ usernameOrEmail, recaptchaToken }: ForgotPasswordInputs) => (dispatch: any) => {
   dispatch({
@@ -22,7 +18,15 @@ export const forgotPassword = ({ usernameOrEmail, recaptchaToken }: ForgotPasswo
           method: 'POST',
           json: { usernameOrEmail, recaptchaToken },
         },
-        commit: { type: FORGOT_PASSWORD_COMMIT },
+        commit: {
+          type: FORGOT_PASSWORD_COMMIT,
+          meta: {
+            thunks: [
+              showToaster(SUCCESS, 'Check your email', 'for a reset captcha'),
+              redirect('/reset-password/$resetPasswordToken'),
+            ],
+          },
+        },
         rollback: { type: FORGOT_PASSWORD_ROLLBACK },
       },
     },

@@ -1,14 +1,14 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { JwtDecoded } from 'shared/user/JwtDecoded'
+import { PublicUser } from 'shared/user/PublicUser'
 
 import { Hamburger } from '../Hamburger/Hamburger.controller'
 // prettier-ignore
 import { HeaderBg, HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./Header.style";
 
 type HeaderViewProps = {
-  user?: JwtDecoded | undefined
+  user?: PublicUser
   removeAuthUserCallback: () => void
 }
 

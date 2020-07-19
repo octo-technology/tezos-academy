@@ -8,9 +8,9 @@ import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { ChangePasswordInputs } from 'shared/user/ChangePassword'
 
+import { ChangePasswordMeta } from './ChangePassword.meta'
 //prettier-ignore
 import { ChangePasswordCard, ChangePasswordStyled, ChangePasswordTitle } from './ChangePassword.style'
-import { ChangePasswordMeta } from './ChangePassword.meta'
 
 type ChangePasswordViewProps = {
   changePasswordCallback: (values: any) => void
