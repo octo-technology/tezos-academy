@@ -6,6 +6,8 @@
 **/dist
 **/downloads
 **/screenshots
+**/yarn-error.log
+**/error.log
 
 # Windows
 **/Thumbs.db
