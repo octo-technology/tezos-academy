@@ -8,6 +8,24 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+:root {
+  --glitch-height: 100vh;
+  --gap-horizontal: 10px;
+  --gap-vertical: 5px;
+  --time-anim: 6s;
+  --delay-anim: 0s;
+  --blend-mode-1: none;
+  --blend-mode-2: none;
+  --blend-mode-3: none;
+  --blend-mode-4: none;
+  --blend-mode-5: overlay;
+  --blend-color-1: transparent;
+  --blend-color-2: transparent;
+  --blend-color-3: transparent;
+  --blend-color-4: transparent;
+  --blend-color-5: #af4949;
+}
+
 body {
   font-family: 'Electrolize', Helvetica, Arial, sans-serif;
   font-display: optional;

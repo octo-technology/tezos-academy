@@ -16,7 +16,7 @@ export const ChapterStyled = styled.div`
 
 export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
   display: grid;
-  grid-template-rows: ${(props) => (props.hasTabs ? 'auto 500px auto' : '500px auto')};
+  grid-template-rows: ${(props) => (props.hasTabs ? '30px 500px auto' : '500px auto')};
   grid-gap: 0;
   overflow-y: scroll;
 
