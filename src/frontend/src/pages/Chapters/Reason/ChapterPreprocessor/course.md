@@ -2,7 +2,7 @@
 
 <dialog character="mechanics"></dialog>
 
-Instead of writing the whole code in a single file, it is possible to split code into different files and include some external code into our file. The pre-processor is responsible to handle code inclusion. While working with multiple files we may encounter a problem of cyclic inclusion. To prevent such situation some pre-processor commands are available.
+Instead of writing the LIGO code in a single file, it is possible to split the code into different files and include some external code into our file. The pre-processor is responsible for handling code inclusion. While working with multiple files we may encounter a problem of cyclic inclusion. To prevent such situation some pre-processor commands are available.
 
 * #if
 * #define
@@ -53,7 +53,7 @@ let substr_special = (s: string) : string =>
 
 ⚠️ Notice that the conditionnal *#if* can be used to customize your includes.
 
-⚠️ Notice that this pattern prevents from redefinition in case of cyclic inclusion.
+⚠️ Notice that this pattern prevents variable or type redefinition in case of cyclic inclusion.
 
 ```
 #if !X 

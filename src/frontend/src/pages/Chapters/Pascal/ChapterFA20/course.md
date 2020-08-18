@@ -4,7 +4,7 @@
 
 ## Definition
 
-There are multiple dimensions and considerations while implementing a particular token smart contract. Tokens might be fungible or non-fungible. A variety of permission policies can be used to define how many tokens can be transferred, who can initiate a transfer, and who can receive tokens. A token contract can be designed to support a single token type (e.g. ERC-20 or ERC-721) or multiple token types (e.g. ERC-1155) to optimize batch transfers and atomic swaps of the tokens.
+There are multiple considerations while implementing a particular token smart contract. Tokens might be fungible or non-fungible. A variety of permission policies can be used to define how many tokens can be transferred, who can initiate a transfer, and who can receive tokens. A token contract can be designed to support a single token type (e.g. ERC-20 or ERC-721) or multiple token types (e.g. ERC-1155) to optimize batch transfers and atomic swaps of the tokens.
 
 The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
@@ -12,9 +12,9 @@ In the following chapter on Financial Application 2.0 , we will focus on _TZIP-1
 
 ## Architecture
 
-FA2 proposes to leave it to implementers to handle common considerations such as defining the contract’s token type(s) (e.g. non-fungible vs. fungible vs. semi-fungible), administration and whitelisting, contract upgradability, and supply operations (e.g. mint/burn).
+The FA2 standard proposes to leave it to implementers to handle common considerations such as defining the contract’s token type(s) (e.g. non-fungible vs. fungible vs. semi-fungible), administration and whitelisting, contract upgradability, and supply operations (e.g. mint/burn).
 
-FA2 also leaves to implementers to decide on architecture pattern for handling permissioning. Permission can be implemented
+The FA2 standard also leaves to implementers to decide on architecture pattern for handling permissioning. Permission can be implemented
 
 - in the the same contract as the core transfer behavior (i.e. a “monolith”),
 - in a transfer hook to another contract,
@@ -22,7 +22,7 @@ FA2 also leaves to implementers to decide on architecture pattern for handling p
 
 ## Interface and library
 
-The FA2 interface formalize a standard way to design tokens and thus describes a list of entry points (that must be implemented) and data structures related to those entry points. A more detailed decription of the interface is broken down in following sections.
+The FA2 interface formalizes a standard way to design tokens and thus describes a list of entry points (that must be implemented) and data structures related to these entry points. A more detailed decription of the interface is broken down in following sections.
 
 In addition to the FA2 interface, the FA2 standard provides helper functions to manipulate data structures involved in FA2 interface. The FA2 library contains helper functions for :
 
@@ -48,7 +48,7 @@ type fa2_entry_points is
 
 ### Balance of
 
-<!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which get the balance of multiple account/token pairs (because FA2 supports mutiple token).
+<!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which gets the balance of multiple account/token pairs (because FA2 supports multiple token).
 
 ```
 | Balance_of of balance_of_params
@@ -85,7 +85,7 @@ end
 
 ### Transfer
 
-FA2 token contracts MUST implement the _Transfer_ entry point which transfer tokens between and MUST ensure following rules.
+FA2 token contracts MUST implement the _Transfer_ entry point which transfers tokens between owners and MUST ensure following rules.
 
 ```
 Transfer of transfer_params
@@ -97,20 +97,15 @@ FA2 token contracts MUST implement the transfer logic defined by the following r
 
 1. Every transfer operation MUST be atomic. If the operation fails, all token transfers MUST be reverted, and token balances MUST remain unchanged.
 
-2. The amount of a token transfer MUST NOT exceed the existing token owner's balance. If the transfer amount for the particular token type and token owner
-   exceeds the existing balance, the whole transfer operation MUST fail with the error mnemonic "INSUFFICIENT_BALANCE"
+2. The amount of a token transfer MUST NOT exceed the existing token owner's balance. If the transfer amount for the particular token type and token owner exceeds the existing balance, the whole transfer operation MUST fail with the error mnemonic "INSUFFICIENT_BALANCE"
 
-3. Core transfer behavior MAY be extended. If additional constraints on tokens transfer are required, FA2 token contract implementation MAY invoke additional
-   permission policies (transfer hook is the recommended design pattern to implement core behavior extension). (See Chapter FA2 - Hook)
+3. Core transfer behavior MAY be extended. If additional constraints on tokens transfer are required, FA2 token contract implementation MAY invoke additional permission policies (transfer hook is the recommended design pattern to implement core behavior extension). (See Chapter FA2 - Hook). If the additional permission hook fails, the whole transfer operation MUST fail with a custom error mnemonic.
 
-If the additional permission hook fails, the whole transfer operation MUST fail with a custom error mnemonic.
-
-4. Core transfer behavior MUST update token balances exactly as the operation parameters specify it. No changes to amount values or additional transfers are
-   allowed.
+4. Core transfer behavior MUST update token balances exactly as the operation parameters specify it. No changes to amount values or additional transfers are allowed.
 
 #### Interface
 
-It transfer tokens from a _from\__ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
+It transfers tokens from a _from\__ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
 
 ```
 type token_id = nat
@@ -136,7 +131,7 @@ type transfer_aux = {
 
 ### Metadata
 
-<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata\_registry* entry point which get the metadata for multiple token types.
+<!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata\_registry* entry point which gets the metadata for multiple token types.
 
 <!-- prettier-ignore -->It expects a callback contract, and sends back a list of *token\_metadata\_* records.
 
@@ -166,8 +161,7 @@ end
 
 ### Error Handling
 
-This FA2 tandard defines the set of standard errors to make it easier to integrate FA2 contracts with wallets, DApps and other generic software, and enable
-localization of user-visible error messages.
+This FA2 standard defines the set of standard errors to make it easier to integrate FA2 contracts with wallets, DApps and other generic software, and enable localization of user-visible error messages.
 
 Each error code is a short abbreviated string mnemonic. An FA2 contract client (like another contract or a wallet) could use on-the-chain or off-the-chain registry to map the error code mnemonic to a user-readable, localized message.
 
@@ -180,25 +174,23 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 #### Standard error mnemonics:
 
-Error mnemonic - Description
+<!-- prettier-ignore -->"*TOKEN\_UNDEFINED*" - One of the specified *token\_ids* is not defined within the FA2 contract
 
-<!-- prettier-ignore -->"TOKEN_UNDEFINED" - One of the specified *token\_ids* is not defined within the FA2 contract
+<!-- prettier-ignore -->"*INSUFFICIENT\_BALANCE*" - A token owner does not have sufficient balance to transfer tokens from owner's account
 
-"INSUFFICIENT_BALANCE" - A token owner does not have sufficient balance to transfer tokens from owner's account
+<!-- prettier-ignore -->"*TX\_DENIED*" - A transfer failed because of *operator\_transfer\_policy* == *No\_transfer*
 
-<!-- prettier-ignore -->"TX_DENIED" - A transfer failed because of *operator\_transfer\_policy* == *No\_transfer*
+<!-- prettier-ignore -->"*NOT\_OWNER*" - A transfer failed because *operator\_transfer\_policy* == *Owner\_transfer* and it is initiated not by the token owner
 
-<!-- prettier-ignore -->"NOT_OWNER" - A transfer failed because *operator\_transfer\_policy* == *Owner\_transfer* and it is initiated not by the token owner
+<!-- prettier-ignore -->"*NOT\_OPERATOR*" - A transfer failed because *operator\_transfer\_policy* == *Owner\_or\_operator\_transfer* and it is initiated neither by the token owner nor a permitted operator
 
-<!-- prettier-ignore -->"NOT_OPERATOR" - A transfer failed because *operator\_transfer\_policy* == *Owner\_or\_operator\_transfer* and it is initiated neither by the token owner nor a permitted operator
+<!-- prettier-ignore -->"*RECEIVER\_HOOK\_FAILED*" - The receiver hook failed. This error MUST be raised by the hook implementation
 
-"RECEIVER_HOOK_FAILED" - The receiver hook failed. This error MUST be raised by the hook implementation
+<!-- prettier-ignore -->"*SENDER\_HOOK\_FAILED*" - The sender failed. This error MUST be raised by the hook implementation
 
-"SENDER_HOOK_FAILED" - The sender failed. This error MUST be raised by the hook implementation
+<!-- prettier-ignore -->"*RECEIVER\_HOOK\_UNDEFINED*" -Receiver hook is required by the permission behavior, but is not implemented by a receiver contract
 
-"RECEIVER_HOOK_UNDEFINED" -Receiver hook is required by the permission behavior, but is not implemented by a receiver contract
-
-"SENDER_HOOK_UNDEFINED" - Sender hook is required by the permission behavior, but is not implemented by a sender contract
+<!-- prettier-ignore -->"*SENDER\_HOOK\_UNDEFINED*" - Sender hook is required by the permission behavior, but is not implemented by a sender contract
 
 ## Your mission
 

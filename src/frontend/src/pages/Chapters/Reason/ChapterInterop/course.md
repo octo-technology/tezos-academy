@@ -2,7 +2,9 @@
 
 <dialog character="alien">We need to hack aliens, decompile their code to understand how their informatic works </dialog>
 
-LIGO can work together with other smart contract languages on Tezos. However data structures might have different representations in Michelson and not correctly match the standard LIGO types.
+Tezos smart contracts are written in Michelson language. The LIGO transpiler helps developers to produce Michelson scripts. However LIGO data structures might have different representations in Michelson. For example, LIGO allows to define a record (a structure containing many fields) but once transpiled in Michelson this record is transformed in a pair of pairs, and there can be many pairs of pairs representing the same record.
+
+In this chapter, we will see that some built-in functions are available in LIGO language in order to address this problem.
 
 ## Annotations
 
@@ -27,7 +29,7 @@ will accept these definitions and fail with the ones that does not respect the t
 
 ### Entrypoints and annotations
 
-<!-- prettier-ignore -->As seen in chapter Polymorphism, a contract can be called by another contract. The predefined function *Tezos.get\_entrypoint\_opt* allows to call a specific entry point of the called contract.
+<!-- prettier-ignore -->As seen in the chapter Polymorphism, a contract can be called by another contract. The predefined function *Tezos.get\_entrypoint\_opt* allows to call a specific entry point of the called contract.
 
 Here is an example. Let's consider the following "Counter" contract :
 
@@ -46,7 +48,7 @@ let main = ((p, x): (parameter, storage)): (list(operation), storage) => {
 };
 ```
 
-Thre following contract sends a transaction to the "Counter" contract.
+The following contract sends a transaction to the "Counter" contract.
 
 ```
 type storage = int;
@@ -67,15 +69,15 @@ let main = ((p, s): (parameter, storage)): (list(operation), storage) => {
 };
 ```
 
-⚠️ Notice how we directly use the _%left_ entrypoint without mentioning the _%right_ entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our int would be referring to.
+⚠️ Notice how we directly use the _%left_ entrypoint without mentioning the _%right_ entrypoint. This is done with the help of annotations. Without annotations it wouldn't be clear what our _int_ would be referring to.
 
-These annotations works for _or_'s or _variant_ types in LIGO.
+These annotations work for _or_'s or _variant_ types in LIGO.
 
-## Interop with Michelson
+## Interoperability with Michelson
 
-<!-- prettier-ignore -->To interop with existing Michelson code or for compatibility with some development tooling, LIGO has two special interop types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
+<!-- prettier-ignore -->To interoperate with existing Michelson code or for compatibility with some development tooling, LIGO has two special interoperability types: *michelson\_or* and *michelson\_pair*. These types give the flexibility to model the exact Michelson output, including field annotations.
 
-Take for example the following Michelson type that we want to interop with:
+Take for example the following Michelson type that we want to interoperate with:
 
 ```
 (or
@@ -115,7 +117,7 @@ let x: z_or = (M_right (y_1) : z_or)
 
 ## Helper functions
 
-Conversions from Ligo types to Michelson types require a precise knowledge of data structures representation.
+Conversions from Ligo types to Michelson types require a precise knowledge of the representation of data structures.
 
 So it becomes even more relevant with nested pairs because there are many possible decompositions of a record in pairs of pairs.
 
@@ -159,7 +161,7 @@ Converting between different LIGO types and data structures can happen in two wa
 
 #### Pair
 
-<!-- prettier-ignore -->Conversion between the Michelson type and record type is handled with the functions *Layout.convert\_from\_left\_comb* and *Layout.convert\_to\_left\_comb*.
+<!-- prettier-ignore -->Conversion between the Michelson type and record type is handled with functions *Layout.convert\_from\_left\_comb* and *Layout.convert\_to\_left\_comb*.
 
 Here's an example of a left combed Michelson data structure using pairs:
 
@@ -185,18 +187,18 @@ type l_record = {
 
 This snippet of code shows
 
-<!-- prettier-ignore -->* how to use *Layout.convert\_from\_left\_comb* to transform a Michelsontype into a record type.
-<!-- prettier-ignore -->* how to use *Layout.convert\_to\_left\_comb* to transform a record type into a Michelsontype.
+<!-- prettier-ignore -->* how to use *Layout.convert\_from\_left\_comb* to transform a Michelson type into a record type.
+<!-- prettier-ignore -->* how to use *Layout.convert\_to\_left\_comb* to transform a record type into a Michelson type.
 
 ```
-type Michelson= michelson_pair_left_comb(l_record);
+type Michelson = michelson_pair_left_comb(l_record);
 
 let of_michelson = (f: michelson) : l_record => {
   let p: l_record = Layout.convert_from_left_comb(f);
   p
 };
 
-let to_michelson = (f: l_record) : Michelson=> {
+let to_michelson = (f: l_record) : Michelson => {
   let p = Layout.convert_to_left_comb(f: l_record);
   p
 }
@@ -204,7 +206,7 @@ let to_michelson = (f: l_record) : Michelson=> {
 
 #### Variant
 
-<!-- prettier-ignore -->In the case of a left combed Michelson or data structure, that you want to translate to a variant, you can use the *michelson\_or\_left\_comb* type.
+<!-- prettier-ignore -->In the case of a left combed Michelson or a data structure, that you want to translate to a variant, you can use the *michelson\_or\_left\_comb* type.
 
 ```
 type vari =
@@ -298,6 +300,6 @@ let make_abstract_record = (z: string, y: int, x: string, w: bool, v: int) : tes
 
 ## Your mission
 
-We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pairs. The contract possess a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
+We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pairs. The contract possesses a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
 
 <!-- prettier-ignore -->1- Complete the implementation of the *update_inventory* lambda function. This function takes a list of item as parameter and must transform each item in a combed pair structure and add this resulting structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)
