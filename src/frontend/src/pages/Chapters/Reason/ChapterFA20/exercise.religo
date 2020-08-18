@@ -104,7 +104,7 @@ let balanceOfRequestsIterator =
         let (balanceOfResponses, storage): balanceOfRequestsIteratorAccumulator = accumulator;
         // Modify the code below
 
-        let balanceOfResponses: list(balanceOfResponseMichelson) = [balanceOfResponseMichelson, ...balanceOfResponses];
+        let balanceOfResponses: list(balanceOfResponseMichelson) = [balanceOfResponseMichelson,...balanceOfResponses];
 
         (balanceOfResponses, storage);
     }

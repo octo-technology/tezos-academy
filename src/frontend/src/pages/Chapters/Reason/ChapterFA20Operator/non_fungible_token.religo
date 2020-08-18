@@ -96,7 +96,7 @@ let balanceOfRequestsIterator =
         };
 
         let balanceOfResponseMichelson: balanceOfResponseMichelson = Layout.convert_to_right_comb(balanceOfResponseAuxiliary);
-        let balanceOfResponses: list(balanceOfResponseMichelson) = [balanceOfResponseMichelson, ...balanceOfResponses];
+        let balanceOfResponses: list(balanceOfResponseMichelson) = [balanceOfResponseMichelson,...balanceOfResponses];
 
         (balanceOfResponses, storage);
     }

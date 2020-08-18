@@ -1,7 +1,6 @@
 # Chapter 24 : Multi-signature pattern
 
-<dialog character="mechanics">Captain, we should warm up the weapons while we are still in FTL, we don't know what awaits us on the other side.</dialog>
-Before any nuke strike, the admiral and the president of Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.
+<dialog character="mechanics">In case you didn't know, we have several nukes in our arsenal. The admiral and the president of the Galatic Union must agree on nuclear usage. We need the approval of both for nuclear weapons usage.</dialog>
 
 In some case one may want to execute an action only if many users approve this action. This kind of pattern is called _multi-signature_.
 
@@ -21,25 +20,24 @@ The multi-signature pattern can be described with this set of rules :
 - an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
 - the smart contract must also handle a list of user in order to specify who is allowed to approve an action
 
-optionnaly
+Optionnaly
 
 - the smart contract can also handle the number of approval per user and set maximum number of approvals.
 - the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
 
 More complex rules can be added these basic ones.
 
-### Implementation of multi-signature pattern
+### Implementation of multi-signature patterns
 
 Let's consider this implementation of the multi-signature pattern. This implementation takes all previously mentionned rules into account.
 
-This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for _Counter_ contract.
+This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for the _Counter_ contract.
 The _Counter_ contract (the example at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
 The _Counter_ contract handle a simple integer counter which can be incemented or decremented.
 
-Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the  _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
+Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
 
-A user can invoke the entry point *Send* of the smart contract _MultisigProxy_ to propose or approve a modification of the counter. When the number of approvals is reached, the desired modification is sent to the contract _Counter_ via a transaction. A user can invoke the entry point *Withdraw* of the smart contract _MultisigProxy_ to reject a proposed modification.
-
+A user can invoke the entry point _Send_ of the smart contract _MultisigProxy_ to propose or approve a modification of the counter. When the number of approvals is reached, the desired modification is sent to the contract _Counter_ via a transaction. A user can invoke the entry point _Withdraw_ of the smart contract _MultisigProxy_ to reject a proposed modification.
 
 ```
 // Counter contract types

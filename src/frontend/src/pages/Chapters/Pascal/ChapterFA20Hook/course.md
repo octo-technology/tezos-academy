@@ -84,7 +84,7 @@ Some helpers functions has been gatthered in a hook library which help defining 
 The hook pattern depends on the permission policy. A transfer hook may be unwanted, optional or required.
 
 <!-- prettier-ignore -->If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens\_received". Otherwise transfer is not allowed.
-<!-- prettier-ignore -->If the policy optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
+<!-- prettier-ignore -->If the policy Optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
 
 It is the same for permission policies including senders, the entry point _tokens_sent_ may need to be implemented.
 
@@ -204,7 +204,7 @@ const own_policy : permissions_descriptor = record [
 
 ## Your mission
 
-We are working on a Fungible token which can handle multiple assets. We decided to implement a Hook pattern. A FA2 core contract handle all fa2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules.
+We are working on a Fungible token which can handle multiple assets. We decided to implement a Hook pattern. A FA2 core contract handle all fa2 entry points (BalanceOf, Transfer,...) and a hook permission contract which implements the validation of a transfer with some custom rules.
 
 ![](/images/small-fa2-hook-exercise.png)
 

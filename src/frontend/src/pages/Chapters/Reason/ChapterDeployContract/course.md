@@ -1,6 +1,6 @@
 # Chapter 23 : Deploy contract
 
-<dialog character="admiral"> Time to go live.</dialog>
+<dialog character="admiral">Time to deploy into the battlefield Rookie!</dialog>
 
 ## Smart contract
 
@@ -27,7 +27,6 @@ Executing an entry point takes some parameters and a state of a storage and retu
 Execution of an entry point produces a new state of the storage of the smart contract. If the entry point execution did not throw an exception and did not fail then the new state of storage is applied.
 
 Operations are transactions (smart contract invocation) that will be sent to some other contracts. They will trigger an entry point of the targeted contract or a tez transfer (no invocation of entry point). If execution of an entry point produces operations (an ordered list of transactions) then they are sent and executed following the order of the list of operations.
-
 
 ## Deploy
 
