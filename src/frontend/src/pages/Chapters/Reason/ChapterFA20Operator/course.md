@@ -212,7 +212,7 @@ type permissionsDescriptorParameter = contract(permissionsDescriptorMichelson);
 ## Your mission
 
 We are working on a non_fungible/single-asset token.
-Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to Alice account.
+Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to alice's account.
 
 - Alice's account address is "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN"
 - Bob's account address is "tz1faswCTDciRzE4oJ9jn2Vm2dvjeyA9fUzU"

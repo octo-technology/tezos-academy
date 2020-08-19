@@ -1,6 +1,6 @@
 # Chapter 23 : Deploy contract
 
-<dialog character="admiral"> Time to go live.</dialog>
+<dialog character="admiral">Time to deploy into the battlefield Rookie!</dialog>
 
 ## Smart contract
 

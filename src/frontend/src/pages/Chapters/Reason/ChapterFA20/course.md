@@ -128,6 +128,7 @@ FA2 token contracts MUST implement the transfer logic defined by the following r
 
 It transfers tokens from a _from\__ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
 
+
 ```
 type tokenId = nat;
 
@@ -229,7 +230,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 - string value which represents an error code mnemonic.
 - a Michelson pair, where the first element is a string representing error code mnemonic and the second element is a custom error data.
 
-#### Standard error mnemonics:
+### Standard error mnemonics:
 
 <!-- prettier-ignore -->"*TOKEN\_UNDEFINED*" - One of the specified *token\_ids* is not defined within the FA2 contract
 

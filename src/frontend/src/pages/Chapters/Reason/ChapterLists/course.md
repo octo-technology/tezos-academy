@@ -20,15 +20,15 @@ let my_list : list (int) = [1, 2, 2]; // The head is 1
 
 Lists can be augmented by adding an element before the head (or, in terms of stack, by pushing an element on top). This operation is usually called consing in functional languages.
 
-In ReasonLIGO, the cons operator is infix and noted _, ..._. It is not symmetric: on the left lies the element to cons, and, on the right, a list on which to cons :
+In ReasonLIGO, the cons operator is infix and noted _,..._. It is not symmetric: on the left lies the element to cons, and, on the right, a list on which to cons :
 
 ```
-let larger_list : list (int) = [5, ...my_list]; // [5,1,2,2]
+let larger_list : list (int) = [5,...my_list]; // [5,1,2,2]
 ```
 
 ## Functional Iteration over Lists
 
-A functional iterator is a function that traverses a data structure and calls in turn a given function over the elements of that structure to compute some value. There are three kinds of functional iterations over LIGO lists: the *iterated operation*, the *map operation* (not to be confused with the map data structure) and the *fold operation*.
+A functional iterator is a function that traverses a data structure and calls in turn a given function over the elements of that structure to compute some value. There are three kinds of functional iterations over LIGO lists: the _iterated operation_, the _map operation_ (not to be confused with the map data structure) and the _fold operation_.
 
 ### Iterated Operation over Lists
 
@@ -44,7 +44,7 @@ let iter_op = (l : list (int)) : unit => {
 
 ### Mapped Operation over Lists
 
-We may want to change all the elements of a given list by applying to them a function. This is called a *map operation*, not to be confused with the map data structure. The predefined functional iterator implementing the mapped operation over lists is called _List.map_ and is used as follows.
+We may want to change all the elements of a given list by applying to them a function. This is called a _map operation_, not to be confused with the map data structure. The predefined functional iterator implementing the mapped operation over lists is called _List.map_ and is used as follows.
 
 ```
 let increment = (i : int) : int => i + 1;
@@ -55,7 +55,7 @@ let plus_one : list (int) = List.map (increment, larger_list);
 
 ### Folded Operation over Lists
 
-A *folded operation* is the most general of iterations. The folded function takes two arguments: an accumulator and the structure element at hand, with which it then produces a new accumulator. This enables having a partial result that becomes complete when the traversal of the data structure is over. The predefined functional iterator implementing the folded operation over lists is called _List.fold_ and is used as follows.
+A _folded operation_ is the most general of iterations. The folded function takes two arguments: an accumulator and the structure element at hand, with which it then produces a new accumulator. This enables having a partial result that becomes complete when the traversal of the data structure is over. The predefined functional iterator implementing the folded operation over lists is called _List.fold_ and is used as follows.
 
 ```
 let sum = ((result, i): (int, int)): int => result + i;
@@ -64,7 +64,7 @@ let sum_of_elements : int = List.fold (sum, my_list, 0);
 
 ## Sets
 
-Sets are unordered collections of values of the same type, like lists are ordered collections. Elements of sets in LIGO are unique, whereas they can be repeated in a list. 
+Sets are unordered collections of values of the same type, like lists are ordered collections. Elements of sets in LIGO are unique, whereas they can be repeated in a list.
 
 ### Defining sets
 
@@ -110,7 +110,7 @@ let smaller_set : set (int) = Set.remove (3, my_set);
 
 It is possible to iterate over elements of a set and apply a function to them (like functional iteratio over List).
 
-There are three kinds of functional iterations over LIGO sets: the *iterated operation* and the *folded operation*.
+There are three kinds of functional iterations over LIGO sets: the _iterated operation_ and the _folded operation_.
 
 #### Iterated Operation
 

@@ -1,4 +1,4 @@
-# Chapter 24 : Financial Application 2.0 - Operators and Permissions
+# Chapter XX : Financial Application 2.0 - Operators and Permissions
 
 <dialog character="mechanics">Captain, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
 
@@ -91,7 +91,7 @@ FA2 defines :
 
 #### permissions_descriptor
 
-FA2 specifies an interface permissions_descriptor allowing external contracts to discover an FA2 contract's permission policy and to configure it. _permissions_descriptor_ serves as a modular approach to define consistent and non-self-contradictory policies.
+FA2 specifies an interface permissions*descriptor allowing external contracts to discover an FA2 contract's permission policy and to configure it. \_permissions_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
 
 The _permission descriptor_ indicates which standard permission policies are implemented by the FA2 contract and can be used by off-chain and on-chain tools to discover the properties of the particular FA2 contract implementation.
 
@@ -108,12 +108,12 @@ type permissions_descriptor = {
 
 #### operator_transfer_policy
 
-operator_transfer_policy - defines who can transfer tokens. Tokens can be
+operator*transfer_policy - defines who can transfer tokens. Tokens can be
 transferred by the token owner or an operator (some address that is authorized to
 transfer tokens on behalf of the token owner). A special case is when neither owner
 nor operator can transfer tokens (can be used for non-transferable tokens). The
 FA2 standard defines two entry points to manage and inspect operators associated
-with the token owner address (_update_operators_,
+with the token owner address (\_update_operators*,
 _is_operator_). Once an operator is added, it can manage all of
 its associated owner's tokens.
 
@@ -126,8 +126,8 @@ type operator_transfer_policy =
 
 #### owner_hook_policy
 
-owner_hook_policy - defines if sender/receiver hooks should be called or
-not. Each token owner contract MAY implement either an _fa2_token_sender_ or
+owner*hook_policy - defines if sender/receiver hooks should be called or
+not. Each token owner contract MAY implement either an \_fa2_token_sender* or
 _fa2_token_receiver_ hook interface. Those hooks MAY be called when a transfer sends
 tokens from the owner account or the owner receives tokens. The hook can either
 accept a transfer transaction or reject it by failing.
@@ -172,7 +172,7 @@ Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 ## Your mission
 
 We are working on a non_fungible/multi-asset token.
-Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to Alice account.
+Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to alice's account.
 
 <!-- prettier-ignore -->1- First we have to set the right operator policy to authorize delegation when deploying the contract. We want you to prepare the initial state of storage. Write the _ligo compile-storage_ command for the *token* contract with following recommandations :
 
@@ -183,7 +183,7 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 - operator transfer is authorized,
 - Bob account has no token
 - Vera account is owner of the token 1
-- Alice account has no token
+- alice's account has no token
 - Jay is the administrator of the contract
 - the token type transfered is 0 (token_id)
 

@@ -20,7 +20,7 @@ let addInventory = ((params,s) : (list(item), storage)) : return =>
 {
     let item_list : list(item) = params;
     // Type your solution below
-    let update_inventory = ((acc,i) : (list(item_michelson), item)) : list(item_michelson) => [Layout.convert_to_right_comb(i), ...acc];
+    let update_inventory = ((acc,i) : (list(item_michelson), item)) : list(item_michelson) => [Layout.convert_to_right_comb(i),...acc];
     let new_inventory : list(item_michelson) = List.fold(update_inventory, item_list, s.inventory);
     (([] : list(operation)), {...s, inventory:new_inventory})
 };
