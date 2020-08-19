@@ -201,28 +201,28 @@ We are working on a fungible token which can handle multiple assets. We decided 
 
 ![](/images/small-fa2-hook-exercise.png)
 
-1 - we want to accept a transfer if transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
+1 - We want to accept a transfer if the transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
 
-<!-- prettier-ignore -->2 - we want to accept a transfer if transfer receiver implements *fa2\_token\_receiver* interface.
+<!-- prettier-ignore -->2 - We want to accept a transfer if the transfer receiver implements *fa2\_token\_receiver* interface.
 
-<!-- prettier-ignore -->If a receiver address implements *fa2\_token\_receiver* interface, its *tokens\_received* entry point must be called.
+<!-- prettier-ignore -->If a receiver address implements the *fa2\_token\_receiver* interface, then its *tokens\_received* entry point must be called.
 
-<!-- prettier-ignore -->Complete the hook permission smart contract by implementing our custom rules on receivers. Transfer is permitted if receiver address implements *fa2\_token\_receiver* interface OR a receiver address is in the receiver white list.
+<!-- prettier-ignore -->Complete the hook permission smart contract by implementing our custom rules on receivers. Transfer is permitted if the receiver address implements the *fa2\_token\_receiver* interface OR the receiver address is in the receiver whitelist.
 
-<!-- prettier-ignore -->1- Find receiver hook - Check if a receiver _r_ implements *fa2\_token\_receiver* interface, using *to\_receiver\_hook* function and a _match_ operator.
+<!-- prettier-ignore -->1- Finding the receiver hook - Check if a receiver _r_ implements the *fa2\_token\_receiver* interface, using *to\_receiver\_hook* function and a _match_ operator.
 
-<!-- prettier-ignore -->2- Retrieve hook - if the receiver _r_ implements *fa2\_token\_receiver* interface, introduce variable _h_ as hook entry point.
+<!-- prettier-ignore -->2- Retrieving the hook - if the receiver _r_ implements the *fa2\_token\_receiver* interface, introduce variable _h_ as hook entry point.
 
-<!-- prettier-ignore -->3- Prepare parameter - cast parameter _p_ into type *transfer\_descriptor\_param\_to\_michelson* and store the result in a new variable _pm_
+<!-- prettier-ignore -->3- Prepare parameters - cast parameter _p_ into type *transfer\_descriptor\_param\_to\_michelson* and store the result in a new variable _pm_
 
 <!-- prettier-ignore -->4- Call the entry point - create a variable _op_ of type *operation* which is a transaction sending variable _pm_ and no mutez to the retrieved entry point _h_
 
 <!-- prettier-ignore -->5- Return transactions - add this newly created operation _op_ in the returned list of operation _ops_ (and return _ops_)
 
-<!-- prettier-ignore -->6- if the receiver _r_ does not implement *fa2\_token\_receiver* interface, response of *to\_receiver\_hook* provided an error message with variable _err_.
+<!-- prettier-ignore -->6- If the receiver _r_ does not implement *fa2\_token\_receiver* interface, response of *to\_receiver\_hook* provided an error message with variable _err_.
 
-<!-- prettier-ignore -->7- Check if receiver _r_ is registered in the whitelist _wl_.
+<!-- prettier-ignore -->7- Check if the receiver _r_ is registered in the whitelist _wl_.
 
 <!-- prettier-ignore -->8- If it is the case , everything is fine, just return the returned list of operation _ops_.
 
-<!-- prettier-ignore -->9- Otherwise throw an exception with _err_ message. Don't forget to cast the exception.
+<!-- prettier-ignore -->9- Otherwise throw an exception with _err_ error message. Don't forget to cast the exception.
