@@ -1,12 +1,12 @@
 # Chapter 22 : Lambda (anonymous function)
 
-<dialog character="alien">red alert the humans are here battle station surrender dirty humans or die we are the master of this universe and we will easily destroy you hahahaha</dialog>
+<dialog character="scientist">Captain, maybe you should think of updating our starmap referencement, it's not like this was introduced by the ICA like 1,000 years ago...</dialog>
 
 ## Versioning
 
 Tezos as a public blockchain expects that contracts should have the same behaviour for all users. In theory, once a contract is deployed, it should not be changed.
 
-We call _antipattern_ when a smart contract has a special role (admin) or may be evolving (changing the rules of the smart contract).
+We call _antipattern_ a smart contract that has a special role (admin) or may be evolving (changing the rules of the smart contract).
 
 The need to modify the behaviour of a smart contract emerges when for example the laws of a country have changed and you need to apply the same changes to the rules in your smart contract.
 One could write a new smart contract (V2) and deploy it but it would imply that all existing information stored in the storage of the old smart contract (V1) would be lost. This problem can be solved by :
@@ -15,7 +15,6 @@ One could write a new smart contract (V2) and deploy it but it would imply that 
 3- or by customizing the contract implementation.
 
 In this chapter we will focus on the third solution.
-
 
 ### Versioning by re-emission
 
@@ -34,6 +33,7 @@ Versioning can be done by writing a single smart contract that can change its pr
 Changing the behavior of a smart contract can be done by customizing the implementation through lambda functions. The idea is to implement smart contract logic in a lambda funtion that can be modified after the contract deployment.
 
 This pattern requires to:
+
 - define an anonymous function in the storage which is called by an entrypoint
 - write a new entrypoint that allows to change the implementation of this anonymous function.
 
@@ -118,7 +118,7 @@ ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y
 ## Your mission
 
 We have a smart contract that registers planets of the Sol system. Since the beginning of the project, all celestial bodies were considered as planets.
-Since 2006, the IAU decided that celetial bodies with a mass under 100 are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change! A _DeduceCategoryChange_ entrypoint allows us to change the lambda which determines the category of a celestial body. All we have to do is define the new rule and all registered celestial bodies will be updated.
+Since 2006, the IAU decided that celetial bodies with a mass under 100 megatons are not considered as a planet but as a dwarf-planet. Hopefully we forecasted this kind of change! A _DeduceCategoryChange_ entrypoint allows us to change the lambda which determines the category of a celestial body. All we have to do is define the new rule and all registered celestial bodies will be updated.
 
 Take a look at the starmap contract in the editor tabs.
 

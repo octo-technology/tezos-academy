@@ -1,6 +1,6 @@
 # Chapter 21 : Polymorphism
 
-<dialog character="pilot"></dialog>
+<dialog character="pilot">The enemy is destroyed, great job Captain! Headquater is sending a reinforcement squadron to help us.</dialog>
 
 When sending transactions between contracts, each contract must know the target contract interface and the parameter type of the target contract. This is done basically by separating type definition and function implementation and by using code inclusion.
 
@@ -41,7 +41,6 @@ let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tez
 <!-- prettier-ignore -->An entry point name is a double-quoted string where the first character is _%_ followed by the name of the entry point (and its first letter must not be capitalized), e.g. for an entry point *FooBar* the corresponding entry point name is *%fooBar*.
 
 Entry point names are written in the form of: _%myEntryPoint_ for the entry point _MyEntryPoint_.
-
 
 ## Your mission
 

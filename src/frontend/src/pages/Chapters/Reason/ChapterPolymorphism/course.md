@@ -1,6 +1,6 @@
 # Chapter 21 : Polymorphism
 
-<dialog character="pilot"></dialog>
+<dialog character="pilot">The enemy is destroyed, great job Captain! Headquater is sending a reinforcement squadron to help us.</dialog>
 
 When sending transactions between contracts, each contract must know the target contract interface and the parameter type of the target contract. This is done basically by separating type definition and function implementation and by using code inclusion.
 

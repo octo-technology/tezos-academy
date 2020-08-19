@@ -15,7 +15,7 @@ let b : nat = abs (1)
 
 ## Addresses
 
-The address type in LIGO denotes Tezos addresses (tz1, tz2, tz3, KT1, ...). Currently, addresses are created by casting a string to the address type. Beware of failures if the address is invalid. Consider the following examples.
+The address type in LIGO denotes Tezos addresses (tz1, tz2, tz3, KT1,...). Currently, addresses are created by casting a string to the address type. Beware of failures if the address is invalid. Consider the following examples.
 
 You can define Tezos addresses by casting a string to an address type :
 

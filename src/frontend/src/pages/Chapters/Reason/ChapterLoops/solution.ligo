@@ -38,7 +38,7 @@ let star_map : list(planet) = [{
   },
 ]
 // Type your solution below
-let conditions = ((acc, p): (list(planet), planet)) : list(planet) => if ((p.density > 100n) && p.atmospheric_activity) { [p, ...acc] } else { acc };
+let conditions = ((acc, p): (list(planet), planet)) : list(planet) => if ((p.density > 100n) && p.atmospheric_activity) { [p,...acc] } else { acc };
 let scan = (l : list(planet)) : list(planet) => List.fold (conditions, l, ([]: list(planet)));
 
 let scan_results : list(planet) = scan (star_map);
