@@ -214,7 +214,7 @@ We are working on a fungible token which can handle multiple assets. We decided 
 
 <!-- prettier-ignore -->2- Retrieving the hook - if the receiver _r_ implements the *fa2\_token\_receiver* interface, introduce variable _h_ as hook entry point.
 
-<!-- prettier-ignore -->3- Prepare parameters - cast parameter _p_ into type *transfer\_descriptor\_param\_to\_michelson* and store the result in a new variable _pm_
+<!-- prettier-ignore -->3- Prepare parameters - cast the parameter _p_ into type *transfer\_descriptor\_param\_to\_michelson* and store the result in a new variable _pm_
 
 <!-- prettier-ignore -->4- Call the entry point - create a variable _op_ of type *operation* which is a transaction sending variable _pm_ and no mutez to the retrieved entry point _h_
 
