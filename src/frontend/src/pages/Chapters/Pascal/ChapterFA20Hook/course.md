@@ -6,7 +6,7 @@
 
 The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
-The FA2 interface formalize a standard way to design tokens and thus describes a list of entrypoints (that must be implemented) and data structures related to those entrypoints.
+The FA2 interface formalizes a standard way to design tokens and thus describes a list of entry points (that must be implemented) and data structures related to those entry points.
 
 In this chapter we will focus on _transfer hook_
 
@@ -27,14 +27,14 @@ Instead of implementing FA2 as a monolithic contract, a permission policy can be
 Although this approach introduces gas consumption overhead (compared to an all-in-one contract) by requiring an extra inter-contract call, it also offers some other advantages:
 
 1. FA2 core implementation can be verified once, and certain properties (not related to permission policy) remain unchanged.
-2. modification of the permission policy of an existing contract can be done by replacing a transfer hook only. No storage migration of the FA2 ledger is required.
+2. Modification of the permission policy of an existing contract can be done by replacing a transfer hook only. No storage migration of the FA2 ledger is required.
 3. Transfer hooks could be used for purposes beyond permissioning, such as implementing _custom logic_ for a particular token application
 
-The transfer hook makes it possible to model different transfer permission policies like whitelists, operator lists, etc.
+The transfer hook pattern permits to model different transfer permission policies like whitelists, operator lists, etc.
 
 #### Hook interface
 
-The FA2 interface formalize a standard way to handle hooks.
+The FA2 interface formalizes a standard way to handle hooks.
 
 ```
 type set_hook_param is record [
@@ -55,27 +55,27 @@ type fa2_with_hook_entry_points is
 
 ```
 
-In addition to the hook standard, the FA2 standard provides helper functions to manipulate data structures involved in FA2 interface. These helper function are packed in a FA2 library. (see section "FA2 standard hook library")
+In addition to the hook standard, the FA2 standard provides helper functions to manipulate data structures involved in FA2 interface. These helper functions are packed in a FA2 library. (see section "FA2 standard hook library")
 
 #### FA2 standard hook library
 
 ##### Register FA2 core with Hook permission contract
 
-Some helpers functions has been gatthered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type alias :
+Some helper functions has been gathered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type alias :
 
 <!-- prettier-ignore -->The type *fa2\_registry* is a _set_ of _address_.
 
-<!-- prettier-ignore -->the function *get\_hook\_entrypoint* retrieves the contract interface of entrypoint "%tokens\_transferred\_hook" for a given contract address
+<!-- prettier-ignore -->the function *get\_hook\_entrypoint* retrieves the contract interface of entry point "%tokens\_transferred\_hook" for a given contract address
 
 <!-- prettier-ignore -->the function *register\_with\_fa2*
 <!-- prettier-ignore -->* takes the address of a FA2 contract (having hooks) and register it in the registry (set of address).
-<!-- prettier-ignore -->* calls the *Set\_transfer\_hook* entrypoint of a FA2 contract
+<!-- prettier-ignore -->* calls the *Set\_transfer\_hook* entry point of a FA2 contract
 
-<!-- prettier-ignore -->the function *create\_register\_hook\_op* sends a transaction to a FA2 contract (having hook entrypoints). The transaction intends to invoke the entrypoint *Set\_transfer\_hook*.  This entrypoint *Set\_transfer\_hook* requires as parameters :
-<!-- prettier-ignore -->* the contract interface of entrypoint "%tokens\_transferred\_hook"
+<!-- prettier-ignore -->the function *create\_register\_hook\_op* sends a transaction to a FA2 contract (having hook entry points). The transaction intends to invoke the entry point *Set\_transfer\_hook*.  This entry point *Set\_transfer\_hook* requires as parameters :
+<!-- prettier-ignore -->* the contract interface of entry point "%tokens\_transferred\_hook"
 <!-- prettier-ignore -->* a _permission descriptor_
 
-<!-- prettier-ignore -->the function *validate\_hook\_call* ensures an address in registered in the registry (set of address).
+<!-- prettier-ignore -->the function *validate\_hook\_call* ensures that an address in registered in the registry (set of address).
 
 ##### Transfer Hooks
 
@@ -98,23 +98,12 @@ The library defines some helper functions
 
 <!-- prettier-ignore -->The function *to\_sender\_hook* retrieves the entry point *"%tokens\_sent"* for a given _address_. It enables to check if the *fa2\_token\_sender* interface is implemented.
 
-//// NOT IMPLEMENTED START///
-
-<!-- prettier-ignore -->These two functions return a variant *hook\_result* type. If variant value is *Hook\_contract* then the entrypoint exists an is provided. If variant value is *Hook\_undefined* then the entry point is not implemented and a message error is provided.
-
-```
-type hook_result =
-  | Hook_contract of transfer_descriptor_param_michelson contract
-  | Hook_undefined of string
-```
-
-//// NOT IMPLEMENTED END///
 
 #### Hook Rules
 
-FA2 implementation with the transfer hook pattern recquires following rules:
+The implementation of a FA2 with the _transfer hook_ pattern requires following rules:
 
-1. An FA2 token contract has a single entry point to set the hook. If a transfer hook is not set, the FA2 token contract transfer operation MUST fail.
+1. A FA2 token contract has a single entry point to set the hook. If a transfer hook is not set, the FA2 token contract transfer operation MUST fail.
 
 2. Transfer hook is to be set by the token contract administrator before any transfers can happen.
 
@@ -126,11 +115,11 @@ FA2 implementation with the transfer hook pattern recquires following rules:
 return a corresponding operation as part of the transfer entry point result.
 <!-- prettier-ignore -->(For more details see set\_transfer\_hook )
 
-5. _operator_ parameter for the hook invocation MUST be set to _SENDER_.
+5. The _operator_ parameter for the hook invocation MUST be set to _SENDER_.
 
-<!-- prettier-ignore -->6) *from_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.from_)*.
+<!-- prettier-ignore -->6. The *from_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.from_)*.
 
-<!-- prettier-ignore -->7) *to_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.to_)*.
+<!-- prettier-ignore -->7. The *to_* parameter for each *hook\_transfer* batch entry MUST be set to *Some(transfer.to_)*.
 
 8. A transfer hook MUST be invoked, and operation returned by the hook invocation
    MUST be returned by transfer entry point among other operations it might create.
@@ -145,7 +134,7 @@ return a corresponding operation as part of the transfer entry point result.
 
 Let's see an example of FA2 Hook pattern implementation. The following smart contract implements a hook permission contract
 
-<!-- prettier-ignore -->Owners transfer hooks are triggered by the *owners\_transfer\_hook* function.
+<!-- prettier-ignore -->Owner transfer hooks are triggered by the *owners\_transfer\_hook* function.
 <!-- prettier-ignore -->If a receiver address implements *fa2\_token\_receiver* interface, its *tokens\_received* entry point must be called.
 <!-- prettier-ignore -->If a sender address implements *fa2\_token\_sender* interface, its *tokens\_sent* entry point must be called.
 
@@ -198,13 +187,13 @@ const own_policy : permissions_descriptor = record [
 ]
 ```
 
-<!-- prettier-ignore -->Notice this Hook Permission contract contains an entry point *Register\_with\_fa2* to register with the FA2 core contract.
+<!-- prettier-ignore -->Notice that this _Hook Permission_ contract contains an entry point *Register\_with\_fa2* to register with the FA2 core contract.
 
-<!-- prettier-ignore -->Notice this Hook Permission contract contains an entry point *Tokens\_transferred\_hook* triggered when FA2 core contract receive a transfer request. This entry point triggers the owner hook transfer (sending hooks to sender and receiver and waiting for their approval or rejection).
+<!-- prettier-ignore -->Notice that this _Hook Permission_ contract contains an entry point *Tokens\_transferred\_hook* triggered when FA2 core contract receives a transfer request. This entry point triggers the owner hook transfer (sending hooks to sender and receiver and waiting for their approval or rejection).
 
 ## Your mission
 
-We are working on a Fungible token which can handle multiple assets. We decided to implement a Hook pattern. A FA2 core contract handle all fa2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules.
+We are working on a fungible token which can handle multiple assets. We decided to implement a _hook pattern_. A FA2 core contract handles all FA2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules.
 
 ![](/images/small-fa2-hook-exercise.png)
 
