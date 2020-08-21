@@ -15,7 +15,7 @@ ligo dry-run lambda2.religo main \
             category:PLANET}), 
         ("sun", {
             position:{x:0,y:0,z:0},
-            mass:1,000,000n,
+            mass:1000000n,
             category:PLANET})
     ])
 }'
