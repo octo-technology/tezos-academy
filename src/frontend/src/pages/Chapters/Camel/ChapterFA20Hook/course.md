@@ -83,7 +83,7 @@ Some helpers functions has been gatthered in a hook library which help defining 
 The hook pattern depends on the permission policy. A transfer hook may be unwanted, optional or required.
 
 <!-- prettier-ignore -->If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens\_received". Otherwise transfer is not allowed.
-<!-- prettier-ignore -->If the policy Optionnaly accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
+<!-- prettier-ignore -->If the policy optionally accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
 
 It is the same for permission policies including senders, the entry point _tokens_sent_ may need to be implemented.
 

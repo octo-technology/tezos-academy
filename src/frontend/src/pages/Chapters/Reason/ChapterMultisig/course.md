@@ -20,12 +20,12 @@ The multi-signature pattern can be described with this set of rules :
 - an action is automatically executed when it has been approved by enough users (a threshold of number of approvals must be defined)
 - the smart contract must also handle a list of user in order to specify who is allowed to approve an action
 
-Optionnaly
+Optionally
 
-- the smart contract can also handle the number of approval per user and set maximum number of approvals.
+- the smart contract can also handle the number of approval per user and set the maximum number of approvals.
 - the smart contract can also handle an inner state. Everytime an action is executed the inner state of the multi-signature contract is updated for tracability purpose
 
-More complex rules can be added these basic ones.
+More complex rules can be added to these basic ones.
 
 ### Implementation of multi-signature patterns
 
@@ -33,7 +33,7 @@ Let's consider this implementation of the multi-signature pattern. This implemen
 
 This smart contract _MultisigProxy_ intends to play the role of a proxy pattern for the _Counter_ contract.
 The _Counter_ contract (the example at https://ide.ligolang.org/p/-hNqhvMFDFdsTULXq4K-KQ) has been deployed at address : KT1CFBbdhRCNAzNkX56v361XZToHCAtjSsVS
-The _Counter_ contract handle a simple integer counter which can be incemented or decremented.
+The _Counter_ contract handle a simple integer counter which can be incremented or decremented.
 
 Instead of invoking the _Counter_ contract, users propose a modification of the counter (e.g. Increment(5)) to the _MultisigProxy_ contract which will forward it to the _Counter_ contract (if approved by other users).
 
@@ -205,7 +205,7 @@ let main = ((param,s) : (parameter, storage)) : return  =>
   }
 ```
 
-Notice in the _Send_ function the number of voters is compared to the threshold. If threshold is reached :
+Notice that in the _Send_ function the number of voters is compared to the threshold. If the threshold is reached then:
 
 <!-- prettier-ignore -->- the message *packed\_msg* is removed from *message\_storage*
 
@@ -237,7 +237,7 @@ if (sender_proposal_counter > s.max_proposal) {
 };
 ```
 
-Notice in the _Withdraw_ function :
+Notice that in the _Withdraw_ function :
 
 - if a message proposal has no voters then it is removed
 - the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
