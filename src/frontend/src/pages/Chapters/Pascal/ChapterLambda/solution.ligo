@@ -20,7 +20,7 @@ ligo dry-run starmap.ligo main \
       category=PLANET]; 
     "sun" -> record [
       position=record [x=0;y=0;z=0];
-      mass=1,000,000n;
+      mass=1000000n;
       category=PLANET] 
   end
 ]'
