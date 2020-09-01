@@ -24,9 +24,9 @@ Executing an entry point takes some parameters and a state of a storage and retu
 
 ![](/images/contract_in_out.png)
 
-Execution of an entry point produces a new state of the storage of the smart contract. If the entry point execution did not throw an exception and did not fail then the new state of storage is applied.
+The execution of an entry point produces a new state of the storage of the smart contract. If the entry point execution did not throw an exception and did not fail then the new state of storage is applied.
 
-Operations are transactions (smart contract invocation) that will be sent to some other contracts. They will trigger an entry point of the targeted contract or a tez transfer (no invocation of entry point). If execution of an entry point produces operations (an ordered list of transactions) then they are sent and executed following the order of the list of operations.
+Operations are transactions (smart contract invocation) that will be sent to some other contracts. They will trigger an entry point of the targeted contract or a tez transfer (no invocation of entry point). If the execution of an entry point produces operations (an ordered list of transactions) then they are sent and executed following the order of the list of operations.
 
 ## Deploy
 
@@ -44,8 +44,8 @@ tezos-client originate contract <contract_name> for <user> transferring <amount_
 
 <contract_name> name given to the contract
 <tz_file> path of the Michelson smart contract code (TZ file).
-<amount_tez> is the quantity of tez being transfered to the newly deployed contract. if a contract balance reaches 0 then it is deactivated.
-<from_user> account from which the tez are taken from (and given transfered to the new contract).
+<amount_tez> is the quantity of tez being transfered to the newly deployed contract. If a contract balance reaches 0 then it is deactivated.
+<from_user> account from which the tez are taken from (and transfered to the new contract).
 <initial_storage> is a Michelson expression. The --init parameter is used to specify initial state of the storage.
 <gaz_fee> it specifies the the maximal fee the user is willing to pay for this operation (using the --burn-cap parameter).
 
@@ -61,11 +61,11 @@ tezos-client transfer <amount_tez> from <user> to <contract_name> --arg '<entryp
 
 <amount_tez> is the quantity of tez being transfered to the contract.
 <contract_name> name given to the contract
-<entrypoint_invocation> name of the entry point and corresponding parameters. example 'Increment(5)'.
+<entrypoint_invocation> name of the entry point and corresponding parameters. For example 'Increment(5)'.
 
 ⚠️ Notice that the --arg parameter specifies an entry point call.
 
-⚠️ Notice that the --dry-run parameter simulate invocation of the entry point.
+⚠️ Notice that the --dry-run parameter simulate the invocation of the entry point.
 
 ## Ligo compiler
 
@@ -84,7 +84,7 @@ ligo compile-contract code.ligo mainFunc > code.tz
 
 <mainFunc> argument is the name of the "main function" in the .ligo file. (see Chapter "Main Function").
 
-⚠️ Notice the output of the command is the Michelson code. We just redirect the command output into a .tz file.
+⚠️ Notice that the output of the command is the Michelson code. We just redirect the command output into a .tz file.
 
 ### Initial storage
 
@@ -108,20 +108,20 @@ ligo compile-parameter [options] code.ligo mainFunc '<ligo_expression>'
 
 ### Simulating
 
-Here is how to simulate execution of an entry point using the LIGO compiler in command line.
+Here is how to simulate the execution of an entry point using the LIGO compiler in command line.
 
 ```
 ligo dry-run [options] code.ligo mainFunc '<entrypoint(p)>' '<storage_state>'
 ```
 
-<storage*state> state of the storage when simulating execution of the entry point
+<storage*state> state of the storage when simulating the execution of the entry point
 <entrypoint(p)> entry point of the smart contract that is invoked (parameter \_p* of this entry point is specified between parantheses).
 
 ### Ligo Expression in command line
 
 Let's see some example how to transpile a storage LIGO expression into a Michelson one.
 
-Let's consider this smart contract which associate coordinates to a planet name.
+Let's consider this smart contract which associates coordinates to a planet name.
 
 ```
 // starmap.ligo
@@ -154,7 +154,7 @@ Initialization of elements of a map is specified between _map[_ and _]_ and elem
 map[ <key1> -> <value1>; <key2> -> <value2> ]
 ```
 
-Here, an example of a command line _ligo compile-storage_ for transpiling a map containg a tuple.
+Here is an example of a command line _ligo compile-storage_ for transpiling a map containing a tuple.
 
 ```
 ligo compile-storage starmap.ligo main 'map [ "earth" -> (1,1,1) ]'
@@ -170,7 +170,7 @@ ligo compile-storage starmap.ligo main '(map []: map(string,coordinates))'
 
 Initialization of elements of a tuple is specified between _(_ and _)_ separated by comma _,_.
 
-The command line _ligo compile-storage_ for transpiling a map containg a tuple.
+Here is an example of a command line _ligo compile-storage_ for transpiling a map containing a tuple.
 
 ```
 ligo compile-storage starmap.ligo main 'map [ "earth" -> (1,1,1) ]'
@@ -209,7 +209,7 @@ block { skip } with case action of
   end
 ```
 
-The command line _ligo compile-storage_ for transpiling a map containg a record tuple.
+Here is an example of a command line _ligo compile-storage_ for transpiling a map containing a record tuple.
 
 ```
 ligo compile-storage starmap2.ligo main 'map [ "earth" -> record [x=1;y=1;z=1] ]'
@@ -221,7 +221,7 @@ This command returns :
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```
 
-⚠️ Notice the record is tranformed into pairs (same for tuples).
+⚠️ Notice that the record is tranformed into pairs (same for tuples).
 
 ## Your mission
 
