@@ -24,18 +24,18 @@ type parameter =
 
 #### Definition
 
-_Operator_ can be seen as delegate role.
+An _Operator_ can be seen as a delegate role.
 
-_Operator_ is a Tezos address that initiates token transfer operation on behalf of the owner.
-_Owner_ is a Tezos address which can hold tokens.
+An _Operator_ is a Tezos address that initiates token transfer operation on behalf of the owner.
+An _Owner_ is a Tezos address which can hold tokens.
 An operator, other than the owner, MUST be approved to manage particular token types held by the owner to make a transfer from the owner account.
-Operator relation is not transitive. If C is an operator of B , and if B is an operator of A, C cannot transfer tokens that are owned by A, on behalf of B.
+The Operator relation is not transitive. If C is an operator of B , and if B is an operator of A, C cannot transfer tokens that are owned by A, on behalf of B.
 
-an _operator_ is defined as a relationship between two address (owner address and operator address) and can be understood as an operator address who can operate tokens held by a owner.
+An _Operator_ is defined as a relationship between two address (owner address and operator address) and can be understood as an operator address which can operate tokens held by a owner.
 
 #### FA2 interface operator
 
-FA2 interface specifies two entry points to update and inspect operators. Once permitted for the specific token owner, an operator can transfer any tokens belonging to the owner.
+The FA2 interface specifies two entry points to update and inspect operators. Once permitted for the specific token owner, an operator can transfer any tokens belonging to the owner.
 
 ```
 | Update_operators(updateOperatorsParameter)
@@ -66,13 +66,13 @@ type updateOperatorsAddOrRemoveMichelson = michelson_or_right_comb(updateOperato
 type updateOperatorsParameter = list(updateOperatorsAddOrRemoveMichelson);
 ```
 
-<!-- prettier-ignore -->Notice the *updateOperatorsAddOrRemove* can only Add or Remove an _operator_ (an allowance between an operator address and a token owner address).
+<!-- prettier-ignore -->Notice that the *updateOperatorsAddOrRemove* can only Add or Remove an _operator_ (an allowance between an operator address and a token owner address).
 
-<!-- prettier-ignore -->Notice entry point *Update\_operators* expects a list of *updateOperatorsAddOrRemoveMichelson*. The fa2 convertor helper provide the *updateOperatorsIterator* function to iterate *updateOperatorsAddOrRemoveMichelson* format.
+<!-- prettier-ignore -->Notice that the entry point *Update\_operators* expects a list of *updateOperatorsAddOrRemoveMichelson*. The FA2 standard provides the *updateOperatorsIterator* function to iterate *updateOperatorsAddOrRemoveMichelson* format.
 
 #### FA2 standard operator library
 
-Some helpers functions has been implemented in the FA2 library which help manipulating _operator_. This library contains following functions and type alias :
+Some helper functions has been implemented in the FA2 library which help manipulating _operator_ relationship. This library contains following functions and type alias :
 
 an _operator_ is a relationship between two address (owner address and operator address)
 
@@ -88,7 +88,7 @@ let canUpdateOperators = ((tokenOwner, storage): (tokenOwner, storage)): unit =>
 }
 ```
 
-<!-- prettier-ignore -->Some helper function can be added such as *isOperator*, verifies if a given address is registered as operator for a given owner
+<!-- prettier-ignore -->Some helper function can be added such as *isOperator*, it verifies if a given address is registered as operator for a given owner
 
 ```
 let isOperator = ((tokenOwner, tokenOperator, storage): (tokenOwner, tokenOperator, storage)): bool => {
@@ -100,7 +100,7 @@ let isOperator = ((tokenOwner, tokenOperator, storage): (tokenOwner, tokenOperat
 }
 ```
 
-// TOTO : verify equivalent !
+
 
 <!-- prettier-ignore -->function *validate\_operator* validates operators for all transfers in the batch at once, depending on given *operatorTransferPolicy*
 
@@ -109,16 +109,16 @@ let isOperator = ((tokenOwner, tokenOperator, storage): (tokenOwner, tokenOperat
 Most token standards specify logic that validates a transfer transaction and can either approve or reject a transfer.
 Such logic (called _Permission Policy_) could validate who initiates a transfer, the transfer amount, and who can receive tokens.
 
-This FA2 standard defines a framework to compose and configure such permission policies from the standard behaviors and configuration APIs.
+This FA2 standard defines a framework to compose and configure such permission policies.
 
-FA2 defines :
+The FA2 standard defines :
 
 - the default core transfer behavior, that MUST always be implemented
 - a set of predefined permission policies that are optional
 
 #### Permissions descriptor
 
-<!-- prettier-ignore -->FA2 specifies an interface *permissions\_descriptor* allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions\_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
+<!-- prettier-ignore -->The FA2 standard specifies an interface *permissions\_descriptor* allowing external contracts to discover an FA2 contract's permission policy and to configure it. *permissions\_descriptor* serves as a modular approach to define consistent and non-self-contradictory policies.
 
 The _permission descriptor_ indicates which standard permission policies are implemented by the FA2 contract and can be used by off-chain and on-chain tools to discover the properties of the particular FA2 contract implementation.
 
@@ -164,7 +164,7 @@ type ownerHookPolicy =
 
 #### Custom permission policy
 
-<!-- prettier-ignore -->It is possible to extend permission policy with a custom behavior, which does not overlap with already existing standard policies. This standard does not specify exact types for custom config entry points. FA2 token contract clients that support custom config entry points must know their types a priori and/or use a tag hint of *customPermissionPolicy*.
+<!-- prettier-ignore -->It is possible to extend a permission policy with a custom behavior, which does not overlap with already existing standard policies. This standard does not specify exact types for custom config entry points. FA2 token contract clients that support custom config entry points must know their types a priori and/or use a tag hint of *customPermissionPolicy*.
 
 ```
 type customPermissionPolicy = {
@@ -190,7 +190,7 @@ Operator(Owner_transfer) * Receiver(Owner_no_hook) * Sender(Owner_no_hook)
 
 #### Interface
 
-Updating permissions requires specific parameters, and thus follow these type definitions.
+Updating permissions requires specific parameters, and thus follows these type definitions.
 
 ```
 type operatorTransferPolicyMichelson = michelson_or_right_comb(operatorTransferPolicy);
@@ -222,8 +222,10 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 
 - Vera account is owner of the token 1
 
-<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer token taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
+<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer tokens taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
-<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1  (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
+<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
 
-You will have to modify the storage to in the state where "Vera account is owner of the token 1" (step 1) and Bob is authorized to transfer token taken from Vera account (step 2).
+You will have to modify the storage accordingly:
+- "Vera account is owner of the token 1" (step 1)
+- "Bob is authorized to transfer tokens taken from Vera account" (step 2).
