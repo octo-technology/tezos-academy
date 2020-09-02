@@ -36,6 +36,7 @@ import { data as pascalDataDeployContract } from '../Chapters/Pascal/ChapterDepl
 import { data as pascalDataFA12 } from '../Chapters/Pascal/ChapterFA12'
 import { data as pascalDataFA20 } from '../Chapters/Pascal/ChapterFA20'
 import { data as pascalDataFA20Operator } from '../Chapters/Pascal/ChapterFA20Operator'
+import { data as pascalDataFA20Hook } from '../Chapters/Pascal/ChapterFA20Hook'
 import { data as pascalDataFunctions } from '../Chapters/Pascal/ChapterFunctions'
 import { data as pascalDataInteractions } from '../Chapters/Pascal/ChapterInteractions'
 import { data as pascalDataInterop } from '../Chapters/Pascal/ChapterInterop'
@@ -220,7 +221,7 @@ export const chapterData = [
     pathname: '/pascal/chapter-fa2-hook',
     language: 'PascaLIGO',
     name: '30 - Pascal - FA2 Hook',
-    data: camelDataFA20Hook,
+    data: pascalDataFA20Hook,
   },
 
   {
@@ -493,11 +494,5 @@ export const chapterData = [
     language: 'ReasonLIGO',
     name: '29 - Reason - FA2 Operator',
     data: reasonDataFA20Operator,
-  },
-  {
-    pathname: '/reason/chapter-fa2-hook',
-    language: 'ReasonLIGO',
-    name: '30 - Reason - FA2 Hook',
-    data: camelDataFA20Hook,
   },
 ]
