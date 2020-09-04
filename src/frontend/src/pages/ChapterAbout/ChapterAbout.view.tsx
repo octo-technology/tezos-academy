@@ -9,7 +9,7 @@ import * as React from 'react'
 import { PENDING, RIGHT, WRONG } from './ChapterAbout.constants'
 import { data } from './ChapterAbout.data'
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
 
 monaco
   .init()
@@ -76,6 +76,9 @@ export const ChapterAboutView = ({ validatorState, validateCallback }: ChapterAb
               },
               h2: {
                 component: ChapterH2,
+              },
+              h3: {
+                component: ChapterH3,
               },
               code: {
                 component: MonacoReadOnly,

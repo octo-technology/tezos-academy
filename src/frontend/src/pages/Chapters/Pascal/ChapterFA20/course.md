@@ -1,6 +1,6 @@
-# Chapter 28 : Financial Application 2.0
+# Chapter 28 : Financial Asset 2.0
 
-<dialog character="mechanics">Captain, Let's create a ship token.</dialog>
+<dialog character="mechanics">Captain, you may not know that buy our ship as been purchased as a financial asset.</dialog>
 
 ## Definition
 
@@ -8,7 +8,7 @@ There are multiple considerations while implementing a particular token smart co
 
 The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
-In the following chapter on Financial Application 2.0 , we will focus on _TZIP-12_ which stands for the 12th Tezos Improvement Proposal (same as EIP-721 for Ethereum).
+In the following chapter on Financial Asset 2.0 , we will focus on _TZIP-12_ which stands for the 12th Tezos Improvement Proposal (same as EIP-721 for Ethereum).
 
 ## Architecture
 
@@ -105,8 +105,7 @@ FA2 token contracts MUST implement the transfer logic defined by the following r
 
 #### Interface
 
-It transfers tokens from a _from\__ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
-
+It transfers tokens from a \_from\_\_ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
 
 ```
 type token_id = nat
@@ -134,7 +133,7 @@ type transfer_aux = {
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata\_registry* entry point which gets the metadata for multiple token types.
 
-<!-- prettier-ignore -->It expects a callback contract, and sends back a list of *token\_metadata\_* records.
+<!-- prettier-ignore -->It expects a callback contract, and sends back a list of *token\_metadata* records.
 
 FA2 token amounts are represented by natural numbers (nat), and their granularity (the smallest amount of tokens which may be minted, burned, or transferred) is always 1.
 
@@ -197,12 +196,12 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 <!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Balance\_Of* entry point is not yet implemented , please finish the job !
 
-<!-- prettier-ignore -->The function *retreive\_balance* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balance\_of\_request*
+<!-- prettier-ignore -->The function *retreive\_balance* is responsible for processing each request and providing a response to each request. As you can see, a request is of type *balance\_of\_request*
 
 <!-- prettier-ignore -->1- Declare a variable *retreived\_balance* of type natural initialized to 0.
 
-<!-- prettier-ignore -->2- Retrieve the balance associated to the request owner in the ledger and store it in the variable *retreived\_balance*. In the _case_ instruction use *ledger_balance* as temporary name for the _Some_. If no balance is retrieve do nothing (do not modify *retreived\_balance*).
+<!-- prettier-ignore -->2- Retrieve the balance associated to the request owner in the ledger and store it in the variable *retreived\_balance*. In the _case_ instruction use *ledger_balance* as a temporary name for the _Some_. If no balance is retrieved, do nothing (do not modify *retreived\_balance*).
 
-<!-- prettier-ignore -->3- Create a constant *response* of type *balance\_of\_response\_* containing a record with the request and the retrieved balance.
+<!-- prettier-ignore -->3- Create a constant *response* of type *balance\_of\_response* containing a record with the request and the retrieved balance.
 
-<!-- prettier-ignore -->4- The function *retreive\_balance* must return a type *balance\_of\_response*. You can use the *convert\_to\_right\_comb* function (seen in Chapter Interoperability) to convert constant *response* into the right format. Don't forget to cast *response* as type *balance\_of\_response\_*.
+<!-- prettier-ignore -->4- The function *retreive\_balance* must return a type *balance\_of\_response*. You can use the *convert\_to\_right\_comb* function (seen in Chapter Interoperability) to convert constant *response* into the right format. Don't forget to cast *response* as type *balance\_of\_response*.

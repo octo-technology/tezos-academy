@@ -59,6 +59,17 @@ export const ChapterH2 = styled.div`
   }
 `
 
+export const ChapterH3 = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 20px;
+
+  @media (max-width: 900px) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+`
+
 export const ChapterValidator = styled.div`
   border: 1px solid #0a5688;
   position: relative;

@@ -1,4 +1,4 @@
-# Chapter XX : Financial Application 2.0 - Operators and Permissions
+# Chapter XX : Financial Asset 2.0 - Operators and Permissions
 
 <dialog character="mechanics">Captain, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
 

@@ -15,8 +15,7 @@
             "image": "registry.digitalocean.com/neutrino/tezosacademy-api",
             "imagePullPolicy": "Always"
           }
-        ],
-        "nodeSelector": { "doks.digitalocean.com/node-pool": "api" }
+        ]
       }
     }
   }

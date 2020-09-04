@@ -15,7 +15,7 @@ type return = (list(operation), storage)
 type entry_points = 
   |  AddInventory (list(item))
 
-// This function takes a list of item as parameter and transform each item in a right combed pair structure and add this transformed item in inventory
+// This function takes a list of items as parameter and transform each item in a right combed pair structure and add this transformed item in inventory
 let addInventory = ((params,s) : (list(item), storage)) : return =>
 {
     let item_list : list(item) = params;

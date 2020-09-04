@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 import { PENDING, RIGHT, WRONG } from '../ChapterAbout/ChapterAbout.constants'
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterItalic, ChapterMonaco, ChapterStyled, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "../ChapterAbout/ChapterAbout.style";
 import { CardBottomCorners, CardTopCorners } from './Chapter.components/Card/Card.style'
 import { Dialog } from './Chapter.components/Dialog/Dialog.controller'
 import { Light } from './Chapter.components/Light/Light.view'
@@ -156,6 +156,9 @@ const Content = ({ course }: any) => (
         h2: {
           component: ChapterH2,
         },
+        h3: {
+          component: ChapterH3,
+        },
         code: {
           component: MonacoReadOnly,
         },
@@ -209,7 +212,7 @@ export const ChapterView = ({
       </ChapterCourse>
       <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
         {Object.keys(supports).length > 0 && (
-          <div>
+          <div style={{ overflow: 'scroll' }}>
             <ChapterTab isSelected={display === 'solution'} onClick={() => setDisplay('solution')}>
               Exercice
             </ChapterTab>

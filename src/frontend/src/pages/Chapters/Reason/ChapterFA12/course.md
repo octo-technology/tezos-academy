@@ -1,10 +1,10 @@
-# Chapter 25 : Financial Application 1.2
+# Chapter 25 : Financial Asset 1.2
 
 <dialog character="mechanics">Captain, we received the bill for reparing the ship after the last battle: 1,000,000 TAT. I have no idea what TAT is or its convertion rate to Tez, that's likely an alien currency, you should probably find out!</dialog>
 
 ## Definition
 
-A Financial Application represents a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, or stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
+A Financial Asset represents a non-physical asset whose value is derived from a contractual claim, such as bank deposits, bonds, or stocks. Financial assets are usually more liquid than other tangible assets, such as commodities or real estate, and may be traded on financial markets.
 
 Financial assets are opposed to non-financial assets, such as property rights which include both tangible properties (sometimes also called real assets) such as land, real estate or commodities and intangible assets such as intellectual property like copyrights, patents, Trademarks, etc.
 
@@ -12,19 +12,19 @@ Financial assets are opposed to non-financial assets, such as property rights wh
 
 A _token_ or _crypto-currency_ is a numerical asset emitted on a blockchain.
 
-Fungible means divisible. A Fungible token is a Financial Application where the account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transferred to another account.
+Fungible means divisible. A Fungible token is a Financial Asset where the account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transferred to another account.
 
-A Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller parts. Crypto-kitties is an example of a game using non fungible tokens (on the Ethereum blockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity,...) and one may want to sell his avatar, but cannot sell the strength property of his avatar separately. It makes sense to keep the whole avatar into a undivisible set of attributes.
+A Non-fungible token (NFT) is a Financial Asset whose balance cannot be splitted into smaller parts. Crypto-kitties is an example of a game using non fungible tokens (on the Ethereum blockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity,...) and one may want to sell his avatar, but cannot sell the strength property of his avatar separately. It makes sense to keep the whole avatar into a undivisible set of attributes.
 
 ## Standard
 
 A standard is a set of rules commonly accepted by the community.
-The rules of Financial Application describe how to create currencies (and transfer those between accounts, etc).
+The rules of Financial Asset describe how to create currencies (and transfer those between accounts, etc).
 
 Depending on the usage of the currency, many sets of rules have been commonly accepted :
 
-- Financial Application 1.2 (FA1.2) is a set of rules for fungible tokens.
-- Financial Application 2.0 (FA20) is a set of rules for non fungible token.
+- Financial Asset 1.2 (FA1.2) is a set of rules for fungible tokens.
+- Financial Asset 2.0 (FA20) is a set of rules for non fungible token.
 
 For example, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
 All smart contracts supporting the FA12 standard can interact with accounts and other contracts by transfering coins of our crypto-currency.

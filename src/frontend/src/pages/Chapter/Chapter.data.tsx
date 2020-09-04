@@ -86,6 +86,7 @@ import { data as reasonDataTuples } from '../Chapters/Reason/ChapterTuples'
 import { data as reasonDataTypes } from '../Chapters/Reason/ChapterTypes'
 import { data as reasonDataVariables } from '../Chapters/Reason/ChapterVariables'
 import { data as reasonDataVariant } from '../Chapters/Reason/ChapterVariant'
+import { data as reasonDataFA20Hook } from '../Chapters/Reason/ChapterFA20Hook'
 
 export const chapterData = [
   {
@@ -494,5 +495,11 @@ export const chapterData = [
     language: 'ReasonLIGO',
     name: '29 - Reason - FA2 Operator',
     data: reasonDataFA20Operator,
+  },
+  {
+    pathname: '/reason/chapter-fa2-hook',
+    language: 'ReasonLIGO',
+    name: '30 - Reason - FA2 Hook',
+    data: reasonDataFA20Hook,
   },
 ]

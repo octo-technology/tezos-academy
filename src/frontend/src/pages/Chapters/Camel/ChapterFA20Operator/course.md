@@ -1,6 +1,6 @@
 # Chapter 29 : FA 2.0 - Operators and Permissions
 
-<dialog character="mechanics">Captain, why are you trying to change the part yourself? Just write a function on the terminal and send it to a droid.</dialog>
+<dialog character="mechanics">When we started our space expedition, you chose a ship that was unique, there is no other like it, treat it well!</dialog>
 
 ## Definition
 
@@ -181,5 +181,6 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 <!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transferred token id is number 1 (token\_id and and amount must be 1). You can use the *transfer\_to\_michelson* function to convert your parameters into the format expected by *Transfer* entry point.
 
 You will have to modify the storage accordingly:
+
 - "Vera account is owner of the token 1" (step 1)
 - "Bob is authorized to transfer tokens taken from Vera account" (step 2).

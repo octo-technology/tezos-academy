@@ -1,4 +1,4 @@
-# Chapter 28 : Financial Application 2.0
+# Chapter 28 : Financial Asset 2.0
 
 <dialog character="mechanics">Captain, Let's create a ship token.</dialog>
 
@@ -8,7 +8,7 @@ There are multiple considerations while implementing a particular token smart co
 
 The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
-In the following chapter on Financial Application 2.0 , we will focus on _TZIP-12_ which stands for the 12th Tezos Improvement Proposal (same as EIP-721 for Ethereum).
+In the following chapter on Financial Asset 2.0 , we will focus on _TZIP-12_ which stands for the 12th Tezos Improvement Proposal (same as EIP-721 for Ethereum).
 
 ## Architecture
 
@@ -46,7 +46,6 @@ type parameter =
 ```
 
 <!-- prettier-ignore -->⚠️ Notice that the type _parameter_ describes all FA2 entry points (and should be renamed *fa2\_entry\_points* in the next release of the FA2 reasonML implementation)
-
 
 ### Balance of
 
@@ -127,8 +126,7 @@ FA2 token contracts MUST implement the transfer logic defined by the following r
 
 #### Interface
 
-It transfers tokens from a _from\__ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
-
+It transfers tokens from a \_from\_\_ account to possibly many destination accounts where each destination transfer describes the type of token, the amount of token, and receiver address.
 
 ```
 type tokenId = nat;
@@ -255,7 +253,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 <!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Balance\_Of* entry point is not yet implemented, please finish the job !
 
-<!-- prettier-ignore -->The function *balanceOfRequestsIterator* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balanceOfRequestMichelson*
+<!-- prettier-ignore -->The function *balanceOfRequestsIterator* is responsible for processing each request and providing a response to each request. As you can see, a request is of type *balanceOfRequestMichelson*
 
 <!-- prettier-ignore -->1- First, we need to retieve information from the request. convert the request *balanceOfRequestMichelson* into a variable named *balanceOfRequest* of type _balanceOfRequest_. You can use the *convert\_from\_right\_comb* function (seen in Chapter Interop)
 

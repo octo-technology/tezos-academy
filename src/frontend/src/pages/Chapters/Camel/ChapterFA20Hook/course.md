@@ -1,6 +1,6 @@
-# Chapter 30 : FA 2.0 - Tranfer Hook
+# Chapter 30 : FA 2.0 - Transfer Hook
 
-<dialog character="mechanics">Captain, all space pirate should have a hook like in old times.</dialog>
+<dialog character="mechanics">This is the end of our adventure Captain, I hope you had a great trip with us and to see you soon for more adventures!</dialog>
 
 ## ... in the previous episode
 
@@ -199,10 +199,9 @@ let own_policy : permissions_descriptor = {
 
 We are working on a fungible token which can handle multiple assets. We decided to implement a _hook pattern_. A FA2 core contract handles all FA2 entry points (BalanceOf, Transfer, ...) and a hook permission contract which implements the validation of a transfer with some custom rules.
 
-
 ![](/images/small-fa2-hook-exercise.png)
 
-1 - We want to accept a transfer if the transfer receiver is registered in a whitelist. This whitelisting is done via a tranfer hook.
+1 - We want to accept a transfer if the transfer receiver is registered in a whitelist. This whitelisting is done via a Transfer Hook.
 
 <!-- prettier-ignore -->2 - We want to accept a transfer if the transfer receiver implements *fa2\_token\_receiver* interface.
 
