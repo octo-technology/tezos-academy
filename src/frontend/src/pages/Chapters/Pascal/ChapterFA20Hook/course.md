@@ -69,7 +69,7 @@ Some helper functions has been gathered in a hook library which help defining ho
 
 <!-- prettier-ignore -->the function *register\_with\_fa2*
 <!-- prettier-ignore -->* takes the address of a FA2 contract (having hooks) and register it in the registry (set of address).
-<!-- prettier-ignore -->* calls the *Set\_transfer\_hook* entry point of a FA2 contract
+<!-- prettier-ignore -->\* calls the *Set\_transfer\_hook* entry point of a FA2 contract
 
 <!-- prettier-ignore -->the function *create\_register\_hook\_op* sends a transaction to a FA2 contract (having hook entry points). The transaction intends to invoke the entry point *Set\_transfer\_hook*.  This entry point *Set\_transfer\_hook* requires as parameters :
 <!-- prettier-ignore -->* the contract interface of entry point "%tokens\_transferred\_hook"
@@ -86,9 +86,9 @@ The hook pattern depends on the permission policy. A transfer hook may be unwant
 <!-- prettier-ignore -->If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens\_received". Otherwise transfer is not allowed.
 <!-- prettier-ignore -->If the policy optionally accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
 
-It is the same for permission policies including senders, the entry point _tokens_sent_ may need to be implemented.
+<!-- prettier-ignore -->It is the same for permission policies including senders, the entry point *tokens\_sent* may need to be implemented.
 
-<!-- prettier-ignore -->In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2\_token\_receiver*, and *fa2\_token\_sender* interfaces. This implies that token'owner contract must have entry points *tokens\_received* and *token\_sent*. If these entry points fail the transfer is rejected.
+<!-- prettier-ignore -->In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2\_token\_receiver*, and *fa2\_token\_sender* interfaces. This implies that token'owner contract must have entry points *tokens\_received* and *tokens\_sent*. If these entry points fail the transfer is rejected.
 
 ##### Transfer Hooks entry points
 

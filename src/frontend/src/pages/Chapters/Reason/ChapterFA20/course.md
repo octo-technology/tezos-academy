@@ -178,7 +178,7 @@ The _decimals_ property is the number of digits to use after the decimal point w
 
 #### Interface
 
-<!-- prettier-ignore -->A basic feature of a token is to provide a metadata related to the token. The FA2 standard speficies an entry point _Token\_metadata\_registry_ for this.
+<!-- prettier-ignore -->A basic feature of a token is to provide a metadata related to the token. The FA2 standard speficies an entry point *Token\_metadata\_registry* for this.
 
 ```
 | Token_metadata_registry(tokenMetadataRegistryParameter)

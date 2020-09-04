@@ -85,9 +85,9 @@ The hook pattern depends on the permission policy. A transfer hook may be unwant
 <!-- prettier-ignore -->If the policy requires a owner hook then the token owner contract MUST implement an entry point "tokens\_received". Otherwise transfer is not allowed.
 <!-- prettier-ignore -->If the policy optionally accepts a owner hook then the token owner contract MAY implement an entry point "tokens\_received". Otherwise transfer is allowed.
 
-It is the same for permission policies including senders, the entry point _tokens_sent_ may need to be implemented.
+<!-- prettier-ignore -->It is the same for permission policies including senders, the entry point *tokens\_sent* may need to be implemented.
 
-<!-- prettier-ignore -->In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2\_token\_receiver*, and *fa2\_token\_sender* interfaces. This implies that token'owner contract must have entry points *tokens\_received* and *token\_sent*. If these entry points fail the transfer is rejected.
+<!-- prettier-ignore -->In case of a Transfer, if permission policies expect a hook, then the token owners MUST implement *fa2\_token\_receiver*, and *fa2\_token\_sender* interfaces. This implies that token'owner contract must have entry points *tokens\_received* and *tokens\_sent*. If these entry points fail the transfer is rejected.
 
 ##### Transfer Hooks entry points
 
