@@ -4,7 +4,7 @@
 
 ## Definition
 
-The FA2 standard proposes a _unified token contract interface_ that accommodates all mentioned concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
+The FA2 standard proposes a _unified token contract interface_ that accommodates fungibility and multiple asset concerns. It aims to provide significant expressivity to contract developers to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers.
 
 In this chapter we will focus on _Operators_ and _Permissions_.
 

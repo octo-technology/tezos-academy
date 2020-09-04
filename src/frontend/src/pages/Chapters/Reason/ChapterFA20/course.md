@@ -36,8 +36,6 @@ In addition to the FA2 interface, the FA2 standard provides helper functions to 
 
 Token contract implementing the FA2 standard MUST have the following entry points.
 
-TODO should be renamed fa2_entry_points
-
 ```
 type parameter =
 | Transfer(transferParameter)
@@ -47,9 +45,12 @@ type parameter =
 | Token_metadata_registry(tokenMetadataRegistryParameter)
 ```
 
+<!-- prettier-ignore -->⚠️ Notice that the type _parameter_ describes all FA2 entry points (and should be renamed *fa2\_entry\_points* in the next release of the FA2 reasonML implementation)
+
+
 ### Balance of
 
-The FA2 client (contracts using our token) may need to know the balance of a owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract.
+The FA2 client (contracts using our token) may need to know the balance of an owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract.
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which gets the balance of multiple account/token pairs (because FA2 supports multiple token).
 
