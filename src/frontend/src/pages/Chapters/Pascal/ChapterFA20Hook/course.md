@@ -24,10 +24,10 @@ Instead of implementing FA2 as a monolithic contract, a permission policy can be
 
 ![](/images/small-fa2-hook.png)
 
-Although this approach introduces gas consumption overhead (compared to an all-in-one contract) by requiring an extra inter-contract call, it also offers some other advantages:
+Although this approach introduces gas consumption overhead (compared to an all-in-one contract) by requiring an extra inter-contract call, it also offers some other benefits:
 
-1. FA2 core implementation can be verified once, and certain properties (not related to permission policy) remain unchanged.
-2. Modification of the permission policy of an existing contract can be done by replacing a transfer hook only. No storage migration of the FA2 ledger is required.
+1. The FA2 core implementation can be verified once, and certain properties (not related to permission policy) remain unchanged.
+2. The modification of the permission policy of an existing contract can be done by replacing a transfer hook only. No storage migration of the FA2 ledger is required.
 3. Transfer hooks could be used for purposes beyond permissioning, such as implementing _custom logic_ for a particular token application
 
 The transfer hook pattern permits to model different transfer permission policies like whitelists, operator lists, etc.
@@ -61,7 +61,7 @@ In addition to the hook standard, the FA2 standard provides helper functions to 
 
 ##### Register FA2 core with Hook permission contract
 
-Some helper functions has been gathered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type alias :
+Some helper functions has been gathered in a hook library which help defining hooks when implementing a FA2 contract. This library contains following functions and type aliases :
 
 <!-- prettier-ignore -->The type *fa2\_registry* is a _set_ of _address_.
 
@@ -75,7 +75,7 @@ Some helper functions has been gathered in a hook library which help defining ho
 <!-- prettier-ignore -->* the contract interface of entry point "%tokens\_transferred\_hook"
 <!-- prettier-ignore -->* a _permission descriptor_
 
-<!-- prettier-ignore -->the function *validate\_hook\_call* ensures that an address in registered in the registry (set of address).
+<!-- prettier-ignore -->the function *validate\_hook\_call* ensures that an address is registered in the registry (set of address).
 
 ##### Transfer Hooks
 

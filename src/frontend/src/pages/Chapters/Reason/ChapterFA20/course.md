@@ -164,7 +164,7 @@ type transferParameter = list(transferMichelson);
 
 ### Metadata
 
-The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range od ids (for non-fungible tokens) or total supply of assets (for fungible tokens).
+The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range of ids (for non-fungible tokens) or the total supply of assets (for fungible tokens).
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
 
@@ -252,7 +252,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 ## Your mission
 
-<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Balance\_Of* entry point is not yet implemented, please finish the job !
+<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Balance\_Of* entry point is not yet implemented, please finish the job !
 
 <!-- prettier-ignore -->The function *balanceOfRequestsIterator* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balanceOfRequestMichelson*
 
