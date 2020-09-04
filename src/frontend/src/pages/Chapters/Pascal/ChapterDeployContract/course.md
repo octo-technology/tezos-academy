@@ -44,8 +44,8 @@ tezos-client originate contract <contract_name> for <user> transferring <amount_
 
 <contract_name> name given to the contract
 <tz_file> path of the Michelson smart contract code (TZ file).
-<amount_tez> is the quantity of tez being transfered to the newly deployed contract. If a contract balance reaches 0 then it is deactivated.
-<from_user> account from which the tez are taken from (and transfered to the new contract).
+<amount_tez> is the quantity of tez being transferred to the newly deployed contract. If a contract balance reaches 0 then it is deactivated.
+<from_user> account from which the tez are taken from (and transferred to the new contract).
 <initial_storage> is a Michelson expression. The --init parameter is used to specify initial state of the storage.
 <gaz_fee> it specifies the the maximal fee the user is willing to pay for this operation (using the --burn-cap parameter).
 
@@ -59,7 +59,7 @@ Here is the syntax of the tezos command line to invoke a smart contract :
 tezos-client transfer <amount_tez> from <user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
 ```
 
-<amount_tez> is the quantity of tez being transfered to the contract.
+<amount_tez> is the quantity of tez being transferred to the contract.
 <contract_name> name given to the contract
 <entrypoint_invocation> name of the entry point and corresponding parameters. For example 'Increment(5)'.
 

@@ -106,7 +106,7 @@ let isOperator = ((tokenOwner, tokenOperator, storage): (tokenOwner, tokenOperat
 
 ### FA2 Permission Policies and Configuration
 
-Most token standards specify logic that validates a transfer transaction and can either approve or reject a transfer.
+Most token standards specify the logic that validates a transfer transaction and that can either approve or reject a transfer.
 Such logic (called _Permission Policy_) could validate who initiates a transfer, the transfer amount, and who can receive tokens.
 
 This FA2 standard defines a framework to compose and configure such permission policies.
@@ -212,7 +212,7 @@ type permissionsDescriptorParameter = contract(permissionsDescriptorMichelson);
 ## Your mission
 
 We are working on a non_fungible/single-asset token.
-Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfert a token taken from Vera account and send it to alice's account.
+Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer a token taken from Vera account and send it to alice's account.
 
 - Alice's account address is "tz1gjaF81ZRRvdzjobyfVNsAeSC6PScjfQwN"
 - Bob's account address is "tz1faswCTDciRzE4oJ9jn2Vm2dvjeyA9fUzU"
@@ -224,7 +224,7 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 
 <!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer tokens taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
 
-<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transfered token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
+<!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transferred token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
 
 You will have to modify the storage accordingly:
 - "Vera account is owner of the token 1" (step 1)
