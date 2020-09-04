@@ -36,8 +36,6 @@ In addition to the FA2 interface, the FA2 standard provides helper functions to 
 
 Token contract implementing the FA2 standard MUST have the following entry points.
 
-TODO should be renamed fa2_entry_points
-
 ```
 type parameter =
 | Transfer(transferParameter)
@@ -47,9 +45,12 @@ type parameter =
 | Token_metadata_registry(tokenMetadataRegistryParameter)
 ```
 
+<!-- prettier-ignore -->⚠️ Notice that the type _parameter_ describes all FA2 entry points (and should be renamed *fa2\_entry\_points* in the next release of the FA2 reasonML implementation)
+
+
 ### Balance of
 
-The FA2 client (contracts using our token) may need to know the balance of a owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract.
+The FA2 client (contracts using our token) may need to know the balance of an owner. The FA2 standard specifies an entry point _Balance of_ which use a callback in order to send the balance information to the calling contract.
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the _Balance of_ entry point which gets the balance of multiple account/token pairs (because FA2 supports multiple token).
 
@@ -164,7 +165,7 @@ type transferParameter = list(transferMichelson);
 
 ### Metadata
 
-The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range od ids (for non-fungible tokens) or total supply of assets (for fungible tokens).
+The metadata section deals with token definition which specifies the name, and asset caracteristics such as the range of ids (for non-fungible tokens) or the total supply of assets (for fungible tokens).
 
 <!-- prettier-ignore -->FA2 token contracts MUST implement the *token\_metadata* entry point which get the metadata for multiple token types.
 
@@ -177,7 +178,7 @@ The _decimals_ property is the number of digits to use after the decimal point w
 
 #### Interface
 
-<!-- prettier-ignore -->A basic feature of a token is to provide a metadata related to the token. The FA2 standard speficies an entry point _Token\_metadata\_registry_ for this.
+<!-- prettier-ignore -->A basic feature of a token is to provide a metadata related to the token. The FA2 standard speficies an entry point *Token\_metadata\_registry* for this.
 
 ```
 | Token_metadata_registry(tokenMetadataRegistryParameter)
@@ -252,7 +253,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 ## Your mission
 
-<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Balance\_Of* entry point is not yet implemented, please finish the job !
+<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Balance\_Of* entry point is not yet implemented, please finish the job !
 
 <!-- prettier-ignore -->The function *balanceOfRequestsIterator* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balanceOfRequestMichelson*
 

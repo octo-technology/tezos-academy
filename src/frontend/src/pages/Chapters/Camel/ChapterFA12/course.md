@@ -14,7 +14,7 @@ A _token_ or _crypto-currency_ is a numerical asset emitted on a blockchain.
 
 Fungible means divisible.
 
-A Fungible token is a Financial Application where the account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transfered to another account.
+A Fungible token is a Financial Application where the account balance represents the value associated to an _address_. This value can be splitted into smaller parts which can be transferred to another account.
 
 A Non-fungible token (NFT) is a Financial Application whose balance cannot be splitted into smaller parts. Crypto-kitties is an example of a game using non fungible tokens (on the Ethereum blockchain). For example, a video game avatar (such as avatar on world of warcraft) is a character having some skills/attributes (strength, dexterity,...) and one may want to sell his avatar, but cannot sell the strength property of his avatar separately. It makes sense to keep the whole avatar into a undivisible set of attributes.
 
@@ -181,9 +181,9 @@ Consider alice's account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 
 <!-- prettier-ignore -->5- Write a Tezos command line that simulates your invocation.
 
-<!-- prettier-ignore -->6- Now that the approval has been executed on the blockchain, 2 TAT can be transfered from your address to *alice*'s. Write a ligo command line for preparing the invocation of a *Transfer* of 2 TAT (Tezos Academy Token) from you to *alice*.
+<!-- prettier-ignore -->6- Now that the approval has been executed on the blockchain, 2 TAT can be transferred from your address to *alice*'s. Write a ligo command line for preparing the invocation of a *Transfer* of 2 TAT (Tezos Academy Token) from you to *alice*.
 
-<!-- prettier-ignore -->7- Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1,000,000 tokens and an allowance is initialized with 2 TAT that can be transfered from *me* to *alice* (tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
+<!-- prettier-ignore -->7- Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1,000,000 tokens and an allowance is initialized with 2 TAT that can be transferred from *me* to *alice* (tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7).
 
 <!-- prettier-ignore -->8- Write a ligo command line that simulates your invocation of the previous *Transfer* on storage prepared at step 7. (Don't forget to specify that you are sending this transaction).
 

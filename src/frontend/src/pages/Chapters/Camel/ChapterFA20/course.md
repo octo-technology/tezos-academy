@@ -223,7 +223,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 ## Your mission
 
-<!-- prettier-ignore -->We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Total\_supply* entry point is not yet implemented , please finish the job !
+<!-- prettier-ignore -->We are working on a fungible/multi-asset token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Total\_supply* entry point is not yet implemented , please finish the job !
 
 <!-- prettier-ignore -->1 - Modify the *get\_total\_supply* lambda function in order to retrieve the *total\_supply* information related to the given *token\_id* list.
 

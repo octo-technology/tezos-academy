@@ -195,7 +195,7 @@ When error occurs, any FA2 contract entry point MUST fail with one of the follow
 
 ## Your mission
 
-<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of token. The *Balance\_Of* entry point is not yet implemented , please finish the job !
+<!-- prettier-ignore -->We are working on a fungible token compliant with the FA2 standard. We want you to complete the existing implementation of our token. The *Balance\_Of* entry point is not yet implemented , please finish the job !
 
 <!-- prettier-ignore -->The function *retreive\_balance* is responsible for processing each request and providing a response to each request.As you can see, a request is of type *balance\_of\_request*
 
