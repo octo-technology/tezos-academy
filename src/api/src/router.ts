@@ -14,6 +14,7 @@ import { verifyEmail } from './resolvers/user/verifyEmail/verifyEmail'
 const router = new Router()
 
 router.get('/', async (ctx: Context) => {
+  console.log('TESTING THE KEY ',process.env.TEST_KEY)
   ctx.body = 'You are not supposed to be here ;)'
 })
 

@@ -13,7 +13,18 @@
           {
             "name": "tezosacademy-api",
             "image": "registry.digitalocean.com/neutrino/tezosacademy-api",
-            "imagePullPolicy": "Always"
+            "imagePullPolicy": "Always",
+            "env": [
+              {
+                "name": "TEST_KEY",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "person",
+                    "key": "TEST_KEY"
+                  }
+                }
+              }
+            ]
           }
         ]
       }

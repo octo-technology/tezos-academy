@@ -17,6 +17,9 @@ export const AppRoutes = ({ location }: any) => (
     <Route exact path="/">
       <Home />
     </Route>
+    <Route exact path="/brave">
+      <Home />
+    </Route>
     <Route exact path="/sign-up">
       <SignUp />
     </Route>

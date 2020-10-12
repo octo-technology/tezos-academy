@@ -3,3 +3,4 @@ build
 dist
 .dockerignore
 Dockerfile
+**/*.spec.ts

@@ -11,7 +11,7 @@
     "docker-run": "docker run --rm -it -p 3000:3000 neutrino/tezosacademy-api",
     "docker-push": "doctl registry login && docker tag neutrino/tezosacademy-api registry.digitalocean.com/neutrino/tezosacademy-api && docker push registry.digitalocean.com/neutrino/tezosacademy-api",
     "docker-patch": "doctl registry kubernetes-manifest | kubectl --context do-fra1-tezosacademy-api apply -f - && kubectl --context do-fra1-tezosacademy-api patch serviceaccount default -p '{\"imagePullSecrets\": [{\"name\": \"registry-neutrino\"}]}'",
-    "docker-secrets": "kubectl --context do-fra1-tezosacademy-api create secret generic person --from-env-file=.env",
+    "docker-secrets": "kubectl --context do-fra1-tezosacademy-api create secret generic person --from-env-file=.testenv",
     "docker-deploy": "kubectl --context do-fra1-tezosacademy-api apply -f kubernetesDeployment.json",
     "docker-serve": "kubectl --context do-fra1-tezosacademy-api apply -f kubernetesService.json",
     "docker-restart": "kubectl --context do-fra1-tezosacademy-api delete pods -l app=tezosacademy-api",
