@@ -1,9 +1,72 @@
 # Chapter 26 : Interoperability with Michelson
 
 <dialog character="pilot">Captain, some ressources are missing from our inventory, you should investigate.</dialog>
-Tezos smart contracts are written in Michelson language. The LIGO transpiler helps developers to produce Michelson scripts. However LIGO data structures might have different representations in Michelson. For example, LIGO allows to define a record (a structure containing many fields) but once transpiled in Michelson this record is transformed in a pair of pairs, and there can be many pairs of pairs representing the same record.
 
-In this chapter, we will see that some built-in functions are available in LIGO language in order to address this problem.
+In this chapter, we will see that some built-in functions are available in LIGO language in order to address interoperability with Michelson.
+
+## Use case
+
+Tezos smart contracts are written in Michelson language. The LIGO transpiler helps developers to produce Michelson scripts. However LIGO data structures might have different representations in Michelson. For this reason, some interoperability issues can occur when contracts communicate between each other.
+
+As seen in previous *chapter 21: Polymorphism*, when contracts communicate between each other they call an entrypoint of contract. This entrypoint requires michelson-typed parameters. 
+
+LIGO allows to define a record (a structure containing many fields) but once transpiled in Michelson this record is transformed in a pair of pairs, and there can be many pairs of pairs representing the same record.
+
+For example a record containing 3 fields A, B and C could be transpiled into right combed pairs :
+
+ ```
+( pair (int %a) ( pair (int %b) (int %c) ) )
+ ```
+
+or a left combed pairs :
+
+ ```
+( pair ( pair (int %a) (int %b) ) (int %c) )
+ ```
+
+These two representations have different structures.
+
+When interacting with other contracts the representation (left or right combed) must be specified in order to match the required type of the invoked entrypoint. This is done by using some built-in functions of the LIGO language.
+
+Let's go deeper into the Michelson representation and related LIGO helper functions.
+
+### Example with FA2 
+
+In the last chapters we will see in detail the Financial Application standard (called FA2) which allows to create tokens. This standard uses a specific right combed representation of Ligo records.
+
+All contracts that need to interact with a token contract (buying tokens or selling tokens) must transpile parameters into the required michelson representation.
+
+<!-- prettier-ignore -->Example of a calling contract that has *transfer_param* parameter which must fit with required FA2 interface. So while calling FA2 , parameters must be specified in the right representation.
+
+example of parameters to be sent 
+
+```
+type transfer_param is [
+  buyer: address, 
+  value: nat,
+  owner: address
+]
+```
+
+example of expected parameters from FA2 interface:
+
+```
+type transferContents = {
+    to_: tokenOwner,
+    token_id: tokenId,
+    amount: tokenAmount
+}
+type transferAuxiliary = {
+   from_: tokenOwner,
+   txs: list(transferContentsMichelson)
+};
+type transferMichelson = michelson_pair_right_comb(transferAuxiliary);
+type transferParameter = list(transferMichelson);
+type parameter = 
+| Transfer(transferParameter)
+...
+```
+
 
 ## Annotations
 
