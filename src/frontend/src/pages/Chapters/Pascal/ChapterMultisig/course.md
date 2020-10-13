@@ -217,10 +217,15 @@ Notice that in the _Withdraw_ function :
 - if a message proposal has no voters then it is removed
 - the counter (of number of proposals) is updated. This is used to compute the limit of maximum of proposal.
 
+
 ## Your mission
 
-<!-- prettier-ignore --> 1- Notice that the storage contains a property called *reputation* which associates a _nat_ number to a voter.
+<!-- prettier-ignore --> Modify the existing *Multisig* contract in order to handle reputation level for each voters. We plan to grant reputation points when the message is really executed (one point of reputation for each voters).
 
-<!-- prettier-ignore --> 2- Modify the *increment* function to modify the reputation of a given *addr* address by granting one point of reputation.  (use *count* as temporary variable for the _switch_ operator). If the voter is not registered yet in the *reputation* registry then add him. Otherwise update its reputation by incrementing by one its actual level. It is recommanded to use Map.add and Map.update when modifying a _map_.
+<!-- prettier-ignore --> 1- Modify storage to have an additionnal property called *reputation* which associates a _nat_ number to a voter.
 
-<!-- prettier-ignore --> 3- Modify the *reputation_updated* variable (representing the new state of reputations) by iterating on voters with a _Set.fold_ operation and applying *increment* function on reputation.
+<!-- prettier-ignore --> In the *send* function, notice that voters are computed in a variable *new_store*.
+
+<!-- prettier-ignore --> 2- Modify the *send* function (at the specified code location), by iterating on voters (*new_store* variable) with a _for_ loop (use *addr* as temporary variable for the loop).
+
+<!-- prettier-ignore --> 3- For each voter, modify the *reputation* of a given *addr* address by granting one point of reputation. Use a _case_ operator to verify if the voter has already a reputation account (use *count* as temporary variable for the _Some_ operator). If the voter is not registered yet in the *reputation* register then add him otherwise update its reputation by incrementing by one its actual level. It is recommanded to use Map.add and Map.update when modifying a _map_.
