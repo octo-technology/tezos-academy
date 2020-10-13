@@ -321,4 +321,21 @@ function make_abstract_record (const z: string; const y: int; const x: string; c
 
 We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pair. The contract possesses a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
 
-<!-- prettier-ignore -->1- Complete the implementation of the *update_inventory* lambda function. This function takes a list of items as parameter and must transform each item in a combed pair structure and add this resulting structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)
+<!-- prettier-ignore -->1- Complete the implementation of the *update\_inventory* lambda function. This function must transform each item in a combed pair structure. 
+
+<!-- prettier-ignore -->Take a look at the instruction using the *update\_inventory* lambda function :
+
+```
+s.inventory := List.fold(update_inventory, item_list, s.inventory);
+```
+
+<!-- prettier-ignore -->As you can see the *update\_inventory* lambda function is applied to the given list of items and the resulting structure updates the storage inventory.
+
+<!-- prettier-ignore -->(Recall) As you can see the *update\_inventory* lambda function is used in a *List.fold* instruction which implies that the *update\_inventory* lambda function takes 2 parameters :
+- an accumulator (conventionnaly named *acc*) 
+- an item of the given folded list
+and produces a new accumulator.
+
+When naming your parameters, use *acc* for the accumulator name and *i* for the current item.
+
+(Recall) One can use the *#* operator to add an element in a list.
