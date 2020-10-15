@@ -57,6 +57,6 @@ As you can see, the entry point _RetrieveShip_ calls the function _sendTx_ which
 
 <!-- prettier-ignore -->2- Use a _case_ operator to extract the entry point if it exists (use temporary variable name *ci* in the case). Otherwise throw an exception with error message "Entrypoint not found in contract Squadron" (and don't forget to cast the exception in the right type). The extracted entry point must be stored in a variable called *contractInterface*.
 
-<!-- prettier-ignore -->3- In order to prepare the ship information that need to be sent back to the Squadron contract. Check the expected type of entry point _moduleResponse_ and prepare a variable *ee* containing the expected ship *e*.
+<!-- prettier-ignore -->3- In order to prepare the ship information that need to be sent back to the Squadron contract. Check the expected type of entry point _ModuleResponse_ and prepare a variable *ee* of this expected type containing the expected ship *e*.
 
 <!-- prettier-ignore -->4- Send a transaction to the retrieved entry point of the Squadron contract. The transaction must point to the _moduleResponse_ entrypoint of squadron contract and passing the right argument prepared in step 3. This transaction sends no money. The transaction is an _operation_ type that you can store in a variable *sendbackOperation*.
