@@ -29,7 +29,7 @@ The problem is coming from the fact that _B_ must know the whole definition of _
 <!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* has the following syntax :
 
 ```
-let <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tezos.get_entrypoint_opt(<entrypoint_name>, <target_contract_address>);
+let <variable_name>: <type_of_target_contract_parameter> contract option = Tezos.get_entrypoint_opt <entrypoint_name> <target_contract_address> in
 ```
 
 <!-- prettier-ignore -->When the function *get\_entrypoint\_opt* does not find any contract at a given _address_ or the contract doesn't match the type, then _None_ is returned.
@@ -53,9 +53,9 @@ The Squadron contract provides an entry point _ModuleResponse_ which is called b
 
 As you can see, the entry point _RetrieveShip_ calls the function _sendTx_ which is responsible to send a transaction to a the calling contract. The implementation of the Central contract has not been finished. We need you to finish the _sendTx_ function!
 
-<!-- prettier-ignore -->1- Try to retrieve the entry point %moduleResponse of the given *callbackAddress* and store the result in a variable called *contractInterfaceOpt* of type _option(contract(actionSquadron))_
+<!-- prettier-ignore -->1- Try to retrieve the entry point %moduleResponse of the given *callbackAddress* and store the result in a variable called *contractInterfaceOpt* of type _actionSquadron contract option_
 
-<!-- prettier-ignore -->2- Use a _switch_ operator to extract the entry point if it exists (use temporary variable name *ci* in the switch). Otherwise throw an exception with error message "Entrypoint not found in contract Squadron". The extracted entry point must be stored in a variable called *contractInterface*.
+<!-- prettier-ignore -->2- Use a _match_ operator to extract the entry point if it exists (use temporary variable name *ci* in the _Some_). Otherwise throw an exception with error message "Entrypoint not found in contract Squadron" (and don't forget to cast the exception in the right type). The extracted entry point must be stored in a variable called *contractInterface*.
 
 <!-- prettier-ignore -->3- In order to prepare the ship information that need to be sent back to the Squadron contract. Check the expected type of entry point _moduleResponse_ and prepare a variable *ee* containing the expected ship *e*.
 

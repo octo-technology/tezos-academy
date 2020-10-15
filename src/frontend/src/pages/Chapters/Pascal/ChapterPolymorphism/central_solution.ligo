@@ -27,7 +27,7 @@ begin
     const ee : actionModuleResponse = record
         e = e
     end;
-    const sendbackOperation: operation = transaction(ModuleResponse(ee), 0mutez, contractInterface);
+    const sendbackOperation: operation = Tezos.transaction(ModuleResponse(ee), 0mutez, contractInterface);
 
     const listoperation : list(operation) = list
         sendbackOperation
