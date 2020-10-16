@@ -1,9 +1,51 @@
 # Chapter 26 : Interoperability with Michelson
 
 <dialog character="pilot">Captain, some ressources are missing from our inventory, you should investigate.</dialog>
-Tezos smart contracts are written in Michelson language. The LIGO transpiler helps developers to produce Michelson scripts. However LIGO data structures might have different representations in Michelson. For example, LIGO allows to define a record (a structure containing many fields) but once transpiled in Michelson this record is transformed in a pair of pairs, and there can be many pairs of pairs representing the same record.
 
-In this chapter, we will see that some built-in functions are available in LIGO language in order to address this problem.
+In this chapter, we will stress at the interoperability issue with Michelson which occurs when contracts are interacting between each other. We will see some built-in functions provided in the LIGO language in order to address this topic.
+
+## Use case
+
+Tezos smart contracts are written in Michelson language. The LIGO transpiler helps developers to produce Michelson scripts. However LIGO data structures might have different representations in Michelson. For this reason, some interoperability issues can occur when contracts communicate between each other.
+
+### Multiple representations
+
+LIGO allows to define a record (a structure containing many fields) but once transpiled in Michelson this record is transformed in a pair of pairs, and there can be many pairs of pairs representing the same record. Interoperability issues can occur because of this multiplicity of representation.
+
+For example a record containing 3 fields A, B and C could be transpiled into right combed pairs :
+
+ ```
+( pair (int %a) ( pair (int %b) (int %c) ) )
+ ```
+
+or a left combed pairs :
+
+ ```
+( pair ( pair (int %a) (int %b) ) (int %c) )
+ ```
+
+These two representations have different structures.
+
+When interacting with other contracts the representation (left or right combed) must be specified in order to match the required type of the invoked entrypoint. This is done by using some built-in functions of the LIGO language.
+
+### Interacting with an other contract
+
+In chapters 28 to 30,  we will see in detail the Financial Application standard (called FA2) which allows to create a standardized token contract. This FA2 token contract provides a *Transfer* entrypoint for transfering the token ownership between users. This entrypoint requires parameters that must respect a right combed representation of Ligo records.
+
+<!-- prettier-ignore -->For example, if a third-party contract (called *Caller* contract) wants to interact with a FA2 token contract (called *token* contract), it would use the entrypoint *Transfer* which expects parameters with a right combed representation of Ligo records. So, when the *Caller* contract sends a transaction to the *token* contract, it must transform parameters of the called entrypoint into the expected representation.  
+
+<!-- prettier-ignore -->The snippet of code below is part of the standard FA2 interface, and defines transfer parameters using *michelson\_pair\_right\_comb* function for specifying the Michelson representation used by the *Transfer* entrypoint.
+
+```
+type transferMichelson = michelson_pair_right_comb(transferAuxiliary);
+type transferParameter = list(transferMichelson);
+type parameter = 
+| Transfer(transferParameter)
+```
+
+We will see in detail the Financial Application standard in chapters 28 to 30.
+
+Let's go deeper into the Michelson representation and related LIGO helper functions.
 
 ## Annotations
 
@@ -321,4 +363,21 @@ function make_abstract_record (const z: string; const y: int; const x: string; c
 
 We want you to modify our "inventory" contract. As you can see the storage is mainly composed of an item inventory where each item is a right combed nested pair. The contract possesses a single entry point AddInventory. This _AddInventory_ function adds each element in the inventory (don't worry about duplicates it has already been taken care of).
 
-<!-- prettier-ignore -->1- Complete the implementation of the *update_inventory* lambda function. This function takes a list of items as parameter and must transform each item in a combed pair structure and add this resulting structure in the storage inventory. (When naming your temporary variables, use *acc* for the accumulator name and *i* for the current item)
+<!-- prettier-ignore -->1- Complete the implementation of the *update\_inventory* lambda function. This function must transform each item in a combed pair structure. 
+
+<!-- prettier-ignore -->Take a look at the instruction using the *update\_inventory* lambda function :
+
+```
+s.inventory := List.fold(update_inventory, item_list, s.inventory);
+```
+
+<!-- prettier-ignore -->As you can see the *update\_inventory* lambda function is applied to the given list of items and the resulting structure updates the storage inventory.
+
+<!-- prettier-ignore -->(Recall) As you can see the *update\_inventory* lambda function is used in a *List.fold* instruction which implies that the *update\_inventory* lambda function takes 2 parameters :
+- an accumulator (conventionnaly named *acc*) 
+- an item of the given folded list
+and produces a new accumulator.
+
+When naming your parameters, use *acc* for the accumulator name and *i* for the current item.
+
+(Recall) One can use the *#* operator to add an element in a list.
