@@ -1,4 +1,4 @@
-# Chapter 25 : Financial Asset 1.2
+# Chapter 27 : Fungible token with Financial Asset 1.2 standard
 
 <dialog character="mechanics">Captain, we received the bill for reparing the ship after the last battle: 1,000,000 TAT. I have no idea what TAT is or its convertion rate to Tez, that's likely an alien currency, you should probably find out!</dialog>
 
@@ -26,10 +26,10 @@ The rules of Financial Asset describe how to create currencies (and how to trans
 Depending on the usage of the currency, many sets of rules have been commonly accepted :
 
 - Financial Asset 1.2 (FA1.2) is a set of rules for fungible tokens.
-- Financial Asset 2.0 (FA2) is a set of rules for non fungible token.
+- Financial Asset 2.0 (FA2) is a set of rules for fungible and non fungible tokens.
 
 For example, the creation of a crypto-currency is equivalent to creating a contract which supports the FA1.2 standard.
-All smart contracts supporting the FA12 standard can interact with accounts and other contracts by transfering coins of our crypto-currency.
+All smart contracts supporting the FA1.2 standard can interact with accounts and other contracts by transfering coins of our crypto-currency.
 
 Similarily for Ethereum, fungible token rules have been specified on an Ethereum forum blog (Ethereum Request Comment), the 20th answer was describing a good rule set and the ERC20 became the name for this standard (rule set).
 ERC721 is the standard rule set for non-fungible tokens.
