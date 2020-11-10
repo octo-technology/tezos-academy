@@ -207,7 +207,12 @@ export const HomeView = () => {
 
       <HomeFooter>
         <HomeFooterGrid>
-          <img alt="logo" src="/images/logo.svg" />
+          <div>
+            <img alt="logo" src="/images/logo.svg" />
+            <a href="https://github.com/octo-technology/tezos-academy" target="_blank">
+              Github
+            </a>
+          </div>
           <div>
             <p>About Tezos Link</p>
             <a href="mailto:beta@octo.com" target="_blank">
