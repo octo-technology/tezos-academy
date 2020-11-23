@@ -51,12 +51,21 @@ The Central contract can provide information of a ship to a calling contract via
 The Squadron contract provides an entry point _ModuleRequest_ to ask for ship information to the central contract.
 The Squadron contract provides an entry point _ModuleResponse_ which is called by the central contract when sending back the expected ship information.
 
-As you can see, the entry point _RetrieveShip_ calls the function _sendTx_ which is responsible to send a transaction to a the calling contract. The implementation of the Central contract has not been finished. We need you to finish the _sendTx_ function!
+As you can see, the entry point _RetrieveShip_ calls the function _sendTx_ which is responsible to send the requested ship information to the caller (by sending a transaction to the calling contract). The implementation of the Central contract has not been finished. We need you to finish the _sendTx_ function!
 
-<!-- prettier-ignore -->1- Try to retrieve the entry point %moduleResponse of the given *callbackAddress* and store the result in a variable called *contractInterfaceOpt* of type _option(contract(actionSquadron))_
+<!-- prettier-ignore -->⚠️ Notice that there are multiple tabs for displaying Squadron and Central smart contracts. Your goal is to complete the Central contract displayed in tab "Exercise".
 
-<!-- prettier-ignore -->2- Use a _case_ operator to extract the entry point if it exists (use temporary variable name *ci* in the case). Otherwise throw an exception with error message "Entrypoint not found in contract Squadron" (and don't forget to cast the exception in the right type). The extracted entry point must be stored in a variable called *contractInterface*.
 
-<!-- prettier-ignore -->3- In order to prepare the ship information that need to be sent back to the Squadron contract. Check the expected type of entry point _ModuleResponse_ and prepare a variable *ee* of this expected type containing the expected ship *e*.
+<!-- prettier-ignore -->1- First we want to call the moduleResponse entrypoint of the Squadron but we need to ensure that the *callbackAddress* is a squadron contract and has the expected entrypoint. Try to retrieve the entry point %moduleResponse of the given *callbackAddress* and store the result in a variable called *contractInterfaceOpt* of type _option(contract(actionSquadron))_. 
+<!-- prettier-ignore -->⚠️Remind that the entry point must be in quotations.
+<!-- prettier-ignore -->⚠️Remind that _option_ type means that maybe there is a value
+<!-- prettier-ignore -->⚠️Remind that _contract(actionSquadron)_ represents entrypoints following the _actionSquadron_ format.
+<!-- prettier-ignore -->⚠️So the type _option(contract(actionSquadron))_ stands for "Maybe there are entrypoints which follow the _actionSquadron_ format". 
+
+<!-- prettier-ignore -->2- Use a _case_ operator to extract the entry point from *contractInterfaceOpt* if it exists (use temporary variable name *ci* in the case). Otherwise throw an exception with error message "Entrypoint not found in contract Squadron" (and don't forget to cast the exception in the right type). The extracted entry point must be stored in a variable called *contractInterface*.
+
+<!-- prettier-ignore -->3- In order to prepare the ship information that need to be sent back to the Squadron contract. Prepare a variable called *ee* of type _actionModuleResponse_ containing the expected ship *e*.
+<!-- prettier-ignore -->⚠️ Notice that in Squadron smart contract the entry point _ModuleResponse_ expects a type _actionModuleResponse_. So when Central smart contract sends back the requested ship information it must respect the expected format (in our case it is a _actionModuleResponse_ containing a _ship_ record).
+
 
 <!-- prettier-ignore -->4- Send a transaction to the retrieved entry point of the Squadron contract. The transaction must point to the _moduleResponse_ entrypoint of squadron contract and passing the right argument prepared in step 3. This transaction sends no money. The transaction is an _operation_ type that you can store in a variable *sendbackOperation*.
