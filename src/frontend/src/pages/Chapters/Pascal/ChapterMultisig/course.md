@@ -222,7 +222,7 @@ Notice that in the _Withdraw_ function :
 
 <!-- prettier-ignore --> Modify the existing *Multisig* contract in order to handle reputation level for each voters. We plan to grant reputation points when the message is really executed (one point of reputation for each voters).
 
-<!-- prettier-ignore --> 1- Modify storage to have an additionnal property called *reputation* which associates a _nat_ number to a voter.
+<!-- prettier-ignore --> 1- Modify the storage to have an additionnal property called *reputation* which associates a _nat_ number to a voter.
 
 <!-- prettier-ignore --> In the *send* function, notice that voters are computed in a variable *new_store*.
 
