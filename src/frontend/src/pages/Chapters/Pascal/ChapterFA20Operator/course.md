@@ -200,7 +200,7 @@ Our NFT "token" is almost ready but to allow a new rule. We need Bob to transfer
 
 - Vera account is owner of the token 1
 
-<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer tokens taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point.
+<!-- prettier-ignore -->2- Complete the _ligo dry-run_ command for authorizing Bob to transfer tokens taken from Vera account, transaction emitted by Vera. (reuse the storage you made on step 1). You can use *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Update\_operators* entry point. Don't forget to refer to fa2_interface to know the the expected type of *Update\_operators* entry point.
 
 <!-- prettier-ignore -->3- Complete the _ligo dry-run_ command for simulating the transfer of 1 token from Vera'account to Alice's account, transaction emitted by Bob. The transferred token id is number 1 (token\_id and and amount must be 1). You can use the *Layout.convert\_to\_right\_comb* function to convert your parameters into the format expected by *Transfer* entry point.
 
