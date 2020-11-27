@@ -85,7 +85,7 @@ export const HomeView = () => {
           )}
           <HomeHeaderLeft>
             <h1>Learn to code Tezos Smart Contracts the easy way!</h1>
-            <p>Tezos academy is a fun interactive tutorial to the LIGO language</p>
+            <p>Tezos Academy is a fun interactive tutorial to the LIGO language</p>
             <Link to="/pascal/chapter-about">
               <Button>
                 <ButtonBorder />
@@ -113,13 +113,13 @@ export const HomeView = () => {
 
       <HomeAdventure>
         <h1>Take part in an epic adventure</h1>
-        <p>Tezos academy is a fun interactive tutorial to the LIGO language</p>
+        <p>Tezos Academy is a fun interactive tutorial to the LIGO language</p>
         <img alt="adventure" src="/images/adventure.png" />
       </HomeAdventure>
 
       <HomeLanguage>
         <h1>Choose your language</h1>
-        <p>Tezos academy is compatible with PascaLIGO, CameLIGO and ReasonLIGO</p>
+        <p>Tezos Academy is compatible with PascaLIGO, CameLIGO and ReasonLIGO</p>
         <HomeLanguageGrid>
           <div>
             <h3>PascalLIGO</h3>
