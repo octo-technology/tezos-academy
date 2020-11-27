@@ -214,7 +214,7 @@ export const ChapterView = ({
         {Object.keys(supports).length > 0 && (
           <div style={{ overflow: 'scroll' }}>
             <ChapterTab isSelected={display === 'solution'} onClick={() => setDisplay('solution')}>
-              Exercice
+              Exercise
             </ChapterTab>
             {Object.keys(supports).map((key, index) => (
               <ChapterTab isSelected={display === key} onClick={() => setDisplay(key)}>

@@ -170,7 +170,7 @@ export const HomeView = () => {
 
       <HomeEditor>
         <h1>Interactive editor with git-diff solutions</h1>
-        <p>Type your solution to each exercice online and compare with the solution</p>
+        <p>Type your solution to each exercise online and compare with the solution</p>
         <img alt="editor" src="/images/editor.png" />
       </HomeEditor>
 

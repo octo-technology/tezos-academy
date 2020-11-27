@@ -44,7 +44,7 @@ Entry point names are written in the form of: _%myEntryPoint_ for the entry poin
 
 ## Your mission
 
-Consider the following smart contracts : Squadron and Central (Exercice).
+Consider the following smart contracts : Squadron and Central (Exercise).
 
 The Central contract acts as an inventory of ships (an entry point _RegisterShip_ is provided to register a ship).
 The Central contract can provide information of a ship to a calling contract via a callback transaction (an entry point _RetrieveShip_ is provided to query a ship).
