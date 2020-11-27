@@ -176,12 +176,12 @@ export const HomeView = () => {
 
       <HomeBadge>
         <h1>Get your completion badge</h1>
-        <p>Tezos Academy tracks your progress and deliver a badge upon completion of all chapters</p>
+        <p>Tezos Academy tracks your progress and delivers a badge upon completion of all chapters</p>
 
         <HomeBadgeGrid>
           <img alt="badge" src="/images/badge.svg" />
           <p>
-            If you complete all chapter in one language track, you will obtain this completion badge. This badge will
+            If you complete all chapters in one language track, you will obtain this completion badge. This badge will
             appear on your profile page so you can share it on LinkedIn or other social networks to prove that you have
             completed your training on Tezos Academy.
           </p>
