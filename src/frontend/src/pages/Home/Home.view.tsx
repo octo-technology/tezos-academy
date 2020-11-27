@@ -209,6 +209,15 @@ export const HomeView = () => {
         <HomeFooterGrid>
           <img alt="logo" src="/images/logo.svg" />
           <div>
+            <p>About LIGO</p>
+            <a href="https://ligolang.org/docs/intro/introduction" target="_blank">
+              Documentation
+            </a>
+            <a href="https://ide.ligolang.org/" target="_blank">
+              Online IDE
+            </a>
+          </div>
+          <div>
             <p>About Tezos Link</p>
             <a href="mailto:beta@octo.com" target="_blank">
               Support
@@ -232,7 +241,7 @@ export const HomeView = () => {
               Aymeric Bethencourt
             </a>
             <a href="https://www.linkedin.com/in/frank-hillard-300b6b106/" target="_blank">
-              Franck Hillard
+              Frank Hillard
             </a>
           </div>
           <img alt="octo" src="/images/by-octo.svg" />
