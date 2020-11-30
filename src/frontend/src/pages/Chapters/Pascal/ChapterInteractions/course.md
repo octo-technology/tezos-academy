@@ -108,6 +108,12 @@ function main (const action : parameter; const store : storage) : return is
  end)
 ```
 
-<!-- prettier-ignore -->2- Consider the contract in the editor. Notice the addresses of each weapon, and that the _orders_ function fetch the corresponding contracts. Your job is now to define the list of operations to send to the weapons. For this, start by creating _operations_ a list of type _operation_.
+<!-- prettier-ignore -->⚠️ Notice that the weapon smart contract provides two entrypoints Fire and Stop.
+
+<!-- prettier-ignore -->2- Consider the contract in the editor which is responsible to control the left and right weapons. 
+<!-- prettier-ignore -->⚠️ Notice the addresses of each weapon, and that the _orders_ function fetch the corresponding contracts. (Variables *right\_laser* and *left\_laser* can be used as the target of a transaction). 
+Your job is now to define the list of transactions sent to the weapon contracts. For this, start by creating _operations_ a list of type _operation_. 
+
+<!-- prettier-ignore -->⚠️ Notice that _operations_ must be filled with transactions and is returned by the function _orders_.
 
 <!-- prettier-ignore -->3- Send a _Fire(5)_ transaction to the *right\_laser* contract, then _Stop_. Send a _Fire(5)_ transaction to the *left\_laser* contract, then _Stop_.

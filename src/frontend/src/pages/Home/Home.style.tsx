@@ -440,7 +440,7 @@ export const HomeFooterGrid = styled.div`
   margin: auto;
   padding: 50px 0;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
   grid-gap: 30px;
   font-family: 'Proxima Nova';
 

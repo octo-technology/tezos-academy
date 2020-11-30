@@ -39,7 +39,7 @@ ERC721 is the standard rule set for non-fungible tokens.
 This Fungible token standard provides basic functionality to transfer tokens, as well as to allow tokens to be approved so they can be spent by another on-chain third party.
 
 Possible actions :
-_Appove_ - Sender can specify an amount of token that can be spent by someone else (from his account)
+_Approve_ - Sender can specify an amount of token that can be spent by someone else (from his account)
 _Transfer_ - Transfer an amount of tokens from an account to another account (or third-party on-chain smart contract)
 _GetAllowance_ - Return the amount that can be spent by someone from sender's account
 _GetBalance_ - Return the sender's account balance
@@ -167,7 +167,7 @@ Let's assume that the _TezosAcamedyToken_ has been deployed.
 Consider your account is _me_ (at address tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) which has been granted 1,000,000 tokens.
 Consider alice's account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 
-<!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Write a ligo command line for preparing a simulated storage where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1,000,000 tokens and no allowance.
+<!-- prettier-ignore -->1- We want you to simulate the transfer of 2 TAT (Tezos Academy Token) to *alice*. Complete the ligo command line for preparing a storage state where you (tz1SdT62G8tQp9fdHh4f2m4VtL8aGG6NUcmJ) possess 1,000,000 tokens and no allowance. Write the storage state (all values of the storage must be filled).
 
 <!-- prettier-ignore -->2- Write a ligo command line for preparing the invocation of an *Approval* of 2 TAT (Tezos Academy Token) for *alice*.
 
@@ -194,3 +194,14 @@ Consider alice's account (at address tz1NiAGZgRV8F1E3qYFEPgajntzTRDYkU9h7)
 ```
 
 <!-- prettier-ignore -->10- Write a Tezos command line that simulates your *Transfer* invocation.
+
+<!-- prettier-ignore -->Remind the syntax of the tezos-client transfer command:
+
+```
+tezos-client transfer <tx_amount> from <tx_user> to <contract_name> --arg '<entrypoint_invocation>' --dry-run
+```
+
+<!-- prettier-ignore --><tx\_amount> = number of mutez of the transaction
+<!-- prettier-ignore --><tx\_user> = account who is emitting the transaction
+<!-- prettier-ignore --><contract_name> = name of the contract
+<!-- prettier-ignore --><entrypoint_invocation> = michelson expression representing the entrypoint and its related parameters

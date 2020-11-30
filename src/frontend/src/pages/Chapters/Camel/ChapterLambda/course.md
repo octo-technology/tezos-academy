@@ -143,7 +143,7 @@ Map.map applyDeduceCatg store.celestialbodies
 
 We want you to update our "starmap" contract in order to take this new rule into account.
 
-<!-- prettier-ignore -->1- Write the _dry-run_ command and the associated invocation (entry point) for taking the new rule into account.
+<!-- prettier-ignore -->1- Write the _dry-run_ command and the associated invocation (entry point) for taking the new rule into account. You must write a lambda function within the parentheses of _DeduceCategoryChange_ as shown in the Lambda definition section. The lambda function must implement the three following rules.
 
 <!-- prettier-ignore -->2- First rule : if the coordinates of a planet is (0,0,0) then the celestial body is considered as a STAR.
 

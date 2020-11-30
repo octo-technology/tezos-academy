@@ -60,7 +60,7 @@ const smaller_set : set (int) = Set.remove (3, my_set)
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Define _itinary_ as a list of string names of celestial bodies representing your course. Start with _"earth"_
+<!-- prettier-ignore -->1- Define a variable _itinary_ as a list of string names of celestial bodies representing your course. Start with _"earth"_
 
 <!-- prettier-ignore -->2- On the next line, add _"sun"_ to the itinary.
 

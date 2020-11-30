@@ -85,7 +85,7 @@ export const HomeView = () => {
           )}
           <HomeHeaderLeft>
             <h1>Learn to code Tezos Smart Contracts the easy way!</h1>
-            <p>Tezos academy is a fun interactive tutorial to the LIGO language</p>
+            <p>Tezos Academy is a fun interactive tutorial to the LIGO language</p>
             <Link to="/pascal/chapter-about">
               <Button>
                 <ButtonBorder />
@@ -113,13 +113,13 @@ export const HomeView = () => {
 
       <HomeAdventure>
         <h1>Take part in an epic adventure</h1>
-        <p>Tezos academy is a fun interactive tutorial to the LIGO language</p>
+        <p>Tezos Academy is a fun interactive tutorial to the LIGO language</p>
         <img alt="adventure" src="/images/adventure.png" />
       </HomeAdventure>
 
       <HomeLanguage>
         <h1>Choose your language</h1>
-        <p>Tezos academy is compatible with PascaLIGO, CameLIGO and ReasonLIGO</p>
+        <p>Tezos Academy is compatible with PascaLIGO, CameLIGO and ReasonLIGO</p>
         <HomeLanguageGrid>
           <div>
             <h3>PascalLIGO</h3>
@@ -170,18 +170,18 @@ export const HomeView = () => {
 
       <HomeEditor>
         <h1>Interactive editor with git-diff solutions</h1>
-        <p>Type your solution to each exercice online and compare with the solution</p>
+        <p>Type your solution to each exercise online and compare with the solution</p>
         <img alt="editor" src="/images/editor.png" />
       </HomeEditor>
 
       <HomeBadge>
         <h1>Get your completion badge</h1>
-        <p>Tezos Academy tracks your progress and deliver a badge upon completion of all chapters</p>
+        <p>Tezos Academy tracks your progress and delivers a badge upon completion of all chapters</p>
 
         <HomeBadgeGrid>
           <img alt="badge" src="/images/badge.svg" />
           <p>
-            If you complete all chapter in one language track, you will obtain this completion badge. This badge will
+            If you complete all chapters in one language track, you will obtain this completion badge. This badge will
             appear on your profile page so you can share it on LinkedIn or other social networks to prove that you have
             completed your training on Tezos Academy.
           </p>
@@ -209,6 +209,15 @@ export const HomeView = () => {
         <HomeFooterGrid>
           <img alt="logo" src="/images/logo.svg" />
           <div>
+            <p>About LIGO</p>
+            <a href="https://ligolang.org/docs/intro/introduction" target="_blank">
+              Documentation
+            </a>
+            <a href="https://ide.ligolang.org/" target="_blank">
+              Online IDE
+            </a>
+          </div>
+          <div>
             <p>About Tezos Link</p>
             <a href="mailto:beta@octo.com" target="_blank">
               Support
@@ -232,7 +241,7 @@ export const HomeView = () => {
               Aymeric Bethencourt
             </a>
             <a href="https://www.linkedin.com/in/frank-hillard-300b6b106/" target="_blank">
-              Franck Hillard
+              Frank Hillard
             </a>
           </div>
           <img alt="octo" src="/images/by-octo.svg" />
