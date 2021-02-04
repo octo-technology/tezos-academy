@@ -25,16 +25,6 @@ export const FooterView = () => {
       <Link to={nextChapter}>
         <img alt="Next Chapter" src="/elements/next-chapter.svg" />
       </Link>
-      <FooterCredits>
-        MADE WITH ♡ BY{' '}
-        <a href="https://www.linkedin.com/in/aymeric-bethencourt-96665046/" target="_blank" rel="noopener noreferrer">
-          AYMERIC BETHENCOURT
-        </a>{' '}
-        AND{' '}
-        <a href="https://octo.com/" target="_blank" rel="noopener noreferrer">
-          OCTO TECHNOLOGY
-        </a>
-      </FooterCredits>
     </FooterStyled>
   )
 }

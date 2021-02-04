@@ -12,7 +12,7 @@
         "containers": [
           {
             "name": "tezosacademy-api",
-            "image": "registry.digitalocean.com/neutrino/tezosacademy-api",
+            "image": "registry.digitalocean.com/octo/tezosacademy-api",
             "imagePullPolicy": "Always"
           }
         ],

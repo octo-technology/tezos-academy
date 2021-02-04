@@ -12,7 +12,7 @@
         "containers": [
           {
             "name": "tezosacademy-frontend",
-            "image": "registry.digitalocean.com/neutrino/tezosacademy-frontend",
+            "image": "registry.digitalocean.com/octo/tezosacademy-frontend",
             "imagePullPolicy": "Always"
           }
         ]

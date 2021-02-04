@@ -31,7 +31,7 @@ export const forgotPassword = async (ctx: Context, next: Next): Promise<void> =>
 
   const captcha: Captcha = await createCaptcha(user._id, CaptchaFor.CAPTCHA_FOR_RESET_PASSWORD)
 
-  await sendEmailForgotPassword(user.email, captcha.index, captcha.token)
+  await sendEmailForgotPassword(user.email, captcha.solution, captcha.token)
 
   const response: ForgotPasswordOutputs = { token: captcha.token }
 

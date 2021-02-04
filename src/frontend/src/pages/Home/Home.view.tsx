@@ -106,9 +106,6 @@ export const HomeView = () => {
             </HomeHeaderRight>
           )}
         </HomeHeaderGrid>
-        <HomeHeaderOcto>
-          <img alt="octo" src="/images/by-octo.svg" />
-        </HomeHeaderOcto>
       </HomeHeader>
 
       <HomeAdventure>
@@ -204,54 +201,6 @@ export const HomeView = () => {
           </Link>
         </HomeAlertText>
       </HomeAlert>
-
-      <HomeFooter>
-        <HomeFooterGrid>
-          <div>
-            <img alt="logo" src="/images/logo.svg" />
-            <a href="https://github.com/octo-technology/tezos-academy" target="_blank">
-              Github
-            </a>
-          </div>
-          <div>
-            <p>About LIGO</p>
-            <a href="https://ligolang.org/docs/intro/introduction" target="_blank">
-              Documentation
-            </a>
-            <a href="https://ide.ligolang.org/" target="_blank">
-              Online IDE
-            </a>
-          </div>
-          <div>
-            <p>About Tezos Link</p>
-            <a href="mailto:beta@octo.com" target="_blank">
-              Support
-            </a>
-            <a href="https://www.reddit.com/r/tezos/" target="_blank">
-              Reddit
-            </a>
-          </div>
-          <div>
-            <p>About OCTO</p>
-            <a href="https://octo.com" target="_blank">
-              Homepage
-            </a>
-            <a href="https://blog.octo.com" target="_blank">
-              Our blog
-            </a>
-          </div>
-          <div>
-            <p>About the devs</p>
-            <a href="https://www.linkedin.com/in/aymeric-bethencourt-96665046/" target="_blank">
-              Aymeric Bethencourt
-            </a>
-            <a href="https://www.linkedin.com/in/frank-hillard-300b6b106/" target="_blank">
-              Frank Hillard
-            </a>
-          </div>
-          <img alt="octo" src="/images/by-octo.svg" />
-        </HomeFooterGrid>
-      </HomeFooter>
     </HomeStyled>
   )
 }

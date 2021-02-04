@@ -1,21 +1,21 @@
 ({
   // Hide files that are rarely edited for better folder arrangement
   "files.exclude": {
-    "LICENSE": true,
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/.webpack": true,
-    "**/build": true,
-    "**/dist": true,
-    "**/coverage": true,
-    "**/node_modules": true,
+    // "LICENSE": true,
+    // "**/.DS_Store": true,
+    // "**/.git": true,
+    // "**/.webpack": true,
+    // "**/build": true,
+    // "**/dist": true,
+    // "**/coverage": true,
+    // "**/node_modules": true,
     // "**.prettier*": true,
     // "**.travis*": true,
     // "**/lerna.json": true,
     // "**/.eslint*": true,
     // "**/.gitignore*": true,
     // "**/package-lock.json": true,
-    "**/yarn.lock": true
+    // "**/yarn.lock": true
     // "**/source-map-install.js": true,
     // "**/tsconfig.json": true,
     // "**/webpack.config.js": true
