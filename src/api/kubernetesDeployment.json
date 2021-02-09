@@ -12,19 +12,8 @@
         "containers": [
           {
             "name": "tezosacademy-api",
-            "image": "registry.digitalocean.com/octo/tezosacademy-api",
-            "imagePullPolicy": "Always",
-            "env": [
-              {
-                "name": "TEST_KEY",
-                "valueFrom": {
-                  "secretKeyRef": {
-                    "name": "person",
-                    "key": "TEST_KEY"
-                  }
-                }
-              }
-            ]
+            "image": "registry.digitalocean.com/rtx/tezosacademy-api",
+            "imagePullPolicy": "Always"
           }
         ]
       }
