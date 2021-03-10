@@ -88,4 +88,4 @@ let change_color_preference (account : account) (color : color) : account =
 
 <!-- prettier-ignore -->3- Create a function *change_coord_z* which takes 2 parameters *point* of type _coordinates_, *zval* of type _int_. That function returns the point patched with its third attribute equal to given *zval*. 
 
-<!-- prettier-ignore -->4- Create a new constant called *modified\_earth\_coordinates* initialized by calling the function *change_coord_z* for *earth\_coordinates* with *z* value to 5.
+<!-- prettier-ignore -->4- Create a new constant called *modified\_earth\_coordinates* initialized by calling the function *change\_coord\_z* for *earth\_coordinates* with *z* value to 5.
