@@ -26,4 +26,4 @@ let gcd = ((x,y) : (nat, nat)) : nat => {
 
 <!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function with the *star\_map* variable as its input _l_. Iterates through each record of the list (seen in Chapter Lists) in order to find a planet that respects specified conditions (see step 3). 
 
-<!-- prettier-ignore -->3- Define a function *conditions* which computes in an accumulator the list of planet verifying some conditions: *density* supperior to 100 and *atmospheric\_activity* true. If conditons are met, the function *conditions* adds this planet to the accumulator. Don't forget to cast the initial value of the accumulator (as a list of planet).
+<!-- prettier-ignore -->3- Define a function *conditions* which computes in an accumulator the list of planet verifying some conditions: *density* superior to 100 and *atmospheric\_activity* true. If conditions are met, the function *conditions* adds this planet to the accumulator. Don't forget to cast the initial value of the accumulator (as a list of planet).

@@ -4,9 +4,9 @@
 
 ## Smart contract
 
-A smart contract is some code written in Michelson langage (a low-level stack-based turing-complete language).
+A smart contract is some code written in Michelson language (a low-level stack-based turing-complete language).
 
-It defines all _entry points_ (invokable functions) of the smart contract.
+It defines all _entry points_ (invocable functions) of the smart contract.
 It defines the prototype of each entry point (e.g. specifies the parameters types of the entry point).
 It defines the _storage_ of the smart contract.
 
@@ -61,7 +61,7 @@ tezos-client transfer <amount_tez> from <user> to <contract_name> --arg '<entryp
 
 <amount_tez> is the quantity of tez being transferred to the contract.
 <contract_name> name given to the contract
-<entrypoint_invocation> name of the entry point and corresponding parameters. For example 'Increment(5)'.
+<entrypoint_invocation> is a Michelson expression specifying the entry point and its corresponding parameters. For example, in Ligo the invocation call 'Increment(5)' would be translated into following Michelson expression 'Left (Right 5)'.
 
 ⚠️ Notice that the --arg parameter specifies an entry point call.
 
@@ -149,7 +149,7 @@ let main = ((action,store) : (parameter,storage)): return =>
 
 #### Maps
 
-The _Map.literal_ predifined function can be used to initialize a _map_
+The _Map.literal_ predefined function can be used to initialize a _map_
 
 Here is an example of a command line _ligo compile-storage_ for transpiling a map containing a tuple.
 
@@ -175,7 +175,7 @@ This command returns :
 
 #### Record
 
-Initialization of elements of a record is specified between _{_ and _}_ separated by comma _,_. Each element is a key/value pair seperated by _:_ and follow the syntax :
+Initialization of elements of a record is specified between _{_ and _}_ separated by comma _,_. Each element is a key/value pair separated by _:_ and follow the syntax :
 
 ```
 { <key1> : <value1>, <key2> : <value2> }
@@ -212,7 +212,7 @@ This command returns :
 { Elt "earth" (Pair (Pair 1 1) 1) }
 ```
 
-⚠️ Notice that the record is tranformed into pairs (same for tuples).
+⚠️ Notice that the record is transformed into pairs (same for tuples).
 
 ## Your mission
 
