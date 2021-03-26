@@ -46,7 +46,7 @@ In LIGO, a constant constructor is equivalent to the same constructor taking an 
 
 ## Pattern matching
 
-Pattern matching is similiar to the *switch* construct in Javascript, and can be used to route the program's control flow based on the value of a variant. Consider for example the definition of a function flip that flips a coin.
+Pattern matching is similar to the *switch* construct in Javascript, and can be used to route the program's control flow based on the value of a variant. Consider for example the definition of a function flip that flips a coin.
 
 ```
 type coin = Head | Tail

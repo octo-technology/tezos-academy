@@ -2,7 +2,7 @@
 
 <dialog character="pilot">Thanks for the coordinates captain but I'm not sure I understand which value corresponds to which coordinate. You mean x,y,z ? You may want to be more explicit.</dialog>
 
-Records are like tuples but with named parameters. In other words, they hold a set of key/data pairs. To instanciate a record, you must first declare its type as follow :
+Records are like tuples but with named parameters. In other words, they hold a set of key/data pairs. To instantiate a record, you must first declare its type as follows :
 
 ```
 type user is

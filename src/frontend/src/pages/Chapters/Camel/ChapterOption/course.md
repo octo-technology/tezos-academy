@@ -36,7 +36,7 @@ match <variable> with
 <!-- prettier-ignore -->_<block\_code>_ can be a single instruction or a function call
 <!-- prettier-ignore -->_<value\_name>_ is a local variable name. _<value\_name>_ which holds the _option_ value and can be used inside the _<block\_code>_
 
-Here is an example of accessing maps returning an option type and retrieving the value behind the optional :
+Here is an example of accessing maps returning an _option_ type and retrieving the value behind the optional :
 
 ```
 type expected_type = int

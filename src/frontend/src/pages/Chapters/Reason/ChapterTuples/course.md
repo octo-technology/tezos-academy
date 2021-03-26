@@ -35,7 +35,7 @@ Notice that we use the underscore to indicate that we ignore the last element of
 
 ## Access
 
-You can access components by their position in their tuple. Tuple components are zero-indexed, that is, the first component has index 0.
+You can access each component of a tuple by their position. Tuple components are zero-indexed, that is, the first component has index 0.
 
 ```
 let first_name : string = person[0];

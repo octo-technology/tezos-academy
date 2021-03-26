@@ -18,7 +18,7 @@ const my_name : name = ("Jack", "Oneill")
 
 ## Access
 
-You can access each components of a tuple by their position :
+You can access each component of a tuple by their position :
 
 ```
 const my_name_first_name : string = my_name.0

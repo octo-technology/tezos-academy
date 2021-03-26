@@ -2,11 +2,11 @@
 
 <dialog character="pilot">Captain, now that we left the atmosphere of earth, we should scan nearby star systems for alien activity. We know that the Xenomorphs like planets with high density, usually above 100 g/cm³ and that their machines trigger atmospheric activity. You should trigger a scan with these parameters.</dialog>
 
-LIGO integrate 2 kinds of loops. General while iterations and bounded for loops.
+LIGO integrates 2 kinds of loops. General while iterations and bounded for loops.
 
 ## While loops
 
-While loops are define as follows :
+While loops are defined as follows :
 
 ```
 while <condition> block {
@@ -66,4 +66,4 @@ Same from sets with _for i in set s_ and maps with _for key -> value in map m_
 
 <!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function onto the *star\_map* variable. Code a for loop that iterates through each record of the list _l_ (given as parameter of the _scan_ function).
 
-<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* supperior to 100 and *atmospheric\_activity* true. If so, assign the planet to *destination*.
+<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* superior to 100 and *atmospheric\_activity* true. If so, assign the planet to *destination*.

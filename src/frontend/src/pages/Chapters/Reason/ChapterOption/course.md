@@ -51,7 +51,7 @@ let bal : expected_type = switch (my_balance) {
 };
 ```
 
-Here is an example of pattern matching resolving an option type directly (usefull when we just want to retrieve the value behind the optional) :
+Here is an example of pattern matching resolving an _option_ type directly (useful when we just want to retrieve the value behind the optional) :
 
 ```
 let bal2 : expected_type = switch (Map.find_opt (1n, user_balances)) {
@@ -66,4 +66,4 @@ let bal2 : expected_type = switch (Map.find_opt (1n, user_balances)) {
 
 <!-- prettier-ignore --> 1- Notice the _weapons_ mapping which maps the name of each weapon to its corresponding input of power. We want to increase the power of the _Main Laser_ but mapping returns optional results as they might not be found in the mapping. Define the constant *main\_laser\_power* as an optional int from selecting _"Main Laser"_ from the _weapons_ mapping.
 
-<!-- prettier-ignore --> 2- Writte a pattern matching for *main\_laser\_power*. If it exists, increase the power of the _"Main Laser"_ by 1 (use *i* as temporary matching variable). If it does not exist in the mapping, fail with _"Weapon not found"_
+<!-- prettier-ignore --> 2- Write a pattern matching for *main\_laser\_power*. If it exists, increase the power of the _"Main Laser"_ by 1 (use *i* as temporary matching variable). If it does not exist in the mapping, fail with _"Weapon not found"_

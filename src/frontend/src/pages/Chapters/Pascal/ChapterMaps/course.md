@@ -12,7 +12,7 @@ Maps are declared as
 type balances is map (string, nat)
 ```
 
-## Instanciation
+## Instantiation
 
 To create an empty map :
 
@@ -66,7 +66,7 @@ remove "tim" from map user_balances
 
 ## Big Maps
 
-<!-- prettier-ignore -->Maps load their entries into the environement, which is fine for small maps, but for maps holding millions of entries, the cost of loading such map would be too expensive. For this we use *big\_maps*. Their syntax is the same as for regular maps.
+<!-- prettier-ignore -->Maps load their entries into the environment, which is fine for small maps, but for maps holding millions of entries, the cost of loading such map would be too expensive. For this we use *big\_maps*. Their syntax is the same as for regular maps.
 
 ## Your mission
 

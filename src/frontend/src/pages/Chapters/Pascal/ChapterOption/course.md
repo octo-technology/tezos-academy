@@ -53,7 +53,7 @@ case my_balance of
 end
 ```
 
-Here is an example of pattern matching resolving an option type directly (usefull when we just want to retrieve the value behind the optional) :
+Here is an example of pattern matching resolving an _option_ type directly (useful when we just want to retrieve the value behind the optional) :
 
 ```
 const my_balance2 : expected_type = case user_balances[1n] of
