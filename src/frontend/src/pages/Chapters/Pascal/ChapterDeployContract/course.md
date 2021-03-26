@@ -261,4 +261,4 @@ block { skip } with case action of
 <!-- prettier-ignore -->1- Write the _compile-storage_ command and the LIGO expression for initializing the *Sol* system containing planet "earth" with coordinates (2,7,1).
 
 <!-- prettier-ignore -->2- Write the _dry-run_ command and the LIGO expression for adding a planet "mars" with coordinates (4,15,2) in our *Sol* system. 
-<!-- prettier-ignore -->⚠️ Remind that the _dry-run_ command expects a parameter "<entrypoint(p)>" and a parameter "<storage_state>" as shown in Simulating section. For this _dry-run_ command you must write the "<entrypoint(p)>" parameter and reuse the *Sol* system of step 1 as "<storage_state>" parameter.
+<!-- prettier-ignore -->⚠️ Remind that the _dry-run_ command expects a parameter "<entrypoint(p)>" and a parameter "<storage\_state>" as shown in Simulating section. For this _dry-run_ command you must write the "<entrypoint(p)>" parameter and reuse the *Sol* system of step 1 as "<storage\_state>" parameter.
