@@ -57,12 +57,12 @@ type storage = {
   total_amount : nat;
 }
 
-type transfer = {
-	address_from : address;
-	address_to   : address;
-	value        : nat;
+type transfer = 
+[@layout:comb] { 
+   from : address; 
+   [@annot:to]to_: address; 
+   value: nat; 
 }
-
 type approve = {
 	spender : address;
 	value   : nat;
@@ -92,17 +92,17 @@ type action =
 
 let transfer (p,s : transfer * storage) : operation list * storage =
    let new_allowances =
-		if Tezos.sender = p.address_from then s.allowances
+		if Tezos.sender = p.from then s.allowances
 		else
-			let authorized_value = match Big_map.find_opt (Tezos.sender,p.address_from) s.allowances with
+			let authorized_value = match Big_map.find_opt (Tezos.sender,p.from) s.allowances with
 				Some value -> value
 			|	None       -> 0n
 			in
 			if (authorized_value < p.value)
 			then (failwith "Not Enough Allowance" : allowances)
-			else Big_map.update (Tezos.sender,p.address_from) (Some (abs(authorized_value - p.value))) s.allowances
+			else Big_map.update (Tezos.sender,p.from) (Some (abs(authorized_value - p.value))) s.allowances
    in
-	let sender_balance = match Big_map.find_opt p.address_from s.tokens with
+	let sender_balance = match Big_map.find_opt p.from s.tokens with
 		Some value -> value
 	|	None        -> 0n
 	in
@@ -110,11 +110,11 @@ let transfer (p,s : transfer * storage) : operation list * storage =
 	then (failwith "Not Enough Balance" : operation list * storage)
 	else
 		let new_tokens = Big_map.update p.address_from (Some (abs(sender_balance - p.value))) s.tokens in
-		let receiver_balance = match Big_map.find_opt p.address_to s.tokens with
+		let receiver_balance = match Big_map.find_opt p.to_ s.tokens with
 			Some value -> value
 		|	None        -> 0n
 		in
-		let new_tokens = Big_map.update p.address_to (Some (receiver_balance + p.value)) new_tokens in
+		let new_tokens = Big_map.update p.to_ (Some (receiver_balance + p.value)) new_tokens in
 		([]:operation list), {s with tokens = new_tokens; allowances = new_allowances}
 
 let approve (p,s : approve * storage) : operation list * storage =
