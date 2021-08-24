@@ -58,6 +58,7 @@ import { data as pascalDataTuples } from '../Chapters/Pascal/ChapterTuples'
 import { data as pascalDataTypes } from '../Chapters/Pascal/ChapterTypes'
 import { data as pascalDataVariables } from '../Chapters/Pascal/ChapterVariables'
 import { data as pascalDataVariant } from '../Chapters/Pascal/ChapterVariant'
+
 import { data as reasonDataAddresses } from '../Chapters/Reason/ChapterAddresses'
 import { data as reasonDataBuiltIns } from '../Chapters/Reason/ChapterBuiltIns'
 import { data as reasonDataConditionals } from '../Chapters/Reason/ChapterConditionals'
@@ -87,6 +88,19 @@ import { data as reasonDataTypes } from '../Chapters/Reason/ChapterTypes'
 import { data as reasonDataVariables } from '../Chapters/Reason/ChapterVariables'
 import { data as reasonDataVariant } from '../Chapters/Reason/ChapterVariant'
 import { data as reasonDataFA20Hook } from '../Chapters/Reason/ChapterFA20Hook'
+
+import { data as jsDataConditionals } from '../Chapters/JS/ChapterConditionals'
+import { data as jsDataFunctions } from '../Chapters/JS/ChapterFunctions'
+import { data as jsDataLists } from '../Chapters/JS/ChapterLists'
+import { data as jsDataMainFunction } from '../Chapters/JS/ChapterMainFunction'
+import { data as jsDataMaps } from '../Chapters/JS/ChapterMaps'
+import { data as jsDataMath } from '../Chapters/JS/ChapterMath'
+import { data as jsDataRecords } from '../Chapters/JS/ChapterRecords'
+import { data as jsDataStrings } from '../Chapters/JS/ChapterStrings'
+import { data as jsDataTuples } from '../Chapters/JS/ChapterTuples'
+import { data as jsDataTypes } from '../Chapters/JS/ChapterTypes'
+import { data as jsDataVariables } from '../Chapters/JS/ChapterVariables'
+import { data as jsDataVariant } from '../Chapters/JS/ChapterVariant'
 
 export const chapterData = [
   {
@@ -223,6 +237,50 @@ export const chapterData = [
     language: 'PascaLIGO',
     name: '30 - Pascal - FA2 Hook',
     data: pascalDataFA20Hook,
+  },
+
+  {
+    pathname: '/js/chapter-about',
+    language: 'JsLIGO',
+    name: '1 - JS - About',
+    data: { course: undefined, exercise: undefined, solution: undefined, supports: {} },
+  },
+  { pathname: '/js/chapter-types', language: 'JsLIGO', name: '2 - JS - Types', data: jsDataTypes },
+  {
+    pathname: '/js/chapter-variables',
+    language: 'JsLIGO',
+    name: '3 - JS - Variables',
+    data: jsDataVariables,
+  },
+  { pathname: '/js/chapter-math', language: 'JsLIGO', name: '4 - JS - Math', data: jsDataMath },
+  { pathname: '/js/chapter-strings', language: 'JsLIGO', name: '5 - JS - Strings', data: jsDataStrings },
+  {
+    pathname: '/js/chapter-functions',
+    language: 'JsLIGO',
+    name: '6 - JS - Functions',
+    data: jsDataFunctions,
+  },
+  {
+    pathname: '/js/chapter-conditionals',
+    language: 'JsLIGO',
+    name: '7 - JS - Conditionals',
+    data: jsDataConditionals,
+  },
+  { pathname: '/js/chapter-tuples', language: 'JsLIGO', name: '8 - JS - Tuples', data: jsDataTuples },
+  { pathname: '/js/chapter-records', language: 'JsLIGO', name: '9 - JS - Records', data: jsDataRecords },
+  { pathname: '/js/chapter-lists', language: 'JsLIGO', name: '10 - JS - Lists', data: jsDataLists },
+  { pathname: '/js/chapter-maps', language: 'JsLIGO', name: '11 - JS - Maps', data: jsDataMaps },
+  {
+    pathname: '/js/chapter-variants',
+    language: 'JsLIGO',
+    name: '12 - JS - Variants',
+    data: jsDataVariant,
+  },
+  {
+    pathname: '/js/chapter-main-function',
+    language: 'JsLIGO',
+    name: '13 - JS - Main function',
+    data: jsDataMainFunction,
   },
 
   {

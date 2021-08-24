@@ -162,6 +162,21 @@ export const HomeView = () => {
               </Button>
             </Link>
           </div>
+
+          <div>
+            <h3>JsLIGO</h3>
+            <p>JsLIGO has a syntax close to JavaScript, great for web developers.</p>
+            <img alt="js" src="/images/reason.svg" />
+            <Link to="/js/chapter-about">
+              <Button>
+                <ButtonBorder />
+                <ButtonText onClick={() => {}}>
+                  <img alt="rocket" src="/icons/rocket.svg" />
+                  START WITH JS
+                </ButtonText>
+              </Button>
+            </Link>
+          </div>
         </HomeLanguageGrid>
       </HomeLanguage>
 
