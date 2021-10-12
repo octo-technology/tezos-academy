@@ -166,7 +166,7 @@ export const HomeView = () => {
           <div>
             <h3>JsLIGO</h3>
             <p>JsLIGO has a syntax close to JavaScript, great for web developers.</p>
-            <img alt="js" src="/images/reason.svg" />
+            <img alt="js" src="/images/js.svg" />
             <Link to="/js/chapter-about">
               <Button>
                 <ButtonBorder />
