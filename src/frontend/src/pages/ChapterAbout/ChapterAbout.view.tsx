@@ -1,15 +1,13 @@
 import Editor, { monaco } from '@monaco-editor/react'
 import Markdown from 'markdown-to-jsx'
-import { CardBottomCorners, CardTopCorners } from 'pages/Chapter/Chapter.components/Card/Card.style'
 import { Dialog } from 'pages/Chapter/Chapter.components/Dialog/Dialog.controller'
-import { ShipSelector } from 'pages/Chapter/Chapter.components/ShipSelector/ShipSelector.controller'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 import { PENDING, RIGHT, WRONG } from './ChapterAbout.constants'
 import { data } from './ChapterAbout.data'
 //prettier-ignore
-import { Button, ButtonBorder, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
+import { Button, ButtonBorder, ButtonText, ChapterAboutStyled, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterStyled, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorInside, ChapterValidatorTitle } from "./ChapterAbout.style";
 
 monaco
   .init()
@@ -65,7 +63,7 @@ type ChapterAboutViewProps = {
 
 export const ChapterAboutView = ({ validatorState, validateCallback }: ChapterAboutViewProps) => {
   return (
-    <ChapterStyled>
+    <ChapterAboutStyled>
       <ChapterCourse>
         <Markdown
           children={data}
@@ -90,42 +88,7 @@ export const ChapterAboutView = ({ validatorState, validateCallback }: ChapterAb
           }}
         />
       </ChapterCourse>
-      <ChapterGrid>
-        <ShipSelector />
-        <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
-          <CardTopCorners className={validatorState === RIGHT ? 'ok' : 'no'} />
-          <CardBottomCorners className={validatorState === RIGHT ? 'ok' : 'no'} />
-          <ChapterValidatorInside className={validatorState === RIGHT ? 'ok' : 'no'}>
-            {validatorState === PENDING && (
-              <ChapterValidatorContentWrapper>
-                <ChapterValidatorTitle>AWAITING VALIDATION</ChapterValidatorTitle>
-                <ChapterValidatorContent>Choose the ship 020433 to continue</ChapterValidatorContent>
-                <Button>
-                  <ButtonBorder />
-                  <ButtonText onClick={() => validateCallback()}>VALIDATE MISSION</ButtonText>
-                </Button>
-              </ChapterValidatorContentWrapper>
-            )}
-            {validatorState === RIGHT && (
-              <ChapterValidatorContentWrapper>
-                <ChapterValidatorTitle>MISSION SUCCESSFUL</ChapterValidatorTitle>
-                <ChapterValidatorContent>Go on to the next mission</ChapterValidatorContent>
-              </ChapterValidatorContentWrapper>
-            )}
-            {validatorState === WRONG && (
-              <ChapterValidatorContentWrapper>
-                <ChapterValidatorTitle>MISSION FAILED</ChapterValidatorTitle>
-                <ChapterValidatorContent>Choose the ship 020433 and try again</ChapterValidatorContent>
-                <Button>
-                  <ButtonBorder />
-                  <ButtonText onClick={() => validateCallback()}>TRY AGAIN</ButtonText>
-                </Button>
-              </ChapterValidatorContentWrapper>
-            )}
-          </ChapterValidatorInside>
-        </ChapterValidator>
-      </ChapterGrid>
-    </ChapterStyled>
+    </ChapterAboutStyled>
   )
 }
 

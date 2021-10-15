@@ -8,6 +8,10 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+.img-git-diff {
+  height: 300px;
+}
+
 :root {
   --glitch-height: 100vh;
   --gap-horizontal: 10px;

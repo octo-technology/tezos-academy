@@ -1,5 +1,10 @@
 import styled from 'styled-components/macro'
 
+export const ChapterAboutStyled = styled.div`
+  height: calc(100vh - 130px);
+  margin: 74px 20px 0;
+`
+
 export const ChapterStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -16,11 +16,7 @@ export const ChapterAbout = () => {
   const { pathname } = useLocation()
 
   const validateCallback = () => {
-    const shipId = document.getElementById('ship-id')?.textContent
-    if (shipId === '020433') {
-      setValidatorState(RIGHT)
-      if (user) dispatch(addProgress({ chapterDone: pathname }))
-    } else setValidatorState(WRONG)
+    setValidatorState(RIGHT)
   }
 
   return (

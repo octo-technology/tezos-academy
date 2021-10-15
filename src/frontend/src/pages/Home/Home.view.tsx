@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { Button, ButtonBorder, ButtonText } from '../ChapterAbout/ChapterAbout.style'
 //prettier-ignore
-import { HomeAdventure, HomeAlert, HomeAlertBand, HomeAlertText, HomeBadge, HomeBadgeGrid, HomeComets, HomeEditor, HomeFooter, HomeFooterGrid, HomeHeader, HomeHeaderGrid, HomeHeaderLeft, HomeHeaderOcto, HomeHeaderRight, HomeLanguage, HomeLanguageGrid, HomeShip, HomeStyled } from './Home.style'
+import { HomeAdventure, HomeAlert, HomeAlertBand, HomeAlertText, HomeBadge, HomeBadgeGrid, HomeEditor, HomeFooter, HomeFooterGrid, HomeHeader, HomeHeaderGrid, HomeHeaderLeft, HomeHeaderOcto, HomeHeaderRight, HomeLanguage, HomeLanguageGrid, HomeStyled } from './Home.style'
 
 export const HomeView = () => {
   const isMobile = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= 600
@@ -11,78 +11,7 @@ export const HomeView = () => {
   return (
     <HomeStyled>
       <HomeHeader>
-        <HomeComets>
-          <svg
-            className="rocket-svg"
-            data-name="Layer 2"
-            xmlns="http://www.w3.org/2000/svg"
-            xlinkHref="http://www.w3.org/1999/xlink"
-            viewBox="0 0 270 370"
-          >
-            <defs></defs>
-            <title>Comets</title>
-            <g id="comets">
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="230" y1="-462" x2="230" y2="663"></line>
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="255" y1="-462" x2="255" y2="663"></line>
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="276" y1="-462" x2="276" y2="663"></line>
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="179" y1="-462" x2="179" y2="663"></line>
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="155" y1="-462" x2="155" y2="663"></line>
-              <line x1="77.5" y1="-15" x2="77.5" y2="1092.5"></line>
-              <line x1="163" y1="-8" x2="163" y2="699"></line>
-              <line x1="49.5" y1="-33" x2="49.5" y2="589.5"></line>
-              <line x1="60.5" y1="-33" x2="60.5" y2="298.5"></line>
-              <line x1="102" y1="-76" x2="102" y2="489"></line>
-              <line x1="26" y1="-19" x2="26" y2="527"></line>
-              <line x1="305.6" y1="-174.3" x2="305.6" y2="734.7"></line>
-              <line x1="291" y1="-462" x2="291" y2="663"></line>
-            </g>
-          </svg>
-        </HomeComets>
         <HomeHeaderGrid>
-          {isMobile && (
-            <HomeHeaderRight>
-              <HomeShip>
-                <img className="laser" alt="laser" src="/images/laser.svg" />
-                <img className="ship" alt="ship" src="/images/ship.svg" />
-                <img className="flame" alt="flame" src="/images/flame.svg" />
-              </HomeShip>
-            </HomeHeaderRight>
-          )}
           <HomeHeaderLeft>
             <h1>Learn to code Tezos Smart Contracts the easy way!</h1>
             <p>Tezos Academy is a fun interactive tutorial to the LIGO language</p>
@@ -96,15 +25,9 @@ export const HomeView = () => {
               </Button>
             </Link>
           </HomeHeaderLeft>
-          {!isMobile && (
-            <HomeHeaderRight>
-              <HomeShip>
-                <img className="laser" alt="laser" src="/images/laser.svg" />
-                <img className="ship" alt="ship" src="/images/ship.svg" />
-                <img className="flame" alt="flame" src="/images/flame.svg" />
-              </HomeShip>
-            </HomeHeaderRight>
-          )}
+          <HomeHeaderRight>
+            <img src="/images/tezos.svg" />
+          </HomeHeaderRight>
         </HomeHeaderGrid>
       </HomeHeader>
 
@@ -170,37 +93,6 @@ export const HomeView = () => {
         <p>Type your solution to each exercise online and compare with the solution</p>
         <img alt="editor" src="/images/editor.png" />
       </HomeEditor>
-
-      <HomeBadge>
-        <h1>Get your completion badge</h1>
-        <p>Tezos Academy tracks your progress and delivers a badge upon completion of all chapters</p>
-
-        <HomeBadgeGrid>
-          <img alt="badge" src="/images/badge.svg" />
-          <p>
-            If you complete all chapters in one language track, you will obtain this completion badge. This badge will
-            appear on your profile page so you can share it on LinkedIn or other social networks to prove that you have
-            completed your training on Tezos Academy.
-          </p>
-        </HomeBadgeGrid>
-      </HomeBadge>
-
-      <HomeAlert>
-        <img alt="boss" src="/images/boss.png" />
-        <HomeAlertBand />
-        <HomeAlertText>
-          <div>The enemy is here!</div>
-          <Link to="/pascal/chapter-about">
-            <Button>
-              <ButtonBorder />
-              <ButtonText onClick={() => {}}>
-                <img alt="rocket" src="/icons/rocket.svg" />
-                INTO BATTLE
-              </ButtonText>
-            </Button>
-          </Link>
-        </HomeAlertText>
-      </HomeAlert>
     </HomeStyled>
   )
 }
