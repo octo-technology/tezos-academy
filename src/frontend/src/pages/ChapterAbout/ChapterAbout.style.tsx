@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro'
 
 export const ChapterAboutStyled = styled.div`
-  height: calc(100vh - 130px);
   margin: 74px 20px 0;
 `
 
