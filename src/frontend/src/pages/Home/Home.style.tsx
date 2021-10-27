@@ -51,6 +51,10 @@ export const HomeHeaderLeft = styled.div`
 export const HomeHeaderRight = styled.div`
   position: relative;
   margin: 200px auto;
+
+  > img {
+    max-width: 100%;
+  }
 `
 
 export const HomeAdventure = styled.div`

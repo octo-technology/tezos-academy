@@ -26,7 +26,7 @@ export const HomeView = () => {
             </Link>
           </HomeHeaderLeft>
           <HomeHeaderRight>
-            <img src="/images/tezos.svg" />
+            <img src="/images/ship.png" />
           </HomeHeaderRight>
         </HomeHeaderGrid>
       </HomeHeader>
