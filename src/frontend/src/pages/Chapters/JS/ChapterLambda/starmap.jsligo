@@ -1,0 +1,74 @@
+// starmap.jsligo
+type coordinates = {
+    x: int,
+    y: int,
+    z: int
+};
+
+type planet_type = ["PLANET"] | ["ASTEROID"] | ["STAR"];
+
+type planet = {
+    position: coordinates,
+    mass: nat,
+    category: planet_type
+};
+
+type planets = map<string, planet>;
+
+type fn = (planet: planet) => planet_type;
+
+type storage = {
+    name: string,
+    func: fn,
+    celestialbodies : planets
+};
+
+type return_ = [list<operation>, storage];
+
+type parameter =
+| ["DeduceCategoryChange", fn]
+| ["AddPlanet", [string, planet]]
+| ["DoNothing"];
+
+const addPlanet = (input: [string, planet], store: storage) : return_ => {
+    const modified: planets = match(Map.find_opt(input[0], store.celestialbodies), {
+        Some: (_p: planets) => failwith("planet already exist"),
+        None: () => Map.add(input[0], { 
+            position: input[1].position, 
+            mass: input[1].mass, 
+            category: store.func(input[1])
+        }, store.celestialbodies)
+    });
+    return [
+        (list([]) as list<operation>),
+        {
+           name: store.name,
+           func: store.func,
+           celestialbodies: modified
+        }
+    ];
+};
+
+const deduceCategoryChange = (f: fn, store: storage) : return_ => {
+    const applyDeduceCatg = (_name: string, p: planet) : planet => ({ 
+        position: p.position,
+        mass: p.mass,
+        category: f(p)
+    });
+    const modified: planets = Map.map(applyDeduceCatg, store.celestialbodies);
+
+    return [
+        (list([]) as list<operation>),
+        {
+            name: store.name,
+            func: store.func,
+            celestialbodies: modified 
+        }
+    ];
+};
+
+const main = (action: parameter, store: storage) : return_ => match(action, {
+    AddPlanet: (input: parameter) => addPlanet(input, store),
+    DeduceCategoryChange: (f: parameter) => deduceCategoryChange(f, store),
+    DoNothing: () => [(list([]) as list<operation>), store],
+});

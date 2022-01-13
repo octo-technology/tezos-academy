@@ -66,6 +66,3 @@ let flip = (input_coin: coin): coin => match(input_coin, {
 
 <!-- prettier-ignore -->3- Define the second option of the variant as *Go\_to* which will be our action to set the ship on course to a new destination. Notice this will also take a string as an input.
 
-```
-
-```
