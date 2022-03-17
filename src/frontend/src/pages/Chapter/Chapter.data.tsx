@@ -58,6 +58,7 @@ import { data as pascalDataTuples } from '../Chapters/Pascal/ChapterTuples'
 import { data as pascalDataTypes } from '../Chapters/Pascal/ChapterTypes'
 import { data as pascalDataVariables } from '../Chapters/Pascal/ChapterVariables'
 import { data as pascalDataVariant } from '../Chapters/Pascal/ChapterVariant'
+
 import { data as reasonDataAddresses } from '../Chapters/Reason/ChapterAddresses'
 import { data as reasonDataBuiltIns } from '../Chapters/Reason/ChapterBuiltIns'
 import { data as reasonDataConditionals } from '../Chapters/Reason/ChapterConditionals'
@@ -87,6 +88,36 @@ import { data as reasonDataTypes } from '../Chapters/Reason/ChapterTypes'
 import { data as reasonDataVariables } from '../Chapters/Reason/ChapterVariables'
 import { data as reasonDataVariant } from '../Chapters/Reason/ChapterVariant'
 import { data as reasonDataFA20Hook } from '../Chapters/Reason/ChapterFA20Hook'
+
+import { data as jsDataAddresses } from '../Chapters/JS/ChapterAddresses'
+import { data as jsDataBuiltIns } from '../Chapters/JS/ChapterBuiltIns'
+import { data as jsDataConditionals } from '../Chapters/JS/ChapterConditionals'
+import { data as jsDataDeployContract } from '../Chapters/JS/ChapterDeployContract'
+import { data as jsDataFA12 } from '../Chapters/JS/ChapterFA12'
+/* import { data as jsDataFA20 } from '../Chapters/JS/ChapterFA20' */
+/* import { data as jsDataFA20Operator } from '../Chapters/JS/ChapterFA20Operator' */
+import { data as jsDataFunctions } from '../Chapters/JS/ChapterFunctions'
+import { data as jsDataInteractions } from '../Chapters/JS/ChapterInteractions'
+import { data as jsDataInterop } from '../Chapters/JS/ChapterInterop'
+import { data as jsDataLambda } from '../Chapters/JS/ChapterLambda'
+import { data as jsDataLists } from '../Chapters/JS/ChapterLists'
+import { data as jsDataLoops } from '../Chapters/JS/ChapterLoops'
+import { data as jsDataMainFunction } from '../Chapters/JS/ChapterMainFunction'
+import { data as jsDataMaps } from '../Chapters/JS/ChapterMaps'
+import { data as jsDataMath } from '../Chapters/JS/ChapterMath'
+import { data as jsDataMultisig } from '../Chapters/JS/ChapterMultisig'
+import { data as jsDataOption } from '../Chapters/JS/ChapterOption'
+import { data as jsDataPolymorphism } from '../Chapters/JS/ChapterPolymorphism'
+import { data as jsDataPreprocessor } from '../Chapters/JS/ChapterPreprocessor'
+import { data as jsDataRecords } from '../Chapters/JS/ChapterRecords'
+import { data as jsDataStrings } from '../Chapters/JS/ChapterStrings'
+import { data as jsDataTimestamps } from '../Chapters/JS/ChapterTimestamps'
+import { data as jsDataTransactions } from '../Chapters/JS/ChapterTransactions'
+import { data as jsDataTuples } from '../Chapters/JS/ChapterTuples'
+import { data as jsDataTypes } from '../Chapters/JS/ChapterTypes'
+import { data as jsDataVariables } from '../Chapters/JS/ChapterVariables'
+import { data as jsDataVariant } from '../Chapters/JS/ChapterVariant'
+/* import { data as jsDataFA20Hook } from '../Chapters/JS/ChapterFA20Hook' */
 
 export const chapterData = [
   {
@@ -224,6 +255,142 @@ export const chapterData = [
     name: '30 - Pascal - FA2 Hook',
     data: pascalDataFA20Hook,
   },
+
+  {
+    pathname: '/js/chapter-about',
+    language: 'JsLIGO',
+    name: '1 - JS - About',
+    data: { course: undefined, exercise: undefined, solution: undefined, supports: {} },
+  },
+  { pathname: '/js/chapter-types', language: 'JsLIGO', name: '2 - JS - Types', data: jsDataTypes },
+  {
+    pathname: '/js/chapter-variables',
+    language: 'JsLIGO',
+    name: '3 - JS - Variables',
+    data: jsDataVariables,
+  },
+  { pathname: '/js/chapter-math', language: 'JsLIGO', name: '4 - JS - Math', data: jsDataMath },
+  { pathname: '/js/chapter-strings', language: 'JsLIGO', name: '5 - JS - Strings', data: jsDataStrings },
+  {
+    pathname: '/js/chapter-functions',
+    language: 'JsLIGO',
+    name: '6 - JS - Functions',
+    data: jsDataFunctions,
+  },
+  {
+    pathname: '/js/chapter-conditionals',
+    language: 'JsLIGO',
+    name: '7 - JS - Conditionals',
+    data: jsDataConditionals,
+  },
+  { pathname: '/js/chapter-tuples', language: 'JsLIGO', name: '8 - JS - Tuples', data: jsDataTuples },
+  { pathname: '/js/chapter-records', language: 'JsLIGO', name: '9 - JS - Records', data: jsDataRecords },
+  { pathname: '/js/chapter-lists', language: 'JsLIGO', name: '10 - JS - Lists', data: jsDataLists },
+  { pathname: '/js/chapter-maps', language: 'JsLIGO', name: '11 - JS - Maps', data: jsDataMaps },
+  {
+    pathname: '/js/chapter-variants',
+    language: 'JsLIGO',
+    name: '12 - JS - Variants',
+    data: jsDataVariant,
+  },
+  {
+    pathname: '/js/chapter-main-function',
+    language: 'JsLIGO',
+    name: '13 - JS - Main function',
+    data: jsDataMainFunction,
+  },
+  { pathname: '/js/chapter-loops', language: 'JsLIGO', name: '14 - JS - Loops', data: jsDataLoops },
+  {
+    pathname: '/js/chapter-addresses',
+    language: 'JsLIGO',
+    name: '15 - JS - Addresses',
+    data: jsDataAddresses,
+  },
+  {
+    pathname: '/js/chapter-built-ins',
+    language: 'JsLIGO',
+    name: '16 - JS - Built-ins',
+    data: jsDataBuiltIns,
+  },
+  {
+    pathname: '/js/chapter-transactions',
+    language: 'JsLIGO',
+    name: '17 - JS - Transactions',
+    data: jsDataTransactions,
+  },
+  {
+    pathname: '/js/chapter-timestamps',
+    language: 'JsLIGO',
+    name: '18 - JS - Timestamps',
+    data: jsDataTimestamps,
+  },
+  { pathname: '/js/chapter-option', language: 'JsLIGO', name: '19 - JS - Option', data: jsDataOption },
+  {
+    pathname: '/js/chapter-interactions',
+    language: 'JsLIGO',
+    name: '20 - JS - Interactions',
+    data: jsDataInteractions,
+  },
+  {
+    pathname: '/js/chapter-polymorphism',
+    language: 'JsLIGO',
+    name: '21 - JS - Polymorphism',
+    data: jsDataPolymorphism,
+  },
+  {
+    pathname: '/js/chapter-lambda',
+    language: 'JsLIGO',
+    name: '22 - JS - Lambda',
+    data: jsDataLambda,
+  },
+  {
+    pathname: '/js/chapter-deploycontract',
+    language: 'JsLIGO',
+    name: '23 - JS - Deploy contract',
+    data: jsDataDeployContract,
+  },
+  {
+    pathname: '/js/chapter-multisig',
+    language: 'JsLIGO',
+    name: '24 - JS - Multisignature',
+    data: jsDataMultisig,
+  },
+  {
+    pathname: '/js/chapter-interop',
+    language: 'JsLIGO',
+    name: '25 - JS - Interoperability',
+    data: jsDataInterop,
+  },
+  {
+    pathname: '/js/chapter-preprocessor',
+    language: 'JsLIGO',
+    name: '26 - JS - Preprocessor',
+    data: jsDataPreprocessor,
+  },
+  {
+    pathname: '/js/chapter-fa12',
+    language: 'JsLIGO',
+    name: '27 - JS - Fungible token (FA1.2)',
+    data: jsDataFA12,
+  },
+  /* { */
+  /*   pathname: '/js/chapter-fa2', */
+  /*   language: 'JsLIGO', */
+  /*   name: '28 - JS - Fungible token (FA2)', */
+  /*   data: jsDataFA20, */
+  /* }, */
+  /* { */
+  /*   pathname: '/js/chapter-fa2-operator', */
+  /*   language: 'JsLIGO', */
+  /*   name: '29 - JS - Non fungible token with FA2 (Operator)', */
+  /*   data: jsDataFA20Operator, */
+  /* }, */
+  /* { */
+  /*   pathname: '/js/chapter-fa2-hook', */
+  /*   language: 'JsLIGO', */
+  /*   name: '30 - JS - FA2 Hook', */
+  /*   data: jsDataFA20Hook, */
+  /* }, */
 
   {
     pathname: '/camel/chapter-about',
