@@ -37,6 +37,9 @@ export const AppRoutes = ({ location }: any) => (
     <Route exact path="/pascal/chapter-about">
       <ChapterAbout />
     </Route>
+    <Route exact path="/js/chapter-about">
+      <ChapterAbout />
+    </Route>
     <Route exact path="/reason/chapter-about">
       <ChapterAbout />
     </Route>
@@ -44,6 +47,9 @@ export const AppRoutes = ({ location }: any) => (
       <ChapterAbout />
     </Route>
     <Route path="/pascal/chapter-*">
+      <Chapter />
+    </Route>
+    <Route path="/js/chapter-*">
       <Chapter />
     </Route>
     <Route path="/reason/chapter-*">
