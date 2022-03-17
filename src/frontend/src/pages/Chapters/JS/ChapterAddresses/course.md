@@ -8,7 +8,7 @@ You can cast a type into another type if you are sure they are compatible :
 
 ```
 let a: int = int(1 as nat);
-const b : nat = abs (-3)
+const b : nat = abs (-3);
 ```
 
 ⚠️ You will not see a transpilation error if the types are not compatible but the execution will fail.
@@ -18,7 +18,7 @@ const b : nat = abs (-3)
 You can define Tezos addresses by casting a string to an address type :
 
 ```
-const my_account: address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" as address)
+const my_account: address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" as address);
 ```
 
 ⚠️ You will not see a transpilation error if the address you enter is wrong but the execution will fail.

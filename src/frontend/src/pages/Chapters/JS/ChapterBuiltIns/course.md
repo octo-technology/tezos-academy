@@ -40,7 +40,7 @@ let main = (action: parameter, store: storage) : return_ => {
     if (Tezos.source != owner) {
         failwith ("Access denied.") as return_;
     } else {
-        return [(list([])) as list<operation>, store]
+        return [(list([]) as list<operation>), store];
     }
 };
 ```
