@@ -1,4 +1,4 @@
-ligo dry-run starmap.mligo main \
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next run dry-run starmap.mligo -e main \
 // Type your solution below
 'DeduceCategoryChange()' \
 '{

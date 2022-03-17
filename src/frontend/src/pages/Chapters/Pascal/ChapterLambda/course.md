@@ -142,4 +142,4 @@ We want you to update our "starmap" contract in order to take this new rule into
 
 <!-- prettier-ignore -->3- Second rule : if the mass of a planet is above 100 then the celestial body is considered as a PLANET.
 
-<!-- prettier-ignore -->4- Third rule : if the mass of a planet is under 100 then the celestial body is considered as an ASTEROID.
+<!-- prettier-ignore -->4- Third rule : Otherwise the celestial body is considered as an ASTEROID.

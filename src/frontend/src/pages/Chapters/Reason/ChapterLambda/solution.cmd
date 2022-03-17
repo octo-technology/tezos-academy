@@ -1,5 +1,4 @@
-ligo dry-run lambda2.religo main \
-// Type your solution below
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next run dry-run starmap.religo -e main \
 'DeduceCategoryChange((p : planet) : planet_type => if (p.position.x==0 && p.position.y==0 && p.position.z==0) { STAR } else { if (p.mass > 100n) { PLANET } else { ASTEROID }})' \
 '{
     name:"Sol",

@@ -1,4 +1,4 @@
-ligo dry-run lambda2.religo main \
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next run dry-run starmap.religo -e main \
 // Type your solution below
 'DeduceCategoryChange()' \
 '{
