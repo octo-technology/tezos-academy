@@ -310,9 +310,9 @@ let make_abstract_record = (z: string, y: int, x: string, w: bool, v: int): test
 
 ## Your mission
 
-Here is a simple contract that changes the item in storage. The contract possesses a single entry point _ChangeItem_.
+Here is a simple contract that changes the item stored in the storage. The contract possesses a single entry point _ChangeItem_.
 
-<!-- prettier-ignore -->Take a look at the ligo command that sompiles storage to Michelson :
+<!-- prettier-ignore -->Take a look at the ligo command that compiles the storage to Michelson :
 
 ```
 ligo compile storage exercise.jsligo "{ name: \"3\", item_id: 2 as nat, cost: 1 as nat }"
@@ -324,7 +324,7 @@ which outputs to:
 (Pair 1 2 "3")
 ```
 
-You need to create _item_ type that will produces such output. Use storage from command below as a hint:
+You need to create an _item_ type that will produces such output. Use the following storage from command below as a hint:
 
 ```
 { name: \"3\", item_id: 2 as nat, cost: 1 as nat }
