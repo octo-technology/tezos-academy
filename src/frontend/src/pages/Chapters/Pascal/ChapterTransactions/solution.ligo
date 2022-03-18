@@ -23,8 +23,8 @@ block {
       | None -> (failwith ("Contract not found.") : contract (unit))
       ];
     // Type your solution below
-    const op : operation = Tezos.transaction (unit, purchase_price, vendor_contract)
-} with ((list [op]: list(operation)), s)
+    const op : operation = Tezos.transaction (unit, purchase_price, vendor_contract);
+} with (list [op], s)
 
 function main (const action : mainAction; const store : storage): return is
   case action of [
