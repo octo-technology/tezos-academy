@@ -1,7 +1,3 @@
-type parameter =
-  Purchase (nat)
-| Register (address)
-
 type command = {
     item : nat,
     price : tez
@@ -13,23 +9,21 @@ type storage = unit
 
 type return = (list(operation), storage)
 
-let purchase = ((item,purchase_price, store) : (nat, tez, storage)) : return => {
+let purchase = ((_item,purchase_price, store) : (nat, tez, storage)) : return => {
     let ship_address : address = ("tz1TGu6TN5GSez2ndXXeDX6LgUDvLzPLqgYV" : address);
     let vendor_address : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address);
+
+    let _check_source : unit = assert_with_error(Tezos.source != ship_address, "Access denied");
+    let _check_amount : unit = assert_with_error(Tezos.amount != purchase_price, "Incorrect amount");
 
     let vendor_contract : contract(unit) =
       switch (Tezos.get_contract_opt (vendor_address) : option(contract(unit))) {
       | Some (contract) => contract
       | None => (failwith ("Contract not found.") : contract(unit))
       };
+
     // Type your solution below
-
-
-    if (Tezos.source != ship_address) { (failwith ("Access denied"): return) } else {
-        if (Tezos.amount != purchase_price) { (failwith ("Incorrect amount"): return) } else {
-            ([op], store);
-        };
-    };
+    (([] : list (operation)), store);
 }
 
 let main = ((action, store) : (mainAction, storage)) : return =>
