@@ -1,4 +1,4 @@
-function purchase (const purchase_price : tez) : bool is
+function purchase (const purchase_price : tez) : list(operation) is
 block {
     const ship_address : address = ("tz1TGu6TN5GSez2ndXXeDX6LgUDvLzPLqgYV" : address);
     const vendor_address : address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" : address);
@@ -12,5 +12,5 @@ block {
       | None -> (failwith ("Contract not found.") : contract (unit))
       end;
     // Type your solution below
-
-} with True
+    
+} with (nil: list(operation))

@@ -5,7 +5,7 @@
 You can transfer tez to an account, or to a function of another smart contract. For this, use :
 
 ```
-Tezos.transaction (<parameter>, <mutez>, <contract>);
+const op : operation = Tezos.transaction (<parameter>, <mutez>, <contract>);
 ```
 
 where :
@@ -17,3 +17,5 @@ where :
 ## Your mission
 
 <!-- prettier-ignore --> 1- Transfer the *purchase\_price* to the *vendor\_contract*
+
+<!-- prettier-ignore --> 2- Do not forget to return the transaction operation

@@ -31,10 +31,10 @@ function execute_action(const str : string; const s : storage ) : list(operation
   var listop : list(operation) := list [];
   if (String.sub(1n,1n,str) = "3") then block {
     const ci_opt : option(contract(action)) = Tezos.get_contract_opt(s.target_contract);
-    const op : operation = case ci_opt of
+    const op : operation = case ci_opt of [
       Some(ci) -> Tezos.transaction(Increment(3), 0tz, ci)
     | None -> (failwith("contract not found") : operation)
-    end;
+    ];
     listop := list [op; ];
   }
   else skip
@@ -54,10 +54,10 @@ function send (const param : message; const s : storage) : return is
 
     (* compute the new set of addresses associated with the message and update counters *)
     const voters_opt : option(addr_set) = Map.find_opt (packed_msg, s.message_store);
-    var new_store : addr_set := case voters_opt of
+    var new_store : addr_set := case voters_opt of [
       Some (voters) -> Set.add (Tezos.sender,voters)
     | None -> set [Tezos.sender]
-    end;
+    ];
   
     // check the threshold
     var ret_ops : list (operation) := nil;
@@ -77,7 +77,7 @@ function withdraw (const param : message; const s : storage) : return is
     var message : message := param;
     const packed_msg : bytes = Bytes.pack (message);
 
-    case s.message_store[packed_msg] of
+    case s.message_store[packed_msg] of [
       Some (voters) ->
         block {
           // The message is stored
@@ -89,7 +89,7 @@ function withdraw (const param : message; const s : storage) : return is
           else s.message_store[packed_msg] := new_set
         }
     | None -> skip
-    end // The message is not stored, ignore.
+    ] // The message is not stored, ignore.
   } with ((nil : list (operation)), s)
 
 (* Use Default action to transfer tez to the contract *)
@@ -97,8 +97,8 @@ function default (const p : unit; const s : storage) : return is
     ((nil : list (operation)), s)
 
 function main (const param : parameter; const s : storage) : return  is
-  case param of
+  case param of [
     | Send (p) -> send (p, s)
     | Withdraw (p) -> withdraw (p, s)
     | Default (p) -> default (p, s)
-  end
+  ]
