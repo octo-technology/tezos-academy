@@ -41,7 +41,7 @@ function execute_action(const str : string; const s : storage ) : list(operation
 } with listop
 
 (* Propagate message p if the number of authorized addresses having voted for the same message p equals the threshold. *)
-function send (const param : message; const s : storage) : return is
+function send (const param : message; var s : storage) : return is
   block {
     // check sender against the authorized addresses
     if not Set.mem (Tezos.sender, s.authorized_addresses)
@@ -72,7 +72,7 @@ function send (const param : message; const s : storage) : return is
   } with (ret_ops, s)
 
 (* Withdraw vote for message p *)
-function withdraw (const param : message; const s : storage) : return is
+function withdraw (const param : message; var s : storage) : return is
   block {
     var message : message := param;
     const packed_msg : bytes = Bytes.pack (message);
