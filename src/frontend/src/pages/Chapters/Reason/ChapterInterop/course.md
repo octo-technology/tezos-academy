@@ -346,7 +346,7 @@ Here is a simple contract that changes the item stored in the storage. The contr
 <!-- prettier-ignore -->Take a look at the ligo command that compiles the storage to Michelson :
 
 ```
-docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next compile storage exercise.religo '{ name= "3"; item_id= 2n; cost= 1n }'
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next compile storage exercise.religo '{ name: "3", item_id: 2n, cost: 1n }'
 ```
 
 which outputs to:
@@ -358,5 +358,5 @@ which outputs to:
 You need to create an _item_ type that will produces such output. Use the following storage from command below as a hint:
 
 ```
-{ name= "3"; item_id= 2n; cost= 1n }
+{ name: "3", item_id: 2n, cost: 1n }
 ```

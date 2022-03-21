@@ -207,6 +207,8 @@ type artist =
 };
 ```
 
+
+
 ### Different Michelson annotations
 
 If the Michelson annotation should be different from the LIGO representation, the annot:<string> attribute can be used. For example:
