@@ -1,31 +1,15 @@
-type item = {
-  item_id : nat,
-  cost : nat,
-  name : string
-}
+// Type your solution below
+type item =
 
-type item_michelson = michelson_pair_right_comb(item)
+type parameter = ChangeItem (item)
+type storage = item
+type return_ = (list(operation), item)
 
-type storage = { 
-    inventory : list(item_michelson)
-}
+let changeItem = ((i, _s) : (item, storage)) : return_ => 
+    (([] : list(operation)), i)
 
-type return = (list(operation), storage)
 
-type entry_points = 
-  |  AddInventory (list(item))
-
-// This function takes a list of items as parameter and transform each item in a right combed pair structure and add this transformed item in inventory
-let addInventory = ((params,s) : (list(item), storage)) : return =>
-{
-    let item_list : list(item) = params;
-    // Type your solution below
-    
-    let new_inventory : list(item_michelson) = List.fold(update_inventory, item_list, s.inventory);
-    (([] : list(operation)), {...s, inventory:new_inventory})
-};
-
-let main  = ((p,s) : (entry_points, storage)) : return =>
+let main = ((p, s) : (parameter, storage)) : return_ => 
     switch (p) {
-    | AddInventory(p) => addInventory((p,s))
+    | ChangeItem (i) => changeItem(i, s) 
     }
