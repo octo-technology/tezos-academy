@@ -57,6 +57,6 @@ let sum_list = (l: list<int>): int => {
 
 <!-- prettier-ignore -->1- Check the proposed code in the editor. Notice that we created a star map as a list of planet records.
 
-<!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function onto the *star\_map* variable. Code a for loop that iterates through each record of the list _l_ (given as parameter of the _scan_ function).
+<!-- prettier-ignore -->2- Notice the unimplemented scan function. Suppose this function is called from the main function onto the *star\_map* variable. Code a *for* loop that iterates through each record of the list _l_ (given as parameter of the _scan_ function). Use *i* as iterator name.
 
-<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* superior to 100 and *atmospheric\_activity* true. If so, assign the planet to *destination*.
+<!-- prettier-ignore -->3- Inside the loop, code a conditional for *density* superior to 100 and *atmospheric\_activity* true. If so, assign the planet to *destination* otherwise do nothing.

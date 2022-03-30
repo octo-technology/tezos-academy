@@ -1,7 +1,7 @@
 type storage = int;
 
 type parameter =
-| ["Fire", int]
+  ["Fire", int]
 | ["Stop"];
 
 type return_ = [list<operation>, storage];

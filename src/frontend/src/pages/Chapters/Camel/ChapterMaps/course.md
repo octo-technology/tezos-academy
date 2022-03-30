@@ -33,7 +33,7 @@ let bal : balances =
 
 ## Access
 
-Use the postfix Map.find_opt operator to read a value of the map :
+Use the *Map.find_opt* built-in function to read a value of the map :
 
 ```
 let my_balance : int option =
@@ -46,7 +46,7 @@ let my_balance : int option =
 ## Update
 
 Given a map, we may want to add a new binding, remove one, or modify one by changing the value associated to an already existing key. All those operations are called updates.
-The values of a map can be updated using the Map.update function :
+The values of a map can be updated using the *Map.update* function :
 
 ```
 let assign (m : balances) : balances =
@@ -58,7 +58,7 @@ Notice the optional value Some (8) instead of 8. If we had use None instead, tha
 
 ## Insertion
 
-To add a new value in the map, use the Map.add function :
+To add a new value in the map, use the *Map.add* function :
 
 ```
 let add (m : balances) : balances =
@@ -68,7 +68,7 @@ let add (m : balances) : balances =
 
 ## Removal
 
-A key-value can be removed from the mapping by using the Map.remove function as follows :
+A key-value can be removed from the mapping by using the *Map.remove* function as follows :
 
 ```
 let delete (key, bals : address * balances) : balances =
@@ -134,3 +134,11 @@ Big_map.update
 <!-- prettier-ignore -->2- Define the type *name\_to\_coordinates* as a mapping from the celestial body name to its coordinates.
 
 <!-- prettier-ignore -->3- Create a new map called *star\_map* and add values for _earth_ at 2,7,1 , the _sun_ at 0,0,0 and _alpha-centauri_ at 2232,7423,12342 .
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can check the value of the *star_map* variable by running the following command:
+
+```
+ligo run interpret --init-file exercise.mligo 'star_map'
+```
+
+

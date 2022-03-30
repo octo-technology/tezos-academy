@@ -47,4 +47,10 @@ let scan = (l : list<planet>) : planet => {
       atmospheric_activity: false
   };
   // Type your solution below
+  for (const i of l) {
+      if (i.density > (100 as nat) && i.atmospheric_activity) {
+        destination = i
+      } else { unit; }
+  }
+  return destination;
 };

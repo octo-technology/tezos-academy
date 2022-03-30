@@ -18,6 +18,6 @@ let go_to = ([input_string, store]: [string, storage]): return_ =>
 
 let main = ([action, store]: [parameter, storage]): return_ =>
   match(action, {
-    Set_ship_code: (input_string: string) => set_ship_code([input_string, store]),
-    Go_to: (input_string: string) => go_to([input_string, store])
+    Set_ship_code: (input_string: string) => set_ship_code(input_string, store),
+    Go_to: (input_string: string) => go_to(input_string, store)
   });

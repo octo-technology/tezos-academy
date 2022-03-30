@@ -196,9 +196,9 @@ export const chapterData = [
     data: pascalDataInteractions,
   },
   {
-    pathname: '/pascal/chapter-polymorphism',
+    pathname: '/pascal/chapter-lazyinteraction',
     language: 'PascaLIGO',
-    name: '21 - Pascal - Polymorphism',
+    name: '21 - Pascal - Lazy interaction',
     data: pascalDataPolymorphism,
   },
   {
@@ -332,9 +332,9 @@ export const chapterData = [
     data: jsDataInteractions,
   },
   {
-    pathname: '/js/chapter-polymorphism',
+    pathname: '/js/chapter-lazyinteraction',
     language: 'JsLIGO',
-    name: '21 - JS - Polymorphism',
+    name: '21 - JS - Lazy interaction',
     data: jsDataPolymorphism,
   },
   {
@@ -463,9 +463,9 @@ export const chapterData = [
     data: camelDataInteractions,
   },
   {
-    pathname: '/camel/chapter-polymorphism',
+    pathname: '/camel/chapter-lazyinteraction',
     language: 'CameLIGO',
-    name: '21 - Camel - Polymorphism',
+    name: '21 - Camel - Lazy interaction',
     data: camelDataPolymorphism,
   },
   {
@@ -609,9 +609,9 @@ export const chapterData = [
     data: reasonDataInteractions,
   },
   {
-    pathname: '/reason/chapter-polymorphism',
+    pathname: '/reason/chapter-lazyinteraction',
     language: 'ReasonLIGO',
-    name: '21 - Reason - Polymorphism',
+    name: '21 - Reason - Lazy interaction',
     data: reasonDataPolymorphism,
   },
   {
