@@ -6,9 +6,9 @@ type coordinates = {
 };
 
 let earth_coordinates: coordinates = {
-    x: 2 as int,
-    y: 7 as int,
-    z: 1 as int,
-}
+    x: 2,
+    y: 7,
+    z: 1,
+};
 
-earth_coordinates = ({...earth_coordinates, z: 5}) 
+let modified_earth_coordinates = {...earth_coordinates, z: 5}; 

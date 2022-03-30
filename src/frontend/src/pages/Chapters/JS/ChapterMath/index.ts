@@ -1,9 +1,9 @@
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from "!raw-loader!./exercise.ligo";
+import exercise from "!raw-loader!./exercise.jsligo";
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from "!raw-loader!./solution.ligo";
+import solution from "!raw-loader!./solution.jsligo";
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import course from "!raw-loader!./course.md";

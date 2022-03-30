@@ -66,8 +66,14 @@ let smaller_set: set<int> = Set.remove(3, my_set);
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Define a variable _itinary_ as a list of string names of celestial bodies representing your course. Start with _"earth"_
+<!-- prettier-ignore -->1- Define a variable _itinary\_initial_ as a set of string names of celestial bodies representing your departure. Start with _"earth"_
 
-<!-- prettier-ignore -->2- On the next line, add _"sun"_ to the itinary.
+<!-- prettier-ignore -->2- On the next line, define a variable _itinary\_small_ representing your course (short version). Add _"sun"_ to the _itinary\_initial_.
 
-<!-- prettier-ignore -->2- On the next line, add _"alpha-centauri"_ to the itinary.
+<!-- prettier-ignore -->2- On the next line, define a variable _itinary\_big_ representing your course (long version). Add _"alpha-centauri"_ to the _itinary\_small_.
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can check the value of the *itinary\_big* variable by running the following command:
+
+```
+ligo run interpret --init-file exercise.jsligo 'itinary_big'
+```

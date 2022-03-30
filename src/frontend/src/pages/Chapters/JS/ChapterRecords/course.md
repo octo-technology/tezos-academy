@@ -42,8 +42,14 @@ let change_name = (u: user): user => ({...u, name: "Mark"});
 
 ## Your mission
 
-<!-- prettier-ignore -->1- Refactor the type of *coordinates* as a record instead of a tuple. Name the parameters x, y and z.
+<!-- prettier-ignore -->1- Refactor the type of *coordinates* as a record instead of a tuple. Name the parameters *x*, *y* and *z*.
 
 <!-- prettier-ignore -->2- Refactor *earth\_coordinates* with the record type.
 
-<!-- prettier-ignore -->2- Refactor the *earth\_coordinates* update of the last parameters with the record type.
+<!-- prettier-ignore -->3- Refactor the *modified\_earth\_coordinates* update of the last parameters with the record type.
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can check the value of the *modified\_earth\_coordinates* variable by running the following command:
+
+```
+ligo run interpret --init-file exercise.jsligo 'modified_earth_coordinates'
+```
