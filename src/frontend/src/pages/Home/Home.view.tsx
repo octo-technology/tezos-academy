@@ -18,7 +18,7 @@ export const HomeView = () => {
             <Link to="/pascal/chapter-about">
               <Button>
                 <ButtonBorder />
-                <ButtonText onClick={() => {}}>
+                <ButtonText onClick={() => { }}>
                   <img alt="rocket" src="/icons/rocket.svg" />
                   GET STARTED
                 </ButtonText>
@@ -39,7 +39,7 @@ export const HomeView = () => {
 
       <HomeLanguage>
         <h1>Choose your language</h1>
-        <p>Tezos Academy is compatible with PascaLIGO, CameLIGO and ReasonLIGO</p>
+        <p>Tezos Academy is compatible with PascaLIGO, CameLIGO and JsLIGO</p>
         <HomeLanguageGrid>
           <div>
             <h3>PascalLIGO</h3>
@@ -48,24 +48,9 @@ export const HomeView = () => {
             <Link to="/pascal/chapter-about">
               <Button>
                 <ButtonBorder />
-                <ButtonText onClick={() => {}}>
+                <ButtonText onClick={() => { }}>
                   <img alt="rocket" src="/icons/rocket.svg" />
                   START WITH PASCAL
-                </ButtonText>
-              </Button>
-            </Link>
-          </div>
-
-          <div>
-            <h3>ReasonLIGO</h3>
-            <p>ReasonLIGO has a syntax close to ReasonML, for next level learning.</p>
-            <img alt="reason" src="/images/reason.svg" />
-            <Link to="/reason/chapter-about">
-              <Button>
-                <ButtonBorder />
-                <ButtonText onClick={() => {}}>
-                  <img alt="rocket" src="/icons/rocket.svg" />
-                  START WITH REASON
                 </ButtonText>
               </Button>
             </Link>
@@ -78,7 +63,7 @@ export const HomeView = () => {
             <Link to="/camel/chapter-about">
               <Button>
                 <ButtonBorder />
-                <ButtonText onClick={() => {}}>
+                <ButtonText onClick={() => { }}>
                   <img alt="rocket" src="/icons/rocket.svg" />
                   START WITH CAMEL
                 </ButtonText>
@@ -93,7 +78,7 @@ export const HomeView = () => {
             <Link to="/js/chapter-about">
               <Button>
                 <ButtonBorder />
-                <ButtonText onClick={() => {}}>
+                <ButtonText onClick={() => { }}>
                   <img alt="rocket" src="/icons/rocket.svg" />
                   START WITH JS
                 </ButtonText>

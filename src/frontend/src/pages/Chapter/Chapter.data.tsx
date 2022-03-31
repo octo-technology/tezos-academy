@@ -3,9 +3,6 @@ import { data as camelDataBuiltIns } from '../Chapters/Camel/ChapterBuiltIns'
 import { data as camelDataConditionals } from '../Chapters/Camel/ChapterConditionals'
 import { data as camelDataDeployContract } from '../Chapters/Camel/ChapterDeployContract'
 import { data as camelDataFA12 } from '../Chapters/Camel/ChapterFA12'
-import { data as camelDataFA20 } from '../Chapters/Camel/ChapterFA20'
-import { data as camelDataFA20Hook } from '../Chapters/Camel/ChapterFA20Hook'
-import { data as camelDataFA20Operator } from '../Chapters/Camel/ChapterFA20Operator'
 import { data as camelDataFunctions } from '../Chapters/Camel/ChapterFunctions'
 import { data as camelDataInteractions } from '../Chapters/Camel/ChapterInteractions'
 import { data as camelDataInterop } from '../Chapters/Camel/ChapterInterop'
@@ -34,9 +31,6 @@ import { data as pascalDataBuiltIns } from '../Chapters/Pascal/ChapterBuiltIns'
 import { data as pascalDataConditionals } from '../Chapters/Pascal/ChapterConditionals'
 import { data as pascalDataDeployContract } from '../Chapters/Pascal/ChapterDeployContract'
 import { data as pascalDataFA12 } from '../Chapters/Pascal/ChapterFA12'
-import { data as pascalDataFA20 } from '../Chapters/Pascal/ChapterFA20'
-import { data as pascalDataFA20Operator } from '../Chapters/Pascal/ChapterFA20Operator'
-import { data as pascalDataFA20Hook } from '../Chapters/Pascal/ChapterFA20Hook'
 import { data as pascalDataFunctions } from '../Chapters/Pascal/ChapterFunctions'
 import { data as pascalDataInteractions } from '../Chapters/Pascal/ChapterInteractions'
 import { data as pascalDataInterop } from '../Chapters/Pascal/ChapterInterop'
@@ -59,43 +53,11 @@ import { data as pascalDataTypes } from '../Chapters/Pascal/ChapterTypes'
 import { data as pascalDataVariables } from '../Chapters/Pascal/ChapterVariables'
 import { data as pascalDataVariant } from '../Chapters/Pascal/ChapterVariant'
 
-import { data as reasonDataAddresses } from '../Chapters/Reason/ChapterAddresses'
-import { data as reasonDataBuiltIns } from '../Chapters/Reason/ChapterBuiltIns'
-import { data as reasonDataConditionals } from '../Chapters/Reason/ChapterConditionals'
-import { data as reasonDataDeployContract } from '../Chapters/Reason/ChapterDeployContract'
-import { data as reasonDataFA12 } from '../Chapters/Reason/ChapterFA12'
-import { data as reasonDataFA20 } from '../Chapters/Reason/ChapterFA20'
-import { data as reasonDataFA20Operator } from '../Chapters/Reason/ChapterFA20Operator'
-import { data as reasonDataFunctions } from '../Chapters/Reason/ChapterFunctions'
-import { data as reasonDataInteractions } from '../Chapters/Reason/ChapterInteractions'
-import { data as reasonDataInterop } from '../Chapters/Reason/ChapterInterop'
-import { data as reasonDataLambda } from '../Chapters/Reason/ChapterLambda'
-import { data as reasonDataLists } from '../Chapters/Reason/ChapterLists'
-import { data as reasonDataLoops } from '../Chapters/Reason/ChapterLoops'
-import { data as reasonDataMainFunction } from '../Chapters/Reason/ChapterMainFunction'
-import { data as reasonDataMaps } from '../Chapters/Reason/ChapterMaps'
-import { data as reasonDataMath } from '../Chapters/Reason/ChapterMath'
-import { data as reasonDataMultisig } from '../Chapters/Reason/ChapterMultisig'
-import { data as reasonDataOption } from '../Chapters/Reason/ChapterOption'
-import { data as reasonDataPolymorphism } from '../Chapters/Reason/ChapterPolymorphism'
-import { data as reasonDataPreprocessor } from '../Chapters/Reason/ChapterPreprocessor'
-import { data as reasonDataRecords } from '../Chapters/Reason/ChapterRecords'
-import { data as reasonDataStrings } from '../Chapters/Reason/ChapterStrings'
-import { data as reasonDataTimestamps } from '../Chapters/Reason/ChapterTimestamps'
-import { data as reasonDataTransactions } from '../Chapters/Reason/ChapterTransactions'
-import { data as reasonDataTuples } from '../Chapters/Reason/ChapterTuples'
-import { data as reasonDataTypes } from '../Chapters/Reason/ChapterTypes'
-import { data as reasonDataVariables } from '../Chapters/Reason/ChapterVariables'
-import { data as reasonDataVariant } from '../Chapters/Reason/ChapterVariant'
-import { data as reasonDataFA20Hook } from '../Chapters/Reason/ChapterFA20Hook'
-
 import { data as jsDataAddresses } from '../Chapters/JS/ChapterAddresses'
 import { data as jsDataBuiltIns } from '../Chapters/JS/ChapterBuiltIns'
 import { data as jsDataConditionals } from '../Chapters/JS/ChapterConditionals'
 import { data as jsDataDeployContract } from '../Chapters/JS/ChapterDeployContract'
 import { data as jsDataFA12 } from '../Chapters/JS/ChapterFA12'
-/* import { data as jsDataFA20 } from '../Chapters/JS/ChapterFA20' */
-/* import { data as jsDataFA20Operator } from '../Chapters/JS/ChapterFA20Operator' */
 import { data as jsDataFunctions } from '../Chapters/JS/ChapterFunctions'
 import { data as jsDataInteractions } from '../Chapters/JS/ChapterInteractions'
 import { data as jsDataInterop } from '../Chapters/JS/ChapterInterop'
@@ -117,7 +79,6 @@ import { data as jsDataTuples } from '../Chapters/JS/ChapterTuples'
 import { data as jsDataTypes } from '../Chapters/JS/ChapterTypes'
 import { data as jsDataVariables } from '../Chapters/JS/ChapterVariables'
 import { data as jsDataVariant } from '../Chapters/JS/ChapterVariant'
-/* import { data as jsDataFA20Hook } from '../Chapters/JS/ChapterFA20Hook' */
 
 export const chapterData = [
   {
@@ -237,25 +198,6 @@ export const chapterData = [
     name: '27 - Pascal - Fungible token (FA1.2)',
     data: pascalDataFA12,
   },
-  {
-    pathname: '/pascal/chapter-fa2',
-    language: 'PascaLIGO',
-    name: '28 - Pascal - Fungible token (FA2)',
-    data: pascalDataFA20,
-  },
-  {
-    pathname: '/pascal/chapter-fa2-operator',
-    language: 'PascaLIGO',
-    name: '29 - Pascal - Non fungible token with FA2 (Operator)',
-    data: pascalDataFA20Operator,
-  },
-  {
-    pathname: '/pascal/chapter-fa2-hook',
-    language: 'PascaLIGO',
-    name: '30 - Pascal - FA2 Hook',
-    data: pascalDataFA20Hook,
-  },
-
   {
     pathname: '/js/chapter-about',
     language: 'JsLIGO',
@@ -504,168 +446,5 @@ export const chapterData = [
     name: '27 - Camel - Fungible token (FA1.2)',
     data: camelDataFA12,
   },
-  {
-    pathname: '/camel/chapter-fa2',
-    language: 'CameLIGO',
-    name: '28 - Camel - Fungible token (FA2)',
-    data: camelDataFA20,
-  },
-  {
-    pathname: '/camel/chapter-fa2-operator',
-    language: 'CameLIGO',
-    name: '29 - Camel - Non fungible token with FA2 (Operator)',
-    data: camelDataFA20Operator,
-  },
-  {
-    pathname: '/camel/chapter-fa2-hook',
-    language: 'CameLIGO',
-    name: '30 - Camel - FA2 Hook',
-    data: camelDataFA20Hook,
-  },
 
-  {
-    pathname: '/reason/chapter-about',
-    language: 'ReasonLIGO',
-    name: '1 - Reason - About',
-    data: { course: undefined, exercise: undefined, solution: undefined, supports: {} },
-  },
-  { pathname: '/reason/chapter-types', language: 'ReasonLIGO', name: '2 - Reason - Types', data: reasonDataTypes },
-  {
-    pathname: '/reason/chapter-variables',
-    language: 'ReasonLIGO',
-    name: '3 - Reason - variables',
-    data: reasonDataVariables,
-  },
-  { pathname: '/reason/chapter-math', language: 'ReasonLIGO', name: '4 - Reason - Math', data: reasonDataMath },
-  {
-    pathname: '/reason/chapter-strings',
-    language: 'ReasonLIGO',
-    name: '5 - Reason - Strings',
-    data: reasonDataStrings,
-  },
-  {
-    pathname: '/reason/chapter-functions',
-    language: 'ReasonLIGO',
-    name: '6 - Reason - Functions',
-    data: reasonDataFunctions,
-  },
-  {
-    pathname: '/reason/chapter-conditionals',
-    language: 'ReasonLIGO',
-    name: '7 - Reason - Conditionals',
-    data: reasonDataConditionals,
-  },
-  { pathname: '/reason/chapter-tuples', language: 'ReasonLIGO', name: '8 - Reason - Tuples', data: reasonDataTuples },
-  {
-    pathname: '/reason/chapter-records',
-    language: 'ReasonLIGO',
-    name: '9 - Reason - Records',
-    data: reasonDataRecords,
-  },
-  { pathname: '/reason/chapter-maps', language: 'ReasonLIGO', name: '10 - Reason - Maps', data: reasonDataMaps },
-  { pathname: '/reason/chapter-lists', language: 'ReasonLIGO', name: '11 - Reason - Lists', data: reasonDataLists },
-  {
-    pathname: '/reason/chapter-variants',
-    language: 'ReasonLIGO',
-    name: '12 - Reason - Variants',
-    data: reasonDataVariant,
-  },
-  {
-    pathname: '/reason/chapter-main-function',
-    language: 'ReasonLIGO',
-    name: '13 - Reason - Main function',
-    data: reasonDataMainFunction,
-  },
-  { pathname: '/reason/chapter-loops', language: 'ReasonLIGO', name: '14 - Reason - Loops', data: reasonDataLoops },
-  {
-    pathname: '/reason/chapter-addresses',
-    language: 'ReasonLIGO',
-    name: '15 - Reason - Addresses',
-    data: reasonDataAddresses,
-  },
-  {
-    pathname: '/reason/chapter-built-ins',
-    language: 'ReasonLIGO',
-    name: '16 - Reason - Built-ins',
-    data: reasonDataBuiltIns,
-  },
-  {
-    pathname: '/reason/chapter-transactions',
-    language: 'ReasonLIGO',
-    name: '17 - Reason - Transactions',
-    data: reasonDataTransactions,
-  },
-  {
-    pathname: '/reason/chapter-timestamps',
-    language: 'ReasonLIGO',
-    name: '18 - Reason - Timestamps',
-    data: reasonDataTimestamps,
-  },
-  { pathname: '/reason/chapter-option', language: 'ReasonLIGO', name: '19 - Reason - Option', data: reasonDataOption },
-  {
-    pathname: '/reason/chapter-interactions',
-    language: 'ReasonLIGO',
-    name: '20 - Reason - Interactions',
-    data: reasonDataInteractions,
-  },
-  {
-    pathname: '/reason/chapter-lazyinteraction',
-    language: 'ReasonLIGO',
-    name: '21 - Reason - Lazy interaction',
-    data: reasonDataPolymorphism,
-  },
-  {
-    pathname: '/reason/chapter-lambda',
-    language: 'ReasonLIGO',
-    name: '22 - Reason - Lambda',
-    data: reasonDataLambda,
-  },
-  {
-    pathname: '/reason/chapter-deploycontract',
-    language: 'ReasonLIGO',
-    name: '23 - Reason - Deploy contract',
-    data: reasonDataDeployContract,
-  },
-  {
-    pathname: '/reason/chapter-multisig',
-    language: 'ReasonLIGO',
-    name: '24 - Reason - Multisignature',
-    data: reasonDataMultisig,
-  },
-  {
-    pathname: '/reason/chapter-interop',
-    language: 'ReasonLIGO',
-    name: '25 - Reason - Interoperability',
-    data: reasonDataInterop,
-  },
-  {
-    pathname: '/reason/chapter-preprocessor',
-    language: 'ReasonLIGO',
-    name: '26 - Reason - Preprocessor',
-    data: reasonDataPreprocessor,
-  },
-  {
-    pathname: '/reason/chapter-fa12',
-    language: 'ReasonLIGO',
-    name: '27 - Reason - Fungible token (FA1.2)',
-    data: reasonDataFA12,
-  },
-  {
-    pathname: '/reason/chapter-fa2',
-    language: 'ReasonLIGO',
-    name: '28 - Reason - Fungible token (FA2)',
-    data: reasonDataFA20,
-  },
-  {
-    pathname: '/reason/chapter-fa2-operator',
-    language: 'ReasonLIGO',
-    name: '29 - Reason - Non fungible token with FA2 (Operator)',
-    data: reasonDataFA20Operator,
-  },
-  {
-    pathname: '/reason/chapter-fa2-hook',
-    language: 'ReasonLIGO',
-    name: '30 - Reason - FA2 Hook',
-    data: reasonDataFA20Hook,
-  },
 ]

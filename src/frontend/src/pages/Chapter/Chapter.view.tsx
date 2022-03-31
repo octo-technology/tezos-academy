@@ -201,7 +201,6 @@ export const ChapterView = ({
   if (pathname.match(/pascal/i)) extension = 'ligo'
   if (pathname.match(/js/i)) extension = 'jsligo'
   if (pathname.match(/camel/i)) extension = 'mligo'
-  if (pathname.match(/reason/i)) extension = 'religo'
 
   return (
     <ChapterStyled>

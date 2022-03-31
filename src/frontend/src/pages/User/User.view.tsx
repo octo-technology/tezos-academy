@@ -16,13 +16,13 @@ export const UserView = ({ loading, user }: UserViewProps) => {
   let badgeUnlocked = false
   let pascalCounter = 0
   let camelCounter = 0
-  let reasonCounter = 0
+  let jsCounter = 0
   user.progress?.forEach((chapter) => {
     if (chapter.indexOf('pascal') >= 0) pascalCounter++
     if (chapter.indexOf('camel') >= 0) camelCounter++
-    if (chapter.indexOf('reason') >= 0) reasonCounter++
+    if (chapter.indexOf('js') >= 0) jsCounter++
   })
-  if (pascalCounter >= 30 || camelCounter >= 30 || reasonCounter >= 30) badgeUnlocked = true
+  if (pascalCounter >= 30 || camelCounter >= 30 || jsCounter >= 30) badgeUnlocked = true
 
   return (
     <UserStyled>

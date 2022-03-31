@@ -31,7 +31,7 @@ export const DrawerView = ({
       <h1>Menu</h1>
 
       <Select
-        options={['PascaLIGO', 'CameLIGO', 'ReasonLIGO', 'JsLIGO']}
+        options={['PascaLIGO', 'CameLIGO', 'JsLIGO']}
         defaultOption={activeLanguage}
         selectCallback={(e) => changeLanguageCallback(e)}
       />
