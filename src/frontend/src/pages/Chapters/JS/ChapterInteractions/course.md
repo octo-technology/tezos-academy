@@ -39,7 +39,7 @@ In our case, we have a _counter.ligo_ contract that accepts an action of type _p
 type storage = int;
 
 type parameter =
-| ["Increment", int]
+  ["Increment", int]
 | ["Decrement", int]
 | ["Reset"];
 
@@ -62,7 +62,7 @@ let main = ([action, store] : [parameter, storage]) : return_ => {
 type storage = unit;
 
 type parameter =
-| ["Increment", nat]
+  ["Increment", nat]
 | ["Decrement", nat]
 | ["Reset"];
 
@@ -101,7 +101,7 @@ Notice that :
 type storage = int;
 
 type parameter =
-| ["Fire", int]
+  ["Fire", int]
 | ["Stop"];
 
 type return_ = [list<operation>, storage];

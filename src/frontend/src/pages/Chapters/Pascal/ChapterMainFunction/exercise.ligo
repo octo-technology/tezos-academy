@@ -1,4 +1,3 @@
-// Modify the code below
 type parameter is
   Action_A of string
 | Action_B of string
@@ -17,7 +16,7 @@ function entry_B (const input_string : string; const store : storage) : return i
   ((nil : list (operation)), store with record [stored_string_B = input_string])
 
 function main (const action : parameter; const store : storage): return is
-  case action of
+  case action of [
     Action_A (input_string) -> entry_A (input_string, store)
   | Action_B (input_string) -> entry_B (input_string, store)
-  end
+  ]

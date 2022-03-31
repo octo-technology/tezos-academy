@@ -1,4 +1,4 @@
-# Chapter 21 : Polymorphism
+# Chapter 21 : Lazy interaction
 
 <dialog character="pilot">The enemy is destroyed, great job Captain! Headquater is sending a reinforcement squadron to help us.</dialog>
 
@@ -29,7 +29,7 @@ The problem is coming from the fact that _B_ must know the whole definition of _
 <!-- prettier-ignore -->The predefined function *Tezos.get\_entrypoint\_opt* has the following syntax :
 
 ```
-const <variable_name>: option(contract(<type_of_target_contract_parameter>)) = Tezos.get_entrypoint_opt(<entrypoint_name>, <target_contract_address>);
+const variable_name: option<contract<type_of_target_contract_parameter>> = Tezos.get_entrypoint_opt(entrypoint_name, target_contract_address);
 ```
 
 <!-- prettier-ignore -->When the function *get\_entrypoint\_opt* does not find any contract at a given _address_ or the contract doesn't match the type, then _None_ is returned.

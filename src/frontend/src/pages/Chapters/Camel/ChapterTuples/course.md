@@ -51,4 +51,10 @@ let my_name_last_name : string = my_name.1
 
 <!-- prettier-ignore -->2- Define *earth_coordinates* at coordinates 2,7,1.
 
-<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Define a new constant *modified_earth_coordinates* which reuses parameters of *earth_coordinates* except for the last parameter of *earth_coordinates* which is fixed to 5. Direct access by postion is asked (do not destructure *earth_coordinates*)
+<!-- prettier-ignore -->3- Let's say you made a mistake in the definition. Define a new constant *modified\_earth\_coordinates* which reuses parameters of *earth_coordinates* except for the last parameter of *earth_coordinates* which is fixed to 5. Direct access by postion is asked (do not destructure *earth_coordinates*)
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can check the value of the *modified\_earth\_coordinates* variable by running the following command:
+
+```
+ligo run interpret --init-file exercise.mligo 'modified_earth_coordinates'
+```

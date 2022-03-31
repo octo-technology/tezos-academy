@@ -54,10 +54,10 @@ We want to conditionally change the engine attribute (third number) to 1 only if
 
 <!-- prettier-ignore -->2- Then define a condition _if_ the engine attribute equal 0. Don't forget the attributes are defined as strings.
 
-<!-- prettier-ignore -->3- If the condition is met, change *modified\_ship* to it new value. Otherwise, _skip_ the instructions.
+<!-- prettier-ignore -->3- If the condition is met, change *modified\_ship* to its new value. Otherwise, _skip_ the instructions.
 
 <!-- prettier-ignore -->⚠️ If you have installed LIGO then you can test the execution of the *modify\_ship* function by running the following command:
 
 ```
-ligo run-function main.ligo modify_ship '("010433")'
+ligo run interpret --init-file main.jsligo 'modify_ship("010433")'
 ```

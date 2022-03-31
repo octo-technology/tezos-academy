@@ -138,3 +138,9 @@ let sum_of_elements : int = Set.fold sum my_set 0
 <!-- prettier-ignore -->2- On the next line, add _"sun"_ to the *itinary* and save it into a *longer\_itinary* constant.
 
 <!-- prettier-ignore -->2- On the next line, add _"alpha-centauri"_ to the *longer\_itinary* and save it into a *far\_itinary* constant.
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can check the value of the *longer\_itinary* variable by running the following command:
+
+```
+ligo run interpret --init-file exercise.jsligo 'longer_itinary'
+```

@@ -30,16 +30,29 @@ When interacting with other contracts the representation (left or right combed) 
 
 ### Interacting with an other contract
 
-In chapters 28 to 30,  we will see in detail the Financial Application standard (called FA2) which allows to create a standardized token contract. This FA2 token contract provides a *Transfer* entrypoint for transfering the token ownership between users. This entrypoint requires parameters that must respect a right combed representation of Ligo records.
+In chapters 28 to 30, we will see in detail the Financial Application standard (called FA2) which allows to create a standardized token contract. This FA2 token contract provides a *Transfer* entrypoint for transfering the token ownership between users. This entrypoint requires parameters that must respect a right combed representation of Ligo records.
 
 <!-- prettier-ignore -->For example, if a third-party contract (called *Caller* contract) wants to interact with a FA2 token contract (called *token* contract), it would use the entrypoint *Transfer* which expects parameters with a right combed representation of Ligo records. So, when the *Caller* contract sends a transaction to the *token* contract, it must transform parameters of the called entrypoint into the expected representation.  
 
-<!-- prettier-ignore -->The snippet of code below is part of the standard FA2 interface, and defines transfer parameters using *michelson\_pair\_right\_comb* function for specifying the Michelson representation used by the *Transfer* entrypoint.
+<!-- prettier-ignore -->The snippet of code below is part of the standard FA2 interface, and defines transfer parameters using *[@layout:comb]* annotation for specifying the Michelson representation used by the *Transfer* entrypoint.
 
 ```
-type transferMichelson = michelson_pair_right_comb<transferAuxiliary>;
-type transferParameter = list([transferMichelson]);
-type parameter = ["Transfer", transferParameter];
+type atomic_trans = 
+// [@layout:comb] 
+{
+   to_      : address,
+   token_id : nat,
+};
+
+type transfer_from = {
+   from_ : address;
+   tx    : list<atomic_trans>
+};
+type transfer = list<transfer_from>;
+
+type parameter = 
+// [@layout:comb] 
+| Transfer of transfer
 ```
 
 We will see in detail the Financial Application standard in chapters 28 to 30.
@@ -185,7 +198,7 @@ If you want to change the data representation in Michelson to a location retaini
   )
 ```
 
-you can use the layout:comb attribute:
+you can use the layout:comb annotation:
 
 ```
 type animal =
@@ -195,7 +208,7 @@ type animal =
 | ["Cat"];
 ```
 
-The layout:comb attribute can also be used on record types:
+The layout:comb annotation can also be used on record types:
 
 ```
 type artist =  
@@ -206,6 +219,8 @@ type artist =
   name: string
 };
 ```
+
+
 
 ### Different Michelson annotations
 
@@ -310,9 +325,9 @@ let make_abstract_record = (z: string, y: int, x: string, w: bool, v: int): test
 
 ## Your mission
 
-Here is a simple contract that changes the item in storage. The contract possesses a single entry point _ChangeItem_.
+Here is a simple contract that changes the item stored in the storage. The contract possesses a single entry point _ChangeItem_.
 
-<!-- prettier-ignore -->Take a look at the ligo command that sompiles storage to Michelson :
+<!-- prettier-ignore -->Take a look at the ligo command that compiles the storage to Michelson :
 
 ```
 ligo compile storage exercise.jsligo "{ name: \"3\", item_id: 2 as nat, cost: 1 as nat }"
@@ -324,7 +339,7 @@ which outputs to:
 (Pair 1 2 "3")
 ```
 
-You need to create _item_ type that will produces such output. Use storage from command below as a hint:
+You need to create an _item_ type that will produces such output. Use the following storage from command below as a hint:
 
 ```
 { name: \"3\", item_id: 2 as nat, cost: 1 as nat }

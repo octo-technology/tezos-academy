@@ -19,3 +19,5 @@ where :
 ## Your mission
 
 <!-- prettier-ignore --> 1- Transfer the *purchase\_price* to the *vendor\_contract*
+
+<!-- prettier-ignore --> 2- Don't forget to return your operation.

@@ -25,7 +25,7 @@ type storage = nat;
 type return_ = [list<operation>, storage];
 
 let save =([action, store]: [parameter, storage]) : return_ =>
-  ((list([]) : list (operation)), store)
+  [(list([]) as list<operation>), store]
 ```
 
 ## Entrypoints

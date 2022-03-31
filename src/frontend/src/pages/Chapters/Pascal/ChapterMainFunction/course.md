@@ -57,10 +57,10 @@ function entry_B (const input_string : string; const store : storage) : return i
   ((nil : list (operation)), store with record [stored_string_B = input_string])
 
 function main (const action : parameter; const store : storage): return is
-  case action of
+  case action of [
     Action_A (input_string) -> entry_A (input_string, store)
   | Action_B (input_string) -> entry_B (input_string, store)
-  end
+  ]
 ```
 
 ℹ️ Now that you created a main function, you can now transpile your code into Michaelson and deploy it on Tezos. Try it out on the <a href="https://ide.ligolang.org/" target="_blank">LIGOlang IDE</a>

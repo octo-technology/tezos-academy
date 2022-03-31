@@ -13,10 +13,10 @@ function doSomethingInventory (const str: string) : string is
 
 type param is Apply of string
 
-function main (const p : param; const store : string) : list(operation)* string is
+function main (const p : param; const _store : string) : list(operation)* string is
 block {
-    const new_storage : string = case (p) of
+    const new_storage : string = case (p) of [
     | Apply (str) -> doSomethingInventory(str)
-    end
+    ]
     
 } with ((nil: list(operation)), new_storage)

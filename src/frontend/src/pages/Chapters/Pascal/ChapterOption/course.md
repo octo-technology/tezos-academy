@@ -30,10 +30,10 @@ The keyword _Some_ can be used in a pattern matching to retrieve the value behin
 The keyword _None_ can be used in a pattern matching to verify the _option_ variable has no value.
 
 ```
-case <variable> of
+case <variable> of [
 | Some(<value_name>) -> <block_code>
 | None -> <block_code>
-end
+]
 ```
 
 <!-- prettier-ignore -->_<block\_code>_ can be a single instruction or a _block {}_
@@ -47,19 +47,19 @@ type balance_type is map(nat, expected_type)
 const user_balances: balance_type = map[ 1n -> 10 ];
 
 const my_balance : option(expected_type) = user_balances[1n];
-case my_balance of
+case my_balance of [
   Some (val) -> block { skip }
 | None -> failwith ("Unknown user")
-end
+]
 ```
 
 Here is an example of pattern matching resolving an _option_ type directly (useful when we just want to retrieve the value behind the optional) :
 
 ```
-const my_balance2 : expected_type = case user_balances[1n] of
+const my_balance2 : expected_type = case user_balances[1n] of [
   Some (val) -> val
 | None -> (failwith ("Unknown user") : expected_type)
-end
+]
 ```
 
 <!-- prettier-ignore -->Notice the cast of _failwith_ instruction into an _expected\_type_

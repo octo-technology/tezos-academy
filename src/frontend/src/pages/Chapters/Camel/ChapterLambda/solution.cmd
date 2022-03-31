@@ -1,0 +1,21 @@
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:next run dry-run starmap.mligo -e main \
+// Type your solution below
+'DeduceCategoryChange(fun (p : planet) -> if p.position.x=0 && p.position.y=0 && p.position.z=0 then STAR else if p.mass > 100n then PLANET else ASTEROID)' \
+'{
+    name="Sol";
+    func=( fun (p : planet) -> PLANET);
+    celestialbodies=Map.literal [
+        ("earth", {
+            position={x=2;y=7;z=1};
+            mass=1000n;
+            category=PLANET}); 
+        ("pluto", {
+            position={x=200;y=750;z=100};
+            mass=10n;
+            category=PLANET}); 
+        ("sun", {
+            position={x=0;y=0;z=0};
+            mass=1000000n;
+            category=PLANET})
+    ]
+}'

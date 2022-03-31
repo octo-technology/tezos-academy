@@ -22,10 +22,10 @@ type parameter is DeduceCategoryChange of (planet) -> planet_type | AddPlanet of
 
 function addPlanet (const input : (string * planet); const store : storage) : return is
 block {
-    const modified : planets = case Map.find_opt(input.0, store.celestialbodies) of
+    const modified : planets = case Map.find_opt(input.0, store.celestialbodies) of [
       Some (p) -> (failwith("planet already exist") : planets)
     | None -> Map.add (input.0, record[position=input.1.position;mass=input.1.mass;category=store.func(input.1)], store.celestialbodies)
-    end;
+    ];
 } with ((nil :  list(operation)), record [name=store.name;func=store.func;celestialbodies=modified])
 
 function deduceCategoryChange (const f : (planet) -> planet_type; const store : storage) : return is
@@ -36,8 +36,8 @@ block {
 } with ((nil :  list(operation)), record [name=store.name;func=f;celestialbodies=modified])
 
 function main (const action : parameter; const store : storage) : return is
-block { skip } with case action of
+block { skip } with case action of [
     AddPlanet (input) -> addPlanet (input,store)
   | DeduceCategoryChange (f) -> deduceCategoryChange (f,store)
   | DoNothing -> ((nil : list(operation)),store)
-  end
+]
