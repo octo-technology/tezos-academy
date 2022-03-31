@@ -1,6 +1,6 @@
  // Type your solution below
 type item = 
-[@layout:comb]
+// @layout:comb
 {
     cost: nat, 
     item_id: nat, 

@@ -98,7 +98,7 @@ const main = (action: parameter, store: storage) : return_ => match(action, {
 The prototype of a lambda has the following syntax :
 
 ```
-(<parameter_type1>,<parameter_type2>) => <returned type>
+(<parameter_type1>,<parameter_type2>) => <returned_type>
 ```
 
 In the "starmap" smart contract, the type of _func_ is
@@ -142,7 +142,7 @@ Take a look at the starmap contract in the editor tabs.
 { name: store.name, func: f, celestialbodies: modified }
 ```
 
-⚠️ Notice that in the function _deduceCategoryChange_ the sub-function _applyDeduceCatg_ applies the new category deduction to a planet (_category=f(p)_).
+⚠️ Notice that in the function _deduceCategoryChange_ the sub-function _applyDeduceCatg_ applies the new category deduction to a planet (_category: f(p)_).
 
 ```
 const applyDeduceCatg = (name: string, p: planet) : planet =>

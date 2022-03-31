@@ -79,10 +79,10 @@ This LIGO compiler is also used to transform "LIGO expression" into "Michelson e
 Here is how to transform LIGO code into Michelson code using the LIGO compiler in command line.
 
 ```
-ligo compile contract code.ligo mainFunc > code.tz
+ligo compile contract code.ligo -e mainFunc > code.tz
 ```
 
-<mainFunc> argument is the name of the "main function" in the .ligo file. (see Chapter "Main Function").
+⚠️ The <mainFunc> argument is the name of the "main function" in the .jsligo file and is introduced with the *-e* option. (see Chapter "Main Function").
 
 ⚠️ Notice that the output of the command is the Michelson code. We just redirect the command output into a .tz file.
 
@@ -94,7 +94,7 @@ Here is how to transform LIGO expression into Michelson expression using the LIG
 ligo compile storage code.ligo '<ligo_expression>' [options]
 ```
 
-<ligo_expression> is a LIGO expression
+<ligo_expression> is a LIGO expression representing the storage of the smart contract
 
 ### Invocation parameter
 
@@ -104,7 +104,7 @@ Here is how to transform LIGO expression into Michelson expression using the LIG
 ligo compile parameter code.ligo mainFunc '<ligo_expression>' [options]
 ```
 
-<ligo_expression> is a LIGO expression
+<ligo_expression> is a LIGO expression representing the called entrypoint of the smart contract. If the smart contrat has only the default entrypoint the value is *unit*, otherwise it expects the name of the entrypoint and its arguments.
 
 ### Simulating
 
@@ -115,7 +115,7 @@ ligo run dry-run code.ligo mainFunc '<entrypoint(p)>' '<storage_state>' [options
 ligo run dry-run starmap.jsligo 'AddPlanet(["earth", [1,2,3]])' 'Map.empty as map<string, coordinates>' [options]
 ```
 
-<storage*state> state of the storage when simulating the execution of the entry point
+<storage\_state> state of the storage when simulating the execution of the entry point
 <entrypoint(p)> entry point of the smart contract that is invoked (parameter \_p* of this entry point is specified between parentheses).
 
 ### Ligo Expression in command line
