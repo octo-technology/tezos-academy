@@ -25,14 +25,15 @@ The keyword _None_ can be used in a pattern matching to verify the _option_ vari
 ```
 match(<variable>, {
   Some: (<value_name>) => <block_code>,
-  None: => <block_code>
+  None: () => <block_code>
 });
 ```
 
-<!-- prettier-ignore -->_<block\_code>_ can be a single instruction or a _{}_
-<!-- prettier-ignore -->_<value\_name>_ is a local variable name. _<value\_name>_ which holds the _option_ value and can be used inside the _<block\_code>_
+<!-- prettier-ignore -->*block\_code* can be a single instruction or a _{}_
+<!-- prettier-ignore -->*value\_name* is a local variable name. *value\_name* which holds the value behind _option_ and can be used inside the *block\_code*. 
+<!-- prettier-ignore -->The type of *value\_name* can also specified with *Some: (<value\_name>: <value\_type>) => <block\_code>* form.
 
-Here is an example of _Map.find_opt_ operator returning an option type :
+<!-- prettier-ignore -->Here is an example of *Map.find\_opt* operator returning an option type :
 
 ```
 type expected_type = int;
@@ -58,8 +59,29 @@ const my_balance2: expected_type = match(my_balance, {
 
 <!-- prettier-ignore -->Notice the cast of _failwith_ instruction into an *expected\_type*
 
+## Pattern matching on list
+
+The match operator can also be used on list type. There are 2 case to be handled: 
+* case when the list is empty with the *[]* pattern
+* case when the list contains an element, in this case the list is decomposed into a head element and the tail of the list with *[head, ...tail]* pattern.  
+
+```
+let compute_length = (lst : list<int>) : int =>
+  match(lst, list([
+    ([] : list<int>) => 0,
+    ([hd, ...tl] : list<int>) => 1 + int(List.length(tl))
+  ]));
+```
+
 ## Your mission
 
 <!-- prettier-ignore --> 1- Notice the _weapons_ mapping which maps the name of each weapon to its corresponding input of power. We want to increase the power of the _Main Laser_ but mapping returns optional results as they might not be found in the mapping. Define the constant *main\_laser\_power* as an optional int from selecting _"Main Laser"_ from the _weapons_ mapping.
 
 <!-- prettier-ignore --> 2- Writte a pattern matching for *main\_laser\_power*. If it exists, increase the power of the _"Main Laser"_ by 1 (use *i* as temporary matching variable). If it does not exist in the mapping, fail with _"Weapon not found"_
+
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can simulate a call of the smart contract by running the following command:
+
+```
+ligo run dry-run exercise.jsligo -e main 'unit' '(Map.empty as weapon_power)'
+```
+

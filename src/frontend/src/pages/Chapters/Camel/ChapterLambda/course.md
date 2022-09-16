@@ -54,7 +54,7 @@ type parameter = ChangeFunc of (coordinates) -> coordinates | AddPlanet of (stri
 
 <!-- prettier-ignore -->let addPlanet (input, store : (string \* coordinates) \* storage) : return =
     let modified : planets = match Map.find_opt input.0 store.systemplanets with
-       Some (p) -> (failwith("planet already exist") : planets)
+       Some (_p) -> (failwith("planet already exist") : planets)
      | None -> Map.add input.0 (store.func input.1) store.systemplanets
     in
     (([] : operation list), {name=store.name;func=store.func;systemplanets=modified})
@@ -104,7 +104,7 @@ fun (<parameter_name> : <parameter_type>) -> <body>
 The implementation of the lambda can be changed with the _changeFunc_ function which assigns some new code to _func_. Here is an example of execution of the _ChangeFunc_ entry point with the simulation ligo command line :
 
 ```
-ligo dry-run lambda.mligo main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});systemplanets=Map.literal [("earth", {x=2;y=7;z=1})] }'
+ligo run dry-run lambda.mligo -e main 'ChangeFunc(fun (c : coordinates) -> {x=c.x*100;y=c.y;z=c.z})' '{name="Sol";func=(fun (c : coordinates) -> {x=c.x*10;y=c.y;z=c.z});systemplanets=Map.literal [("earth", {x=2;y=7;z=1})] }'
 ```
 
 ⚠️ Notice that the returned type of the lambda is not specified
@@ -149,4 +149,4 @@ We want you to update our "starmap" contract in order to take this new rule into
 
 <!-- prettier-ignore -->3- Second rule : if the mass of a planet is above 100 then the celestial body is considered as a PLANET.
 
-<!-- prettier-ignore -->4- Third rule : if the mass of a planet is under 100 then the celestial body is considered as an ASTEROID.
+<!-- prettier-ignore -->4- Third rule : Otherwise the celestial body is considered as an ASTEROID.

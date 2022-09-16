@@ -6,9 +6,9 @@ import course from '!raw-loader!./course.md'
 import extra from '!raw-loader!./extra.jsligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import exercise from '!raw-loader!./inventory_exercise.ligo'
+import exercise from '!raw-loader!./inventory_exercise.jsligo'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import solution from '!raw-loader!./inventory_solution.ligo'
+import solution from '!raw-loader!./inventory_solution.jsligo'
 
 export const data = { course, exercise, solution, supports: { extra } }

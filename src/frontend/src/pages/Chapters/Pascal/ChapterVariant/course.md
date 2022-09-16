@@ -52,10 +52,10 @@ Pattern matching is similar to the switch construct in Javascript, and can be us
 type coin is Head | Tail
 
 function flip (const input_coin : coin) : coin is
-case input_coin of
+case input_coin of [
   Head -> Tail
 | Tail -> Head
-end
+]
 ```
 
 ## Your mission

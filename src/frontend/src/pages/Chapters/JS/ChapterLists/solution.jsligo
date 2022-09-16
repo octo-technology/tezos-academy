@@ -1,0 +1,4 @@
+// Type your solution below
+let itinary_initial: set<string> = Set.add("earth", Set.empty as set<string>);
+let itinary_small = Set.add("sun", itinary_initial);
+let itinary_big = Set.add("alpha-centauri", itinary_small);

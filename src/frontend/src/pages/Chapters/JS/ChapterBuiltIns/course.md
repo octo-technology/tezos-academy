@@ -28,24 +28,33 @@ The keyword _failwith_ throws an exception and stop the execution of the smart c
 failwith(<string_message>)
 ```
 
+_<string_message>_ must be a string value
+
 ## Access Control
 
 This example shows how Tezos.source can be used to deny access to an entrypoint.
 
 ```
 const owner: address = ("tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" as address);
+type storage = unit;
+type parameter = unit;
 type return_ = [list <operation>, storage];
 
-let main = (action: parameter, store: storage) : return_ => {
+let main = ([action, store]: [parameter, storage]) : return_ => {
     if (Tezos.source != owner) {
         failwith ("Access denied.") as return_;
     } else {
-        return [(list([])) as list<operation>, store]
+        return [(list([]) as list<operation>), store];
     }
 };
 ```
 
-_<string_message>_ must be a string value
+<!-- prettier-ignore -->⚠️ If you have installed LIGO then you can simulate the call to the smart contract by running the following command. Notice that the source caller can be specified with the *\-\-source* option:
+
+```
+ligo run dry-run exercise.jsligo --source "tz1KqTpEZ7Yob7QbPE4Hy4Wo8fHG8LhKxZSx" -e main 'unit' 'unit'
+```
+
 
 ## Your mission
 

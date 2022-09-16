@@ -54,10 +54,10 @@ type parameter is ChangeFunc of (coordinates) -> coordinates | AddPlanet of (str
 
 function addPlanet (const input : (string * coordinates); const store : storage) : return is
 block {
-    const modified : planets = case Map.find_opt(input.0, store.systemplanets) of
+    const modified : planets = case Map.find_opt(input.0, store.systemplanets) of [
       Some (p) -> (failwith("planet already exist") : planets)
     | None -> Map.add (input.0, store.func(input.1), store.systemplanets)
-    end;
+    ];
 } with ((nil :  list(operation)), record [name=store.name;func=store.func;systemplanets=modified])
 
 function changeFunc (const f : (coordinates) -> coordinates; const store : storage) : return is
@@ -65,11 +65,11 @@ block { skip }
 with ((nil :  list(operation)), record [name=store.name;func=f;systemplanets=store.systemplanets])
 
 function main (const action : parameter; const store : storage) : return is
-block { skip } with case action of
+block { skip } with case action of [
     AddPlanet (input) -> addPlanet (input,store)
   | ChangeFunc (f) -> changeFunc (f,store)
   | DoNothing -> ((nil : list(operation)),store)
-  end
+]
 ```
 
 ## Lambda prototype
@@ -142,4 +142,4 @@ We want you to update our "starmap" contract in order to take this new rule into
 
 <!-- prettier-ignore -->3- Second rule : if the mass of a planet is above 100 then the celestial body is considered as a PLANET.
 
-<!-- prettier-ignore -->4- Third rule : if the mass of a planet is under 100 then the celestial body is considered as an ASTEROID.
+<!-- prettier-ignore -->4- Third rule : Otherwise the celestial body is considered as an ASTEROID.

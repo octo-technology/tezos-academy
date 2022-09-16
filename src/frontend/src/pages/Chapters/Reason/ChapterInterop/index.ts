@@ -7,5 +7,8 @@ import exercise from "!raw-loader!./exercise.religo";
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import solution from "!raw-loader!./solution.religo";
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import compile_store from "!raw-loader!./compile_store.cmd";
 
-export const data = { course, exercise, solution, supports: {} };
+export const data = { course, exercise, solution, supports: { compile_store } };

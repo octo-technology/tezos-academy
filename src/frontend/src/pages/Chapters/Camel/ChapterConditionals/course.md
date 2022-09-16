@@ -61,5 +61,5 @@ We want to conditionally change the engine attribute (third number) to 1 only if
 <!-- prettier-ignore -->⚠️ If you have installed LIGO then you can test the execution of the *modify\_ship* function by running the following command:
 
 ```
-ligo run-function main.ligo modify_ship '("010433")'
+ligo run interpret --init-file main.mligo 'modify_ship("010433")'
 ```

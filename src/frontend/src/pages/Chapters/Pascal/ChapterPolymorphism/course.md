@@ -1,4 +1,4 @@
-# Chapter 21 : Polymorphism
+# Chapter 21 : Lazy interaction
 
 <dialog character="pilot">The enemy is destroyed, great job Captain! Headquater is sending a reinforcement squadron to help us.</dialog>
 
