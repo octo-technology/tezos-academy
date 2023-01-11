@@ -30,7 +30,7 @@
     "bcryptjs": "^2.4.3",
     "chalk": "^4.0.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "dayjs": "^1.8.28",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
